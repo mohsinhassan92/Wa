@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/line3"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/datum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentLeft="true"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <View
+        android:id="@+id/border1"
+        android:layout_toRightOf="@id/datum"
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="#a7a9ac" />
+
+    <TextView
+        android:id="@+id/hoog"
+        android:layout_width="wrap_content"
+        android:layout_toRightOf="@id/border1"
+        android:layout_height="match_parent"
+        android:textColor="@color/text_color"
+        android:gravity="left"
+        android:layout_marginLeft="10dp"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <View
+        android:id="@+id/border2"
+        android:layout_width="2dp"
+        android:layout_toRightOf="@id/hoog"
+        android:layout_height="wrap_content"
+        android:background="#a7a9ac" />
+
+    <TextView
+        android:id="@+id/hoogte"
+        android:layout_toRightOf="@id/border2"
+        android:textColor="@color/text_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+</RelativeLayout>
