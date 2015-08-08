@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import nl.vogelbescherming.wadvogels.R;
 import nl.vogelbescherming.wadvogels.adapters.TideTimesListAdapter;
 import nl.vogelbescherming.wadvogels.control.Controller;
 import nl.vogelbescherming.wadvogels.fonts.Fonts;
@@ -24,8 +23,6 @@ public class TideTimesActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContent(R.layout.activity_tide_times);
-		setHeader("GETIJDENTABEL");
-		showListButton();
 		String code = getIntent().getStringExtra("Code");
 		
 		//Log.d("TEST0",code);

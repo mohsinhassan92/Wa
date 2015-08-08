@@ -37,7 +37,7 @@ public class FilmActivity extends BaseActivity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContent(R.layout.activity_film);
-		setHeader("FILM");
+//		setHeader("FILM");
 	   
 	    mVideoView = (ImageView) findViewById(R.id.video);
 	    //uri = Uri.parse("android.resource://com.rosberry.wadden.android/raw/waddenapp");

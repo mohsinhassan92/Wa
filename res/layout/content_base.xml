@@ -10,7 +10,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:background="@color/bg" 
-            android:visibility="gone">
+            android:visibility="visible"
+            android:orientation="horizontal">
     </LinearLayout>
     
     <LinearLayout
@@ -19,7 +20,8 @@
             
             android:layout_height="wrap_content"
             android:background="@color/bg" 
-            android:layout_alignParentBottom="true">
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
             
     </LinearLayout>
 
@@ -30,7 +32,8 @@
             android:layout_below="@id/TitleContainer"
             android:layout_above="@id/ButtonContainer"
             android:background="@color/bg" 
-            android:visibility="gone">
+            android:visibility="gone"
+            android:orientation="horizontal">
     </LinearLayout>
 
 </RelativeLayout>

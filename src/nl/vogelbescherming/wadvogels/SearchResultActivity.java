@@ -31,18 +31,18 @@ public class SearchResultActivity extends ContentBaseActivity {
         ArrayList<Bird> birds = null;
         
         if (locationFromMap != null){
-        	setHeader("VOGELGIDS");
+//        	setHeader("VOGELGIDS");
         	//birds = (ArrayList<Bird>) locationFromMap.getBirds(Controller.getBirds(this));
         	findViewById(R.id.filterContainer).setVisibility(View.GONE);
         } else {
 	        if (showAllBirds != null && showAllBirds){
-	        	setHeader("ZOEK OP NAAM");
+//	        	setHeader("ZOEK OP NAAM");
 	        	birds = (ArrayList<Bird>) Controller.getBirds(this);
 	        } else {
-	        	setHeader("VOGELGIDS");
+//	        	setHeader("VOGELGIDS");
 	        	birds = (ArrayList<Bird>) Controller.getFilteredBirds(this);
 	        	findViewById(R.id.filterContainer).setVisibility(View.GONE);
-	        	setSubHeader("Gevonden resultaten");
+//	        	setSubHeader("Gevonden resultaten");
 	        }
         }
         if(birds.size() == 0){
@@ -73,7 +73,6 @@ public class SearchResultActivity extends ContentBaseActivity {
 
             }
         });*/
-        showListButton();
         ((TextView) findViewById(R.id.filter)).addTextChangedListener(filterTextWatcher);
 	}
 	

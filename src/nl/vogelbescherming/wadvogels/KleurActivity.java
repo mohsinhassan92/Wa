@@ -76,17 +76,16 @@ public class KleurActivity extends BaseGridActivity{
 			selectedItems = Controller.getMyBird().getColors();
 		preSetContent(drawablelist,R.layout.grid_item, 3,3/*rownumber*/,MAX_NUMBER_SELECTED_ITEMS, selectedItems, true/*padding*/, true/*cell height*/, text,handler);
         super.onCreate(savedInstanceState);
-        setHeader("VOGELVINDER");
         setTitle("Welke kleuren vallen het meest op?");
         setButton(R.drawable.resultaten_state);
-        showListButton();
         
         Display display = getWindowManager().getDefaultDisplay();
         int width = display.getWidth();  // deprecated
         int height = display.getHeight();  // deprecated
-        
+        /*/
         if (width > 325 && height > 485)
         	createSeekBar(Controller.getMyBird(), 4);
+        //*/
         getButton().setOnClickListener(this);
 	}
 }

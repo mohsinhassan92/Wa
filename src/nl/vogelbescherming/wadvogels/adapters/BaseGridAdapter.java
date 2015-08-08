@@ -116,13 +116,13 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 //				}
 				heightInPixels = widthInPixels;
 				
-				if(maxItemSelected == 3){ /*fix for color page*/
+				if (maxItemSelected == 3) { /*fix for color page*/
 					heightInPixels = heightInPixels-getPixels(25, mMetrics);
 				}
 				
 				RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(widthInPixels,heightInPixels);
 				int pixs = 0;
-				if (padding){
+				if (padding) {
 					pixs = getPixels(3,mMetrics);
 					layoutParams.setMargins(pixs,pixs,pixs,pixs);
 				} else {
@@ -133,7 +133,7 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 		       
 		        layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, 0);
 		        iv.setLayoutParams(layoutParams);
-	        } else if (columnNumber == 1){
+	        } else if (columnNumber == 1) {
 	        	heightInPixels = (mMetrics.widthPixels/(mObjects.size() + 1));
 	        	if (backing.getLayoutParams() != null)
 	        		backing.getLayoutParams().height = heightInPixels;
@@ -144,11 +144,11 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 			
 			
 		}
-		if (padding){
+		if (padding) {
 			v.setPadding(9, 9, 9, 9);
 			//v.setBackgroundResource(R.drawable.topbar_bg);
 		}
-		if (isItemSelecked(position)){
+		if (isItemSelecked(position)) {
 			selectItemInGrid(v,position);
 		} else {
 			v.setTag(false);
@@ -199,7 +199,7 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 						selectedImage.setTag(false);
 						
 						int listSize1 = selectImagePositions.size();
-						for (int j = 0; j<listSize1; j++){
+						for (int j = 0; j<listSize1; j++) {
 						    //Log.d("HAI 1 Member name: ", "HAI 1 Member name: "+Integer.toString(selectImagePositions.get(j)));
 						    selectImagePositions.remove(selectImagePositions.get(j));
 						}

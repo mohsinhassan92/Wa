@@ -69,16 +69,15 @@ public class SilhuetteActivity extends BaseGridActivity{
 			selectedItems.add(Controller.getMyBird().getSilhouette().get(0));
 		preSetContent(list, R.layout.textdown_grid_item,3,0,MAX_NUMBER_SELECTED_ITEMS, selectedItems, false, false, text,handler);
         super.onCreate(savedInstanceState);
-        setHeader("VOGELVINDER");
         setTitle("Op welk silhouet lijkt de vogel het meest?");
         setButton(R.drawable.verder_state);
-        showListButton();
         Display display = getWindowManager().getDefaultDisplay();
         int width = display.getWidth();  // deprecated
         int height = display.getHeight();  // deprecated
-        
+        /*/
         if (width > 325 && height > 485)
-        	createSeekBar(Controller.getMyBird(), 1);
+        	createSeekBar(Controller.getMyBird(), 4);
+        //*/
         getButton().setOnClickListener(onSkipClickListener);
 	}
 }

@@ -35,8 +35,6 @@ public class BirdSpotsActivity extends ContentBaseActivity {
         super.onCreate(savedInstanceState);
        
         setContent(R.layout.activity_bird_spots);
-		setHeader("VOGELPLEKKEN");
-		showListButton();
 		setButton(R.drawable.map_button_state);
 		showButton(false);
 		
@@ -123,6 +121,7 @@ public class BirdSpotsActivity extends ContentBaseActivity {
          
                     }
                 });
+        		
         		mMap.setOnInfoWindowClickListener(new OnInfoWindowClickListener() {
 					
 					@Override
@@ -131,6 +130,7 @@ public class BirdSpotsActivity extends ContentBaseActivity {
 						showButton(false);
 					}
 				});
+        		
         		mMap.setOnMapClickListener(new OnMapClickListener() {
 					
 					@Override
@@ -138,6 +138,7 @@ public class BirdSpotsActivity extends ContentBaseActivity {
 						showButton(false);
 					}
 				});
+        		
         		mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
 					
 					@Override

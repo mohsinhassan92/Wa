@@ -52,21 +52,22 @@ public class GrootteActivity extends BaseGridActivity{
 		list = createList();
 		text = createText();
 		List<Integer> selectedItems = new ArrayList<Integer>();
-		if (Controller.getMyBird().getSizes() != null && Controller.getMyBird().getSizes().size() > 0)
+		if (Controller.getMyBird().getSizes() != null && Controller.getMyBird().getSizes().size() > 0) {
 			selectedItems = Controller.getMyBird().getSizes();
+		}
 		
 		preSetContent(list, R.layout.long_grid_item,1,0,MAX_NUMBER_SELECTED_ITEMS, selectedItems,false,false, text,handler);
         super.onCreate(savedInstanceState);
-        setHeader("VOGELVINDER");
+//        setHeader("VOGELVINDER");
         setTitle("Hoe groot is de vogel ongeveer?");
         setButton(R.drawable.verder_state);
-        showListButton();
         Display display = getWindowManager().getDefaultDisplay();
         int width = display.getWidth();  // deprecated
         int height = display.getHeight();  // deprecated
         
-        if (width > 325 && height > 485)
+        if (width > 325 && height > 485) {
         	createSeekBar(Controller.getMyBird(), 3);
+        }
         getButton().setOnClickListener(onSkipClickListener);
 	}
 }

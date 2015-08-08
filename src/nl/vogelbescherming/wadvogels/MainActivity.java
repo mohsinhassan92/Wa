@@ -6,6 +6,7 @@ import nl.vogelbescherming.wadvogels.fonts.Fonts;
 
 
 import android.os.Bundle;
+import android.os.IInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.util.DisplayMetrics;
@@ -28,17 +29,14 @@ public class MainActivity extends BaseActivity {
         
         hideTabs();
         
-        ((TextView) findViewById(R.id.slogan_part1)).setTypeface(Fonts.getTfFont(), Typeface.BOLD_ITALIC);
-        ((TextView) findViewById(R.id.slogan_part2)).setTypeface(Fonts.getTfFont(), Typeface.BOLD_ITALIC);
-        
         button1 = findViewById(R.id.relativeLayout1);
         button1.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				//Intent i = new Intent(MainActivity.this, BirdGuideActivity.class);
-				Intent i = new Intent(MainActivity.this, SilhuetteActivity.class);
-				startActivity(i);
+				Intent intent = new Intent(MainActivity.this, GrootteActivity.class);
+				startActivity(intent);
 			}
 		});
         button3 = findViewById(R.id.relativeLayout2);
@@ -60,8 +58,6 @@ public class MainActivity extends BaseActivity {
 				startActivity(i);
 			}
 		});
-        RelativeLayout title = (RelativeLayout) findViewById(R.id.top_space);
-        title.setLayoutParams(calcLayoutWH(title));
 	}
 	@Override
 	protected void onResume() {

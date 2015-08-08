@@ -40,7 +40,6 @@
 		    android:src="@drawable/home_bt"/>
     </RelativeLayout>
 	<include layout="@layout/progress_filters"
-        android:layout_below="@id/TitleContainer"
 		android:id="@+id/seek_bar"
 		android:visibility="gone"
 		/>

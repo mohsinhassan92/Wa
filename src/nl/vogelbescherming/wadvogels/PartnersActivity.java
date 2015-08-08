@@ -11,8 +11,6 @@ public class PartnersActivity extends BaseActivity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContent(R.layout.activity_partners);
-		showListButton();
-		setHeader("PARTNERS");
 		TextView text1 = (TextView) findViewById(R.id.text1);
 		text1.setTypeface(Fonts.getTfFont());
 		TextView text2 = (TextView) findViewById(R.id.text2);

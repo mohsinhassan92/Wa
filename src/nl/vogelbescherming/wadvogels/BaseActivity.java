@@ -43,8 +43,9 @@ public class BaseActivity extends FragmentActivity {
 	private TextView kleuren;
 	private SeekBar progress;
 	private ImageView label;
+	private TextView title;
 	private boolean isTabsDown;
-	private ImageView list;
+	private ImageView homeIV;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +93,25 @@ public class BaseActivity extends FragmentActivity {
 			});
 		}
 		
+		Typeface typeFace = Typeface.createFromAsset(getAssets(), "fonts/ufonts.com_museo-700-opentype.otf");
+		title = (TextView) findViewById(R.id.title_tv);
+		title.setTypeface(typeFace);
+		
+		homeIV = (ImageView) findViewById(R.id.home_iv);
+		homeIV.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(BaseActivity.this,
+						MainActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.putExtra("ShowAllBirds", true);
+				startActivity(intent);
+				finish();
+			
+			}
+		});
+		
 		label = (ImageView)findViewById(R.id.label);
 		label.setOnClickListener(new OnClickListener() {
 			
@@ -120,7 +140,7 @@ public class BaseActivity extends FragmentActivity {
 		View view2 = findViewById(R.id.container);
 		Log.i("FLAG", up+"");
 		Animation move = null;
-		if (up){
+		if (up) {
 			move = AnimationUtils.loadAnimation(this, R.anim.scroll_up);
 		} else {
 			move = AnimationUtils.loadAnimation(this, R.anim.scroll_down);
@@ -164,16 +184,16 @@ public class BaseActivity extends FragmentActivity {
         showBackButton();
 	}
 	
-	public void showBaseHeader(boolean show){
+	public void showBaseHeader(boolean show) {
 		View header = findViewById(R.id.baseHeaderContainer);
-		if (show){
+		if (show) {
 			header.setVisibility(View.VISIBLE);
 		} else {
 			header.setVisibility(View.GONE);
 		}
 	}
 
-    public void showBackButton(){
+    public void showBackButton() {
         View back = findViewById(R.id.backbutton);
         back.setVisibility(View.VISIBLE);
         back.setOnClickListener(new OnClickListener() {
@@ -359,10 +379,10 @@ public class BaseActivity extends FragmentActivity {
 	}
 
 	public void showListButton() {
-		list.setVisibility(View.VISIBLE);
+		homeIV.setVisibility(View.VISIBLE);
 	}
 	
-	private void setStatus(Bird myBird, int position){
+	private void setStatus(Bird myBird, int position) {
 		progress.setProgress((int) (((double)(position - 1)/3)*progress.getMax()));
 		if (myBird.getSilhouette() != null)
 			silhouet.setTextColor(Color.parseColor("#97d4fb"));
@@ -378,9 +398,7 @@ public class BaseActivity extends FragmentActivity {
 		setContentPart(R.id.baseHeaderContainer, headerLayoutId);
 		setText(headerLayoutId, R.id.text, Typeface.BOLD, text, false);
 
-		list =((ImageView) findViewById(R.id.homebutton));
-		
-		list.setOnClickListener(new OnClickListener() {
+		homeIV.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {

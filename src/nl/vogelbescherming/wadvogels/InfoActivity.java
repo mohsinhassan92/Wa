@@ -23,9 +23,6 @@ public class InfoActivity extends BaseActivity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContent(R.layout.activity_info);
-        setHeader("INFORMATIE");
-        showListButton();
-
         View vogned = findViewById(R.id.vogned);
         createExpandView(vogned, "Vogelbescherming Nederland", "par_1");
         View ruvo = findViewById(R.id.ruvo);
@@ -43,7 +40,7 @@ public class InfoActivity extends BaseActivity implements OnClickListener {
         WebView webView = new WebView(this);
         webView.setBackgroundColor(getResources().getColor(android.R.color.transparent));
         webView.getSettings().setBuiltInZoomControls(false);
-        if(Utils.hasHoneycomb())webView.getSettings().setDisplayZoomControls(false);
+        if (Utils.hasHoneycomb())	webView.getSettings().setDisplayZoomControls(false);
         webView.loadUrl("file:///android_asset/html/" + bodyName + ".html");
         //web.setOverScrollMode(View.OVER_SCROLL_NEVER);
 

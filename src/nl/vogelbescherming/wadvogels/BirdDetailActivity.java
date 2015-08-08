@@ -66,7 +66,7 @@ public class BirdDetailActivity extends ContentBaseActivity{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContent(R.layout.activity_bird_detail);
-		setHeader("VOGELGIDS");
+//		setHeader("VOGELGIDS");
 		
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		
@@ -82,7 +82,6 @@ public class BirdDetailActivity extends ContentBaseActivity{
 		
 		description = ((TextView) findViewById(R.id.description));
 		infoBar =((TableLayout) findViewById(R.id.infoBar));
-		showListButton();
 		soundButton = (ImageView) findViewById(R.id.soundButton);
         clickBird = bird;
 		soundButton.setOnClickListener(new OnClickListener() {
