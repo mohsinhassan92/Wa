@@ -26,7 +26,7 @@ import nl.vogelbescherming.wadvogels.R;
 import nl.vogelbescherming.wadvogels.control.Controller;
 import nl.vogelbescherming.wadvogels.fonts.Fonts;
 
-public class BaseGridAdapter extends ArrayAdapter<Drawable> {
+public class BaseGridAdapter_old extends ArrayAdapter<Drawable> {
 
 	private Context mContext;
 	private int mGridItemLayout;
@@ -45,7 +45,7 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 	
 	private View selectedImage;
 	
-	public BaseGridAdapter(Context context, int gridItemLayout, int imageView, List<Drawable> objects, 
+	public BaseGridAdapter_old(Context context, int gridItemLayout, int imageView, List<Drawable> objects, 
 			int maxItemSelected, int columnNumber, List<Integer> selectedItems, List<String> text, Handler handler) {
 		super(context, gridItemLayout, objects);
 		
@@ -62,7 +62,7 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 		this.padding = false;
 		this.text = text;
 	}
-	public BaseGridAdapter(Context context, int gridItemLayout, int imageView, List<Drawable> objects, 
+	public BaseGridAdapter_old(Context context, int gridItemLayout, int imageView, List<Drawable> objects, 
 			int maxItemSelected, int columnNumber, int rowNumber, List<Integer> selectedItems,
             boolean padding, boolean cellHeight,List<String> text, Handler handler) {
 		
@@ -134,40 +134,7 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 		        layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, 0);
 		        iv.setLayoutParams(layoutParams);
 	        }
-			else if (columnNumber == 2){ /*padding*/
-				if (padding){
-					//widthInPixels = (mMetrics.widthPixels/columnNumber)-getPixels(20, mMetrics);
-					//widthInPixels = (mMetrics.widthPixels/columnNumber)-getPixels(mContext.getResources().getDimensionPixelSize(id), mMetrics);
-					widthInPixels = (mMetrics.widthPixels/columnNumber)-mContext.getResources().getDimensionPixelSize(R.dimen.image_padding);
-				}
-				else {
-					widthInPixels = (mMetrics.widthPixels/columnNumber)-getPixels(15, mMetrics);
-				}
-				
-//				if (cellHeight){//chitaem dryguu visotu
-//					heightInPixels = (mMetrics.heightPixels/(rowNumber * 2))-getPixels(10, mMetrics); 
-//				} else {
-//				}
-				heightInPixels = widthInPixels;
-				
-				if(maxItemSelected == 3){ /*fix for color page*/
-					heightInPixels = heightInPixels-getPixels(15, mMetrics);
-				}
-				
-				RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(widthInPixels,heightInPixels);
-				int pixs = 0;
-				if (padding){
-					pixs = getPixels(4,mMetrics);
-					layoutParams.setMargins(pixs,pixs,pixs,pixs);
-				} else {
-					Log.i("Color", "bil");
-					pixs = getPixels(30,mMetrics);
-					layoutParams.setMargins(pixs,0,pixs,pixs);
-				}
-		       
-		        layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, 0);
-		        iv.setLayoutParams(layoutParams);
-	        }else if (columnNumber == 1){
+			else if (columnNumber == 1){
 	        	heightInPixels = (mMetrics.widthPixels/(mObjects.size() + 1));
 	        	if (backing.getLayoutParams() != null)
 	        		backing.getLayoutParams().height = heightInPixels;

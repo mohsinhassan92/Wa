@@ -1,4 +1,4 @@
-package nl.vogelbescherming.wadvogels;
+/*package nl.vogelbescherming.wadvogels;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -28,7 +27,7 @@ import nl.vogelbescherming.wadvogels.control.Controller;
 import nl.vogelbescherming.wadvogels.fonts.Fonts;
 import nl.vogelbescherming.wadvogels.model.Bird;
 
-public class BaseActivity extends FragmentActivity {
+public class BaseActivity_old extends FragmentActivity {
 	private final LinearLayout.LayoutParams layoutFillParent = new LinearLayout.LayoutParams(
 			LinearLayout.LayoutParams.MATCH_PARENT,
 			LinearLayout.LayoutParams.MATCH_PARENT);
@@ -52,7 +51,7 @@ public class BaseActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.base);
-		hideTabs();
+		
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		
 		tabs = (LinearLayout) findViewById(R.id.radiogroup);
@@ -65,30 +64,30 @@ public class BaseActivity extends FragmentActivity {
 					Intent i = null;
 					switch (v.getId()) {
 					case R.id.btnZoek:
-						if (!(BaseActivity.this instanceof FilmActivity)){
-							i = new Intent(BaseActivity.this, SearchResultActivity.class);
+						if (!(BaseActivity_old.this instanceof FilmActivity)){
+							i = new Intent(BaseActivity_old.this, SearchResultActivity.class);
                             i.putExtra("ShowAllBirds", true);
 						}
 						break;
 					case R.id.btnVOGELBESCHERMING:
-						if (!(BaseActivity.this instanceof InfoActivity)){
-							i = new Intent(BaseActivity.this, InfoActivity.class);
+						if (!(BaseActivity_old.this instanceof InfoActivity)){
+							i = new Intent(BaseActivity_old.this, InfoActivity.class);
 						}
 						break;
 					case R.id.btnVOGELVINDER:
-						if (!(BaseActivity.this instanceof SilhuetteActivity)){
+						if (!(BaseActivity_old.this instanceof SilhuetteActivity)){
 							Controller.clearMyBird();
-							i = new Intent(BaseActivity.this, SilhuetteActivity.class);
+							i = new Intent(BaseActivity_old.this, SilhuetteActivity.class);
 						}
 						break;
 					case R.id.btnVOGELPLEKKEN:
-						if (!(BaseActivity.this instanceof BirdSpotsActivity)){
-							i = new Intent(BaseActivity.this, BirdSpotsActivity.class);
+						if (!(BaseActivity_old.this instanceof BirdSpotsActivity)){
+							i = new Intent(BaseActivity_old.this, BirdSpotsActivity.class);
 						}
 						break;
 					}
 					if (i != null){
-						BaseActivity.this.startActivity(i);
+						BaseActivity_old.this.startActivity(i);
 					}
 				}
 			});
@@ -103,7 +102,7 @@ public class BaseActivity extends FragmentActivity {
 			
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(BaseActivity.this,
+				Intent intent = new Intent(BaseActivity_old.this,
 						MainActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				intent.putExtra("ShowAllBirds", true);
@@ -220,23 +219,6 @@ public class BaseActivity extends FragmentActivity {
 			view_text.setTypeface(Fonts.getTfFont());
 		view_text.setText(text);
 	}
-	
-	/***Changed Method setTextHeader***/
-	protected void setTextHeader(int where_id, int id, int typeface, int headerGrootte,
-			boolean flag) {
-		TextView view_text;
-		if (flag) {
-			View view = getLayoutInflater().inflate(where_id, null);
-			view_text = (TextView) view.findViewById(id);
-		} else {
-			view_text = (TextView) findViewById(id);
-		}
-		if (typeface == Typeface.BOLD)
-			view_text.setTypeface(Fonts.getTfFont_bold());
-		else
-			view_text.setTypeface(Fonts.getTfFont_regular());
-		view_text.setText(Html.fromHtml(getString(R.string.header_grootte)));
-	}
 
 	public void setSubHeader(String text) {
 
@@ -266,14 +248,14 @@ public class BaseActivity extends FragmentActivity {
 			
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(BaseActivity.this, SilhuetteActivity.class);
+				Intent i = new Intent(BaseActivity_old.this, SilhuetteActivity.class);
 				startActivity(i);
 			}
 		});
 		snavel.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(BaseActivity.this, SnavelActivity.class);
+				Intent i = new Intent(BaseActivity_old.this, SnavelActivity.class);
 				startActivity(i);
 			}
 		});
@@ -281,7 +263,7 @@ public class BaseActivity extends FragmentActivity {
 			
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(BaseActivity.this, GrootteActivity.class);
+				Intent i = new Intent(BaseActivity_old.this, GrootteActivity.class);
 				startActivity(i);
 			}
 		});
@@ -289,7 +271,7 @@ public class BaseActivity extends FragmentActivity {
 			
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(BaseActivity.this, KleurActivity.class);
+				Intent i = new Intent(BaseActivity_old.this, KleurActivity.class);
 				startActivity(i);
 			}
 		});
@@ -326,18 +308,18 @@ public class BaseActivity extends FragmentActivity {
 				
 				float xCoord = event.getX();
 				if (xCoord - lastX > 9) {
-					Class <?> nextClass = findNextFilter(BaseActivity.this, false);
+					Class <?> nextClass = findNextFilter(BaseActivity_old.this, false);
 					if (nextClass != null){
-						Intent intent = new Intent(BaseActivity.this, nextClass);
+						Intent intent = new Intent(BaseActivity_old.this, nextClass);
 						startActivity(intent);
 						overridePendingTransition(R.anim.pull_in_from_right, R.anim.pull_out_to_right);
 					}
 					isInTouch = false;
 					return true;
 				} else if (lastX - xCoord > 9){
-					Class <?> nextClass = findNextFilter(BaseActivity.this, true);
+					Class <?> nextClass = findNextFilter(BaseActivity_old.this, true);
 					if (nextClass != null){
-						Intent intent = new Intent(BaseActivity.this, nextClass);
+						Intent intent = new Intent(BaseActivity_old.this, nextClass);
 						startActivity(intent);
 						overridePendingTransition(R.anim.pull_in_from_left, R.anim.pull_out_to_left);
 					}
@@ -352,7 +334,7 @@ public class BaseActivity extends FragmentActivity {
 		
 	};
 	
-	private Class<?> findNextFilter(BaseActivity that, boolean toRight) {
+	private Class<?> findNextFilter(BaseActivity_old that, boolean toRight) {
 		if (that instanceof SilhuetteActivity){
 			if (toRight)
 				return SnavelActivity.class;
@@ -420,7 +402,7 @@ public class BaseActivity extends FragmentActivity {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(BaseActivity.this,
+				Intent intent = new Intent(BaseActivity_old.this,
 						MainActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				intent.putExtra("ShowAllBirds", true);
@@ -434,7 +416,7 @@ public class BaseActivity extends FragmentActivity {
 		setContentPart(R.id.baseContentContainer, contentLayoutId);
 	}
 
-	/*
+	
 	 * public void setFooter() { //setFooter(R.layout.footer); }
 	 * 
 	 * public void setFooter(View footer) {
@@ -442,7 +424,7 @@ public class BaseActivity extends FragmentActivity {
 	 * 
 	 * public void setFooter(int footerLayoutId) {
 	 * setContentPart(R.id.baseFooterContainer, footerLayoutId); }
-	 */
+	 
 
 	protected void setContentPart(int containerId, int layoutId) {
 		final LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -463,4 +445,4 @@ public class BaseActivity extends FragmentActivity {
 		return mInflater;
 	}
 	
-}
+}*/

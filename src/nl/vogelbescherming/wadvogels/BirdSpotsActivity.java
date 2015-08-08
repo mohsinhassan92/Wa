@@ -121,7 +121,6 @@ public class BirdSpotsActivity extends ContentBaseActivity {
          
                     }
                 });
-        		
         		mMap.setOnInfoWindowClickListener(new OnInfoWindowClickListener() {
 					
 					@Override
@@ -130,7 +129,6 @@ public class BirdSpotsActivity extends ContentBaseActivity {
 						showButton(false);
 					}
 				});
-        		
         		mMap.setOnMapClickListener(new OnMapClickListener() {
 					
 					@Override
@@ -138,7 +136,6 @@ public class BirdSpotsActivity extends ContentBaseActivity {
 						showButton(false);
 					}
 				});
-        		
         		mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
 					
 					@Override

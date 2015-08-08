@@ -12,7 +12,7 @@ import java.util.List;
 import nl.vogelbescherming.wadvogels.R;
 import nl.vogelbescherming.wadvogels.control.Controller;
 
-public class GrootteActivity extends BaseGridActivity{
+public class GrootteActivity_old extends BaseGridActivity{
 	
 	public static int MAX_NUMBER_SELECTED_ITEMS = 1;
 	private static List<Drawable> list;
@@ -34,10 +34,11 @@ public class GrootteActivity extends BaseGridActivity{
 	}
 	private List<String> createText() {
 		List<String> temp = new ArrayList<String>(TABLE_ITEM_NUMBER);
-		temp.add("ALS EEN MUS\n(MINDER DAN 16 CM)");
-		temp.add("ALS EEN MEREL\n(17 T/M 30 CM)");
-		temp.add("ALS EEN KRAAI\n(30 T/M 65 CM)");
-		temp.add("ALS EEN REIGER\n(MEER DAN 65 CM)");
+		temp.add("Als een mus (6 t/m 16 cm)");
+		temp.add("Als een merel (17 t/m 30 cm)");
+		temp.add("Als een kraai (30 t/m 65 cm)");
+		temp.add("Als een reiger (Meer dan 65 cm)");
+
 		return temp;
 	}
 	public static Drawable getDrawableFromPosition(int position){
@@ -48,20 +49,16 @@ public class GrootteActivity extends BaseGridActivity{
 	}
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-	
-//		hideTabs();
 		list = createList();
 		text = createText();
 		List<Integer> selectedItems = new ArrayList<Integer>();
 		if (Controller.getMyBird().getSizes() != null && Controller.getMyBird().getSizes().size() > 0)
 			selectedItems = Controller.getMyBird().getSizes();
 		
-		preSetContent(list, R.layout.long_grid_item,2,0,MAX_NUMBER_SELECTED_ITEMS, selectedItems,false,false, text,handler);
+		preSetContent(list, R.layout.long_grid_item,1,0,MAX_NUMBER_SELECTED_ITEMS, selectedItems,false,false, text,handler);
         super.onCreate(savedInstanceState);
 //        setHeader("VOGELVINDER");
-        
-        /****Method Changed SetTitle()-Previously receive string as Parameter****/
-        setTitleHeader(R.string.header_grootte);
+        setTitle("Hoe groot is de vogel ongeveer?");
         setButton(R.drawable.verder_state);
         Display display = getWindowManager().getDefaultDisplay();
         int width = display.getWidth();  // deprecated

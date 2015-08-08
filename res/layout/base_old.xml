@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent" >
 
     <LinearLayout
         android:id="@+id/baseHeaderContainer"
@@ -11,7 +11,7 @@
         android:background="@drawable/header_bg"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:visibility="visible">
+        android:visibility="visible" >
 
         <ImageView
             android:id="@+id/home_iv"
@@ -29,7 +29,7 @@
             android:textSize="20sp"
             android:layout_marginRight="50dp"
             android:text="Beleef de waddennatuur"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white" />
     </LinearLayout>
 
     <LinearLayout

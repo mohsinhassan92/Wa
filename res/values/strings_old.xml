@@ -26,37 +26,12 @@
     <string name="title_activity_splash">SplashActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-
-    <!-- Added Afterwards By Android Developer -->
-
-    <string name="serial_no1">
-<![CDATA[
-     <p><font color="#0072A0">1</font><font color="#898F8E">/4</font></p>
-  ]]>
-    </string>
-    <string name="serial_no2">
-<![CDATA[
-     <p><font color="#0072A0">2</font><font color="#898F8E">/4</font></p>
-  ]]>
-    </string>
-    <string name="serial_no3">
-<![CDATA[
-     <p><font color="#0072A0">3</font><font color="#898F8E">/4</font></p>
-  ]]>
-    </string>
-    <string name="serial_no4">
-<![CDATA[
-     <p><font color="#0072A0">4</font><font color="#898F8E">/4</font></p>
-  ]]>
-    </string>
-    <string name="header_grootte">
-<![CDATA[
-      <p>
-          <font color="#898F8E" >Hoe </font>
-          <font color="#0072A0">groot </font>
-          <font color="#898F8E">is de vogel ongeveer?</font>
-      </p>
-  ]]>
-    </string>
+    
+    
+    
+    
+    
+    
+    
 
 </resources>

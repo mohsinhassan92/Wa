@@ -40,7 +40,7 @@ public class InfoActivity extends BaseActivity implements OnClickListener {
         WebView webView = new WebView(this);
         webView.setBackgroundColor(getResources().getColor(android.R.color.transparent));
         webView.getSettings().setBuiltInZoomControls(false);
-        if (Utils.hasHoneycomb())	webView.getSettings().setDisplayZoomControls(false);
+        if(Utils.hasHoneycomb())webView.getSettings().setDisplayZoomControls(false);
         webView.loadUrl("file:///android_asset/html/" + bodyName + ".html");
         //web.setOverScrollMode(View.OVER_SCROLL_NEVER);
 

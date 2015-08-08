@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import nl.vogelbescherming.wadvogels.R;
 
-public class ContentBaseActivity extends BaseActivity{
+public class ContentBaseActivity_old extends BaseActivity{
 
 	private ImageView button;
 
@@ -42,12 +42,6 @@ public class ContentBaseActivity extends BaseActivity{
 		//setHeader(R.layout.title, str);
 		setContentPart(R.id.TitleContainer, R.layout.title);
         setText(R.layout.title, R.id.title_text, Typeface.NORMAL, str, false);
-	}
-	/***Changed setTitleHeader***/
-	public void setTitleHeader(int headerGrootte){
-		//setHeader(R.layout.title, str);
-		setContentPart(R.id.TitleContainer, R.layout.title);
-        setTextHeader(R.layout.title, R.id.title_text, Typeface.NORMAL, headerGrootte, false);
 	}
 
 	public void setContent(int contentLayoutId) {

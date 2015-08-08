@@ -44,7 +44,6 @@ public class BaseGridActivity extends ContentBaseActivity implements OnClickList
         adjustGridView();
         gvMain.setAdapter(adapter);
         //gvMain.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
-
     }
 
     @Override
@@ -74,7 +73,6 @@ public class BaseGridActivity extends ContentBaseActivity implements OnClickList
         this.handler = handler;
         this.list_item_id = list_item_id;
     }
-
     @Override
     public void onBackPressed() {
     	//Log.d("HAI BACK","HAI BACK");
@@ -92,7 +90,6 @@ public class BaseGridActivity extends ContentBaseActivity implements OnClickList
         startActivity(intent);
         finish();
     }
-
     public void getResult() {
         saveCheaked();
         startNext();

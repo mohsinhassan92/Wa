@@ -12,5 +12,5 @@
         android:state_enabled="true" 
         android:state_selected="true"
         android:drawable="@drawable/zoek_naam"/>
-    <item android:drawable="@drawable/zoek_naam_def"  />
+    <item android:drawable="@drawable/zoek_naam_def"/>
 </selector>
