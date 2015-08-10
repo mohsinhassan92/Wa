@@ -5,6 +5,5 @@
     <dimen name="tab_height">80px</dimen>
     <dimen name="preview_height">237px</dimen>
     <dimen name="preview_width">440px</dimen>
-    
     <dimen name="image_padding">20dp</dimen>
 </resources>

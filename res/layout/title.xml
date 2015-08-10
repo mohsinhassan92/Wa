@@ -1,21 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:gravity="center"
-    android:layout_gravity="center"
     android:layout_height="wrap_content"
-    android:background="@android:color/transparent" >
+    android:layout_gravity="center"
+    android:background="@android:color/transparent"
+    android:gravity="center" >
 
+     <TextView
+        android:id="@+id/text_serial_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/title_text"
+        android:layout_toLeftOf="@+id/title_text"
+        android:gravity="center"
+        android:paddingBottom="4dp"
+        android:paddingTop="4dp"
+        android:text="SERIAL NO"
+        android:textSize="13sp"
+        android:textStyle="bold" /> 
     <TextView
         android:id="@+id/title_text"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:gravity="center"
-        
         android:paddingBottom="4dp"
         android:paddingTop="4dp"
         android:shadowColor="#fff"
@@ -27,4 +38,4 @@
         android:textSize="13sp"
         android:textStyle="bold" />
 
-</RelativeLayout><!-- android:textSize="11sp" -->
+</RelativeLayout> <!-- android:textSize="11sp" -->

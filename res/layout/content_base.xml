@@ -1,38 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
 
     <LinearLayout
-            android:id="@+id/TitleContainer"
-            android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:background="@color/bg" 
-            android:visibility="visible"
-            android:gravity="center"
-            android:orientation="vertical">
-    </LinearLayout>
-    
-    <LinearLayout
-            android:id="@+id/ButtonContainer"
-            android:layout_width="match_parent"
+        android:id="@+id/TitleContainer"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:background="@color/bg"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="visible" >
+
+        <LinearLayout
+            android:id="@+id/titleSerial"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/bg" 
-            android:layout_alignParentBottom="true"
-            android:orientation="horizontal">
-            
+            android:gravity="center"
+            android:layout_gravity="left"
+            android:orientation="horizontal"
+            android:visibility="visible" >
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
-            android:id="@+id/ContentContainer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/TitleContainer"
-            android:layout_above="@id/ButtonContainer"
-            android:background="@color/bg" 
-            android:visibility="gone"
-            android:orientation="horizontal">
+        android:id="@+id/ButtonContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/bg"
+        android:orientation="horizontal" >
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ContentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/ButtonContainer"
+        android:layout_below="@id/TitleContainer"
+        android:background="@color/bg"
+        android:orientation="horizontal"
+        android:visibility="gone" >
     </LinearLayout>
 
 </RelativeLayout>

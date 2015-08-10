@@ -8,4 +8,6 @@
     <color name="info_color">#5684A2</color>
     <color name="text_header_color">#636466</color>
     <color name="main_buttons_text">#99b8d6</color>
+    <color name="inactive_button_color">#939598</color>
+    <color name="active_button_color">#297faf</color>
 </resources>

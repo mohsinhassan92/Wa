@@ -141,7 +141,7 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 					widthInPixels = (mMetrics.widthPixels/columnNumber)-mContext.getResources().getDimensionPixelSize(R.dimen.image_padding);
 				}
 				else {
-					widthInPixels = (mMetrics.widthPixels/columnNumber)-getPixels(15, mMetrics);
+					widthInPixels = (mMetrics.widthPixels/columnNumber)-getPixels(1, mMetrics);
 				}
 				
 //				if (cellHeight){//chitaem dryguu visotu
@@ -151,18 +151,18 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 				heightInPixels = widthInPixels;
 				
 				if(maxItemSelected == 3){ /*fix for color page*/
-					heightInPixels = heightInPixels-getPixels(15, mMetrics);
+					heightInPixels = heightInPixels-getPixels(25, mMetrics);
 				}
 				
 				RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(widthInPixels,heightInPixels);
 				int pixs = 0;
 				if (padding){
 					pixs = getPixels(4,mMetrics);
-					layoutParams.setMargins(pixs,pixs,pixs,pixs);
+		//			layoutParams.setMargins(pixs,pixs,pixs,pixs);
 				} else {
 					Log.i("Color", "bil");
 					pixs = getPixels(30,mMetrics);
-					layoutParams.setMargins(pixs,0,pixs,pixs);
+	//				layoutParams.setMargins(pixs,0,pixs,pixs);
 				}
 		       
 		        layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, 0);
