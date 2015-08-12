@@ -9,7 +9,7 @@
 	    android:id="@+id/title"
 	    android:textStyle="bold"
 	    android:textAppearance="?android:attr/textAppearanceMedium"
-	    android:gravity="center_horizontal"
+	    android:gravity="left"
         android:layout_toLeftOf="@+id/close_bt"
         android:layout_marginTop="5dp"
 	    android:text="Title"/>
@@ -25,5 +25,14 @@
 	    android:layout_below="@id/title"
         android:layout_marginTop="5dp"
 	    android:textAppearance="?android:attr/textAppearanceSmall"
-	    android:text="TitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitle"/>
+	    android:text="Lorem ipsum is dummy text for testing.."/>
+
+	<ImageView
+	    android:id="@+id/imageView1"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/snippet"
+	    android:layout_below="@+id/snippet"
+	    android:src="@drawable/info_window_btn" />
+
 </RelativeLayout>

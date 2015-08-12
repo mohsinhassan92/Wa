@@ -1,6 +1,7 @@
 package nl.vogelbescherming.wadvogels.control;
 
 import android.content.Context;
+import android.text.BoringLayout;
 import android.util.Log;
 
 import org.xmlpull.v1.XmlPullParserException;
@@ -75,6 +76,20 @@ public class Controller {
 			}
 		});
 		return birds;
+	}
+	
+	public static ArrayList<Bird> getSelectedBirds(Context context, int chance, int appears, String text) {
+		if (birds == null)
+			birds = createListBirds(context);
+		
+		ArrayList<Bird> birdsList = new ArrayList<Bird>();
+		for (Bird bird : birds) {
+			if (bird.getChance() == chance && bird.getAppears().get(0) == appears && bird.getName().contains(text)) {
+				birdsList.add(bird);
+			}
+		}
+
+		return birdsList;
 	}
 	
 	public static List<Bird> getFilteredBirds(Context context){

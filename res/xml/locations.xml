@@ -725,4 +725,96 @@
     />
   </Record>
   
+  <!-- New Recors -->
+  
+  <Record>
+    <Row
+      Name="De Slufter"
+      Lat="53.1419310"
+      Lng="4.817161560"
+      Text="Unieke kwelder in duinen met altijd bijzondere vogelsoorten. Vaak lepelaars, kiekendieven en steltlopers."
+      LocationCode="Staatsbosbeheer"/>
+  </Record>
+  
+  <Record>
+    <Row
+      Name="De Muy"
+      Lat="53.1233927"
+      Lng="4.793472290"
+      Text="Duinen met meertjes. Kans op zomertortel, nachtegaal, sprinkhaanzanger, grasmus en kneu."
+      LocationCode="Staatsbosbeheer"/>
+  </Record>
+  
+  <Record>
+    <Row
+      Name="Utopia"
+      Lat="53.1237017"
+      Lng="4.89749908"
+      Text="Talloze wadvogels van dichtbij te bewonderen (waaronder broedende sterns). Aan de andere kant van de dijk ligt het vogelrijke gebied De Schorren. Lepelaar, steltlopers en slechtvalken te zien."
+      LocationCode="Natuurmonumenten"/>
+  </Record>
+  
+  <Record>
+    <Row
+      Name="Noordkop"
+      Lat="53.17877798"
+      Lng="4.855785369"
+      Text="Duinen, strand en bosjes met vooral in de trektijd veel zeldzame vogels. Vaak tapuiten."
+      LocationCode="Staatsbosbeheer"/>
+  </Record>
+  
+  <Record>
+    <Row
+      Name="De Bol en Krassekeet"
+      Lat="53.10247605"
+      Lng="4.894924163"
+      Text="Grasland, plassen en rietkragen met veel ganzen, zwanen- en eendensoorten."
+      LocationCode="Natuurmonumenten"/>
+  </Record>
+  
+  <Record>
+    <Row
+      Name="Wagenjot en IJzeren Kaap"
+      Lat="53.08804480"
+      Lng="4.905567"
+      Text="Mooi slik, open water en eilandjes met veel  steltlopers en kans op geoorde fuut en kuifduiker."
+      LocationCode="Natuurmonumenten"/>
+  </Record>
+  
+  <Record>
+    <Row
+      Name="Dijkmanshuizen en Ottersaat"
+      Lat="53.05447345449547"
+      Lng="4.8621368408203125"
+      Text="Gras- en rietland met sterns, rotgans, wintertaling, wulp, goudplevier, kluut en bruine kiekendief."
+      LocationCode="Natuurmonumenten"/>
+  </Record>
+  
+  <Record>
+    <Row
+      Name="Waal en Burg"
+      Lat="53.0813429"
+      Lng="4.804115295"
+      Text="Grasland, sloten, en rietkragen met slobeend, zomertaling, grutto, tureluur, kievit en scholekster."
+      LocationCode="Natuurmonumenten"/>
+  </Record>
+  
+  <Record>
+    <Row
+      Name="Mokbaai en De Petten"
+      Lat="53.0099291"
+      Lng="4.75261688"
+      Text="Wad, kwelders en riet met roofvogels, sterns, steltlopers, meeuwen, eidereend en lepelaar."
+      LocationCode="Staatsbosbeheer"/>
+  </Record>
+  
+  <Record>
+    <Row
+      Name="De Geul en Horsmeertjes"
+      Lat="53.005487"
+      Lng="4.736480712"
+      Text="Duinmeren en duinvalleien met eenden, lepelaars en bruine kiekendief. Ook blauwborst en baardmannetjes."
+      LocationCode="Staatsbosbeheer"/>
+  </Record>
+  
 </Records>

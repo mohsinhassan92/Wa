@@ -142,6 +142,7 @@ public class ListAdapter extends BaseAdapter implements Filterable {
 
     public void setFiller(ArrayList<Bird> filler){
         mContent = filler;
+        mFilteredBirds = mContent;
     }
 
     public ArrayList<Bird> getFiller(){

@@ -81,7 +81,7 @@ public class BirdSpotsActivity extends ContentBaseActivity {
                 .position(new LatLng(loc.getLat(), loc.getLng()))
                 .title(loc.getName())
                 .snippet(str)
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.blue_pin)));
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pin)));
         		// Setting a custom info window adapter for the google map
         		mMap.setInfoWindowAdapter(new InfoWindowAdapter() {
          

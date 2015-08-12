@@ -41,8 +41,8 @@ public class MainActivity extends BaseActivity {
 				startActivity(intent);
 			}
 		});
-        button3 = findViewById(R.id.relativeLayout2);
-        button3.setOnClickListener(new OnClickListener() {
+        button2 = findViewById(R.id.relativeLayout2);
+        button2.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -51,8 +51,8 @@ public class MainActivity extends BaseActivity {
 				startActivity(i);
 			}
 		});
-        button2 = findViewById(R.id.relativeLayout3);
-        button2.setOnClickListener(new OnClickListener() {
+        button3 = findViewById(R.id.relativeLayout3);
+        button3.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {

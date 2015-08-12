@@ -15,12 +15,13 @@ public class ContentBaseActivity extends BaseActivity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setContent(R.layout.content_base);
+        hideTitleContainer();
         showButton(false);
     }
 
 	public void setButton(int drawable){
 		setContentPart(R.id.ButtonContainer, R.layout.apply_button);
-		setBackgroundToButton(R.id.apply_button,drawable);
+		setBackgroundToButton(R.id.apply_button, drawable);
 	}
 
 	public void showButton(boolean show){
@@ -50,13 +51,14 @@ public class ContentBaseActivity extends BaseActivity{
 		setContentPart(R.id.TitleContainer, R.layout.title);
         setTextHeader(R.layout.title, R.id.title_text, Typeface.NORMAL, headerGrootte, false);
 	}
-	/***Changed setTitleSerial***/
-	public void setTitleSerial(int serialNo){
-		//setHeader(R.layout.title, str);
-		setContentPart(R.id.titleSerial, R.layout.title);
-        setTextSerialNo(R.layout.title, R.id.text_serial_no, Typeface.NORMAL, serialNo, false);
+
+	public void hideTitleContainer() {
+		findViewById(R.id.TitleContainer).setVisibility(View.GONE);
 	}
 	
+	public void showTitleContainer() {
+		findViewById(R.id.TitleContainer).setVisibility(View.VISIBLE);
+	}
 	
 	public void setContent(int contentLayoutId) {
 		setContentPart(R.id.ContentContainer, contentLayoutId);
