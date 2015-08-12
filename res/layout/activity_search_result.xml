@@ -1,0 +1,98 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg" >
+
+    <LinearLayout
+        android:id="@+id/filterContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="7dp"
+        android:layout_marginTop="7dp" >
+
+        <EditText
+            android:id="@+id/filter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/search_input"
+            android:drawablePadding="5dp"
+            android:gravity="center_vertical"
+            android:hint="Trefwoorden..."
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:paddingLeft="16dp"
+            android:singleLine="true"
+            android:textColorHint="#dad8d8" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/buttonSearch"
+        android:layout_marginTop="10dp"
+        android:visibility="visible" >
+    </ListView>
+
+    <TextView
+        android:id="@+id/emptyView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonSearch"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:text="Deze zoekterm heeft geen resultaten opgeleverd.\nGa terug en probeer het opnieuw."
+        android:visibility="gone" />
+
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/filterContainer"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:visibility="gone" />
+
+    <Spinner
+        android:id="@+id/spinnerTrefkans"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/filterContainer"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/spinner_background"
+        android:popupBackground="@drawable/spinner_background"
+        android:spinnerMode="dropdown" />
+    
+    <Spinner
+        android:id="@+id/spinnerAanwezigheid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/spinnerTrefkans"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/spinner_background"
+        android:popupBackground="@drawable/spinner_background"
+        android:spinnerMode="dropdown" />
+
+    <Button
+        android:id="@+id/buttonSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/spinnerAanwezigheid"
+        android:layout_alignRight="@+id/spinnerAanwezigheid"
+        android:layout_below="@+id/spinnerAanwezigheid"
+        android:background="@color/blue_bg"
+        android:text="@string/search"
+        android:textColor="@color/white" />
+
+</RelativeLayout>
