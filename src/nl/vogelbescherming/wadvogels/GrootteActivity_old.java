@@ -58,7 +58,7 @@ public class GrootteActivity_old extends BaseGridActivity{
 		preSetContent(list, R.layout.long_grid_item,1,0,MAX_NUMBER_SELECTED_ITEMS, selectedItems,false,false, text,handler);
         super.onCreate(savedInstanceState);
 //        setHeader("VOGELVINDER");
-        setTitle("Hoe groot is de vogel ongeveer?");
+        setSubHeaderTitle("Hoe groot is de vogel ongeveer?");
         setButton(R.drawable.verder_state);
         Display display = getWindowManager().getDefaultDisplay();
         int width = display.getWidth();  // deprecated

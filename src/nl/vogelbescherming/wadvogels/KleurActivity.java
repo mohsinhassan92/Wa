@@ -76,7 +76,7 @@ public class KleurActivity extends BaseGridActivity{
 			selectedItems = Controller.getMyBird().getColors();
 		preSetContent(drawablelist,R.layout.grid_item, 3,3/*rownumber*/,MAX_NUMBER_SELECTED_ITEMS, selectedItems, true/*padding*/, true/*cell height*/, text,handler);
         super.onCreate(savedInstanceState);
-        setTitle("Welke kleuren vallen het meest op?");
+        setSubHeaderTitle("Welke kleuren vallen het meest op?");
         setButton(R.drawable.resultaten_state);
         
         Display display = getWindowManager().getDefaultDisplay();

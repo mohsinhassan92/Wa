@@ -40,7 +40,7 @@ public class ContentBaseActivity extends BaseActivity{
 	}
 	
 
-	public void setTitle(String str){
+	public void setSubHeaderTitle(String str){
 		//setHeader(R.layout.title, str);
 		setContentPart(R.id.TitleContainer, R.layout.title);
         setText(R.layout.title, R.id.title_text, Typeface.NORMAL, str, false);

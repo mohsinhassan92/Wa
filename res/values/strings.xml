@@ -29,34 +29,45 @@
 
     <!-- Added Afterwards By Android Developer -->
 
-    <string name="serial_no1">
+    <string name="header_grootte">
 <![CDATA[
-     <p><font color="#0072A0">1</font><font color="#898F8E">/4</font></p>
-  ]]>
+      	  		<font color="#297faf">1</font><font color="#939598">/4</font>\u00A0\u00A0\u00A0\u00A0\u00A0
+          		<font color="#939598" >Hoe </font>
+          		<font color="#297faf">groot </font>
+          		<font color="#939598">is de vogel ongeveer?</font>
+  		]]>
     </string>
-    <string name="serial_no2">
+
+    <!-- 
+    <string name="header_grootte">
 <![CDATA[
-     <p><font color="#0072A0">2</font><font color="#898F8E">/4</font></p>
-  ]]>
-    </string>
-    <string name="serial_no3">
-<![CDATA[
-     <p><font color="#0072A0">3</font><font color="#898F8E">/4</font></p>
-  ]]>
-    </string>
-    <string name="serial_no4">
-<![CDATA[
-     <p><font color="#0072A0">4</font><font color="#898F8E">/4</font></p>
-  ]]>
+			<p>
+      	  		<font color="#0072A0">2</font><font color="#898F8E">/4</font>\u00A0\u00A0\u00A0
+          		<font color="#898F8E" >Hoe </font>
+          		<font color="#0072A0">groot </font>
+          		<font color="#898F8E">is de vogel ongeveer?</font>
+  			</p>
+  		]]>
     </string>
     <string name="header_grootte">
 <![CDATA[
-      <p>
-          <font color="#898F8E" >Hoe </font>
-          <font color="#0072A0">groot </font>
-          <font color="#898F8E">is de vogel ongeveer?</font>
-      </p>
-  ]]>
+			<p>
+      	  		<font color="#0072A0">3</font><font color="#898F8E">/4</font>\u00A0\u00A0\u00A0
+          		<font color="#898F8E" >Hoe </font>
+          		<font color="#0072A0">groot </font>
+          		<font color="#898F8E">is de vogel ongeveer?</font>
+  			</p>
+  		]]>
     </string>
-
+    <string name="header_grootte">
+<![CDATA[
+			<p>
+      	  		<font color="#0072A0">4</font><font color="#898F8E">/4</font>\u00A0\u00A0\u00A0
+          		<font color="#898F8E" >Hoe </font>
+          		<font color="#0072A0">groot </font>
+          		<font color="#898F8E">is de vogel ongeveer?</font>
+  			</p>
+  		]]>
+    </string>
+ -->
 </resources>

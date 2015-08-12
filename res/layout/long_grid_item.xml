@@ -1,36 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     android:id="@+id/backing"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/cell">
-
+    android:background="@drawable/cell" >
     <ImageView
         android:id="@+id/image"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:scaleType="centerInside"
-        android:src="@drawable/bird_on_bt_1"/>
+        android:src="@drawable/bird_on_bt_1" />
 
     <RelativeLayout
+        android:id="@+id/relative_item_text"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_below="@id/image"
         android:layout_centerVertical="true"
-        android:orientation="vertical" >
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="33dp"
+        android:gravity="left" >
 
         <TextView
             android:id="@+id/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:layout_marginBottom="-30dp"
             android:duplicateParentState="true"
             android:gravity="center_horizontal"
-            android:paddingLeft="8dp"
+            android:paddingLeft="0dp"
             android:text="Medium Text"
-            android:textSize="11sp"
-            android:textColor="@drawable/text_list_item_pressed" />
+            android:textColor="@drawable/text_list_item_pressed"
+            android:textSize="11sp" />
     </RelativeLayout>
-
 </RelativeLayout>

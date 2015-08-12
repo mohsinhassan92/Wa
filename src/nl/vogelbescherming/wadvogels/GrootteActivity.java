@@ -4,7 +4,13 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Html;
 import android.view.Display;
+import android.view.Gravity;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,16 +76,21 @@ public class GrootteActivity extends BaseGridActivity {
 		showButton(false);
 		/**** Method Changed SetTitle()-Previously receive string as Parameter ****/
 
-		setTitleSerial(R.string.serial_no2);
 		setTitleHeader(R.string.header_grootte);
-
-/*		setButton(R.drawable.verder_state);		
-		Display display = getWindowManager().getDefaultDisplay();
-		int width = display.getWidth(); // deprecated
-		int height = display.getHeight(); // deprecated
-
-		if (width > 325 && height > 485)
-			createSeekBar(Controller.getMyBird(), 3);
-		getButton().setOnClickListener(onSkipClickListener);*/
+		setSubHeaderTitle(getResources().getString(R.string.header_grootte));
+		
+//		RelativeLayout titleContainer =   (RelativeLayout) findViewById(R.id.relative_title);
+//		titleContainer.set(Gravity.CENTER);
+		// setTitleSerial("/4");
+		/*
+		 * setButton(R.drawable.verder_state); Display display =
+		 * getWindowManager().getDefaultDisplay(); int width =
+		 * display.getWidth(); // deprecated int height = display.getHeight();
+		 * // deprecated
+		 * 
+		 * if (width > 325 && height > 485)
+		 * createSeekBar(Controller.getMyBird(), 3);
+		 * getButton().setOnClickListener(onSkipClickListener);
+		 */
 	}
 }

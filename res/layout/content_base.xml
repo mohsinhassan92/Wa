@@ -4,25 +4,15 @@
     android:layout_height="match_parent" >
 
     <LinearLayout
-        android:id="@+id/TitleContainer"
-        android:layout_width="match_parent"
-        android:layout_height="58dp"
-        android:background="@color/bg"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:visibility="visible" >
-
-        <LinearLayout
-            android:id="@+id/titleSerial"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_gravity="left"
-            android:orientation="horizontal"
-            android:visibility="visible" >
-        </LinearLayout>
+            android:id="@+id/TitleContainer"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:layout_alignParentTop="true"
+            android:background="@android:color/white" 
+            android:visibility="visible"
+            android:orientation="horizontal">
     </LinearLayout>
-
+   
     <LinearLayout
         android:id="@+id/ButtonContainer"
         android:layout_width="match_parent"

@@ -21,7 +21,6 @@
             android:background="@color/bg" 
             android:layout_alignParentBottom="true"
             android:orientation="horizontal">
-            
     </LinearLayout>
 
     <LinearLayout

@@ -65,7 +65,7 @@ public class SnavelActivity extends BaseGridActivity{
 			selectedItems.add(Controller.getMyBird().getBeak().get(0));
 		preSetContent(list,R.layout.textdown_grid_item, 3,0,MAX_NUMBER_SELECTED_ITEMS, selectedItems,false,false, text,handler);
         super.onCreate(savedInstanceState);
-        setTitle("Wat voor soort snavel heeft de vogel?");
+        setSubHeaderTitle("Wat voor soort snavel heeft de vogel?");
         setButton(R.drawable.verder_state);
         Display display = getWindowManager().getDefaultDisplay();
         int width = display.getWidth();  // deprecated

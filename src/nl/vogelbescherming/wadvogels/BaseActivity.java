@@ -18,6 +18,7 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -47,12 +48,54 @@ public class BaseActivity extends FragmentActivity {
 	private TextView title;
 	private boolean isTabsDown;
 	private ImageView homeIV;
+	private View vogelvinder;
+	private View zoekOpNaam;
+	private View vogelplekken;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.base);
 		hideTabs();
+
+		vogelvinder = findViewById(R.id.relative_footer_left);
+		vogelvinder.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// Intent i = new Intent(MainActivity.this,
+				// BirdGuideActivity.class);
+				vogelvinder.setBackgroundColor(Color.parseColor("#226991"));
+				Intent intent = new Intent(BaseActivity.this,
+						GrootteActivity.class);
+				startActivity(intent);
+			}
+		});
+		zoekOpNaam = findViewById(R.id.relative_footer_center);
+		zoekOpNaam.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				zoekOpNaam.setBackgroundColor(Color.parseColor("#226991"));
+				Intent i = new Intent(BaseActivity.this,
+						SearchResultActivity.class);
+				i.putExtra("ShowAllBirds", true);
+				startActivity(i);
+			}
+		});
+		vogelplekken = findViewById(R.id.relative_footer_right);
+		vogelplekken.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				vogelplekken.setBackgroundColor(Color.parseColor("#226991"));
+				Intent i = new Intent(BaseActivity.this,
+						BirdSpotsActivity.class);
+				startActivity(i);
+			}
+		});
+
+		/*** Showing Tabs not Required here ***/
 
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -99,6 +142,14 @@ public class BaseActivity extends FragmentActivity {
 				}
 			});
 		}
+		Typeface typeFaceFooterButtons = Typeface.createFromAsset(getAssets(),
+				"fonts/Museo500-Regular.otf");
+		Button btn_vorige = (Button) findViewById(R.id.button_vorige);
+		Button btn_verder = (Button) findViewById(R.id.button_verder);
+		TextView textBwBtns = (TextView) findViewById(R.id.textBwBtns);
+		btn_vorige.setTypeface(typeFaceFooterButtons);
+		btn_verder.setTypeface(typeFaceFooterButtons);
+		textBwBtns.setTypeface(typeFaceFooterButtons);
 
 		Typeface typeFace = Typeface.createFromAsset(getAssets(),
 				"fonts/ufonts.com_museo-700-opentype.otf");
@@ -234,8 +285,8 @@ public class BaseActivity extends FragmentActivity {
 		if (typeface == Typeface.BOLD)
 			view_text.setTypeface(Fonts.getTfFont_bold());
 		else
-			view_text.setTypeface(Fonts.getTfFont());
-		view_text.setText(text);
+			view_text.setTypeface(Fonts.getTfFont_regular());
+		view_text.setText(Html.fromHtml(text));
 	}
 
 	/*** Changed Method setTextHeader ***/
@@ -252,12 +303,12 @@ public class BaseActivity extends FragmentActivity {
 			view_text.setTypeface(Fonts.getTfFont_bold());
 		else
 			view_text.setTypeface(Fonts.getTfFont_regular());
-		view_text.setText(Html.fromHtml(getString(R.string.header_grootte)));
+		view_text.setText(Html.fromHtml(getString(headerGrootte)));
 	}
 
 	/*** Changed Method setTextSerialNo ***/
 	protected void setTextSerialNo(int where_id, int id, int typeface,
-			int serialNoId, boolean flag) {
+			String text, boolean flag) {
 		TextView view_text;
 		if (flag) {
 			View view = getLayoutInflater().inflate(where_id, null);
@@ -267,27 +318,9 @@ public class BaseActivity extends FragmentActivity {
 		}
 		if (typeface == Typeface.BOLD)
 			view_text.setTypeface(Fonts.getTfFont_bold());
-		else {
-			view_text.setTypeface(Fonts.getTfFont_regular());
-		}
-		switch (serialNoId) {
-		case R.string.serial_no1:
-			view_text.setText(Html.fromHtml(getString(R.string.serial_no1)));
-			break;
-		case R.string.serial_no2:
-			view_text.setText(Html.fromHtml(getString(R.string.serial_no2)));
-			break;
-		case R.string.serial_no3:
-			view_text.setText(Html.fromHtml(getString(R.string.serial_no3)));
-			break;
-		case R.string.serial_no4:
-			view_text.setText(Html.fromHtml(getString(R.string.serial_no4)));
-			break;
-		default:
-			view_text.setText("DUMMY");
-
-		}
-
+		else
+			view_text.setTypeface(Fonts.getTfFont());
+		view_text.setText(text);
 	}
 
 	public void setSubHeader(String text) {
@@ -525,6 +558,21 @@ public class BaseActivity extends FragmentActivity {
 		if (mInflater == null)
 			mInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		return mInflater;
+	}
+
+	public void showVogelVinderMenuAsActive() {
+		View view = findViewById(R.id.relative_footer_left);
+		view.setBackgroundColor(Color.parseColor("#226991"));
+	}
+
+	public void showZoekOpNaamMenuAsActive() {
+		View view = findViewById(R.id.relative_footer_center);
+		view.setBackgroundColor(Color.parseColor("#226991"));
+	}
+
+	public void showVogelPlekkenMenuAsActive() {
+		View view = findViewById(R.id.relative_footer_right);
+		view.setBackgroundColor(Color.parseColor("#226991"));
 	}
 
 }
