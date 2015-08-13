@@ -44,7 +44,7 @@ public class BaseActivity extends FragmentActivity {
 	private TextView groette;
 	private TextView kleuren;
 	private SeekBar progress;
-	private ImageView label;
+	private ImageView label, allBirdsIV;
 	private TextView title;
 	private boolean isTabsDown;
 	private ImageView homeIV;
@@ -157,6 +157,19 @@ public class BaseActivity extends FragmentActivity {
 		title.setTypeface(typeFace);
 
 		homeIV = (ImageView) findViewById(R.id.home_iv);
+		allBirdsIV = (ImageView) findViewById(R.id.all_birds);
+		
+		allBirdsIV.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(BaseActivity.this, SearchResultActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.putExtra("ShowAllBirds", true);
+				startActivity(intent);
+			}
+		});
+		
 		homeIV.setOnClickListener(new OnClickListener() {
 
 			@Override

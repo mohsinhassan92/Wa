@@ -35,7 +35,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/buttonSearch"
         android:layout_marginTop="10dp"
-        android:visibility="visible" >
+        android:visibility="gone" >
     </ListView>
 
     <TextView

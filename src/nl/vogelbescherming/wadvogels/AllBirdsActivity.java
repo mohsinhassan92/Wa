@@ -25,9 +25,8 @@ import nl.vogelbescherming.wadvogels.model.Bird;
 import nl.vogelbescherming.wadvogels.model.Location;
 import nl.vogelbescherming.wadvogels.util.Utils;
 
-public class SearchResultActivity extends ContentBaseActivity {
+public class AllBirdsActivity extends ContentBaseActivity {
 
-	private ListView listview;
     private ArrayList<Bird> birds = null;
     private ListAdapter la = null;
     private Boolean showAllBirds;
@@ -61,9 +60,6 @@ public class SearchResultActivity extends ContentBaseActivity {
 //        	setHeader("VOGELGIDS");
         	//birds = (ArrayList<Bird>) locationFromMap.getBirds(Controller.getBirds(this));
         	findViewById(R.id.filterContainer).setVisibility(View.GONE);
-        	spinnerAppears.setVisibility(View.GONE);
-        	spinnerChance.setVisibility(View.GONE);
-        	btnSearch.setVisibility(View.GONE);
         } else {
 	        if (showAllBirds != null && showAllBirds) {
 //	        	setHeader("ZOEK OP NAAM");
@@ -72,9 +68,6 @@ public class SearchResultActivity extends ContentBaseActivity {
 //	        	setHeader("VOGELGIDS");
 	        	birds = (ArrayList<Bird>) Controller.getFilteredBirds(this);
 	        	findViewById(R.id.filterContainer).setVisibility(View.GONE);
-	        	spinnerAppears.setVisibility(View.GONE);
-	        	spinnerChance.setVisibility(View.GONE);
-	        	btnSearch.setVisibility(View.GONE);
 //	        	setSubHeader("Gevonden resultaten");
 	        }
         }
@@ -88,10 +81,8 @@ public class SearchResultActivity extends ContentBaseActivity {
     			}
     		}).show();
         }
+        ListView listview = (ListView) findViewById(R.id.listView);
         
-        listview = (ListView) findViewById(R.id.listView);
-		listview.setVisibility(View.GONE);
-		
         la = new ListAdapter(this, R.layout.list_item, birds);
         listview.setAdapter(la);
         listview.setEmptyView(findViewById(R.id.emptyView));
@@ -103,11 +94,10 @@ public class SearchResultActivity extends ContentBaseActivity {
         		int chance = spinnerChance.getSelectedItemPosition();
         		int appears = spinnerAppears.getSelectedItemPosition();
         		String searchText = etSearch.getText().toString().trim();
-        		birds = Controller.getSelectedBirds(SearchResultActivity.this, ++chance, ++appears, searchText);
+        		birds = Controller.getSelectedBirds(AllBirdsActivity.this, ++chance, ++appears, searchText);
         		la.setFiller(birds);
         		la.notifyDataSetChanged();
-//        		listview.setVisibility(View.VISIBLE);
-        		Utils.hideKeyBoard(SearchResultActivity.this, etSearch);
+        		Utils.hideKeyBoard(AllBirdsActivity.this, etSearch);
         	}
         });
         

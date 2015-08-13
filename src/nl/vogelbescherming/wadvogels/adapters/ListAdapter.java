@@ -137,7 +137,6 @@ public class ListAdapter extends BaseAdapter implements Filterable {
         	mFilteredBirds = new ArrayList<Bird>((List<Bird>) results.values);
             notifyDataSetInvalidated();
         }
-
     }
 
     public void setFiller(ArrayList<Bird> filler){
