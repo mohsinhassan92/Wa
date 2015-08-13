@@ -574,18 +574,18 @@ public class BaseActivity extends FragmentActivity {
 	}
 
 	public void showVogelVinderMenuAsActive() {
-		View view = findViewById(R.id.relative_footer_left);
-		view.setBackgroundColor(Color.parseColor("#226991"));
+	//	View view = findViewById(R.id.relative_footer_left);
+		vogelvinder.setBackgroundColor(Color.parseColor("#226991"));
 	}
 
 	public void showZoekOpNaamMenuAsActive() {
-		View view = findViewById(R.id.relative_footer_center);
-		view.setBackgroundColor(Color.parseColor("#226991"));
+//		View view = findViewById(R.id.relative_footer_center);
+		zoekOpNaam.setBackgroundColor(Color.parseColor("#226991"));
 	}
 
 	public void showVogelPlekkenMenuAsActive() {
-		View view = findViewById(R.id.relative_footer_right);
-		view.setBackgroundColor(Color.parseColor("#226991"));
+//		View view = findViewById(R.id.relative_footer_right);
+		vogelplekken.setBackgroundColor(Color.parseColor("#226991"));
 	}
 
 }

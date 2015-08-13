@@ -29,7 +29,7 @@
 
     <!-- Added Afterwards By Android Developer -->
 
-    <string name="header_grootte">
+    <string name="sub_header_grootte">
 <![CDATA[
       	  		<font color="#297faf">1</font><font color="#939598">/4</font>\u00A0\u00A0\u00A0\u00A0\u00A0
           		<font color="#939598" >Hoe </font>
@@ -38,36 +38,31 @@
   		]]>
     </string>
 
-    <!-- 
-    <string name="header_grootte">
+ 
+    <string name="sub_header_silhuette">
 <![CDATA[
-			<p>
-      	  		<font color="#0072A0">2</font><font color="#898F8E">/4</font>\u00A0\u00A0\u00A0
-          		<font color="#898F8E" >Hoe </font>
-          		<font color="#0072A0">groot </font>
-          		<font color="#898F8E">is de vogel ongeveer?</font>
-  			</p>
+
+		  		<font color="#0072A0">2</font><font color="#898F8E">/4</font>\u00A0\u00A0\u00A0
+          		<font color="#898F8E" >Op welk </font>
+          		<font color="#0072A0">silhouet </font>
+          		<font color="#898F8E">lijkt de vogel het meest?</font>
   		]]>
     </string>
-    <string name="header_grootte">
+    <string name="sub_header_snavel">
 <![CDATA[
-			<p>
       	  		<font color="#0072A0">3</font><font color="#898F8E">/4</font>\u00A0\u00A0\u00A0
-          		<font color="#898F8E" >Hoe </font>
-          		<font color="#0072A0">groot </font>
-          		<font color="#898F8E">is de vogel ongeveer?</font>
-  			</p>
+          		<font color="#898F8E" >Wat voor soort </font>
+          		<font color="#0072A0">snavel </font>
+          		<font color="#898F8E">heeft de vogel?</font>
   		]]>
     </string>
-    <string name="header_grootte">
+    <string name="sub_header_kleur">
 <![CDATA[
-			<p>
       	  		<font color="#0072A0">4</font><font color="#898F8E">/4</font>\u00A0\u00A0\u00A0
-          		<font color="#898F8E" >Hoe </font>
-          		<font color="#0072A0">groot </font>
-          		<font color="#898F8E">is de vogel ongeveer?</font>
-  			</p>
+          		<font color="#898F8E" >Welke 3 </font>
+          		<font color="#0072A0">kleuren </font>
+          		<font color="#898F8E">vallen het meest op?</font>
   		]]>
     </string>
- -->
+ 
 </resources>

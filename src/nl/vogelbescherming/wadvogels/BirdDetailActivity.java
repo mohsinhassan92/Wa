@@ -30,14 +30,12 @@ import nl.vogelbescherming.wadvogels.fonts.Fonts;
 import nl.vogelbescherming.wadvogels.model.Bird;
 import nl.vogelbescherming.wadvogels.util.HackyScrollView;
 import nl.vogelbescherming.wadvogels.util.HackyViewPager;
-/*
- * Детальное описание птицы
- */
+
 public class BirdDetailActivity extends ContentBaseActivity{
 	
-	private Bird bird; 						// выбранная птица
-	private boolean mStartPlaying = true;   // флаг проигррывания звука
-	private boolean ShowFullInfo = true;    // флаг показывать картинку на весь экарн или нет
+	private Bird bird; 						
+	private boolean mStartPlaying = true;   
+	private boolean ShowFullInfo = true;    
 	private TextView description;
 	private TableLayout infoBar;
 	private RelativeLayout image_large_layout;
@@ -67,7 +65,8 @@ public class BirdDetailActivity extends ContentBaseActivity{
 		super.onCreate(savedInstanceState);
 		setContent(R.layout.activity_bird_detail);
 //		setHeader("VOGELGIDS");
-		
+
+		showVogelVinderMenuAsActive();
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		
 		bird = (Bird) getIntent().getExtras().getSerializable("CurrentBird");

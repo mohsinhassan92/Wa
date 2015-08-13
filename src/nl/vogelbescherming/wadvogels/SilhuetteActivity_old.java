@@ -12,7 +12,7 @@ import java.util.List;
 import nl.vogelbescherming.wadvogels.R;
 import nl.vogelbescherming.wadvogels.control.Controller;
 
-public class SilhuetteActivity extends BaseGridActivity{
+public class SilhuetteActivity_old extends BaseGridActivity{
 	
 	public static int MAX_NUMBER_SELECTED_ITEMS = 1;
 	private static List<Drawable> list;
@@ -40,10 +40,10 @@ public class SilhuetteActivity extends BaseGridActivity{
 	}
 	private List<String> createText() {
 		List<String> temp = new ArrayList<String>(TABLE_ITEM_NUMBER);
-		temp.add("EEND/GANS");
+		temp.add("EEND OF GANS");
 		temp.add("STELTLOPER");
-		temp.add("MEEUW/STERN");
-		temp.add("MUS/MEES");
+		temp.add("MEEUW OF STERN");
+		temp.add("KLEIN");
 		temp.add("MERELACHTIG");
 		temp.add("LANG");
 		temp.add("ROOFVOGEL");
@@ -60,7 +60,6 @@ public class SilhuetteActivity extends BaseGridActivity{
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		
-		
 		list = createList();
 		
 		text = createText();
@@ -70,17 +69,15 @@ public class SilhuetteActivity extends BaseGridActivity{
 			selectedItems.add(Controller.getMyBird().getSilhouette().get(0));
 		preSetContent(list, R.layout.textdown_grid_item,3,0,MAX_NUMBER_SELECTED_ITEMS, selectedItems, false, false, text,handler);
         super.onCreate(savedInstanceState);
-        showVogelVinderMenuAsActive();
-        showButton(false);
-        setSubHeaderTitle(getResources().getString(R.string.sub_header_silhuette));
-    /*    setButton(R.drawable.verder_state);
+        setSubHeaderTitle("Op welk silhouet lijkt de vogel het meest?");
+        setButton(R.drawable.verder_state);
         Display display = getWindowManager().getDefaultDisplay();
         int width = display.getWidth();  // deprecated
         int height = display.getHeight();  // deprecated
-        /
+        /*/
         if (width > 325 && height > 485)
         	createSeekBar(Controller.getMyBird(), 4);
-        //
-        getButton().setOnClickListener(onSkipClickListener);*/
+        //*/
+        getButton().setOnClickListener(onSkipClickListener);
 	}
 }

@@ -12,7 +12,7 @@ import java.util.List;
 import nl.vogelbescherming.wadvogels.R;
 import nl.vogelbescherming.wadvogels.control.Controller;
 
-public class SnavelActivity extends BaseGridActivity{
+public class SnavelActivity_old extends BaseGridActivity{
 	
 	public static int MAX_NUMBER_SELECTED_ITEMS = 1;
 	private static List<Drawable> list;
@@ -58,7 +58,6 @@ public class SnavelActivity extends BaseGridActivity{
 	}
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		
 		list = createList();
 		text = createText();
 		List<Integer> selectedItems = new ArrayList<Integer>();
@@ -66,9 +65,8 @@ public class SnavelActivity extends BaseGridActivity{
 			selectedItems.add(Controller.getMyBird().getBeak().get(0));
 		preSetContent(list,R.layout.textdown_grid_item, 3,0,MAX_NUMBER_SELECTED_ITEMS, selectedItems,false,false, text,handler);
         super.onCreate(savedInstanceState);
-        showVogelVinderMenuAsActive();
-        setSubHeaderTitle(getResources().getString(R.string.sub_header_snavel));
-/*        setButton(R.drawable.verder_state);
+        setSubHeaderTitle("Wat voor soort snavel heeft de vogel?");
+        setButton(R.drawable.verder_state);
         Display display = getWindowManager().getDefaultDisplay();
         int width = display.getWidth();  // deprecated
         int height = display.getHeight();  // deprecated
@@ -76,6 +74,6 @@ public class SnavelActivity extends BaseGridActivity{
         if (width > 325 && height > 485)
         	createSeekBar(Controller.getMyBird(), 2);
         getButton().setOnClickListener(onSkipClickListener);
-*/	}
+	}
 
 }

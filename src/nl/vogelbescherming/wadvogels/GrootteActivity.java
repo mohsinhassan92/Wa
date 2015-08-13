@@ -73,11 +73,12 @@ public class GrootteActivity extends BaseGridActivity {
 				handler);
 		super.onCreate(savedInstanceState);
 		// setHeader("VOGELVINDER");
+		showVogelVinderMenuAsActive();
 		showButton(false);
 		/**** Method Changed SetTitle()-Previously receive string as Parameter ****/
 
-		setTitleHeader(R.string.header_grootte);
-		setSubHeaderTitle(getResources().getString(R.string.header_grootte));
+		setTitleHeader(R.string.sub_header_grootte);
+		setSubHeaderTitle(getResources().getString(R.string.sub_header_grootte));
 		
 //		RelativeLayout titleContainer =   (RelativeLayout) findViewById(R.id.relative_title);
 //		titleContainer.set(Gravity.CENTER);

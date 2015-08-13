@@ -78,13 +78,13 @@ public class BaseGridActivity extends ContentBaseActivity implements OnClickList
     	//Log.d("HAI BACK","HAI BACK");
         Class<?> backActivity = null;
         if (this instanceof SilhuetteActivity) {
-            backActivity = MainActivity.class;
+            backActivity = GrootteActivity.class;
         } else if (this instanceof SnavelActivity) {
             backActivity = SilhuetteActivity.class;
         } else if (this instanceof GrootteActivity) {
-            backActivity = SnavelActivity.class;
+            backActivity = MainActivity.class;
         } else if (this instanceof KleurActivity) {
-            backActivity = GrootteActivity.class;
+            backActivity = SnavelActivity.class;
         }
         Intent intent = new Intent(this, backActivity);
         startActivity(intent);
@@ -101,10 +101,10 @@ public class BaseGridActivity extends ContentBaseActivity implements OnClickList
             intent = new Intent(this, SnavelActivity.class);
         }
         if (this instanceof SnavelActivity) {
-            intent = new Intent(this, GrootteActivity.class);
+            intent = new Intent(this, KleurActivity.class);
         }
         if (this instanceof GrootteActivity) {
-            intent = new Intent(this, KleurActivity.class);
+            intent = new Intent(this, SilhuetteActivity.class);
         }
         if (this instanceof KleurActivity) {
             intent = new Intent(this, SearchResultActivity.class);

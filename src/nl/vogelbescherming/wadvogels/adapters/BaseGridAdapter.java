@@ -129,7 +129,7 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 									R.dimen.image_padding);
 				} else {
 					widthInPixels = (mMetrics.widthPixels / columnNumber)
-							- getPixels(10, mMetrics);
+							- getPixels(-13, mMetrics);
 				}
 
 				// if (cellHeight){//chitaem dryguu visotu

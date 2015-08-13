@@ -37,6 +37,7 @@ public class BirdSpotsActivity extends ContentBaseActivity {
         setContent(R.layout.activity_bird_spots);
 		setButton(R.drawable.map_button_state);
 		showButton(false);
+		showVogelPlekkenMenuAsActive();
 		
 		setSubHeaderTitle("Dit zijn de mooiste vogellocaties in het waddengebied.\nKlik voor meer informatie op een locatiepunt.");
 		locations = Controller.getLocations(this);

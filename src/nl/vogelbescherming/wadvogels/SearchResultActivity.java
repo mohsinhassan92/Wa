@@ -43,6 +43,7 @@ public class SearchResultActivity extends ContentBaseActivity {
 		showAllBirds = getIntent().getExtras().getBoolean("ShowAllBirds");
         Location locationFromMap = (Location) getIntent().getExtras().get("locationFromMap");
         
+        showZoekOpNaamMenuAsActive();
         hideButtons();
         
         etSearch = (EditText) findViewById(R.id.filter);
