@@ -91,7 +91,6 @@ public class Controller {
 
 		return birdsList;
 	}
-	
 	public static List<Bird> getFilteredBirds(Context context){
 		Filter filter = new Filter(myBird);
 		List<Bird> result = new ArrayList<Bird>();
@@ -105,7 +104,7 @@ public class Controller {
 		result = filter.filterSizes(result);
 		result = filter.filterBeak(result);
 		
-		//result = filter.sortBirds(result); // Remove repeted birds, удаляются повторяющиеся птицы. Самые похожие выдвигаются наверх
+		//result = filter.sortBirds(result); // Remove repeted birds,
 		Collections.sort(result, new Comparator<Bird>() {
 			@Override
 			public int compare(Bird lhs, Bird rhs) {
