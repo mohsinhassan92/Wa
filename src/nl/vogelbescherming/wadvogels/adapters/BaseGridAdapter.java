@@ -1,18 +1,24 @@
 package nl.vogelbescherming.wadvogels.adapters;
 
+import android.R.color;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.ColorRes;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.view.ViewGroup.MarginLayoutParams;
+import android.webkit.WebView.FindListener;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -23,17 +29,22 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.android.gms.appdatasearch.GetRecentContextCall;
+
 import nl.vogelbescherming.wadvogels.BaseGridActivity;
 import nl.vogelbescherming.wadvogels.R;
 import nl.vogelbescherming.wadvogels.control.Controller;
 import nl.vogelbescherming.wadvogels.fonts.Fonts;
+import nl.vogelbescherming.wadvogels.view.CircleImageView;
 
+@SuppressLint("NewApi")
 public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 
 	private Context mContext;
 	private int mGridItemLayout;
 	private int mImageView;
 	private List<Drawable> mObjects;
+	private List<Drawable> mObjects_active;
 	private RelativeLayout backing;
 	private int maxItemSelected;
 	private int columnNumber;
@@ -48,8 +59,9 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 	private View selectedImage;
 
 	public BaseGridAdapter(Context context, int gridItemLayout, int imageView,
-			List<Drawable> objects, int maxItemSelected, int columnNumber,
-			List<Integer> selectedItems, List<String> text, Handler handler) {
+			List<Drawable> objects, List<Drawable> objects_active,
+			int maxItemSelected, int columnNumber, List<Integer> selectedItems,
+			List<String> text, Handler handler) {
 		super(context, gridItemLayout, objects);
 
 		selectImagePositions = new ArrayList<Integer>(maxItemSelected);
@@ -58,6 +70,7 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 		mGridItemLayout = gridItemLayout;
 		mImageView = imageView;
 		mObjects = objects;
+		mObjects_active = objects_active;
 		this.columnNumber = columnNumber;
 		this.maxItemSelected = maxItemSelected;
 		this.selectedItems = selectedItems;
@@ -67,12 +80,13 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 	}
 
 	public BaseGridAdapter(Context context, int gridItemLayout, int imageView,
-			List<Drawable> objects, int maxItemSelected, int columnNumber,
-			int rowNumber, List<Integer> selectedItems, boolean padding,
-			boolean cellHeight, List<String> text, Handler handler) {
+			List<Drawable> objects, List<Drawable> objects_active,
+			int maxItemSelected, int columnNumber, int rowNumber,
+			List<Integer> selectedItems, boolean padding, boolean cellHeight,
+			List<String> text, Handler handler) {
 
-		this(context, gridItemLayout, imageView, objects, maxItemSelected,
-				columnNumber, selectedItems, text, handler);
+		this(context, gridItemLayout, imageView, objects, objects_active,
+				maxItemSelected, columnNumber, selectedItems, text, handler);
 		this.cellHeight = cellHeight;
 		this.padding = padding;
 		this.rowNumber = rowNumber;
@@ -101,8 +115,17 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 			ImageView iv = (ImageView) v.findViewById(mImageView);
 			backing = (RelativeLayout) v.findViewById(R.id.backing);
 			iv.setImageDrawable(drawable);
+			/*
+			 * LinearLayout.LayoutParams loparams = (LinearLayout.LayoutParams)
+			 * iv.getLayoutParams(); loparams.setMargins(0, 0, 0, 20);
+			 * v.setLayoutParams(loparams);
+			 */
 			TextView txt = (TextView) v.findViewById(R.id.text);
-			if (txt != null) {
+			/*
+			 * LinearLayout.LayoutParams loparams = (LinearLayout.LayoutParams)
+			 * txt.getLayoutParams(); loparams.setMargins(0, 0, 0, 20);
+			 * txt.setLayoutParams(loparams);
+			 */if (txt != null) {
 				// txt.setTypeface(Fonts.getTfFont());
 				txt.setText(text.get(position));
 				/*
@@ -116,7 +139,8 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 					.getDisplayMetrics();
 			int widthInPixels;
 			int heightInPixels;
-			if (columnNumber == 3) { /* padding */
+			if (columnNumber == 3) {
+
 				if (padding) {
 					// widthInPixels =
 					// (mMetrics.widthPixels/columnNumber)-getPixels(20,
@@ -129,7 +153,7 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 									R.dimen.image_padding);
 				} else {
 					widthInPixels = (mMetrics.widthPixels / columnNumber)
-							- getPixels(-13, mMetrics);
+							- getPixels(0, mMetrics);
 				}
 
 				// if (cellHeight){//chitaem dryguu visotu
@@ -139,8 +163,11 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 				// }
 				heightInPixels = widthInPixels;
 
+				/*** COLOR SCREEN ***/
+
 				if (maxItemSelected == 3) { /* fix for color page */
-					heightInPixels = heightInPixels - getPixels(25, mMetrics);
+					heightInPixels = heightInPixels - getPixels(65, mMetrics);
+					txt.setVisibility(View.GONE);
 				}
 
 				RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
@@ -157,7 +184,22 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 
 				layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, 0);
 				iv.setLayoutParams(layoutParams);
-			
+
+				/*** COLOR SCREEN ***/
+
+				if (R.layout.grid_item == mGridItemLayout) {
+					if (position == 1) {
+						CircleImageView view_color = (CircleImageView) v
+								.findViewById(mImageView);
+						view_color.setBorderColor(mContext.getResources()
+								.getColor(R.color.inactive_button_color));
+					}
+
+					RelativeLayout rLyt = (RelativeLayout) v
+							.findViewById(R.id.backing);
+					rLyt.setPadding(0, 140, 0, 140);
+				}
+
 			} else if (columnNumber == 2) { /* padding */
 				if (padding) {
 					// widthInPixels =
@@ -198,12 +240,25 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 				}
 				layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, 0);
 				iv.setLayoutParams(layoutParams);
-				RelativeLayout rLyt=(RelativeLayout) v.findViewById(R.id.backing);
-				rLyt.setPadding(0, 37, 0, 27);
-/*				ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) rLyt
-						.getLayoutParams();
-				mlp.setMargins(0, 0, 0, 20);*/
-				
+				RelativeLayout rLyt = (RelativeLayout) v
+						.findViewById(R.id.backing);
+				rLyt.setGravity(Gravity.CENTER);
+				rLyt.setPadding(0, 47, 0, 0);
+				/*
+				 * TextView text=(TextView) rLyt.findViewById(R.id.text);
+				 * LayoutParams params = new
+				 * LayoutParams(LayoutParams.WRAP_CONTENT
+				 * ,LayoutParams.WRAP_CONTENT);
+				 * 
+				 * text.setGravity(Gravity.CENTER); ((MarginLayoutParams)
+				 * params).setMargins(0, 0, 0, 20);
+				 */// text.setPadding(20, 20, 20, 20);
+
+				/*
+				 * ViewGroup.MarginLayoutParams mlp =
+				 * (ViewGroup.MarginLayoutParams) rLyt .getLayoutParams();
+				 * mlp.setMargins(0, 0, 0, 20);
+				 */
 			} else if (columnNumber == 1) {
 				heightInPixels = (mMetrics.widthPixels / (mObjects.size() + 1));
 				if (backing.getLayoutParams() != null)
@@ -225,7 +280,6 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 		} else {
 			v.setTag(false);
 		}
-
 		v.setOnClickListener(new OnClickListener() {
 
 			@SuppressLint("UseValueOf")
@@ -244,7 +298,39 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 					// if (columnNumber == 1)
 					// backing.setBackgroundResource(R.drawable.long_bt);
 					// else
-					backing.setBackgroundResource(R.drawable.cell);
+
+					if (R.layout.grid_item == mGridItemLayout) {
+						CircleImageView img_color = (CircleImageView) v
+								.findViewById(mImageView);
+						// img_color
+						// .setBackgroundResource(R.drawable.circle_color);
+						/*
+						 * DisplayMetrics mMetrics = mContext.getResources()
+						 * .getDisplayMetrics(); int widthInPixels = 300; int
+						 * heightInPixels = 105;
+						 * 
+						 * RelativeLayout.LayoutParams layoutParams = new
+						 * RelativeLayout.LayoutParams( widthInPixels,
+						 * heightInPixels); layoutParams
+						 * .addRule(RelativeLayout.CENTER_IN_PARENT, 0);
+						 * img_color.setLayoutParams(layoutParams);
+						 */
+						if (position == 1) {
+							img_color.setBorderWidth(0);
+							img_color.setBorderColor(mContext.getResources()
+									.getColor(R.color.inactive_button_color));
+						} else {
+							img_color.setBorderWidth(0);
+							img_color.setBorderColor(Color
+									.parseColor("#ffffff"));
+						}
+					} else {
+						ImageView img = (ImageView) v.findViewById(mImageView);
+						img.setImageDrawable(mObjects.get(position));
+						TextView text = (TextView) v.findViewById(R.id.text);
+						text.setTextColor(mContext.getResources().getColor(R.color.inactive_button_color));
+						backing.setBackgroundResource(R.drawable.cell);
+					}
 					// backing.setBackgroundResource(android.R.color.transparent);//TODO:
 					selectImagePositions.remove(new Integer(position));
 					v.setTag(false);
@@ -255,13 +341,49 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 					// if (columnNumber == 1)
 					// backing.setBackgroundResource(R.drawable.long_pressed);
 					// else
-					backing.setBackgroundResource(R.drawable.cell_select);
 
+					if (R.layout.grid_item == mGridItemLayout) {
+						CircleImageView img_color = (CircleImageView) v
+								.findViewById(mImageView);
+						/*
+						 * DisplayMetrics mMetrics = mContext.getResources()
+						 * .getDisplayMetrics(); int widthInPixels = 305; int
+						 * heightInPixels = 110;
+						 * 
+						 * RelativeLayout.LayoutParams layoutParams = new
+						 * RelativeLayout.LayoutParams( widthInPixels,
+						 * heightInPixels); layoutParams
+						 * .addRule(RelativeLayout.CENTER_IN_PARENT, 0);
+						 * img_color.setLayoutParams(layoutParams);
+						 */
+						// img_color
+						// .setBackgroundResource(R.drawable.circle_color);
+						img_color.setBorderWidth(10);
+						img_color.setBorderColor(mContext.getResources()
+								.getColor(R.color.active_button_color));
+						// img_color.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.circle_color));
+						/*
+						 * img_color.setBackgroundColor(mContext.getResources()
+						 * .getColor(R.color.active_button_color));
+						 */
+						/*
+						 * img_color.setBorderWidth(10);
+						 * img_color.setBorderColor(mContext.getResources()
+						 * .getColor(R.color.inactive_button_color));
+						 */
+					} else {
+//						backing.setBackgroundResource(R.drawable.cell_select);
+					}
+
+					/*** I am Here ***/
+					ImageView img = (ImageView) v.findViewById(mImageView);
+					img.setImageDrawable(mObjects_active.get(position));
+					TextView text = (TextView) v.findViewById(R.id.text);
+					text.setTextColor(Color.WHITE);
 					selectedImage = v;
 
 					// Log.d("HAI6x1","TEST HAI6x1 "+v);
 					// Log.d("HAI6x2","TEST HAI6x2 "+selectImagePositions);
-
 					if (maxItemSelected == 1) {
 						// Log.d("HAI7","TEST HAI7");
 
@@ -298,16 +420,19 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 
 					v.setTag(true);
 					// }
+
 				}
 
 				mHandler.sendMessage(Message.obtain(null, 0,
 						selectImagePositions.size() > 0));
 
+				
 				if (selectImagePositions.size() == maxItemSelected
 						&& maxItemSelected == 1) {
 					((BaseGridActivity) mContext).getResult();
 					// Log.d("HAI8","TEST HAI8");
 				}
+				
 			}
 		});
 		// the view must be returned to our activity

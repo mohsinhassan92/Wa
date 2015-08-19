@@ -6,14 +6,13 @@
     <RelativeLayout
         android:id="@+id/backing"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/cell"
-  >
+        android:layout_height="wrap_content" >
 
-        <ImageView
+        <nl.vogelbescherming.wadvogels.view.CircleImageView
             android:id="@+id/image"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:padding="50dp" />
     </RelativeLayout>
 
     <TextView
@@ -23,6 +22,7 @@
         android:layout_below="@id/backing"
         android:layout_centerHorizontal="true"
         android:paddingTop="1dp"
+        android:text="Test"
         android:textColor="@color/inactive_button_color"
         android:textSize="10sp" />
 

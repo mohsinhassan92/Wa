@@ -1,4 +1,4 @@
-package nl.vogelbescherming.wadvogels;
+/*package nl.vogelbescherming.wadvogels;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -77,3 +77,4 @@ public class SnavelActivity_old extends BaseGridActivity{
 	}
 
 }
+*/

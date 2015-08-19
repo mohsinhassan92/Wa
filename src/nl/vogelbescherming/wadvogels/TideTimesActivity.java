@@ -31,7 +31,6 @@ public class TideTimesActivity extends BaseActivity {
 		((TextView)findViewById(R.id.hoog)).setTypeface(Fonts.getTfFont_bold());
 		((TextView)findViewById(R.id.hoogte)).setTypeface(Fonts.getTfFont_bold());
 		listView = (ListView) findViewById(R.id.tide_time_list);
-
         TextView headerText = (TextView) findViewById(R.id.headerText);
         headerText.setTypeface(Fonts.getTfFont());
 		

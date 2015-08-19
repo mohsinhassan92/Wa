@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.Display;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ public class SilhuetteActivity extends BaseGridActivity{
 	
 	public static int MAX_NUMBER_SELECTED_ITEMS = 1;
 	private static List<Drawable> list;
+	private static List<Drawable> list_active;
 	private static List<String> text;
 	private final int TABLE_ITEM_NUMBER = 9;
 	private Handler handler = new Handler(){
@@ -36,6 +38,20 @@ public class SilhuetteActivity extends BaseGridActivity{
 		temp.add(getResources().getDrawable(R.drawable.black_bird_7));
 		temp.add(getResources().getDrawable(R.drawable.black_bird_8));
 		temp.add(getResources().getDrawable(R.drawable.black_bird_9));
+		return temp;
+	}
+	
+	private List<Drawable> createList_active() {
+		List<Drawable> temp = new ArrayList<Drawable>(TABLE_ITEM_NUMBER);
+		temp.add(getResources().getDrawable(R.drawable.black_bird_1_active));
+		temp.add(getResources().getDrawable(R.drawable.black_bird_2_active));
+		temp.add(getResources().getDrawable(R.drawable.black_bird_3_active));
+		temp.add(getResources().getDrawable(R.drawable.black_bird_4_active));
+		temp.add(getResources().getDrawable(R.drawable.black_bird_5_active));
+		temp.add(getResources().getDrawable(R.drawable.black_bird_6_active));
+		temp.add(getResources().getDrawable(R.drawable.black_bird_7_active));
+		temp.add(getResources().getDrawable(R.drawable.black_bird_8_active));
+		temp.add(getResources().getDrawable(R.drawable.black_bird_9_active));
 		return temp;
 	}
 	private List<String> createText() {
@@ -62,13 +78,13 @@ public class SilhuetteActivity extends BaseGridActivity{
 		
 		
 		list = createList();
-		
+		list_active = createList_active();
 		text = createText();
 		
 		List<Integer> selectedItems = new ArrayList<Integer>();
 		if (Controller.getMyBird().getSilhouette() != null && Controller.getMyBird().getSilhouette().size() > 0)
 			selectedItems.add(Controller.getMyBird().getSilhouette().get(0));
-		preSetContent(list, R.layout.textdown_grid_item,3,0,MAX_NUMBER_SELECTED_ITEMS, selectedItems, false, false, text,handler);
+		preSetContent(list, list_active,R.layout.textdown_grid_item,3,0,MAX_NUMBER_SELECTED_ITEMS, selectedItems, false, false, text,handler);
         super.onCreate(savedInstanceState);
         showVogelVinderMenuAsActive();
         showButton(false);
@@ -79,8 +95,11 @@ public class SilhuetteActivity extends BaseGridActivity{
         int height = display.getHeight();  // deprecated
         /
         if (width > 325 && height > 485)
-        	createSeekBar(Controller.getMyBird(), 4);
-        //
-        getButton().setOnClickListener(onSkipClickListener);*/
-	}
+        	createSeekBar(Controller.getMyBird(), 4);*/
+		View btn_vorige= findViewById(R.id.button_vorige);
+		View btn_verder= findViewById(R.id.button_verder);
+		btn_vorige.setBackgroundColor(getResources().getColor(R.color.active_button_color));		
+		btn_vorige.setOnClickListener(onVorigeClickListener);
+		btn_verder.setOnClickListener(onSkipClickListener);	
+		}
 }

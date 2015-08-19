@@ -1,4 +1,4 @@
-package nl.vogelbescherming.wadvogels;
+/*package nl.vogelbescherming.wadvogels;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -68,4 +68,4 @@ public class GrootteActivity_old extends BaseGridActivity{
         	createSeekBar(Controller.getMyBird(), 3);
         getButton().setOnClickListener(onSkipClickListener);
 	}
-}
+}*/

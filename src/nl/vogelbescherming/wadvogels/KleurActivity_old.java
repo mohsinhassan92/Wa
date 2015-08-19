@@ -1,4 +1,4 @@
-package nl.vogelbescherming.wadvogels;
+/*package nl.vogelbescherming.wadvogels;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -74,7 +74,7 @@ public class KleurActivity_old extends BaseGridActivity{
 		List<Integer> selectedItems = new ArrayList<Integer>();
 		if (Controller.getMyBird().getColors()!= null && Controller.getMyBird().getColors().size() > 0)
 			selectedItems = Controller.getMyBird().getColors();
-		preSetContent(drawablelist,R.layout.grid_item, 3,3/*rownumber*/,MAX_NUMBER_SELECTED_ITEMS, selectedItems, true/*padding*/, true/*cell height*/, text,handler);
+		preSetContent(drawablelist,R.layout.grid_item, 3,3rownumber,MAX_NUMBER_SELECTED_ITEMS, selectedItems, truepadding, truecell height, text,handler);
         super.onCreate(savedInstanceState);
         setSubHeaderTitle("Welke kleuren vallen het meest op?");
         setButton(R.drawable.resultaten_state);
@@ -82,10 +82,11 @@ public class KleurActivity_old extends BaseGridActivity{
         Display display = getWindowManager().getDefaultDisplay();
         int width = display.getWidth();  // deprecated
         int height = display.getHeight();  // deprecated
-        /*/
+        /
         if (width > 325 && height > 485)
         	createSeekBar(Controller.getMyBird(), 4);
-        //*/
+        //
         getButton().setOnClickListener(this);
 	}
 }
+*/

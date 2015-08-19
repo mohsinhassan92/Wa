@@ -7,6 +7,7 @@ import android.os.Message;
 import android.text.Html;
 import android.view.Display;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -22,6 +23,7 @@ public class GrootteActivity extends BaseGridActivity {
 
 	public static int MAX_NUMBER_SELECTED_ITEMS = 1;
 	private static List<Drawable> list;
+	private static List<Drawable> list_active;
 	private static List<String> text;
 	private final int TABLE_ITEM_NUMBER = 4;
 	private Handler handler = new Handler() {
@@ -40,6 +42,14 @@ public class GrootteActivity extends BaseGridActivity {
 		return temp;
 	}
 
+	private List<Drawable> createListActive() {
+		List<Drawable> temp = new ArrayList<Drawable>(TABLE_ITEM_NUMBER);
+		temp.add(getResources().getDrawable(R.drawable.bird_on_bt_1_active));
+		temp.add(getResources().getDrawable(R.drawable.bird_on_bt_2_active));
+		temp.add(getResources().getDrawable(R.drawable.bird_on_bt_3_active));
+		temp.add(getResources().getDrawable(R.drawable.bird_on_bt_4_active));
+		return temp;
+	}
 	private List<String> createText() {
 		List<String> temp = new ArrayList<String>(TABLE_ITEM_NUMBER);
 		temp.add("ALS EEN MUS\n(MINDER DAN 16 CM)");
@@ -62,13 +72,14 @@ public class GrootteActivity extends BaseGridActivity {
 
 		// hideTabs();
 		list = createList();
+		list_active = createListActive();
 		text = createText();
 		List<Integer> selectedItems = new ArrayList<Integer>();
 		if (Controller.getMyBird().getSizes() != null
 				&& Controller.getMyBird().getSizes().size() > 0)
 			selectedItems = Controller.getMyBird().getSizes();
 
-		preSetContent(list, R.layout.long_grid_item, 2, 0,
+		preSetContent(list, list_active,R.layout.long_grid_item, 2, 0,
 				MAX_NUMBER_SELECTED_ITEMS, selectedItems, false, false, text,
 				handler);
 		super.onCreate(savedInstanceState);
@@ -79,9 +90,10 @@ public class GrootteActivity extends BaseGridActivity {
 
 		setTitleHeader(R.string.sub_header_grootte);
 		setSubHeaderTitle(getResources().getString(R.string.sub_header_grootte));
-		
-//		RelativeLayout titleContainer =   (RelativeLayout) findViewById(R.id.relative_title);
-//		titleContainer.set(Gravity.CENTER);
+
+		// RelativeLayout titleContainer = (RelativeLayout)
+		// findViewById(R.id.relative_title);
+		// titleContainer.set(Gravity.CENTER);
 		// setTitleSerial("/4");
 		/*
 		 * setButton(R.drawable.verder_state); Display display =
@@ -90,8 +102,9 @@ public class GrootteActivity extends BaseGridActivity {
 		 * // deprecated
 		 * 
 		 * if (width > 325 && height > 485)
-		 * createSeekBar(Controller.getMyBird(), 3);
-		 * getButton().setOnClickListener(onSkipClickListener);
-		 */
+		 * createSeekBar(Controller.getMyBird(), 3);*/
+		View btn_verder= findViewById(R.id.button_verder);
+		btn_verder.setOnClickListener(onSkipClickListener);
+		 
 	}
 }

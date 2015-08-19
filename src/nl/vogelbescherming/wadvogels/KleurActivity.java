@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.Display;
+import android.view.View;
+import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +21,8 @@ public class KleurActivity extends BaseGridActivity {
 	public static int MAX_NUMBER_SELECTED_ITEMS = 3;
 	private static List<Integer> list;
 	private List<Drawable> drawablelist;
+	private List<Drawable> drawablelist_active;
+
 	private final int TABLE_ITEM_NUMBER = 12;
 	private static List<String> text;
 	private Handler handler = new Handler() {
@@ -78,11 +82,12 @@ public class KleurActivity extends BaseGridActivity {
 		list = createList();
 		text = createText();
 		drawablelist = createDrawablesFromColors(list);
+		drawablelist_active = createDrawablesFromColors(list);
 		List<Integer> selectedItems = new ArrayList<Integer>();
 		if (Controller.getMyBird().getColors() != null
 				&& Controller.getMyBird().getColors().size() > 0)
 			selectedItems = Controller.getMyBird().getColors();
-		preSetContent(drawablelist, R.layout.grid_item, 3, 3/* rownumber */,
+		preSetContent(drawablelist,drawablelist_active ,R.layout.grid_item, 3, 3/* rownumber */,
 				MAX_NUMBER_SELECTED_ITEMS, selectedItems, true/* padding */,
 				true/* cell height */, text, handler);
 		super.onCreate(savedInstanceState);
@@ -99,5 +104,14 @@ public class KleurActivity extends BaseGridActivity {
 		 * createSeekBar(Controller.getMyBird(), 4); //
 		 * getButton().setOnClickListener(this); }
 		 */
+		
+		
+		
+		View btn_vorige= findViewById(R.id.button_vorige);
+		btn_vorige.setBackgroundColor(getResources().getColor(R.color.active_button_color));
+		btn_vorige.setOnClickListener(onVorigeClickListener);
+		Button btn_verder= (Button) findViewById(R.id.button_verder);
+		btn_verder.setText("Bekijk");
+		btn_verder.setOnClickListener(onSkipClickListener);
 	}
 }

@@ -1,4 +1,4 @@
-package nl.vogelbescherming.wadvogels;
+/*package nl.vogelbescherming.wadvogels;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -74,10 +74,11 @@ public class SilhuetteActivity_old extends BaseGridActivity{
         Display display = getWindowManager().getDefaultDisplay();
         int width = display.getWidth();  // deprecated
         int height = display.getHeight();  // deprecated
-        /*/
+        /
         if (width > 325 && height > 485)
         	createSeekBar(Controller.getMyBird(), 4);
-        //*/
+        //
         getButton().setOnClickListener(onSkipClickListener);
 	}
 }
+*/
