@@ -328,7 +328,8 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 						ImageView img = (ImageView) v.findViewById(mImageView);
 						img.setImageDrawable(mObjects.get(position));
 						TextView text = (TextView) v.findViewById(R.id.text);
-						text.setTextColor(mContext.getResources().getColor(R.color.inactive_button_color));
+						text.setTextColor(mContext.getResources().getColor(
+								R.color.inactive_button_color));
 						backing.setBackgroundResource(R.drawable.cell);
 					}
 					// backing.setBackgroundResource(android.R.color.transparent);//TODO:
@@ -372,7 +373,7 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 						 * .getColor(R.color.inactive_button_color));
 						 */
 					} else {
-//						backing.setBackgroundResource(R.drawable.cell_select);
+						// backing.setBackgroundResource(R.drawable.cell_select);
 					}
 
 					/*** I am Here ***/
@@ -393,6 +394,7 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 						backing.setBackgroundResource(R.drawable.cell_select);
 						selectedImage.setTag(false);
 
+						// i m HERE Now.
 						int listSize1 = selectImagePositions.size();
 						for (int j = 0; j < listSize1; j++) {
 							// Log.d("HAI 1 Member name: ",
@@ -426,13 +428,12 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 				mHandler.sendMessage(Message.obtain(null, 0,
 						selectImagePositions.size() > 0));
 
-				
 				if (selectImagePositions.size() == maxItemSelected
 						&& maxItemSelected == 1) {
 					((BaseGridActivity) mContext).getResult();
 					// Log.d("HAI8","TEST HAI8");
 				}
-				
+
 			}
 		});
 		// the view must be returned to our activity
