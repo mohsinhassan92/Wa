@@ -1,0 +1,62 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg" 
+    android:orientation="vertical" >
+
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:orientation="horizontal">
+        <TextView android:id="@+id/silhouet"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:textSize="11sp" 
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:layout_height="wrap_content"
+            android:text="Silhouet"
+            android:layout_weight="1"/>
+        <TextView android:id="@+id/snavel"
+            android:gravity="center"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Snavel"
+            android:layout_weight="1"/>
+        <TextView android:id="@+id/groette"
+            android:gravity="center"
+            android:textSize="11sp" 
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:text="Grootte"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <TextView android:id="@+id/kleuren"
+            android:textSize="11sp" 
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:text="Kleuren"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+    </LinearLayout>
+    <SeekBar android:layout_width="match_parent"
+        android:id="@+id/progress"
+        android:progressDrawable="@drawable/progressbar"
+        android:thumb="@drawable/slider_circle"
+        android:layout_height="wrap_content"
+        android:thumbOffset="0dp"
+        android:maxHeight="9dip"
+        android:layout_marginLeft="18dip"
+        android:layout_marginRight="18dip"
+        android:paddingLeft="18dip"
+        android:paddingRight="18dip"/>
+
+</LinearLayout>

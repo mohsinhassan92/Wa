@@ -1,0 +1,80 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:background="@color/bg" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/bg"
+        android:padding="20dp" >
+
+        <TextView
+            android:id="@+id/film_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/angs_top"
+            android:gravity="center_horizontal"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:text="Film over het verstoren van broedvogels"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <RelativeLayout
+            android:id="@+id/preview_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_below="@id/film_title"
+            android:layout_centerHorizontal="true" >
+
+            <ImageView
+                android:id="@+id/video"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/preview"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/play_bt" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/vogelweb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/preview_container"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Vogelweb"
+            android:textColor="#127bbe"
+            android:textSize="@dimen/text_size" />
+
+        <TextView
+            android:id="@+id/info1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color"
+            android:layout_below="@id/vogelweb"
+            android:textSize="@dimen/text_size" />
+
+        <TextView
+            android:id="@+id/info2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color"
+            android:layout_below="@id/info1"
+            android:layout_marginTop="10dp"
+            android:textSize="@dimen/text_size" />
+    </RelativeLayout>
+
+</ScrollView>

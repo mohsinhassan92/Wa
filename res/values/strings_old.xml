@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Wadvogels</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="astronomical_url">http://live.getij.nl/wsgetij/hwlw.php?format=xml&amp;from=%2$s&amp;&amp;to=%3$s&amp;location=%1$s&amp;Timezone=MET_DST&amp;reference=LAT</string>
+
+    <color name="red"> #f00 </color>
+
+    <string name="medium_text">Medium Text</string>
+
+    <string-array name="appears">
+        <item>Hele jaar door aanwezig</item>
+        <item>Wintergast</item>
+        <item>Broedvogel of zomergast</item>
+        <item>Doortrekker</item>
+    </string-array>
+    <string-array name="chance">
+        <item>Zeer kleine trefkans</item>
+        <item>Kleine trefkans</item>
+        <item>Redelijke trefkans</item>
+        <item>Grote trefkans</item>
+    </string-array>
+
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    
+    
+    
+    
+    
+    
+    
+
+</resources>

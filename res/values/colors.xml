@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="item_back">#919296</color>
+    <color name="text_select">#0287de</color>
+    <color name="text_unselect">#919296</color>
+    <color name="text_color">#444344</color>
+    <color name="bg">#f1f2f2</color> <!-- cfdde6 -->
+    <color name="info_color">#5684A2</color>
+    <color name="text_header_color">#636466</color>
+    <color name="main_buttons_text">#99b8d6</color>
+    <color name="white">#ffffff</color>
+    <color name="blue_spinner_color">#7393a7</color>
+    <color name="blue_bg">#297faf</color>
+    <color name="inactive_button_color">#939598</color>
+    <color name="active_button_color">#297faf</color>
+</resources>
