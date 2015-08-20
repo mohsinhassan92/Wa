@@ -373,7 +373,7 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 						 * .getColor(R.color.inactive_button_color));
 						 */
 					} else {
-						// backing.setBackgroundResource(R.drawable.cell_select);
+						backing.setBackgroundResource(R.drawable.cell_select);
 					}
 
 					/*** I am Here ***/
@@ -412,6 +412,24 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 						// }
 
 					}
+					if (maxItemSelected == 2) {
+						// Log.d("HAI7","TEST HAI7");
+
+						RelativeLayout selecetedBacking = (RelativeLayout) selectedImage
+								.findViewById(R.id.backing);
+						selecetedBacking.setBackgroundResource(R.drawable.cell);
+						backing.setBackgroundResource(R.drawable.cell_select);
+						selectedImage.setTag(false);
+						int listSize2 = selectImagePositions.size();
+//						for (int j = 0; j < listSize2-1; j++) {
+//							selectImagePositions.remove(selectImagePositions
+//									.get(j));
+//						}
+						if (listSize2 >= 3)
+						selectImagePositions.remove(selectImagePositions
+									.get(0));
+						//selectImagePositions.clear();
+					}
 					selectImagePositions.add(new Integer(position));
 
 					// int listSize3 = selectImagePositions.size();
@@ -443,11 +461,26 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 
 	private void selectItemInGrid(View v, int position) {
 		backing = (RelativeLayout) v.findViewById(R.id.backing);
-		if (selectImagePositions.size() < maxItemSelected) {
+
+		if (selectImagePositions.size() < maxItemSelected || position == 0) {
 			// if (columnNumber != 1)
 			// backing.setBackgroundResource(R.drawable.long_pressed);
 			// else
-			backing.setBackgroundResource(R.drawable.cell_select);
+			if (maxItemSelected == 3) {
+				CircleImageView img_color = (CircleImageView) v
+						.findViewById(mImageView);
+				img_color.setBorderWidth(10);
+				img_color.setBorderColor(mContext.getResources().getColor(
+						R.color.active_button_color));
+
+			} else {
+				backing.setBackgroundResource(R.drawable.cell_select);
+			}
+			ImageView img = (ImageView) v.findViewById(mImageView);
+
+			img.setImageDrawable(mObjects_active.get(position));
+			TextView text = (TextView) v.findViewById(R.id.text);
+			text.setTextColor(Color.WHITE);
 			selectImagePositions.add(Integer.valueOf(position));
 			v.setTag(true);
 		}

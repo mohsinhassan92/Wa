@@ -58,6 +58,12 @@ public class BaseGridActivity extends ContentBaseActivity implements
 		saveCheaked();
 	}
 
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+	}
+
 	private void adjustGridView() {
 		gvMain.setNumColumns(columnNumber);
 		// gvMain.setVerticalSpacing(10);
@@ -101,7 +107,7 @@ public class BaseGridActivity extends ContentBaseActivity implements
 
 	public void getResult() {
 		saveCheaked();
-	//	startNext();
+		// startNext();
 	}
 
 	private void startNext() {
@@ -145,7 +151,10 @@ public class BaseGridActivity extends ContentBaseActivity implements
 			}
 		}
 		if (this instanceof GrootteActivity) {
-			Controller.setSize(list);
+			for (int i = 0; i < GrootteActivity.MAX_NUMBER_SELECTED_ITEMS
+					&& flag; i++) {
+				Controller.setSize(list);
+			}
 		}
 		if (this instanceof KleurActivity) {
 			Controller.setColor(list);
@@ -181,7 +190,7 @@ public class BaseGridActivity extends ContentBaseActivity implements
 				backActivity = GrootteActivity.class;
 			} else if (BaseGridActivity.this instanceof SnavelActivity) {
 				backActivity = SilhuetteActivity.class;
-			}else if (BaseGridActivity.this instanceof KleurActivity) {
+			} else if (BaseGridActivity.this instanceof KleurActivity) {
 				backActivity = SnavelActivity.class;
 			}
 			Intent intent = new Intent(BaseGridActivity.this, backActivity);

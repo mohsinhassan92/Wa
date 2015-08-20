@@ -21,7 +21,7 @@ import nl.vogelbescherming.wadvogels.control.Controller;
 
 public class GrootteActivity extends BaseGridActivity {
 
-	public static int MAX_NUMBER_SELECTED_ITEMS = 1;
+	public static int MAX_NUMBER_SELECTED_ITEMS = 2;
 	private static List<Drawable> list;
 	private static List<Drawable> list_active;
 	private static List<String> text;
