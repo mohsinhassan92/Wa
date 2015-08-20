@@ -63,4 +63,8 @@ public class ContentBaseActivity extends BaseActivity{
 	public void setContent(int contentLayoutId) {
 		setContentPart(R.id.ContentContainer, contentLayoutId);
 	}
+	
+	public void setContentView(View view) {
+		setContentPart(R.id.ContentContainer, view);
+	}
 }

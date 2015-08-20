@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.google.android.gms.appdatasearch.GetRecentContextCall;
+
 import nl.vogelbescherming.wadvogels.BirdDetailActivity;
 import nl.vogelbescherming.wadvogels.R;
 import nl.vogelbescherming.wadvogels.fonts.Fonts;
@@ -57,6 +59,7 @@ public class ListAdapter extends BaseAdapter implements Filterable {
         ImageView iv;
         TextView text;
         TextView subtext;
+        View itemContainer;
     }
     @Override
     public View getView(final int position, View rootView, ViewGroup parent) {
@@ -72,8 +75,15 @@ public class ListAdapter extends BaseAdapter implements Filterable {
             viewHolder.iv = (ImageView) rootView.findViewById(R.id.image);
             viewHolder.text = (TextView) rootView.findViewById(R.id.text);
             viewHolder.subtext = (TextView) rootView.findViewById(R.id.subtext);
+            viewHolder.itemContainer = (View) rootView.findViewById(R.id.layoutItem);
 
         } else viewHolder = (ViewHolder) rootView.getTag();
+        
+        if (position % 2 == 0) {
+        	viewHolder.itemContainer.setBackgroundColor(mContext.getResources().getColor(R.color.white));
+        } else {
+        	viewHolder.itemContainer.setBackgroundColor(mContext.getResources().getColor(R.color.light_grey_list_item));
+        }
 
         Log.i("ImageName", "ImageName - "+bird.getImageName());
         Uri uri = Uri.parse("android.resource://"+ mContext.getPackageName() + "/drawable/ir" + bird.getImageName());

@@ -163,7 +163,7 @@ public class BaseActivity extends FragmentActivity {
 			
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(BaseActivity.this, SearchResultActivity.class);
+				Intent intent = new Intent(BaseActivity.this, AllBirdsActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				intent.putExtra("ShowAllBirds", true);
 				startActivity(intent);
@@ -210,6 +210,10 @@ public class BaseActivity extends FragmentActivity {
 	/*** Method Changed hideFooterMenu ***/
 	public void hideFooterMenu() {
 		findViewById(R.id.relative_footer).setVisibility(View.GONE);
+	}
+	
+	public void showFooterMenu() {
+		findViewById(R.id.relative_footer).setVisibility(View.VISIBLE);
 	}
 
 	/*** Method Changed hideButtons ***/
@@ -508,6 +512,14 @@ public class BaseActivity extends FragmentActivity {
 	public void showListButton() {
 		homeIV.setVisibility(View.VISIBLE);
 	}
+	
+	public void showAllBirdsButton(boolean isShow) {
+		if (isShow) {
+			allBirdsIV.setVisibility(View.VISIBLE);
+		} else {
+			allBirdsIV.setVisibility(View.GONE);
+		}
+	}
 
 	private void setStatus(Bird myBird, int position) {
 		progress.setProgress((int) (((double) (position - 1) / 3) * progress
@@ -559,7 +571,7 @@ public class BaseActivity extends FragmentActivity {
 		setContentPart(containerId, inflater.inflate(layoutId, null));
 	}
 
-	private void setContentPart(int containerId, View view) {
+	protected void setContentPart(int containerId, View view) {
 		final ViewGroup vg = (ViewGroup) findViewById(containerId);
 		vg.setVisibility(view != null ? View.VISIBLE : View.GONE);
 		vg.removeAllViews();

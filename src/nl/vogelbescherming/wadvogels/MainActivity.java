@@ -20,6 +20,7 @@ public class MainActivity extends BaseActivity {
 	private View button1;
 	private View button2;
 	private View button3;
+	private View button4;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,7 @@ public class MainActivity extends BaseActivity {
 			public void onClick(View v) {
 				Intent i = new Intent(MainActivity.this, SearchResultActivity.class);
 				i.putExtra("ShowAllBirds", true);
+				i.putExtra("Caller", "MainActivity");
 				startActivity(i);
 			}
 		});
@@ -57,6 +59,16 @@ public class MainActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(MainActivity.this, BirdSpotsActivity.class);
+				startActivity(i);
+			}
+		});
+        
+        button4 = findViewById(R.id.infoIV);
+        button4.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(MainActivity.this, InfoActivity.class);
 				startActivity(i);
 			}
 		});

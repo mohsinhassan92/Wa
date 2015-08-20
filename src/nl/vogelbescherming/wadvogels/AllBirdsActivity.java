@@ -6,13 +6,18 @@ import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -38,20 +43,25 @@ public class AllBirdsActivity extends ContentBaseActivity {
     @Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContent(R.layout.activity_search_result);
+//		setContent(R.layout.activity_all_birds);
+		final ViewGroup root = ViewGroup.class.cast(getLayoutInflater().inflate(R.layout.activity_all_birds, null));
+		root.addView(createAlphabetTrack());
+		setContentView(root);
+		
 		showAllBirds = getIntent().getExtras().getBoolean("ShowAllBirds");
         Location locationFromMap = (Location) getIntent().getExtras().get("locationFromMap");
-        showZoekOpNaamMenuAsActive();
+        
         hideButtons();
         
-        etSearch = (EditText) findViewById(R.id.filter);
-        btnSearch = (Button) findViewById(R.id.buttonSearch);
-        spinnerChance = (Spinner) findViewById(R.id.spinnerTrefkans);
+        etSearch = (EditText) root.findViewById(R.id.filter);
+        btnSearch = (Button) root.findViewById(R.id.buttonSearch);
+        spinnerChance = (Spinner) root.findViewById(R.id.spinnerTrefkans);
+        
         ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, R.layout.simple_spinner_item, getResources().getStringArray(R.array.chance));
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerChance.setAdapter(adapter1);
         
-        spinnerAppears = (Spinner) findViewById(R.id.spinnerAanwezigheid);
+        spinnerAppears = (Spinner) root.findViewById(R.id.spinnerAanwezigheid);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, R.layout.simple_spinner_item, getResources().getStringArray(R.array.appears));
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerAppears.setAdapter(adapter2);
@@ -59,7 +69,7 @@ public class AllBirdsActivity extends ContentBaseActivity {
         if (locationFromMap != null){
 //        	setHeader("VOGELGIDS");
         	//birds = (ArrayList<Bird>) locationFromMap.getBirds(Controller.getBirds(this));
-        	findViewById(R.id.filterContainer).setVisibility(View.GONE);
+        	root.findViewById(R.id.filterContainer).setVisibility(View.GONE);
         } else {
 	        if (showAllBirds != null && showAllBirds) {
 //	        	setHeader("ZOEK OP NAAM");
@@ -67,7 +77,7 @@ public class AllBirdsActivity extends ContentBaseActivity {
 	        } else {
 //	        	setHeader("VOGELGIDS");
 	        	birds = (ArrayList<Bird>) Controller.getFilteredBirds(this);
-	        	findViewById(R.id.filterContainer).setVisibility(View.GONE);
+	        	root.findViewById(R.id.filterContainer).setVisibility(View.GONE);
 //	        	setSubHeader("Gevonden resultaten");
 	        }
         }
@@ -81,11 +91,12 @@ public class AllBirdsActivity extends ContentBaseActivity {
     			}
     		}).show();
         }
-        ListView listview = (ListView) findViewById(R.id.listView);
+        
+        ListView listview = (ListView) root.findViewById(R.id.listView);
         
         la = new ListAdapter(this, R.layout.list_item, birds);
         listview.setAdapter(la);
-        listview.setEmptyView(findViewById(R.id.emptyView));
+        listview.setEmptyView(root.findViewById(R.id.emptyView));
         
         btnSearch.setOnClickListener(new View.OnClickListener() {
 
@@ -116,6 +127,43 @@ public class AllBirdsActivity extends ContentBaseActivity {
         });*/
         etSearch.addTextChangedListener(filterTextWatcher);
 	}
+    
+    private ViewGroup createAlphabetTrack() {
+		final LinearLayout layout = new LinearLayout(this);
+		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams((int) (30 * getResources().getDisplayMetrics().density), LayoutParams.MATCH_PARENT);
+		params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+		params.addRule(RelativeLayout.BELOW, R.id.filterContainer);
+		layout.setLayoutParams(params);
+		layout.setOrientation(LinearLayout.VERTICAL);
+
+		final LinearLayout.LayoutParams textparams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+		textparams.weight = 1;
+		final int height = getResources().getDisplayMetrics().heightPixels;
+		int iterate = 0;
+		if (height >= 1024){
+			iterate = 1; layout.setWeightSum(26);
+		} else {
+			iterate = 2; layout.setWeightSum(13);
+		}
+		for (char character = 'A'; character <= 'Z'; character+=iterate) {
+			final TextView textview = new TextView(this);
+			textview.setLayoutParams(textparams);
+			textview.setTextColor(getResources().getColor(R.color.blue_bg));
+			textview.setGravity(Gravity.CENTER_HORIZONTAL);
+			textview.setText(Character.toString(character));
+			textview.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					String text = textview.getText().toString().trim();
+//					filterTextWatcher.onTextChanged(text, 0, 0, 1);
+				}
+			});
+			layout.addView(textview);
+		}
+
+		return layout;
+	}
 	
 	private TextWatcher filterTextWatcher = new TextWatcher() {
 		@Override
@@ -124,7 +172,7 @@ public class AllBirdsActivity extends ContentBaseActivity {
         public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
 
         public void onTextChanged(CharSequence s, int start, int before,int count) {
-            if(la != null)la.getFilter().filter(s);
+            if(la != null)	la.getFilter().filter(s);
         }
     };
 }

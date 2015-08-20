@@ -4,42 +4,16 @@
     android:layout_height="match_parent"
     android:background="@color/bg" >
 
-    <RelativeLayout
-        android:id="@+id/backView"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:gravity="center_vertical"
-        android:visibility="gone" >
-
-        <ImageView
-            android:id="@+id/backBtn"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="8dp"
-            android:src="@drawable/ic_back" />
-
-        <TextView
-            android:id="@+id/backTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/backBtn"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="8dp"
-            android:layout_toRightOf="@+id/backBtn"
-            android:text="Zoekopdracht aanpassen"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/blue_bg" />
-    </RelativeLayout>
-
     <LinearLayout
         android:id="@+id/filterContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:layout_marginBottom="7dp"
-        android:layout_marginTop="7dp"
-        android:visibility="visible" >
+        android:layout_marginTop="7dp" 
+        android:visibility="visible">
 
         <EditText
             android:id="@+id/filter"
@@ -52,8 +26,8 @@
             android:gravity="center_vertical"
             android:hint="Trefwoorden..."
             android:paddingBottom="5dp"
-            android:paddingLeft="16dp"
             android:paddingTop="5dp"
+            android:paddingLeft="16dp"
             android:singleLine="true"
             android:textColorHint="#dad8d8" />
     </LinearLayout>
@@ -62,19 +36,28 @@
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/buttonSearch"
-        android:layout_marginTop="10dp"
-        android:visibility="gone" >
+        android:layout_below="@+id/filterContainer"
+        android:visibility="visible" >
     </ListView>
 
     <TextView
         android:id="@+id/emptyView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/buttonSearch"
         android:layout_margin="10dp"
         android:gravity="center"
+        android:layout_below="@+id/filterContainer"
         android:text="Deze zoekterm heeft geen resultaten opgeleverd.\nGa terug en probeer het opnieuw."
+        android:visibility="gone" />
+
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/filterContainer"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:visibility="gone" />
 
     <Spinner
@@ -83,27 +66,27 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/filterContainer"
-        android:layout_marginBottom="10dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/spinner_background"
         android:popupBackground="@drawable/spinner_background"
-        android:spinnerMode="dropdown"
-        android:visibility="visible" />
-
+        android:spinnerMode="dialog" 
+        android:visibility="gone"/>
+    
     <Spinner
         android:id="@+id/spinnerAanwezigheid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/spinnerTrefkans"
-        android:layout_marginBottom="10dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/spinner_background"
         android:popupBackground="@drawable/spinner_background"
-        android:spinnerMode="dropdown"
-        android:visibility="visible" />
+        android:spinnerMode="dropdown" 
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/buttonSearch"
@@ -115,6 +98,6 @@
         android:background="@color/blue_bg"
         android:text="@string/search"
         android:textColor="@color/white"
-        android:visibility="visible" />
+        android:visibility="gone" />
 
 </RelativeLayout>

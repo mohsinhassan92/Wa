@@ -16,7 +16,7 @@
         <ImageView
             android:id="@+id/relativeLayout1"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="80dp"
             android:src="@drawable/menu1"
             android:layout_marginBottom="16dp"
             android:scaleType="fitXY" />
@@ -24,26 +24,27 @@
         <ImageView
             android:id="@+id/relativeLayout2"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="80dp"
             android:src="@drawable/menu2"
             android:scaleType="fitXY" />
 
         <ImageView
             android:id="@+id/relativeLayout3"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="80dp"
             android:src="@drawable/menu3"
             android:layout_marginTop="16dp"
             android:scaleType="fitXY" />
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/relativeLayout4"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:id="@+id/infoIV"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="32dp"
+        android:padding="8dp"
         android:src="@drawable/ic_info_72px" />
 
 </RelativeLayout>

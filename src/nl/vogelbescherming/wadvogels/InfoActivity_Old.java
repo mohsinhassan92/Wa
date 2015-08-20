@@ -15,61 +15,46 @@ import nl.vogelbescherming.wadvogels.expandView.ExpandAnimation;
 import nl.vogelbescherming.wadvogels.fonts.Fonts;
 import nl.vogelbescherming.wadvogels.util.Utils;
 
-public class InfoActivity extends BaseActivity implements OnClickListener {
+public class InfoActivity_Old extends BaseActivity implements OnClickListener {
     private final String phoneNo = "4333";
     private final String textSMS = "VOGELS";
-    private int itemNo = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContent(R.layout.activity_info);
-        
-        hideButtons();
-        showAllBirdsButton(false);
-        
         View vogned = findViewById(R.id.vogned);
-        View ruvo = findViewById(R.id.ruvo);
-        View waar = findViewById(R.id.waar);
-        View gebr = findViewById(R.id.gebr);
-        View cred = findViewById(R.id.cred);
-        ruvo.setBackgroundColor(getResources().getColor(R.color.bg));
-        waar.setBackgroundColor(getResources().getColor(R.color.white));
-        gebr.setBackgroundColor(getResources().getColor(R.color.bg));
-        cred.setBackgroundColor(getResources().getColor(R.color.white));
-        vogned.setBackgroundColor(getResources().getColor(R.color.bg));
-        createExpandView(ruvo, "Rust voor vogels, Ruimte voor mensen.", "par_2");
-        createExpandView(waar, "Waarom is rust zo belangrijk voor vogels?", "par_3");
-        createExpandView(gebr, "Gebruikstips", "par_4");
-        createExpandView(cred, "Credits", "par_5");
         createExpandView(vogned, "Vogelbescherming Nederland", "par_1");
+        View ruvo = findViewById(R.id.ruvo);
+        createExpandView(ruvo, "Rust voor vogels, Ruimte voor mensen", "par_2");
+        View waar = findViewById(R.id.waar);
+        createExpandView(waar, "Waarom is rust voor vogels zo belangrijk?", "par_3");
+        View gebr = findViewById(R.id.gebr);
+        createExpandView(gebr, "Gebruikstips", "par_4");
+        View cred = findViewById(R.id.cred);
+        createExpandView(cred, "Credits", "par_5");
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private View createExpandView(View parent, String title, String bodyName) {
-    	
         WebView webView = new WebView(this);
-        webView.setBackgroundColor(getResources().getColor(android.R.color.white));
+        webView.setBackgroundColor(getResources().getColor(android.R.color.transparent));
         webView.getSettings().setBuiltInZoomControls(false);
-        if(Utils.hasHoneycomb())	webView.getSettings().setDisplayZoomControls(false);
+        if(Utils.hasHoneycomb())webView.getSettings().setDisplayZoomControls(false);
         webView.loadUrl("file:///android_asset/html/" + bodyName + ".html");
+        //web.setOverScrollMode(View.OVER_SCROLL_NEVER);
+
+
         TextView tv = ((TextView) parent.findViewById(R.id.title));
-//        if (itemNo%2 == 0) {
-//        	tv.setBackgroundColor(getResources().getColor(R.color.bg));
-//        } else {
-//        	tv.setBackgroundColor(getResources().getColor(R.color.white));
-//        }
         tv.setText(title);
-        tv.setTextColor(getResources().getColor(R.color.text_color));
-        tv.setTypeface(Fonts.getTfFont_regular());
+        tv.setTypeface(Fonts.getTfFont());
         parent.setTag(tv);
         LinearLayout toolbar = (LinearLayout) parent.findViewById(R.id.toolbar);
-//        ((LinearLayout.LayoutParams) toolbar.getLayoutParams()).bottomMargin = -50;
-        ((LinearLayout.LayoutParams) toolbar.getLayoutParams()).topMargin = 16;
+        ((LinearLayout.LayoutParams) toolbar.getLayoutParams()).bottomMargin = -50;
         toolbar.setVisibility(View.GONE);
         toolbar.removeAllViews();
         toolbar.addView(webView);
         parent.setOnClickListener(this);
-        itemNo++;
         return parent;
     }
 
@@ -81,9 +66,9 @@ public class InfoActivity extends BaseActivity implements OnClickListener {
         if (toolbar.getTag() != null) return;
         TextView tv = (TextView) view.getTag();
         if (toolbar.getVisibility() == View.VISIBLE) {
-            tv.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_down, 0);
+            tv.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.arrow_right, 0);
         } else
-            tv.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_up, 0);
+            tv.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.arrow_down, 0);
         ExpandAnimation expandAni = new ExpandAnimation(toolbar, 500);
         expandAni.setAnimationListener(new Animation.AnimationListener() {
             @Override

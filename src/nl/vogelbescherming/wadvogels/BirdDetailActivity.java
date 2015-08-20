@@ -49,17 +49,30 @@ public class BirdDetailActivity extends ContentBaseActivity{
 	private ArrayList<Bird> birds;
 	private HackyScrollView scroll;
 	private View info;
-	private View titleBar;
+	private View titleBar1, titleBar2, soundView, backView;
 	
 	private void showHeader(boolean show){
 		if (show){
-			titleBar.setVisibility(View.VISIBLE);
+			titleBar1.setVisibility(View.VISIBLE);
+			titleBar2.setVisibility(View.VISIBLE);
 			showBaseHeader(true);
 		} else {
-			titleBar.setVisibility(View.GONE);
+			titleBar1.setVisibility(View.GONE);
+			titleBar2.setVisibility(View.GONE);
 			showBaseHeader(false);
 		}
 	}
+	
+	private void showHeaders(boolean show) {
+		if (show){
+			titleBar1.setVisibility(View.VISIBLE);
+			titleBar2.setVisibility(View.VISIBLE);
+		} else {
+			titleBar1.setVisibility(View.GONE);
+			titleBar2.setVisibility(View.GONE);
+		}
+	}
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -69,21 +82,37 @@ public class BirdDetailActivity extends ContentBaseActivity{
 		showVogelVinderMenuAsActive();
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		
+		hideButtons();
+		
 		bird = (Bird) getIntent().getExtras().getSerializable("CurrentBird");
 		birds = (ArrayList<Bird>) getIntent().getExtras().getSerializable("Birds");
 		pos = getIntent().getExtras().getInt("Pos");
 		
+		
+		((TextView) findViewById(R.id.backTV)).setTypeface(Fonts.getTfFont_regular());
+		((TextView) findViewById(R.id.soundTV)).setTypeface(Fonts.getTfFont_regular());
+		
 		info = findViewById(R.id.info);
-		
-		titleBar = findViewById(R.id.titleBar);
-		
+		titleBar1 = findViewById(R.id.titleBar1);
+		titleBar2 = findViewById(R.id.titleBar2);
+		soundView = findViewById(R.id.soundView);
+		backView = findViewById(R.id.backView);
 		scroll = (HackyScrollView) findViewById(R.id.scroll);
 		
 		description = ((TextView) findViewById(R.id.description));
 		infoBar =((TableLayout) findViewById(R.id.infoBar));
 		soundButton = (ImageView) findViewById(R.id.soundButton);
         clickBird = bird;
-		soundButton.setOnClickListener(new OnClickListener() {
+        
+        backView.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				onBackPressed();
+			}
+		});
+       
+        soundView.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -181,17 +210,23 @@ public class BirdDetailActivity extends ContentBaseActivity{
 	}
 	private void createContent() {
 		
-		TextView name = (TextView) findViewById(R.id.name);		
+		TextView name = (TextView) findViewById(R.id.name);	
+		TextView category = (TextView) findViewById(R.id.category);		
 		name.setText(bird.getName());
-		name.setTypeface(Fonts.getTfFont_bold());
+		
+		String[] chances = getResources().getStringArray(R.array.chance);
+        String[] appears = getResources().getStringArray(R.array.appears);
+		category.setText(chances[Integer.valueOf(bird.getChance()) - 1] + " | " + appears[bird.getAppears().get(0) - 1]);
+		
+		name.setTypeface(Fonts.getTfFont_regular());
+		category.setTypeface(Fonts.getTfFont_regular());
 		
 		TextView voorkomen_title =(TextView) findViewById(R.id.voorkomen_title);
 		voorkomen_title.setText("Voorkomen");
 		setTypeFace(voorkomen_title, true);
 		
 		TextView voorkomen_content =(TextView) findViewById(R.id.voorkomen_content);
-		String[] voorkomen = getResources().getStringArray(R.array.appears);
-		String text = voorkomen[bird.getAppears().get(0) - 1];
+		String text = appears[bird.getAppears().get(0) - 1];
 		voorkomen_content.setText(text);
 		setTypeFace(voorkomen_content, false);
 		
@@ -200,7 +235,6 @@ public class BirdDetailActivity extends ContentBaseActivity{
 		setTypeFace(aantal_title, true);
 		
 		TextView aantal_content =(TextView) findViewById(R.id.trefkans_content);
-		String[] chances = getResources().getStringArray(R.array.chance);
 		String chance = chances[Integer.valueOf(bird.getChance()) - 1];
 		aantal_content.setText(chance);
 		setTypeFace(aantal_content, false);
@@ -317,7 +351,7 @@ public class BirdDetailActivity extends ContentBaseActivity{
 		DisplayMetrics metrics = getResources().getDisplayMetrics();
 		LayoutParams rlp = (LayoutParams) view.getLayoutParams();
 		if (flag == 1)
-			rlp.height = metrics.heightPixels * 8 / 9;
+			rlp.height = (int) (metrics.heightPixels - (155 * metrics.density));
 			//rlp.height = LayoutParams.MATCH_PARENT;
 		if (flag == 0)
 			rlp.height = metrics.heightPixels / 3;
@@ -337,13 +371,17 @@ public class BirdDetailActivity extends ContentBaseActivity{
     	if (ShowFullInfo){
     		info.setVisibility(View.GONE);
     		scroll.setScrollingEnabled(false);
+//    		showBaseHeader(false);
+    		hideFooterMenu();
     		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
     	} else {
     		info.setVisibility(View.VISIBLE);
     		scroll.setScrollingEnabled(true);
+//    		showBaseHeader(true);
+    		showFooterMenu();
     		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     	}
-    	if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+    	if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 			calcLayoutWH(mViewPager, 2);
 		} else {
 			calcLayoutWH(mViewPager, ShowFullInfo ? 1: 0);
@@ -357,20 +395,21 @@ public class BirdDetailActivity extends ContentBaseActivity{
         public Object instantiateItem(ViewGroup container, int position) {
             LayoutInflater inflater = LayoutInflater.from(container.getContext());
             View view = inflater.inflate(R.layout.viewpager_container, null);
-           
+
+            final ImageView fullScreenIV = (ImageView) view.findViewById(R.id.full_screen);
             final ImageView image = (ImageView) view.findViewById(R.id.image_small);
             final ImageView image_large = (ImageView) view.findViewById(R.id.image_large);
-    		
-            image.setOnClickListener(new OnClickListener() {
+            
+            fullScreenIV.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-    				click(v, image_large);
-				}
-			});
-            image_large.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-    				click(v, image);
+					if (fullScreenIV.getTag().toString().equals("small")) {
+						click(image, image_large);
+						v.setTag("large");
+					} else {
+						click(image_large, image);
+						v.setTag("small");
+					}
 				}
 			});
             

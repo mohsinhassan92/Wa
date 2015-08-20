@@ -13,4 +13,5 @@
     <color name="blue_bg">#297faf</color>
     <color name="inactive_button_color">#939598</color>
     <color name="active_button_color">#297faf</color>
+    <color name="light_grey_list_item">#f1f2f2</color>
 </resources>

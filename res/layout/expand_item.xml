@@ -2,34 +2,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="5dp"
-    android:paddingRight="5dp"
-    android:background="@color/bg"
     android:orientation="vertical" >
 
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableRight="@drawable/arrow_right"
+        android:drawableRight="@drawable/ic_arrow_down"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:padding="2dp"
-        android:textColor="#0072BA"
-        android:textStyle="bold"/>
-    <View android:background="@color/info_color" android:layout_width="match_parent"
-          android:layout_height="2dp"/>
+        android:text="Title"
+    	android:padding="16dp"
+        android:textSize="14sp"/>
     <!-- *********************** -->
     <!-- *** TOOLBAR LAYOUT **** -->
     <!-- *********************** -->
 
     <LinearLayout
         android:id="@+id/toolbar"
-        android:background="@color/bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="-50dip"
         android:orientation="vertical"
+        android:background="@color/white"
+    	android:padding="16dp"
         android:visibility="gone" >
     </LinearLayout>
 

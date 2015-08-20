@@ -6,40 +6,104 @@
     android:orientation="vertical" >
 
     <RelativeLayout
-        android:id="@+id/titleBar"
+        android:id="@+id/titleBar1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/another_func" >
-
-        <ImageView
-            android:id="@+id/soundButton"
+        android:layout_height="40dp"
+        android:background="@color/white">
+        
+        <RelativeLayout
+            android:id="@+id/soundView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginBottom="15dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/sound_icon" />
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/soundButton"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginRight="8dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/ic_sound" />
+
+            <TextView
+                android:id="@+id/soundTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:layout_toLeftOf="@+id/soundButton"
+                android:text="Beluister"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/blue_bg" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/backView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/backBtn"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:src="@drawable/ic_back" />
+
+            <TextView
+                android:id="@+id/backTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/backBtn"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@+id/backBtn"
+                android:gravity="center_vertical"
+                android:text="Terug"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/blue_bg" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/titleBar2"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical" >
 
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical|left"
             android:singleLine="true"
-            android:text="MAIN HEADER"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Bird Name"
+            android:textSize="18sp"
             android:textColor="@color/text_color" />
-        <!-- </LinearLayout> -->
+
+        <TextView
+            android:id="@+id/category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/name"
+            android:layout_below="@+id/name"
+            android:text="Description here"
+            android:textSize="12sp"
+            android:textColor="@color/text_color" />
+
     </RelativeLayout>
 
     <nl.vogelbescherming.wadvogels.util.HackyScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        android:id="@+id/scroll"
         android:scrollbarStyle="outsideOverlay" >
 
         <LinearLayout

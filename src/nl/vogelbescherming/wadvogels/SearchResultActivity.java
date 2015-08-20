@@ -15,7 +15,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-
+import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import nl.vogelbescherming.wadvogels.R;
@@ -35,6 +35,7 @@ public class SearchResultActivity extends ContentBaseActivity {
     private Spinner spinnerAppears;
     private Button btnSearch;
     private EditText etSearch;
+    private View backView;
 
     @Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -46,9 +47,11 @@ public class SearchResultActivity extends ContentBaseActivity {
         showZoekOpNaamMenuAsActive();
         hideButtons();
         
+        backView = (View) findViewById(R.id.backView);
         etSearch = (EditText) findViewById(R.id.filter);
         btnSearch = (Button) findViewById(R.id.buttonSearch);
         spinnerChance = (Spinner) findViewById(R.id.spinnerTrefkans);
+        
         ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, R.layout.simple_spinner_item, getResources().getStringArray(R.array.chance));
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerChance.setAdapter(adapter1);
@@ -58,13 +61,10 @@ public class SearchResultActivity extends ContentBaseActivity {
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerAppears.setAdapter(adapter2);
         
-        if (locationFromMap != null){
+        if (locationFromMap != null) {
 //        	setHeader("VOGELGIDS");
         	//birds = (ArrayList<Bird>) locationFromMap.getBirds(Controller.getBirds(this));
-        	findViewById(R.id.filterContainer).setVisibility(View.GONE);
-        	spinnerAppears.setVisibility(View.GONE);
-        	spinnerChance.setVisibility(View.GONE);
-        	btnSearch.setVisibility(View.GONE);
+        	hideSearchViews();
         } else {
 	        if (showAllBirds != null && showAllBirds) {
 //	        	setHeader("ZOEK OP NAAM");
@@ -72,30 +72,31 @@ public class SearchResultActivity extends ContentBaseActivity {
 	        } else {
 //	        	setHeader("VOGELGIDS");
 	        	birds = (ArrayList<Bird>) Controller.getFilteredBirds(this);
-	        	findViewById(R.id.filterContainer).setVisibility(View.GONE);
-	        	spinnerAppears.setVisibility(View.GONE);
-	        	spinnerChance.setVisibility(View.GONE);
-	        	btnSearch.setVisibility(View.GONE);
+//	        	hideSearchViews();
 //	        	setSubHeader("Gevonden resultaten");
 	        }
         }
-        if(birds.size() == 0){
-        	new AlertDialog.Builder(this)
-    		.setMessage("Deze zoekterm heeft geen resultaten opgeleverd. Ga terug en probeer het opnieuw.")
-    		.setPositiveButton("Ok", new OnClickListener() {
-    			@Override
-    			public void onClick(DialogInterface dialog, int arg1) {
-    				onBackPressed();
-    			}
-    		}).show();
-        }
+        
+//        if (getIntent().getStringExtra("Caller") == null || !getIntent().getStringExtra("Caller").equals("MainActivity")) {
+        	if(birds.size() == 0) {
+            	new AlertDialog.Builder(this)
+        		.setMessage("Deze zoekterm heeft geen resultaten opgeleverd. Ga terug en probeer het opnieuw.")
+        		.setPositiveButton("Ok", new OnClickListener() {
+        			@Override
+        			public void onClick(DialogInterface dialog, int arg1) {
+        				onBackPressed();
+        			}
+        		}).show();
+            }
+//        }
         
         listview = (ListView) findViewById(R.id.listView);
-		listview.setVisibility(View.GONE);
 		
         la = new ListAdapter(this, R.layout.list_item, birds);
         listview.setAdapter(la);
         listview.setEmptyView(findViewById(R.id.emptyView));
+        
+        listview.setVisibility(View.GONE);
         
         btnSearch.setOnClickListener(new View.OnClickListener() {
 
@@ -112,6 +113,14 @@ public class SearchResultActivity extends ContentBaseActivity {
         	}
         });
         
+        backView.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				onBackPressed();
+			}
+		});
+        
         /*listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -127,6 +136,18 @@ public class SearchResultActivity extends ContentBaseActivity {
         });*/
         etSearch.addTextChangedListener(filterTextWatcher);
 	}
+    
+    private void hideSearchViews() {
+    	findViewById(R.id.filterContainer).setVisibility(View.GONE);
+    	spinnerAppears.setVisibility(View.GONE);
+    	spinnerChance.setVisibility(View.GONE);
+    	btnSearch.setVisibility(View.GONE);
+    }
+    
+    private void showBackButton(boolean isShow) {
+    	if (isShow)	backView.setVisibility(View.VISIBLE);
+    	else	backView.setVisibility(View.GONE);
+    }
 	
 	private TextWatcher filterTextWatcher = new TextWatcher() {
 		@Override
