@@ -89,7 +89,7 @@ public class KleurActivity extends BaseGridActivity {
 			selectedItems = Controller.getMyBird().getColors();
 		preSetContent(drawablelist,drawablelist_active ,R.layout.grid_item, 3, 3/* rownumber */,
 				MAX_NUMBER_SELECTED_ITEMS, selectedItems, true/* padding */,
-				true/* cell height */, text, handler);
+				true/* cell height */, text, handler, list);
 		super.onCreate(savedInstanceState);
 		showVogelVinderMenuAsActive();
 		setSubHeaderTitle(getResources().getString(R.string.sub_header_kleur));

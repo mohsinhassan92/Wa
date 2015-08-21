@@ -20,6 +20,7 @@ public class BaseGridActivity extends ContentBaseActivity implements
 		OnClickListener {
 
 	private List<Drawable> listDrawables;
+	private List<Integer> colorsList;
 	private List<Drawable> listDrawables_active;
 	private GridView gvMain;
 	private BaseGridAdapter adapter;
@@ -44,7 +45,7 @@ public class BaseGridActivity extends ContentBaseActivity implements
 		adapter = new BaseGridAdapter(this, list_item_id, R.id.image,
 				listDrawables, listDrawables_active, maxItemselected,
 				columnNumber, rowNumber, selectedItems, padding, cellHeight,
-				text, handler);
+				text, handler, colorsList);
 		gvMain = (GridView) findViewById(R.id.gridView);
 		adjustGridView();
 		gvMain.setAdapter(adapter);
@@ -85,6 +86,24 @@ public class BaseGridActivity extends ContentBaseActivity implements
 		this.text = text;
 		this.handler = handler;
 		this.list_item_id = list_item_id;
+	}
+	
+	public void preSetContent(List<Drawable> list, List<Drawable> list_active,
+			int list_item_id, int columnNumber, int rowNubmer,
+			int maxItemselected, List<Integer> selectedItems, boolean padding,
+			boolean cellHeight, List<String> text, Handler handler, List<Integer> colorsList) {
+		listDrawables = list;
+		listDrawables_active = list_active;
+		this.columnNumber = columnNumber;
+		this.rowNumber = rowNubmer;
+		this.maxItemselected = maxItemselected;
+		this.selectedItems = selectedItems;
+		this.padding = padding;
+		this.cellHeight = cellHeight;
+		this.text = text;
+		this.handler = handler;
+		this.list_item_id = list_item_id;
+		this.colorsList = colorsList;
 	}
 
 	@Override
