@@ -1,71 +1,70 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/bg" >
-
-    <TextView
-        android:id="@+id/headerText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:paddingTop="20dp"
-        android:paddingLeft="25dp"
-        android:paddingRight="25dp"
-        android:text="In de getijdentabel kunt u zien wanneer het hoogwater is. Bij hoogwater zijn er langs de kust meer vogels te zien."/>
+    android:layout_height="wrap_content" >
 
     <RelativeLayout
+        android:id="@+id/relativeLayout1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/headerText"
-        android:layout_margin="20dp">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp" >
 
         <LinearLayout
             android:id="@+id/table_header"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_alignParentTop="true"
-            
-            android:background="@drawable/angs_top"
             android:orientation="horizontal" >
 
             <TextView
                 android:id="@+id/datum"
                 android:layout_width="match_parent"
-                android:layout_margin="5dp"
-                android:layout_marginLeft="10dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="DATUM + TIJD"
-                android:textSize="11sp"/>
+                android:layout_marginLeft="16dp"
+                android:layout_weight="0.5"
+                android:gravity="center_vertical|left"
+                android:textSize="12sp"
+                android:text="DATUM + TIJD" />
 
             <TextView
                 android:id="@+id/hoog"
-                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="HOOG/LAAG"
-                android:textSize="11sp"/>
+                android:layout_weight="0.6"
+                android:textSize="12sp"
+                android:gravity="center_vertical|left"
+                android:text="HOOG/LAAG" />
 
             <TextView
                 android:id="@+id/hoogte"
-                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="HOOGTE (CM)"
-                android:textSize="11sp"/>
+                android:layout_weight="0.6"
+                android:textSize="12sp"
+                android:gravity="center_vertical|left"
+                android:text="HOOGTE (CM)" />
         </LinearLayout>
+        
+        <LinearLayout 
+            android:id="@+id/table"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"/>
 
         <ListView
             android:id="@+id/tide_time_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/angs_bottom"
-            android:layout_below="@+id/table_header">
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/table_header" >
         </ListView>
     </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_alignRight="@+id/relativeLayout1"
+        android:layout_alignTop="@+id/relativeLayout1"
+        android:src="@drawable/ic_cross" />
 
 </RelativeLayout>

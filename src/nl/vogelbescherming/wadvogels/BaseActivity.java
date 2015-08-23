@@ -151,6 +151,11 @@ public class BaseActivity extends FragmentActivity {
 		btn_verder.setTypeface(typeFaceFooterButtons);
 		textBwBtns.setTypeface(typeFaceFooterButtons);
 
+		if (Controller.getFilteredBirds(BaseActivity.this) != null) {
+			int size = Controller.getFilteredBirds(BaseActivity.this).size();
+			textBwBtns.setText(size + " Resultaten");
+		}
+		
 		Typeface typeFace = Typeface.createFromAsset(getAssets(),
 				"fonts/ufonts.com_museo-700-opentype.otf");
 		title = (TextView) findViewById(R.id.title_tv);

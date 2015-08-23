@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.andraskindler.quickscroll.Scrollable;
 import com.google.android.gms.appdatasearch.GetRecentContextCall;
 
 import nl.vogelbescherming.wadvogels.BirdDetailActivity;
@@ -24,7 +25,7 @@ import nl.vogelbescherming.wadvogels.R;
 import nl.vogelbescherming.wadvogels.fonts.Fonts;
 import nl.vogelbescherming.wadvogels.model.Bird;
 
-public class ListAdapter extends BaseAdapter implements Filterable {
+public class ListAdapter extends BaseAdapter implements Filterable, Scrollable {
 
     private Context mContext;
     private LayoutInflater mInflater;
@@ -109,7 +110,7 @@ public class ListAdapter extends BaseAdapter implements Filterable {
                 i.putExtra("CurrentBird", bird);
                 i.putExtra("Birds", mFilteredBirds);
                 i.putExtra("Pos", position);
-
+                i.putExtra("Caller", mContext.toString());
                 mContext.startActivity(i);
             }
 	    });
@@ -157,6 +158,16 @@ public class ListAdapter extends BaseAdapter implements Filterable {
     public ArrayList<Bird> getFiller(){
         return mFilteredBirds;
     }
+
+	@Override
+	public String getIndicatorForPosition(int childposition, int groupposition) {
+		return mFilteredBirds.get(childposition).getIndicator();
+	}
+
+	@Override
+	public int getScrollPosition(int childposition, int groupposition) {
+		return childposition;
+	}
 }
 
 	

@@ -23,6 +23,22 @@
         <item>Redelijke trefkans</item>
         <item>Grote trefkans</item>
     </string-array>
+    
+    <string-array name="appears_items">
+        <item>Hele jaar door aanwezig</item>
+        <item>Wintergast</item>
+        <item>Broedvogel of zomergast</item>
+        <item>Doortrekker</item>
+        <item>Aanwezigheid...</item>
+    </string-array>
+    <string-array name="chance_items">
+        <item>Zeer kleine trefkans</item>
+        <item>Kleine trefkans</item>
+        <item>Redelijke trefkans</item>
+        <item>Grote trefkans</item>
+        <item>Trefkans...</item>
+    </string-array>
+    
 
     <string name="title_activity_splash">SplashActivity</string>
     <string name="hello_world">Hello world!</string>

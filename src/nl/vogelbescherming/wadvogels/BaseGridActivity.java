@@ -365,13 +365,10 @@ public class BaseGridActivity extends ContentBaseActivity implements
 	@Override
 	protected void onPause() {
 		super.onPause();
-		// Log.d("HAI0000x2","HAI0000x2");
-		saveCheaked();
 	}
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 	}
 
@@ -435,10 +432,9 @@ public class BaseGridActivity extends ContentBaseActivity implements
 		finish();
 	}
 
-	public void getResult() {
-		saveCheaked();
-		// startNext();
-	}
+//	public void getResult() {
+//		saveCheaked();
+//	}
 
 	private void startNext() {
 		Intent intent = null;
@@ -454,47 +450,43 @@ public class BaseGridActivity extends ContentBaseActivity implements
 		if (this instanceof KleurActivity) {
 			intent = new Intent(this, SearchResultActivity.class);
 			intent.putExtra("ShowAllBirds", false);
+			intent.putExtra("Caller", "KleurActivity");
 		}
+		saveChecked();	//TODO
 		startActivity(intent);
 	}
 
-	private void saveCheaked() {
-		boolean flag = true;
-
-		List<Integer> list = adapter.getCheckedItems();
-		if (list == null || list.size() == 0)
-			flag = false;
-
+	private void saveChecked() {
 		if (this instanceof SilhuetteActivity) {
-			// Log.d("HAI0000-1","HAI00000-1");
-			for (int i = 0; i < SilhuetteActivity.MAX_NUMBER_SELECTED_ITEMS
-					&& flag; i++) {
-				Controller.setSilhuette(list.get(i));
-				// Log.d("HAI0000-2","HAI0000-2 "+Integer.toString(list.get(i)));
+			if (positionSilhuette != -1) {
+				Controller.setSilhuette(positionSilhuette);
 			}
-
 		}
 		if (this instanceof SnavelActivity) {
-			for (int i = 0; i < SnavelActivity.MAX_NUMBER_SELECTED_ITEMS
-					&& flag; i++) {
-				Controller.setBeak(list.get(i));
+			if (positionSnavel != -1) {
+				Controller.setBeak(positionSnavel);
 			}
 		}
 		if (this instanceof GrootteActivity) {
-			for (int i = 0; i < GrootteActivity.MAX_NUMBER_SELECTED_ITEMS
-					&& flag; i++) {
-				Controller.setSize(list);
+			if (positionGrootte != null && positionGrootte.size() > 0) {
+				for (int i = 0; i < GrootteActivity.MAX_NUMBER_SELECTED_ITEMS && i < positionGrootte.size(); i++) {
+					Controller.addSize(positionGrootte.get(i));
+				}
 			}
 		}
 		if (this instanceof KleurActivity) {
-			Controller.setColor(list);
+			if (positionKleur != null && positionKleur.size() > 0) {
+				for (int i = 0; i < GrootteActivity.MAX_NUMBER_SELECTED_ITEMS && i < positionKleur.size(); i++) {
+					Controller.addColor(positionKleur.get(i));
+				}
+			}
 		}
 	}
 
 	@Override
 	public void onClick(View v) {
 		// Log.d("HAI0000x1","HAI0000x1");
-		getResult();
+//		getResult();
 	}
 
 	protected OnClickListener onSkipClickListener = new OnClickListener() {

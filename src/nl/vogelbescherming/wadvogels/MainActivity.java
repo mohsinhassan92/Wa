@@ -29,7 +29,6 @@ public class MainActivity extends BaseActivity {
         setContent(R.layout.activity_main);
         
         hideTabs();
-        hideFooterMenu();
         hideButtons();
         
         button1 = findViewById(R.id.relativeLayout1);

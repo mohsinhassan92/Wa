@@ -79,7 +79,13 @@ public class BirdDetailActivity extends ContentBaseActivity{
 		setContent(R.layout.activity_bird_detail);
 //		setHeader("VOGELGIDS");
 
-		showVogelVinderMenuAsActive();
+		if (getIntent().getStringExtra("Caller") != null) {
+			if (getIntent().getStringExtra("Caller").contains("SearchResultActivity")) {
+				showZoekOpNaamMenuAsActive();
+			}
+		} else {
+			showVogelVinderMenuAsActive();
+		}
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		
 		hideButtons();

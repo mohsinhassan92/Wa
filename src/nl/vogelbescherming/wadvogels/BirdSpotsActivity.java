@@ -1,14 +1,29 @@
 package nl.vogelbescherming.wadvogels;
 
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.os.AsyncTask;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import nl.vogelbescherming.wadvogels.adapters.TideTimeAdapter;
+import nl.vogelbescherming.wadvogels.control.Controller;
+import nl.vogelbescherming.wadvogels.fonts.Fonts;
+import nl.vogelbescherming.wadvogels.model.Location;
+import nl.vogelbescherming.wadvogels.model.Tide;
+import nl.vogelbescherming.wadvogels.util.Utils;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
@@ -24,38 +39,19 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import nl.vogelbescherming.wadvogels.R;
-import nl.vogelbescherming.wadvogels.adapters.TideTimesListAdapter;
-import nl.vogelbescherming.wadvogels.control.Controller;
-import nl.vogelbescherming.wadvogels.fonts.Fonts;
-import nl.vogelbescherming.wadvogels.model.AstronomicalTideGroup;
-import nl.vogelbescherming.wadvogels.model.Location;
-import nl.vogelbescherming.wadvogels.model.Tide;
-import nl.vogelbescherming.wadvogels.model.TideTimeAdapter;
-
 public class BirdSpotsActivity extends ContentBaseActivity {
 
 	private GoogleMap mMap;
 	private List<Location> locations;
-	private List<Tide> mTidesList;
-//	private Map<LatLng, String> mAreaMap;
-	private String code;
-
+	private Map<LatLng, String> mAreaMap;
+	//	private String code;
+	private boolean isInfoWinShown;
+	private Marker mMarker;
 	private ListView listView;
 	private TideTimeAdapter la;
+	private Map<String, ArrayList<Tide>> mTidesMap;
 	private static AsyncHttpClient client = new AsyncHttpClient();
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -68,8 +64,19 @@ public class BirdSpotsActivity extends ContentBaseActivity {
 		hideButtons();
 		showVogelPlekkenMenuAsActive();
 		hideTitleContainer();
-		//		setSubHeaderTitle("Dit zijn de mooiste vogellocaties in het waddengebied.\nKlik voor meer informatie op een locatiepunt.");
+
 		locations = Controller.getLocations(this);
+
+		mTidesMap = new HashMap<String, ArrayList<Tide>>();
+
+		String [] locationCodes = {"TEXNZE", "VLIELHVN", "TERSLNZE", "NES", "SCHIERMNOG", "DENHDR", "WIERMGDN", "EEMHVN"};
+		if (Utils.isOnline(this)) {
+			for (String code : locationCodes) {
+				String url = getResources().getString(R.string.url_get_regions_info) + code;
+				Log.i("BirdSpotsActivity", "Location before\n" + code);
+				client.get(url, mAsyncResponseHandler);
+			}
+		}
 	}
 
 	@Override
@@ -92,7 +99,7 @@ public class BirdSpotsActivity extends ContentBaseActivity {
 	}
 	private void setUpMap() {
 		if (locations != null) {
-//			mAreaMap = new HashMap<LatLng, String>();
+			mAreaMap = new HashMap<LatLng, String>();
 			for (Location loc : locations) {
 				String str = loc.getText();
 				String locationCode = loc.getmLocationCode();
@@ -103,7 +110,7 @@ public class BirdSpotsActivity extends ContentBaseActivity {
 					pin = BitmapDescriptorFactory.fromResource(R.drawable.pin_yellow);
 				}
 
-//				mAreaMap.put(new LatLng(loc.getLat(), loc.getLng()), loc.getmLocationCode());
+				mAreaMap.put(new LatLng(loc.getLat(), loc.getLng()), loc.getmLocationCode());
 
 				mMap.addMarker(new MarkerOptions()
 				.position(new LatLng(loc.getLat(), loc.getLng()))
@@ -122,29 +129,20 @@ public class BirdSpotsActivity extends ContentBaseActivity {
 					// Defines the contents of the InfoWindow
 					@Override
 					public View getInfoContents(final Marker marker) {
-						LatLng latlng = marker.getPosition();
-//						String locationCode = mAreaMap.get(latlng);
-						if (code.equals("TEXNZE") || code.equals("VLIELHVN") || code.equals("TERSLNZE") || code.equals("NES")
-								|| code.equals("SCHIERMNOG") || code.equals("DENHDR") || code.equals("WIERMGDN") || code.equals("EEMHVN")) {
+						mMarker = marker;
+						String code = mAreaMap.get(marker.getPosition());
+						isInfoWinShown = true;
+						if (Utils.isOnline(BirdSpotsActivity.this) && (code.equals("TEXNZE") || code.equals("VLIELHVN") || code.equals("TERSLNZE") || code.equals("NES")
+								|| code.equals("SCHIERMNOG") || code.equals("DENHDR") || code.equals("WIERMGDN") || code.equals("EEMHVN"))) {
 							View v = getLayoutInflater().inflate(R.layout.activity_tide_times, null);
+							((TextView) v.findViewById(R.id.datum)).setTypeface(Fonts.getTfFont_regular());
+							((TextView) v.findViewById(R.id.hoog)).setTypeface(Fonts.getTfFont_regular());
+							((TextView)	v.findViewById(R.id.hoogte)).setTypeface(Fonts.getTfFont_regular());
+							ArrayList<Tide> list = mTidesMap.get(code);
 							
-							((TextView) v.findViewById(R.id.datum)).setTypeface(Fonts.getTfFont_bold());
-							((TextView) v.findViewById(R.id.hoog)).setTypeface(Fonts.getTfFont_bold());
-							((TextView)	v.findViewById(R.id.hoogte)).setTypeface(Fonts.getTfFont_bold());
 							listView = (ListView) v.findViewById(R.id.tide_time_list);
-					        TextView headerText = (TextView) v.findViewById(R.id.headerText);
-					        headerText.setTypeface(Fonts.getTfFont_regular());
-							String url = getResources().getString(R.string.url_get_regions_info) + code;
-							
-							la = new TideTimeAdapter(BirdSpotsActivity.this, mTidesList);
-			                listView.setAdapter(la);
-			                
-					        client.get(url, mAsyncResponseHandler);
-							
-//							TextView title = (TextView) v.findViewById(R.id.title);
-//							TextView snippet = (TextView) v.findViewById(R.id.snippet);
-//							title.setText(marker.getTitle());
-//							snippet.setText(marker.getSnippet().replaceAll("\n","!"));
+							la = new TideTimeAdapter(BirdSpotsActivity.this, list);
+							listView.setAdapter(la);
 							return v;
 						} else {
 							View v = getLayoutInflater().inflate(R.layout.info_map, null);
@@ -157,47 +155,52 @@ public class BirdSpotsActivity extends ContentBaseActivity {
 							});
 							TextView title = (TextView) v.findViewById(R.id.title);
 							TextView snippet = (TextView) v.findViewById(R.id.snippet);
+							ImageView image = (ImageView) v.findViewById(R.id.imageView1);
+							
+							if (mAreaMap.get(marker.getPosition()).equalsIgnoreCase("Staatsbosbeheer")) {
+								image.setImageDrawable(getResources().getDrawable(R.drawable.natuurmonumenten)); //TODO
+							} else if (mAreaMap.get(marker.getPosition()).equalsIgnoreCase("Natuurmonumenten")) {
+								image.setImageDrawable(getResources().getDrawable(R.drawable.natuurmonumenten));
+							}
+							
 							title.setText(marker.getTitle());
 							snippet.setText(marker.getSnippet().replaceAll("\n","!"));
 							return v;
 						}
-
 					}
 				});
-				mMap.setOnInfoWindowClickListener(new OnInfoWindowClickListener() {
 
-					@Override
-					public void onInfoWindowClick(Marker marker) {
-						marker.hideInfoWindow();
-						//						showButton(false);
-					}
-				});
+				mMap.setOnInfoWindowClickListener(onInfoWindowClickListener);
+
 				mMap.setOnMapClickListener(new OnMapClickListener() {
 
 					@Override
 					public void onMapClick(LatLng latLng) {
-						//						showButton(false);
 					}
 				});
 				mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
 
 					@Override
-					public boolean onMarkerClick(Marker arg0) {
-						//						showButton(true);
-						for (Location loc : locations) {
-							if (loc.getName().equals(arg0.getTitle())){
-								code = loc.getmLocationCode();
-								break;
-							}
-						}
+					public boolean onMarkerClick(Marker marker) {
 						return false;
 					}
 				});
 			}
-			mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(52.059246, 5.427246), 6.0f));
+			mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(locations.get(0).getLat(), locations.get(0).getLng()), 8.0f));
 		}
 	}
-	
+
+	private OnInfoWindowClickListener onInfoWindowClickListener = new OnInfoWindowClickListener() {
+
+		@Override
+		public void onInfoWindowClick(Marker marker) {
+			marker.hideInfoWindow();
+			mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(marker.getPosition(), 8.0f));
+			isInfoWinShown = false;
+			//						showButton(false);
+		}
+	};
+
 	private AsyncHttpResponseHandler mAsyncResponseHandler = new AsyncHttpResponseHandler() {
 
 		@Override
@@ -214,18 +217,18 @@ public class BirdSpotsActivity extends ContentBaseActivity {
 		public void onSuccess(String content) {
 			try {
 				JSONObject json = new JSONObject(content);
+				ArrayList<Tide> list = new ArrayList<Tide>();
 				if (json.get("status").equals(true)) {
 					String loc = json.getString("location");
-					mTidesList = new ArrayList<Tide>();
-					if (loc.equalsIgnoreCase(code)) {
-						JSONArray array = json.getJSONArray("data");
-						if (array != null && array.length() > 0) {
-							for (int i = 0; i < array.length(); i++) {
-								JSONObject obj = (JSONObject) array.get(i);
-								mTidesList.add(new Tide(obj));
-							}
+					JSONArray array = json.getJSONArray("data");
+					Log.i("BirdSpotsActivity", "Location\n" + loc + "\nArray" + array);
+					if (array != null && array.length() > 0) {
+						for (int i = 0; i < array.length(); i++) {
+							JSONObject obj = (JSONObject) array.get(i);
+							list.add(new Tide(obj));
 						}
 					}
+					mTidesMap.put(loc, list);
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -237,4 +240,13 @@ public class BirdSpotsActivity extends ContentBaseActivity {
 			super.onFailure(error, content);
 		}
 	};
+
+	@Override
+	public void onBackPressed() {
+		if (isInfoWinShown && mMarker != null) {
+			onInfoWindowClickListener.onInfoWindowClick(mMarker);
+		} else {
+			super.onBackPressed();
+		}
+	}
 }

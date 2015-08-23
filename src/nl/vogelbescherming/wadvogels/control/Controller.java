@@ -86,9 +86,24 @@ public class Controller {
 			birds = createListBirds(context);
 		
 		ArrayList<Bird> birdsList = new ArrayList<Bird>();
+
 		for (Bird bird : birds) {
-			if (bird.getChance() == chance && bird.getAppears().get(0) == appears && bird.getName().contains(text)) {
-				birdsList.add(bird);
+			if (chance >= 1 && chance <= 4 && appears >= 1 && appears <= 4) {
+				if (bird.getChance() == chance && bird.getAppears().get(0) == appears && bird.getName().contains(text)) {
+					birdsList.add(bird);
+				}
+			} else if (chance >= 1 && chance <= 4) {
+				if (bird.getChance() == chance && bird.getName().contains(text)) {
+					birdsList.add(bird);
+				}
+			} else if (appears >= 1 && appears <= 4) {
+				if (bird.getAppears().get(0) == appears && bird.getName().contains(text)) {
+					birdsList.add(bird);
+				}
+			} else {
+				if (bird.getName().contains(text)) {
+					birdsList.add(bird);
+				}
 			}
 		}
 

@@ -1,6 +1,8 @@
 package nl.vogelbescherming.wadvogels.util;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -31,5 +33,12 @@ public class Utils {
 		InputMethodManager imm = (InputMethodManager) context.getSystemService(
 				Context.INPUT_METHOD_SERVICE);
 		imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+	}
+    
+    public static boolean isOnline(Context context) {
+	    ConnectivityManager cm =
+	        (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+	    NetworkInfo netInfo = cm.getActiveNetworkInfo();
+	    return netInfo != null && netInfo.isConnectedOrConnecting();
 	}
 }

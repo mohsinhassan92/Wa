@@ -1,48 +1,43 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/line3"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingLeft="8dp" >
 
     <TextView
-        android:id="@+id/datum"
-        android:layout_width="wrap_content"
+        android:id="@+id/dateTimeTV"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_alignParentLeft="true"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <View
-        android:id="@+id/border1"
-        android:layout_toRightOf="@id/datum"
-        android:layout_width="2dp"
-        android:layout_height="match_parent"
-        android:background="#a7a9ac" />
-
-    <TextView
-        android:id="@+id/hoog"
-        android:layout_width="wrap_content"
-        android:layout_toRightOf="@id/border1"
-        android:layout_height="match_parent"
+        android:gravity="center_vertical|left"
+        android:layout_weight="0.5"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
         android:textColor="@color/text_color"
-        android:gravity="left"
-        android:layout_marginLeft="10dp"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <View
-        android:id="@+id/border2"
-        android:layout_width="2dp"
-        android:layout_toRightOf="@id/hoog"
+        android:textSize="12sp"
+        android:text="31/03/2015 11:00" />
+    
+   <TextView
+        android:id="@+id/tideTV"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#a7a9ac" />
-
-    <TextView
-        android:id="@+id/hoogte"
-        android:layout_toRightOf="@id/border2"
+        android:gravity="center_vertical|left"
+        android:layout_weight="0.6"
+        android:textSize="12sp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
         android:textColor="@color/text_color"
-        android:layout_width="wrap_content"
+        android:text="Hoog" />
+   
+   <TextView
+        android:id="@+id/heightTV"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:gravity="center_vertical|left"
+        android:layout_weight="0.6"
+        android:textSize="12sp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:textColor="@color/text_color"
+        android:text="19" />
 
-</RelativeLayout>
+</LinearLayout>

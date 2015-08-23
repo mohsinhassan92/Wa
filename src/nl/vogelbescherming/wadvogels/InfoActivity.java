@@ -26,6 +26,7 @@ public class InfoActivity extends BaseActivity implements OnClickListener {
         
         hideButtons();
         showAllBirdsButton(false);
+        hideFooterMenu();
         
         View vogned = findViewById(R.id.vogned);
         View ruvo = findViewById(R.id.ruvo);

@@ -10,7 +10,7 @@ import nl.vogelbescherming.wadvogels.GrootteActivity;
 import nl.vogelbescherming.wadvogels.SilhuetteActivity;
 import nl.vogelbescherming.wadvogels.SnavelActivity;
 
-public class Bird implements Serializable{
+public class Bird implements Serializable, Comparable<Bird> {
 	private final int COLOR_LENGTH = 4;
 	private final int SIZE_LENGTH = 2;
 	private final int APPEARS_LENGTH = 2;
@@ -216,7 +216,7 @@ public class Bird implements Serializable{
 			silhouette = new ArrayList<Integer>(SILHUETTE_LENGTH);
 			//Log.d("HAI001","HAI001 "+silhouette);
 		}
-		if (this.silhouette.size() >= SilhuetteActivity.MAX_NUMBER_SELECTED_ITEMS){
+		if (this.silhouette.size() >= SilhuetteActivity.MAX_NUMBER_SELECTED_ITEMS) {
 			this.silhouette.clear();
 			//Log.d("HAI002","HAI002");
 		}
@@ -338,4 +338,12 @@ public class Bird implements Serializable{
     public void clearSizes() {
         sizes = new ArrayList<Integer>(SIZE_LENGTH);
     }
+    
+    public String getIndicator(){
+		return Character.toString(name.charAt(0)) + Character.toString(Character.toLowerCase(name.charAt(0)));
+	}
+	@Override
+	public int compareTo(Bird another) {
+		return this.name.compareTo(another.name);
+	}
 }

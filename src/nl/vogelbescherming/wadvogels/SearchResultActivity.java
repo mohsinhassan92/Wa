@@ -52,14 +52,16 @@ public class SearchResultActivity extends ContentBaseActivity {
         btnSearch = (Button) findViewById(R.id.buttonSearch);
         spinnerChance = (Spinner) findViewById(R.id.spinnerTrefkans);
         
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, R.layout.simple_spinner_item, getResources().getStringArray(R.array.chance));
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, R.layout.simple_spinner_item, getResources().getStringArray(R.array.chance_items));
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerChance.setAdapter(adapter1);
+        spinnerChance.setSelection(spinnerChance.getCount()-1);
         
         spinnerAppears = (Spinner) findViewById(R.id.spinnerAanwezigheid);
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, R.layout.simple_spinner_item, getResources().getStringArray(R.array.appears));
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, R.layout.simple_spinner_item, getResources().getStringArray(R.array.appears_items));
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerAppears.setAdapter(adapter2);
+        spinnerAppears.setSelection(spinnerAppears.getCount()-1);
         
         if (locationFromMap != null) {
 //        	setHeader("VOGELGIDS");
@@ -96,7 +98,15 @@ public class SearchResultActivity extends ContentBaseActivity {
         listview.setAdapter(la);
         listview.setEmptyView(findViewById(R.id.emptyView));
         
-        listview.setVisibility(View.GONE);
+        
+        if (getIntent().getStringExtra("Caller") != null && getIntent().getStringExtra("Caller").contains("KleurActivity")) {
+        	hideSearchViews();
+        	showBackButton(true);
+        	showVogelVinderMenuAsActive();
+            listview.setVisibility(View.VISIBLE);
+        } else {
+            listview.setVisibility(View.GONE);
+        }
         
         btnSearch.setOnClickListener(new View.OnClickListener() {
 

@@ -33,6 +33,6 @@
 	    android:layout_height="wrap_content"
 	    android:layout_alignLeft="@+id/snippet"
 	    android:layout_below="@+id/snippet"
-	    android:src="@drawable/info_window_btn" />
+	    android:background="@drawable/natuurmonumenten" />
 
 </RelativeLayout>
