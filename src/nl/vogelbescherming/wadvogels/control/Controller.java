@@ -60,6 +60,9 @@ public class Controller {
 	public static void setSize(List<Integer> sizes){
 		myBird.setSize(sizes);
 	}
+	public static void addSize(Integer size){
+		myBird.AddSize(size);
+	}
 	public static void addSize(int size){
 		myBird.AddSize(size);
 	}

@@ -33,7 +33,10 @@ import java.util.List;
 import com.google.android.gms.appdatasearch.GetRecentContextCall;
 
 import nl.vogelbescherming.wadvogels.BaseGridActivity;
+import nl.vogelbescherming.wadvogels.GrootteActivity;
 import nl.vogelbescherming.wadvogels.R;
+import nl.vogelbescherming.wadvogels.SilhuetteActivity;
+import nl.vogelbescherming.wadvogels.SnavelActivity;
 import nl.vogelbescherming.wadvogels.control.Controller;
 import nl.vogelbescherming.wadvogels.fonts.Fonts;
 import nl.vogelbescherming.wadvogels.view.CircleImageView;
@@ -80,7 +83,7 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 		this.padding = false;
 		this.text = text;
 	}
-	
+
 	public BaseGridAdapter(Context context, int gridItemLayout, int imageView,
 			List<Drawable> objects, List<Drawable> objects_active,
 			int maxItemSelected, int columnNumber, List<Integer> selectedItems,
@@ -115,7 +118,7 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 		this.padding = padding;
 		this.rowNumber = rowNumber;
 	}
-	
+
 	public BaseGridAdapter(Context context, int gridItemLayout, int imageView,
 			List<Drawable> objects, List<Drawable> objects_active,
 			int maxItemSelected, int columnNumber, int rowNumber,
@@ -152,9 +155,11 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 		if (drawable != null) {
 			backing = (RelativeLayout) v.findViewById(R.id.backing);
 			if (R.layout.grid_item == mGridItemLayout) {
-					((CircleImageView)	v.findViewById(mImageView)).setBackgroundColor(mColors.get(position));
+				((CircleImageView) v.findViewById(mImageView))
+						.setBackgroundColor(mColors.get(position));
 			} else {
-				((ImageView)	v.findViewById(mImageView)).setImageDrawable(drawable);
+				((ImageView) v.findViewById(mImageView))
+						.setImageDrawable(drawable);
 			}
 			/*
 			 * LinearLayout.LayoutParams loparams = (LinearLayout.LayoutParams)
@@ -316,160 +321,187 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 			v.setPadding(9, 9, 9, 9);
 			// v.setBackgroundResource(R.drawable.topbar_bg);
 		}
-		if (isItemSelecked(position)) {
-			selectItemInGrid(v, position);
-		} else {
-			v.setTag(false);
-		}
-		v.setOnClickListener(new OnClickListener() {
-
-			@SuppressLint("UseValueOf")
-			@Override
-			public void onClick(View v) {
-
-				// Log.d("HAI3","TEST HAI3");
-
-				RelativeLayout backing = (RelativeLayout) v
-						.findViewById(R.id.backing);
-				if (v == null || v.getTag() == null)
-					return;
-				// Log.d("HAI4","TEST HAI4 "+v.getTag());
-				if (v.getTag().equals(true)) {
-					// Log.d("HAI5","TEST HAI5 "+position);
-					// if (columnNumber == 1)
-					// backing.setBackgroundResource(R.drawable.long_bt);
-					// else
-
-					if (R.layout.grid_item == mGridItemLayout) {
-						CircleImageView img_color = (CircleImageView) v
-								.findViewById(mImageView);
-						// img_color
-						// .setBackgroundResource(R.drawable.circle_color);
-						/*
-						 * DisplayMetrics mMetrics = mContext.getResources()
-						 * .getDisplayMetrics(); int widthInPixels = 300; int
-						 * heightInPixels = 105;
-						 * 
-						 * RelativeLayout.LayoutParams layoutParams = new
-						 * RelativeLayout.LayoutParams( widthInPixels,
-						 * heightInPixels); layoutParams
-						 * .addRule(RelativeLayout.CENTER_IN_PARENT, 0);
-						 * img_color.setLayoutParams(layoutParams);
-						 */
-						if (position == 1) {
-							img_color.setBorderWidth(0);
-							img_color.setBorderColor(mContext.getResources()
-									.getColor(R.color.inactive_button_color));
-						} else {
-							img_color.setBorderWidth(0);
-							img_color.setBorderColor(Color
-									.parseColor("#ffffff"));
-						}
-					} else {
-						ImageView img = (ImageView) v.findViewById(mImageView);
-						img.setImageDrawable(mObjects.get(position));
-						TextView text = (TextView) v.findViewById(R.id.text);
-						text.setTextColor(mContext.getResources().getColor(
-								R.color.inactive_button_color));
-						backing.setBackgroundResource(R.drawable.cell);
-					}
-					// backing.setBackgroundResource(android.R.color.transparent);//TODO:
-					selectImagePositions.remove(new Integer(position));
-					v.setTag(false);
-
-				} else {
-					if (R.layout.grid_item == mGridItemLayout) {
-						CircleImageView img_color = (CircleImageView) v
-								.findViewById(mImageView);
-						img_color.setBorderWidth(10);
-						img_color.setBorderColor(mContext.getResources()
-								.getColor(R.color.active_button_color));
-					} else {
-						backing.setBackgroundResource(R.drawable.cell_select);
-						ImageView img = (ImageView) v.findViewById(mImageView);
-						img.setImageDrawable(mObjects_active.get(position));
-					}
-
-					TextView text = (TextView) v.findViewById(R.id.text);
-					text.setTextColor(Color.WHITE);
-					selectedImage = v;
-
-					// Log.d("HAI6x1","TEST HAI6x1 "+v);
-					// Log.d("HAI6x2","TEST HAI6x2 "+selectImagePositions);
-					if (maxItemSelected == 1) {
-						// Log.d("HAI7","TEST HAI7");
-
-						RelativeLayout selecetedBacking = (RelativeLayout) selectedImage
-								.findViewById(R.id.backing);
-						selecetedBacking.setBackgroundResource(R.drawable.cell);
-						backing.setBackgroundResource(R.drawable.cell_select);
-						selectedImage.setTag(false);
-
-						// i m HERE Now.
-						int listSize1 = selectImagePositions.size();
-						for (int j = 0; j < listSize1; j++) {
-							// Log.d("HAI 1 Member name: ",
-							// "HAI 1 Member name: "+Integer.toString(selectImagePositions.get(j)));
-							selectImagePositions.remove(selectImagePositions
-									.get(j));
-						}
-
-						selectImagePositions.clear();
-
-						// int listSize2 = selectImagePositions.size();
-						// for (int j = 0; j<listSize2; j++){
-						// Log.d("HAI 2 Member name: ",
-						// "HAI 2 Member name: "+Integer.toString(selectImagePositions.get(j)));
-						// }
-
-					}
-					if (maxItemSelected == 2) {
-						// Log.d("HAI7","TEST HAI7");
-
-						RelativeLayout selecetedBacking = (RelativeLayout) selectedImage
-								.findViewById(R.id.backing);
-						selecetedBacking.setBackgroundResource(R.drawable.cell);
-						backing.setBackgroundResource(R.drawable.cell_select);
-						selectedImage.setTag(false);
-						int listSize2 = selectImagePositions.size();
-//						for (int j = 0; j < listSize2-1; j++) {
-//							selectImagePositions.remove(selectImagePositions
-//									.get(j));
-//						}
-						if (listSize2 >= 3)
-						selectImagePositions.remove(selectImagePositions
-									.get(0));
-						//selectImagePositions.clear();
-					}
-					selectImagePositions.add(new Integer(position));
-
-					// int listSize3 = selectImagePositions.size();
-					// for (int j = 0; j<listSize3; j++){
-					// Log.d("HAI 3 Member name: ",
-					// "HAI 3 Member name: "+Integer.toString(selectImagePositions.get(j)));
-					// }
-
-					v.setTag(true);
-					// }
-
-				}
-
-				mHandler.sendMessage(Message.obtain(null, 0,
-						selectImagePositions.size() > 0));
-
-				if (selectImagePositions.size() == maxItemSelected
-						&& maxItemSelected == 1) {
-					((BaseGridActivity) mContext).getResult();
-					// Log.d("HAI8","TEST HAI8");
-				}
-
+		/*
+		 * if (isItemSelecked(position)) { selectItemInGrid(v, position); } else
+		 * {
+		 */
+		v.findViewById(R.id.image).setTag("unselected");
+		if (mContext instanceof GrootteActivity) {
+			if (BaseGridActivity.positionGrootte != null && BaseGridActivity.positionGrootte.size() > 0) {
+				if (BaseGridActivity.positionGrootte.get(0) == position) {
+					selectItem(v, position);
+				} else if (BaseGridActivity.positionGrootte.size() > 1 && BaseGridActivity.positionGrootte.get(1) == position) {
+					selectItem(v, position);}
 			}
-		});
+		} else if (mContext instanceof SilhuetteActivity) {
+			if (BaseGridActivity.positionSilhuette != -1
+					&& BaseGridActivity.positionSilhuette == position) {
+				selectItem(v, position);
+			}
+		} else if (mContext instanceof SnavelActivity) {
+			if (BaseGridActivity.positionSnavel != -1
+					&& BaseGridActivity.positionSnavel == position) {
+				for (int i = 0; i < parent.getChildCount(); i++) {
+					v.setBackgroundResource(R.drawable.cell);
+					((ImageView) v.findViewById(R.id.image))
+							.setImageDrawable(mObjects.get(i));
+					TextView text = (TextView) v.findViewById(R.id.text);
+					text.setTextColor(mContext.getResources().getColor(
+							R.color.inactive_button_color));
+					v.findViewById(R.id.image).setTag("unselected");
+				}
+				v.setBackgroundResource(R.drawable.cell_select);
+				((ImageView) v.findViewById(R.id.image))
+						.setImageDrawable(mObjects_active.get(position));
+				TextView text = (TextView) v.findViewById(R.id.text);
+				text.setTextColor(Color.WHITE);
+				v.findViewById(R.id.image).setTag("selected");
+			}
+		}
+		// }
+		/*
+		 * v.setOnClickListener(new OnClickListener() {
+		 * 
+		 * @SuppressLint("UseValueOf")
+		 * 
+		 * @Override public void onClick(View v) {
+		 * 
+		 * // Log.d("HAI3","TEST HAI3");
+		 * 
+		 * RelativeLayout backing = (RelativeLayout) v
+		 * .findViewById(R.id.backing); if (v == null || v.getTag() == null)
+		 * return; if (v.getTag().equals(true)) { //if Selected then UnSelect
+		 * Item Here
+		 * 
+		 * if (maxItemSelected == 3R.layout.grid_item == mGridItemLayout) {
+		 * CircleImageView img_color = (CircleImageView) v
+		 * .findViewById(mImageView); // img_color //
+		 * .setBackgroundResource(R.drawable.circle_color);
+		 * 
+		 * DisplayMetrics mMetrics = mContext.getResources()
+		 * .getDisplayMetrics(); int widthInPixels = 300; int heightInPixels =
+		 * 105;
+		 * 
+		 * RelativeLayout.LayoutParams layoutParams = new
+		 * RelativeLayout.LayoutParams( widthInPixels, heightInPixels);
+		 * layoutParams .addRule(RelativeLayout.CENTER_IN_PARENT, 0);
+		 * img_color.setLayoutParams(layoutParams);
+		 * 
+		 * if (position == 1) { img_color.setBorderWidth(0);
+		 * img_color.setBorderColor(mContext.getResources()
+		 * .getColor(R.color.inactive_button_color)); } else {
+		 * img_color.setBorderWidth(0); img_color.setBorderColor(Color
+		 * .parseColor("#ffffff")); } } else { ImageView img = (ImageView)
+		 * v.findViewById(mImageView);
+		 * img.setImageDrawable(mObjects.get(position)); TextView text =
+		 * (TextView) v.findViewById(R.id.text);
+		 * text.setTextColor(mContext.getResources().getColor(
+		 * R.color.inactive_button_color));
+		 * backing.setBackgroundResource(R.drawable.cell); } //
+		 * backing.setBackgroundResource(android.R.color.transparent);//TODO:
+		 * selectImagePositions.remove(new Integer(position)); v.setTag(false);
+		 * 
+		 * }
+		 * 
+		 * 
+		 * //********************************************************************
+		 * **********************************
+		 * 
+		 * 
+		 * else { //if UnSelected then Select Item Here if (maxItemSelected ==
+		 * 3R.layout.grid_item == mGridItemLayout) { CircleImageView img_color =
+		 * (CircleImageView) v .findViewById(mImageView);
+		 * img_color.setBorderWidth(10);
+		 * img_color.setBorderColor(mContext.getResources()
+		 * .getColor(R.color.active_button_color)); } else {
+		 * backing.setBackgroundResource(R.drawable.cell_select); ImageView img
+		 * = (ImageView) v.findViewById(mImageView);
+		 * img.setImageDrawable(mObjects_active.get(position)); }
+		 * 
+		 * TextView text = (TextView) v.findViewById(R.id.text);
+		 * text.setTextColor(Color.WHITE); selectedImage = v;
+		 * 
+		 * 
+		 * 
+		 * //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		 * +++++++++++++++++++++++++++++++++++ if (maxItemSelected == 1) { //
+		 * Log.d("HAI7","TEST HAI7");
+		 * 
+		 * RelativeLayout selecetedBacking = (RelativeLayout) selectedImage
+		 * .findViewById(R.id.backing);
+		 * selecetedBacking.setBackgroundResource(R.drawable.cell);
+		 * backing.setBackgroundResource(R.drawable.cell_select);
+		 * selectedImage.setTag(false);
+		 * 
+		 * 
+		 * for (int i = 0; i < selectImagePositions.size(); i++) { iv_temp =
+		 * (ImageView) selectImagePositions.get(i)
+		 * iv_temp.setBackgroundColor(Color.parseColor("#ffffff"));
+		 * iv_temp.setTag("unselected"); } // i m HERE Now. int listSize1 =
+		 * selectImagePositions.size(); for (int j = 0; j < listSize1; j++) { //
+		 * Log.d("HAI 1 Member name: ", //
+		 * "HAI 1 Member name: "+Integer.toString(selectImagePositions.get(j)));
+		 * selectImagePositions.remove(selectImagePositions .get(j)); }
+		 * 
+		 * selectImagePositions.clear();
+		 * 
+		 * // int listSize2 = selectImagePositions.size(); // for (int j = 0;
+		 * j<listSize2; j++){ // Log.d("HAI 2 Member name: ", //
+		 * "HAI 2 Member name: "+Integer.toString(selectImagePositions.get(j)));
+		 * // }
+		 * 
+		 * }
+		 * 
+		 * 
+		 * //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		 * ++++++++++++++++++++++++++++++++++++++++++++++++
+		 * 
+		 * if (maxItemSelected == 2) { // Log.d("HAI7","TEST HAI7");
+		 * 
+		 * RelativeLayout selecetedBacking = (RelativeLayout) selectedImage
+		 * .findViewById(R.id.backing);
+		 * selecetedBacking.setBackgroundResource(R.drawable.cell);
+		 * backing.setBackgroundResource(R.drawable.cell_select);
+		 * selectedImage.setTag(false); int listSize2 =
+		 * selectImagePositions.size(); // for (int j = 0; j < listSize2-1; j++)
+		 * { // selectImagePositions.remove(selectImagePositions // .get(j)); //
+		 * } if (listSize2 > 2) {
+		 * selectImagePositions.remove(selectImagePositions .get(0));
+		 * notifyDataSetChanged(); } //selectImagePositions.clear(); }
+		 * selectImagePositions.add(new Integer(position));
+		 * 
+		 * // int listSize3 = selectImagePositions.size(); // for (int j = 0;
+		 * j<listSize3; j++){ // Log.d("HAI 3 Member name: ", //
+		 * "HAI 3 Member name: "+Integer.toString(selectImagePositions.get(j)));
+		 * // }
+		 * 
+		 * v.setTag(true); // }
+		 * 
+		 * }
+		 * 
+		 * mHandler.sendMessage(Message.obtain(null, 0,
+		 * selectImagePositions.size() > 0));
+		 * 
+		 * if (selectImagePositions.size() == maxItemSelected && maxItemSelected
+		 * == 1) { ((BaseGridActivity) mContext).getResult(); //
+		 * Log.d("HAI8","TEST HAI8"); }
+		 * 
+		 * } });
+		 */
 		// the view must be returned to our activity
 		return v;
 
 	}
 
+	private void selectItem(View v , int position) {
+		v.setBackgroundResource(R.drawable.cell_select);
+		((ImageView) v.findViewById(R.id.image))
+		.setImageDrawable(mObjects_active.get(position));
+		TextView text = (TextView) v.findViewById(R.id.text);
+		text.setTextColor(Color.WHITE);
+		v.findViewById(R.id.image).setTag("selected");
+	}
+	
 	private void selectItemInGrid(View v, int position) {
 		backing = (RelativeLayout) v.findViewById(R.id.backing);
 
@@ -501,6 +533,10 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 		for (Integer itemPos : selectedItems) {
 			if (itemPos == position)
 				return true;
+			// */
+			else {
+				selectImagePositions.remove(itemPos);
+			}// */
 		}
 		return false;
 	}

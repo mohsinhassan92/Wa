@@ -1,13 +1,19 @@
 package nl.vogelbescherming.wadvogels;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.ContactsContract.CommonDataKinds.Im;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +21,10 @@ import java.util.List;
 import nl.vogelbescherming.wadvogels.R;
 import nl.vogelbescherming.wadvogels.adapters.BaseGridAdapter;
 import nl.vogelbescherming.wadvogels.control.Controller;
+import nl.vogelbescherming.wadvogels.view.CircleImageView;
 
 public class BaseGridActivity extends ContentBaseActivity implements
-		OnClickListener {
+		OnClickListener, OnItemClickListener {
 
 	private List<Drawable> listDrawables;
 	private List<Integer> colorsList;
@@ -33,6 +40,12 @@ public class BaseGridActivity extends ContentBaseActivity implements
 	private Handler handler;
 	private List<String> text;
 	private int list_item_id;
+	private static List<View> viewListGrootte = new ArrayList<View>();
+	public static List<Integer> positionGrootte = new ArrayList<Integer>();
+	public static int positionSilhuette = -1;
+	public static int positionSnavel = -1;
+	public static List<Integer> positionKleur = new ArrayList<Integer>();
+	private static List<View> viewListKleur = new ArrayList<View>();
 
 	/**
 	 * Called when the activity is first created.
@@ -49,7 +62,304 @@ public class BaseGridActivity extends ContentBaseActivity implements
 		gvMain = (GridView) findViewById(R.id.gridView);
 		adjustGridView();
 		gvMain.setAdapter(adapter);
-		// gvMain.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
+		gvMain.setOnItemClickListener((AdapterView.OnItemClickListener) this);
+	}
+
+	// Single item Selection::
+	@Override
+	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+
+		// **************************************GrootteActivity*************************************************
+
+		if (this instanceof GrootteActivity) {
+			Boolean flag = false;
+			View iv = v;
+			View iv_temp = v;
+			View iv_temp2 = v;
+			// int tempPos = -1;
+			if (iv.findViewById(R.id.image).getTag().toString()
+					.equals("unselected")) {
+
+				for (int i = 0; i < parent.getChildCount(); i++) {
+					if (parent.getChildAt(i).findViewById(R.id.image).getTag()
+							.equals("selected")) {
+						// selectedCount++;
+						flag = true;
+					}
+				}
+				/*
+				 * if (selectedCount == 1) {
+				 * 
+				 * tempPos = positionGrootte.get(0); }
+				 */if (flag == false) {
+					viewListGrootte.clear();
+					positionGrootte.clear();
+				}
+				if (viewListGrootte.size() < 2 /* && (selectedCount < 2) */) {
+					/*
+					 * if (selectedCount == 1) {
+					 * viewList.add(parent.getChildAt(tempPos));
+					 * positionGrootte.add(position); }
+					 */viewListGrootte.add(v);
+					positionGrootte.add(position);
+
+				} else if (viewListGrootte.size() >= 2
+						&& viewListGrootte != null
+						&& (viewListGrootte.get(0) != v && viewListGrootte
+								.get(1) != v)) {
+					View view = viewListGrootte.get(0);
+					view.setBackgroundResource(R.drawable.cell);
+					((ImageView) view.findViewById(R.id.image))
+							.setImageDrawable(listDrawables.get(positionGrootte
+									.get(0)));
+					TextView text = (TextView) view.findViewById(R.id.text);
+					text.setTextColor(this.getResources().getColor(
+							R.color.inactive_button_color));
+					view.findViewById(R.id.image).setTag("unselected");
+					positionGrootte.remove(0);
+					viewListGrootte.remove(0);
+					positionGrootte.add(position);
+					viewListGrootte.add(v);
+				}
+
+				for (int i = 0; i < viewListGrootte.size(); i++) {
+					iv_temp2 = viewListGrootte.get(i);
+					if (!(iv_temp2.findViewById(R.id.image).getTag()
+							.equals("selected"))) {
+						iv_temp2.setBackgroundResource(R.drawable.cell_select);
+						((ImageView) iv_temp2.findViewById(R.id.image))
+								.setImageDrawable(listDrawables_active
+										.get(positionGrootte.get(i)));
+						TextView text = (TextView) iv_temp2
+								.findViewById(R.id.text);
+						text.setTextColor(Color.WHITE);
+						iv_temp2.findViewById(R.id.image).setTag("selected");
+					}
+				}
+				// selectedCount=0;
+			} else {
+				iv.setBackgroundResource(R.drawable.cell);
+				((ImageView) iv.findViewById(R.id.image))
+						.setImageDrawable(listDrawables.get(position));
+				TextView text = (TextView) iv.findViewById(R.id.text);
+				text.setTextColor(this.getResources().getColor(
+						R.color.inactive_button_color));
+				iv.findViewById(R.id.image).setTag("unselected");
+				// positionGrootte.remove(position);
+				// viewList.remove(position);
+			}
+
+		}
+
+		// **************************************SilhuetteActivity*************************************************
+
+		else if (this instanceof SilhuetteActivity) {
+			View iv = v;
+			View iv_temp = v;
+
+			if (iv.findViewById(R.id.image).getTag().toString()
+					.equals("unselected")) {
+				for (int i = 0; i < parent.getChildCount(); i++) {
+					iv_temp = parent.getChildAt(i);
+					iv_temp.setBackgroundResource(R.drawable.cell);
+					((ImageView) iv_temp.findViewById(R.id.image))
+							.setImageDrawable(listDrawables.get(i));
+					TextView text = (TextView) iv_temp.findViewById(R.id.text);
+					text.setTextColor(this.getResources().getColor(
+							R.color.inactive_button_color));
+					iv_temp.findViewById(R.id.image).setTag("unselected");
+				}
+				iv.setBackgroundResource(R.drawable.cell_select);
+				((ImageView) iv.findViewById(R.id.image))
+						.setImageDrawable(listDrawables_active.get(position));
+				TextView text = (TextView) iv.findViewById(R.id.text);
+				text.setTextColor(Color.WHITE);
+				iv.findViewById(R.id.image).setTag("selected");
+				positionSilhuette = position;
+			} else {
+				iv.setBackgroundResource(R.drawable.cell);
+				((ImageView) iv.findViewById(R.id.image))
+						.setImageDrawable(listDrawables.get(position));
+				TextView text = (TextView) iv.findViewById(R.id.text);
+				text.setTextColor(this.getResources().getColor(
+						R.color.inactive_button_color));
+				iv.findViewById(R.id.image).setTag("unselected");
+			}
+
+		}
+
+		// **************************************SnavelActivity*************************************************
+
+		else if (this instanceof SnavelActivity) {
+			View iv = v;
+			View iv_temp = v;
+
+			if (iv.findViewById(R.id.image).getTag().toString()
+					.equals("unselected")) {
+				for (int i = 0; i < parent.getChildCount(); i++) {
+					iv_temp = parent.getChildAt(i);
+					iv_temp.setBackgroundResource(R.drawable.cell);
+					((ImageView) iv_temp.findViewById(R.id.image))
+							.setImageDrawable(listDrawables.get(i));
+					TextView text = (TextView) iv_temp.findViewById(R.id.text);
+					text.setTextColor(this.getResources().getColor(
+							R.color.inactive_button_color));
+					iv_temp.findViewById(R.id.image).setTag("unselected");
+				}
+				iv.setBackgroundResource(R.drawable.cell_select);
+				((ImageView) iv.findViewById(R.id.image))
+						.setImageDrawable(listDrawables_active.get(position));
+				TextView text = (TextView) iv.findViewById(R.id.text);
+				text.setTextColor(Color.WHITE);
+				iv.findViewById(R.id.image).setTag("selected");
+				positionSnavel = position;
+			} else {
+				iv.setBackgroundResource(R.drawable.cell);
+				((ImageView) iv.findViewById(R.id.image))
+						.setImageDrawable(listDrawables.get(position));
+				TextView text = (TextView) iv.findViewById(R.id.text);
+				text.setTextColor(this.getResources().getColor(
+						R.color.inactive_button_color));
+				iv.findViewById(R.id.image).setTag("unselected");
+			}
+
+		}
+
+		// *******************************************KleurActivity***********************************
+
+		else if (this instanceof KleurActivity) {
+
+			Boolean flag = false;
+			View iv = v;
+			View iv_temp = v;
+			View iv_temp2 = v;
+			if (iv.findViewById(R.id.image).getTag().toString()
+					.equals("unselected")) {
+
+				for (int i = 0; i < parent.getChildCount(); i++) {
+					if (parent.getChildAt(i).findViewById(R.id.image).getTag()
+							.equals("selected")) {
+						flag = true;
+					}
+				}
+				if (flag == false) {
+					viewListKleur.clear();
+					positionKleur.clear();
+				}
+				if (viewListKleur.size() < 3) {
+					viewListKleur.add(v);
+					positionKleur.add(position);
+
+				} else if (viewListKleur.size() >= 3
+						&& viewListKleur != null
+						&& (viewListKleur.get(0) != v
+								&& viewListKleur.get(1) != v && viewListKleur
+								.get(2) != v)) {
+					View view = viewListKleur.get(0);
+					view.setBackgroundResource(R.drawable.cell);
+					CircleImageView img_color = (CircleImageView) view
+							.findViewById(R.id.image);
+					img_color.setImageDrawable(listDrawables.get(positionKleur
+							.get(0)));
+					if (positionKleur.get(0) == 1) {
+						img_color.setBorderWidth(0);
+						img_color.setBorderColor(this.getResources().getColor(
+								R.color.inactive_button_color));
+					} else {
+						img_color.setBorderWidth(0);
+						img_color.setBorderColor(Color.parseColor("#ffffff"));
+					}
+					
+					/*
+					((ImageView) view.findViewById(R.id.image))
+							.setImageDrawable(listDrawables.get(positionKleur
+									.get(0)));
+*/					TextView text = (TextView) view.findViewById(R.id.text);
+					text.setTextColor(this.getResources().getColor(
+							R.color.inactive_button_color));
+					view.findViewById(R.id.image).setTag("unselected");
+					positionKleur.remove(0);
+					viewListKleur.remove(0);
+					positionKleur.add(position);
+					viewListKleur.add(v);
+				}
+
+				for (int i = 0; i < viewListKleur.size(); i++) {
+					iv_temp2 = viewListKleur.get(i);
+					if (!(iv_temp2.findViewById(R.id.image).getTag()
+							.equals("selected"))) {
+						iv_temp2.setBackgroundResource(R.drawable.cell);
+						 ((CircleImageView) iv_temp2.findViewById(R.id.image)).setImageDrawable(listDrawables_active
+								.get(positionKleur.get(i)));
+						
+						 ((CircleImageView) iv_temp2.findViewById(R.id.image)).setBorderWidth(10);
+						 ((CircleImageView) iv_temp2.findViewById(R.id.image)).setBorderColor(this.getResources()
+						 .getColor(R.color.active_button_color));
+						
+						
+					/*	((ImageView) iv_temp2.findViewById(R.id.image))
+								.setImageDrawable(listDrawables_active
+										.get(positionKleur.get(i)));
+*/						TextView text = (TextView) iv_temp2
+								.findViewById(R.id.text);
+						text.setTextColor(Color.WHITE);
+						iv_temp2.findViewById(R.id.image).setTag("selected");
+					}
+				}
+				// selectedCount=0;
+			} else {
+				iv.setBackgroundResource(R.drawable.cell);
+				CircleImageView img_color = (CircleImageView) iv
+						.findViewById(R.id.image);
+				// ((ImageView) iv.findViewById(R.id.image))
+				img_color.setImageDrawable(listDrawables.get(position));
+				if (position == 1) {
+					img_color.setBorderWidth(0);
+					img_color.setBorderColor(this.getResources().getColor(
+							R.color.inactive_button_color));
+				} else {
+					img_color.setBorderWidth(0);
+					img_color.setBorderColor(Color.parseColor("#ffffff"));
+				}
+				TextView text = (TextView) iv.findViewById(R.id.text);
+				text.setTextColor(this.getResources().getColor(
+						R.color.inactive_button_color));
+				iv.findViewById(R.id.image).setTag("unselected");
+				// positionGrootte.remove(position);
+				// viewListKleur.remove(position);
+			}
+
+			// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+			/*
+			 * Boolean flag = false; View iv = v; View iv_temp = v; View
+			 * iv_temp2 = v;
+			 * 
+			 * if (iv.findViewById(R.id.image).getTag().toString()
+			 * .equals("unselected")) {
+			 * 
+			 * for (int i = 0; i < parent.getChildCount(); i++) { if
+			 * (parent.getChildAt(i).findViewById(R.id.image).getTag()
+			 * .equals("selected")) { flag = true; } } if (flag == false) {
+			 * viewList.clear(); } if (viewList.size() < 3) { viewList.add(v); }
+			 * else if (viewList.size() >= 3 && viewList != null &&
+			 * (viewList.get(0) != v && viewList.get(1) != v && viewList .get(2)
+			 * != v)) { View view = viewList.get(0);
+			 * view.setBackgroundResource(R.drawable.cell);
+			 * view.findViewById(R.id.image).setTag("unselected");
+			 * viewList.remove(0); viewList.add(v); } for (int i = 0; i <
+			 * parent.getChildCount(); i++) { iv_temp = parent.getChildAt(i);
+			 * iv_temp.setBackgroundResource(R.drawable.cell);
+			 * iv_temp.findViewById(R.id.image).setTag("unselected"); }
+			 * 
+			 * for (int i = 0; i < viewList.size(); i++) { iv_temp2 =
+			 * viewList.get(i);
+			 * iv_temp2.setBackgroundResource(R.drawable.cell_select); ;
+			 * iv_temp2.findViewById(R.id.image).setTag("selected"); } } else {
+			 * iv.setBackgroundResource(R.drawable.cell);
+			 * iv.findViewById(R.id.image).setTag("unselected"); }
+			 */
+		}
+
 	}
 
 	@Override
@@ -87,11 +397,12 @@ public class BaseGridActivity extends ContentBaseActivity implements
 		this.handler = handler;
 		this.list_item_id = list_item_id;
 	}
-	
+
 	public void preSetContent(List<Drawable> list, List<Drawable> list_active,
 			int list_item_id, int columnNumber, int rowNubmer,
 			int maxItemselected, List<Integer> selectedItems, boolean padding,
-			boolean cellHeight, List<String> text, Handler handler, List<Integer> colorsList) {
+			boolean cellHeight, List<String> text, Handler handler,
+			List<Integer> colorsList) {
 		listDrawables = list;
 		listDrawables_active = list_active;
 		this.columnNumber = columnNumber;

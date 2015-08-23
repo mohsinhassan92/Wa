@@ -227,7 +227,7 @@ public class BaseGridAdapter_old extends ArrayAdapter<Drawable> {
 				mHandler.sendMessage(Message.obtain(null, 0, selectImagePositions.size() > 0));
 				
 				if (selectImagePositions.size() == maxItemSelected && maxItemSelected == 1){
-					((BaseGridActivity) mContext).getResult();
+//					((BaseGridActivity) mContext).getResult();
 					//Log.d("HAI8","TEST HAI8");
 				}
 			}
