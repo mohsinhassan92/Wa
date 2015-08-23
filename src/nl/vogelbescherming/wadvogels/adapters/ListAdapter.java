@@ -16,14 +16,12 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-
-import com.andraskindler.quickscroll.Scrollable;
 import com.google.android.gms.appdatasearch.GetRecentContextCall;
-
 import nl.vogelbescherming.wadvogels.BirdDetailActivity;
 import nl.vogelbescherming.wadvogels.R;
 import nl.vogelbescherming.wadvogels.fonts.Fonts;
 import nl.vogelbescherming.wadvogels.model.Bird;
+import nl.vogelbescherming.wadvogels.view.Scrollable;
 
 public class ListAdapter extends BaseAdapter implements Filterable, Scrollable {
 

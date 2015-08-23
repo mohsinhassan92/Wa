@@ -7,6 +7,7 @@ import nl.vogelbescherming.wadvogels.adapters.ListAdapter;
 import nl.vogelbescherming.wadvogels.control.Controller;
 import nl.vogelbescherming.wadvogels.model.Bird;
 import nl.vogelbescherming.wadvogels.model.Location;
+import nl.vogelbescherming.wadvogels.view.QuickScroll;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -23,8 +24,6 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.andraskindler.quickscroll.QuickScroll;
 
 public class AllBirdsActivity extends ContentBaseActivity {
 
