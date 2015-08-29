@@ -197,6 +197,8 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 					.getDisplayMetrics();
 			int widthInPixels = 0;
 			int heightInPixels;
+			
+			//Silhoute__Snavel
 			if (columnNumber == 3) {
 
 				if (padding) {
@@ -210,8 +212,34 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 							- mContext.getResources().getDimensionPixelSize(
 									R.dimen.image_padding);
 				} else {
+					if (width >= 200 && width < 320) {
+						Log.d("SCREEN_SIZE", "200-LDPI");
+					} else if (width >= 320 && width < 480) {
+						Log.d("SCREEN_SIZE", "320-MDPI");
+					} else if (width >= 480 && width < 720) {
+						Log.d("SCREEN_SIZE", "480-HDPI");
+						widthInPixels = (mMetrics.widthPixels / columnNumber)
+								- getPixels(10, mMetrics);
+					} else if (width >= 720 && width < 960) {
+						Log.d("SCREEN_SIZE", "720-XHDPI");
+						// Nexus_Note
+						widthInPixels = (mMetrics.widthPixels / columnNumber)
+								- getPixels(0, mMetrics);
+
+					} else if (width >= 960 && width < 1280) {
+						Log.d("SCREEN_SIZE", "960-XXHDPI");
+						// S4
+						widthInPixels = (mMetrics.widthPixels / columnNumber)
+								- getPixels(0, mMetrics);
+					} else if (width >= 1280) {
+						Log.d("SCREEN_SIZE", "1280-XXXHDPI");
+					} else {
+						Log.d("SCREEN_SIZE", "::UnIdentified::");
+					}
+					/*/
 					widthInPixels = (mMetrics.widthPixels / columnNumber)
 							- getPixels(0, mMetrics);
+					//*/
 				}
 
 				// if (cellHeight){//chitaem dryguu visotu
@@ -277,6 +305,7 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 						Log.d("SCREEN_SIZE", "320-MDPI");
 					} else if (width >= 480 && width < 720) {
 						Log.d("SCREEN_SIZE", "480-HDPI");
+						rLyt.setPadding(0, 45, 0, 45);
 					} else if (width >= 720 && width < 960) {
 						Log.d("SCREEN_SIZE", "720-XHDPI");
 						// Nexus_Note
@@ -290,14 +319,14 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 					} else {
 						Log.d("SCREEN_SIZE", "::UnIdentified::");
 					}
-					
-					/*/
-					RelativeLayout rLyt = (RelativeLayout) v
-							.findViewById(R.id.backing);
-					rLyt.setPadding(0, 140, 0, 140);
-					//*/
-				}
 
+					/*
+					 * / RelativeLayout rLyt = (RelativeLayout) v
+					 * .findViewById(R.id.backing); rLyt.setPadding(0, 140, 0,
+					 * 140); //
+					 */
+				}
+					//Grootte
 			} else if (columnNumber == 2) { /* padding */
 
 				if (padding) {
@@ -317,6 +346,13 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 						Log.d("SCREEN_SIZE", "320-MDPI");
 					} else if (width >= 480 && width < 720) {
 						Log.d("SCREEN_SIZE", "480-HDPI");
+						widthInPixels = (mMetrics.widthPixels / columnNumber)
+								- getPixels(65, mMetrics);
+						RelativeLayout relativeTextLongGrid = (RelativeLayout) v
+								.findViewById(R.id.relative_item_text);
+						ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) relativeTextLongGrid
+								.getLayoutParams();
+						mlp.setMargins(10, 0, 0, 10);
 					} else if (width >= 720 && width < 960) {
 						Log.d("SCREEN_SIZE", "720-XHDPI");
 						// Nexus_Note
@@ -604,26 +640,27 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 		iv_temp2.setBackgroundResource(R.drawable.cell);
 		CircleImageView image_color = ((CircleImageView) iv_temp2
 				.findViewById(R.id.image));
-		//image_color.setImageDrawable(mObjects_active.get(position));
+		// image_color.setImageDrawable(mObjects_active.get(position));
 		image_color.setBackgroundColor(mColors.get(position));
-		
 
 		Display display = ((Activity) mContext).getWindowManager()
 				.getDefaultDisplay();
 		int width = display.getWidth();
 		int height = display.getHeight();
-		
+
 		if (width >= 200 && width < 320) {
 			Log.d("SCREEN_SIZE", "200-LDPI");
 		} else if (width >= 320 && width < 480) {
 			Log.d("SCREEN_SIZE", "320-MDPI");
 		} else if (width >= 480 && width < 720) {
 			Log.d("SCREEN_SIZE", "480-HDPI");
+			// Nexus_S
+			image_color.setBorderWidth(3);
 		} else if (width >= 720 && width < 960) {
 			Log.d("SCREEN_SIZE", "720-XHDPI");
 			// Nexus_Note
 			image_color.setBorderWidth(7);
-			} else if (width >= 960 && width < 1280) {
+		} else if (width >= 960 && width < 1280) {
 			Log.d("SCREEN_SIZE", "960-XXHDPI");
 			// S4
 			image_color.setBorderWidth(10);
@@ -632,14 +669,15 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 		} else {
 			Log.d("SCREEN_SIZE", "::UnIdentified::");
 		}
-	//	image_color.setBackgroundColor(mColors.get(position));
-			image_color.setBorderColor(mContext.getResources().getColor(
+		// image_color.setBackgroundColor(mColors.get(position));
+		image_color.setBorderColor(mContext.getResources().getColor(
 				R.color.active_button_color));
 		TextView text = (TextView) iv_temp2.findViewById(R.id.text);
 		text.setTextColor(Color.WHITE);
 		image_color.setTag("selected");
 	}
 
+	// Not to be Used By Us Now....Shoaib_Akhtar
 	private void selectItemInGrid(View v, int position) {
 		backing = (RelativeLayout) v.findViewById(R.id.backing);
 

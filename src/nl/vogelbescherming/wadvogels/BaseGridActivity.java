@@ -189,6 +189,8 @@ public class BaseGridActivity extends ContentBaseActivity implements
 		}
 		// **************************************SilhuetteActivity*************************************************
 		else if (this instanceof SilhuetteActivity) {
+			
+			
 			View iv = v;
 			View iv_temp = v;
 			if (iv.findViewById(R.id.image).getTag().toString()
@@ -316,6 +318,13 @@ public class BaseGridActivity extends ContentBaseActivity implements
 			}
 
 		}
+		saveChecked();
+		TextView textBwBtns=(TextView) findViewById(R.id.textBwBtns);
+		if (Controller.getFilteredBirds(BaseGridActivity.this) != null) {
+			int size = Controller.getFilteredBirds(BaseGridActivity.this).size();
+			textBwBtns.setText(size + " Resultaten");
+		}
+		
 	}
 
 	private void selectGrootte(View iv_temp2, int position) {
@@ -385,6 +394,7 @@ public class BaseGridActivity extends ContentBaseActivity implements
 			Log.d("SCREEN_SIZE", "320-MDPI");
 		} else if (width >= 480 && width < 720) {
 			Log.d("SCREEN_SIZE", "480-HDPI");
+			image_color.setBorderWidth(3);
 		} else if (width >= 720 && width < 960) {
 			Log.d("SCREEN_SIZE", "720-XHDPI");
 			// Nexus_Note

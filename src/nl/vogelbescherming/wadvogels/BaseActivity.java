@@ -217,6 +217,10 @@ public class BaseActivity extends FragmentActivity {
 		findViewById(R.id.relative_footer).setVisibility(View.GONE);
 	}
 	
+	public void hideHomeIcon()
+	{
+		findViewById(R.id.home_iv).setVisibility(View.GONE);
+	}
 	public void showFooterMenu() {
 		findViewById(R.id.relative_footer).setVisibility(View.VISIBLE);
 	}

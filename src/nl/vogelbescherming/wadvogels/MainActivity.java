@@ -39,6 +39,7 @@ public class MainActivity extends BaseActivity {
 		hideTabs();
 		hideButtons();
 		hideFooterMenu();
+		hideHomeIcon();
 		button1 = findViewById(R.id.relativeLayout1);
 		button1.setOnClickListener(new OnClickListener() {
 
