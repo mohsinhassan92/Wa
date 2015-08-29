@@ -1,19 +1,26 @@
 package nl.vogelbescherming.wadvogels;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.ContactsContract.CommonDataKinds.Im;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +48,7 @@ public class BaseGridActivity extends ContentBaseActivity implements
 	private List<String> text;
 	private int list_item_id;
 	private static List<View> viewListGrootte = new ArrayList<View>();
+	// public static List<View> viewListGrootteOnResume = new ArrayList<View>();
 	public static List<Integer> positionGrootte = new ArrayList<Integer>();
 	public static int positionSilhuette = -1;
 	public static int positionSnavel = -1;
@@ -63,46 +71,90 @@ public class BaseGridActivity extends ContentBaseActivity implements
 		adjustGridView();
 		gvMain.setAdapter(adapter);
 		gvMain.setOnItemClickListener((AdapterView.OnItemClickListener) this);
+
+		Display display = getWindowManager().getDefaultDisplay();
+		int width = display.getWidth();
+		int height = display.getHeight();
+		// Toast.makeText(this, "Width"+width+"::Height"+height,
+		// Toast.LENGTH_SHORT).show();
+		// */
+		if (width >= 200 && width < 320) {
+			Toast.makeText(this, "200-LDPI", Toast.LENGTH_SHORT).show();
+		} else if (width >= 320 && width < 480) {
+			Toast.makeText(this, "320-MDPI", Toast.LENGTH_SHORT).show();
+		} else if (width >= 480 && width < 720) {
+			Toast.makeText(this, "480-HDPI", Toast.LENGTH_SHORT).show();
+		} else if (width >= 720 && width < 960) {
+			Toast.makeText(this, "720-XHDPI", Toast.LENGTH_SHORT).show();
+		} else if (width >= 960 && width < 1280) {
+			Toast.makeText(this, "960-XXHDPI", Toast.LENGTH_SHORT).show();
+		} else if (width >= 1280) {
+			Toast.makeText(this, "1280-XXXHDPI", Toast.LENGTH_SHORT).show();
+		}
+
+		// */
+
+		/*
+		 * / int density= getResources().getDisplayMetrics().densityDpi;
+		 * if(density==DisplayMetrics.DENSITY_LOW) { Toast.makeText(this,
+		 * "LDPI", Toast.LENGTH_SHORT).show(); }else
+		 * if(density==DisplayMetrics.DENSITY_MEDIUM){ Toast.makeText(this,
+		 * "MDPI", Toast.LENGTH_SHORT).show(); }else
+		 * if(density==DisplayMetrics.DENSITY_HIGH){ Toast.makeText(this,
+		 * "HDPI", Toast.LENGTH_SHORT).show(); }else
+		 * if(density==DisplayMetrics.DENSITY_XHIGH){ Toast.makeText(this,
+		 * "xHDPI", Toast.LENGTH_SHORT).show(); } //
+		 */
+
+		/*
+		 * / switch(density) { case DisplayMetrics.DENSITY_LOW:
+		 * Toast.makeText(this, "LDPI", Toast.LENGTH_SHORT).show(); break; case
+		 * DisplayMetrics.DENSITY_MEDIUM: Toast.makeText(this, "MDPI",
+		 * Toast.LENGTH_SHORT).show(); break; case DisplayMetrics.DENSITY_HIGH:
+		 * Toast.makeText(this, "HDPI", Toast.LENGTH_SHORT).show(); break; case
+		 * DisplayMetrics.DENSITY_XHIGH: Toast.makeText(this, "XHDPI",
+		 * Toast.LENGTH_SHORT).show(); break; } //
+		 */
+
+		/*
+		 * int screenSize = getResources().getConfiguration().screenLayout &
+		 * Configuration.SCREENLAYOUT_SIZE_MASK;
+		 * 
+		 * String toastMsg; switch(screenSize) { case
+		 * Configuration.SCREENLAYOUT_SIZE_LARGE: toastMsg = "Large screen";
+		 * break; case Configuration.SCREENLAYOUT_SIZE_NORMAL: toastMsg =
+		 * "Normal screen"; break; case Configuration.SCREENLAYOUT_SIZE_SMALL:
+		 * toastMsg = "Small screen"; break; default: toastMsg =
+		 * "Screen size is neither large, normal or small"; }
+		 * Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show(); //
+		 */
 	}
 
-	// Single item Selection::
 	@Override
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 
 		// **************************************GrootteActivity*************************************************
-
 		if (this instanceof GrootteActivity) {
 			Boolean flag = false;
 			View iv = v;
 			View iv_temp = v;
 			View iv_temp2 = v;
-			// int tempPos = -1;
 			if (iv.findViewById(R.id.image).getTag().toString()
 					.equals("unselected")) {
 
 				for (int i = 0; i < parent.getChildCount(); i++) {
 					if (parent.getChildAt(i).findViewById(R.id.image).getTag()
 							.equals("selected")) {
-						// selectedCount++;
 						flag = true;
 					}
 				}
-				/*
-				 * if (selectedCount == 1) {
-				 * 
-				 * tempPos = positionGrootte.get(0); }
-				 */if (flag == false) {
+				if (flag == false) {
 					viewListGrootte.clear();
 					positionGrootte.clear();
 				}
-				if (viewListGrootte.size() < 2 /* && (selectedCount < 2) */) {
-					/*
-					 * if (selectedCount == 1) {
-					 * viewList.add(parent.getChildAt(tempPos));
-					 * positionGrootte.add(position); }
-					 */viewListGrootte.add(v);
+				if (viewListGrootte.size() < 2) {
+					viewListGrootte.add(v);
 					positionGrootte.add(position);
-
 				} else if (viewListGrootte.size() >= 2
 						&& viewListGrootte != null
 						&& (viewListGrootte.get(0) != v && viewListGrootte
@@ -122,41 +174,23 @@ public class BaseGridActivity extends ContentBaseActivity implements
 					viewListGrootte.add(v);
 				}
 
-				for (int i = 0; i < viewListGrootte.size(); i++) {
-					iv_temp2 = viewListGrootte.get(i);
-					if (!(iv_temp2.findViewById(R.id.image).getTag()
-							.equals("selected"))) {
-						iv_temp2.setBackgroundResource(R.drawable.cell_select);
-						((ImageView) iv_temp2.findViewById(R.id.image))
-								.setImageDrawable(listDrawables_active
-										.get(positionGrootte.get(i)));
-						TextView text = (TextView) iv_temp2
-								.findViewById(R.id.text);
-						text.setTextColor(Color.WHITE);
-						iv_temp2.findViewById(R.id.image).setTag("selected");
-					}
+				// *
+				for (int i = 0; i < parent.getChildCount(); i++) {
+					unSelectGrootteAll(parent.getChildAt(i), i);
+					adapter.notifyDataSetChanged();
 				}
-				// selectedCount=0;
+				// */
+				for (int i = 0; i < viewListGrootte.size(); i++) {
+					selectGrootte(viewListGrootte.get(i), i);
+				}
 			} else {
-				iv.setBackgroundResource(R.drawable.cell);
-				((ImageView) iv.findViewById(R.id.image))
-						.setImageDrawable(listDrawables.get(position));
-				TextView text = (TextView) iv.findViewById(R.id.text);
-				text.setTextColor(this.getResources().getColor(
-						R.color.inactive_button_color));
-				iv.findViewById(R.id.image).setTag("unselected");
-				// positionGrootte.remove(position);
-				// viewList.remove(position);
+				unSelectGrootte(iv_temp2, position);
 			}
-
 		}
-
 		// **************************************SilhuetteActivity*************************************************
-
 		else if (this instanceof SilhuetteActivity) {
 			View iv = v;
 			View iv_temp = v;
-
 			if (iv.findViewById(R.id.image).getTag().toString()
 					.equals("unselected")) {
 				for (int i = 0; i < parent.getChildCount(); i++) {
@@ -176,20 +210,12 @@ public class BaseGridActivity extends ContentBaseActivity implements
 				text.setTextColor(Color.WHITE);
 				iv.findViewById(R.id.image).setTag("selected");
 				positionSilhuette = position;
+				adapter.notifyDataSetChanged();
 			} else {
-				iv.setBackgroundResource(R.drawable.cell);
-				((ImageView) iv.findViewById(R.id.image))
-						.setImageDrawable(listDrawables.get(position));
-				TextView text = (TextView) iv.findViewById(R.id.text);
-				text.setTextColor(this.getResources().getColor(
-						R.color.inactive_button_color));
-				iv.findViewById(R.id.image).setTag("unselected");
+				unSelect_Silhuette_Snavel(v, position);
 			}
-
 		}
-
 		// **************************************SnavelActivity*************************************************
-
 		else if (this instanceof SnavelActivity) {
 			View iv = v;
 			View iv_temp = v;
@@ -213,32 +239,27 @@ public class BaseGridActivity extends ContentBaseActivity implements
 				text.setTextColor(Color.WHITE);
 				iv.findViewById(R.id.image).setTag("selected");
 				positionSnavel = position;
+				adapter.notifyDataSetChanged();
 			} else {
-				iv.setBackgroundResource(R.drawable.cell);
-				((ImageView) iv.findViewById(R.id.image))
-						.setImageDrawable(listDrawables.get(position));
-				TextView text = (TextView) iv.findViewById(R.id.text);
-				text.setTextColor(this.getResources().getColor(
-						R.color.inactive_button_color));
-				iv.findViewById(R.id.image).setTag("unselected");
+				unSelect_Silhuette_Snavel(v, position);
 			}
-
 		}
-
 		// *******************************************KleurActivity***********************************
-
 		else if (this instanceof KleurActivity) {
-
+			adapter.notifyDataSetChanged();
 			Boolean flag = false;
 			View iv = v;
 			View iv_temp = v;
 			View iv_temp2 = v;
+			CircleImageView image_color;
+			CircleImageView img_color;
 			if (iv.findViewById(R.id.image).getTag().toString()
 					.equals("unselected")) {
 
 				for (int i = 0; i < parent.getChildCount(); i++) {
-					if (parent.getChildAt(i).findViewById(R.id.image).getTag()
-							.equals("selected")) {
+					if (((CircleImageView) (parent.getChildAt(i)
+							.findViewById(R.id.image))).getTag().equals(
+							"selected")) {
 						flag = true;
 					}
 				}
@@ -257,10 +278,13 @@ public class BaseGridActivity extends ContentBaseActivity implements
 								.get(2) != v)) {
 					View view = viewListKleur.get(0);
 					view.setBackgroundResource(R.drawable.cell);
-					CircleImageView img_color = (CircleImageView) view
-							.findViewById(R.id.image);
-					img_color.setImageDrawable(listDrawables.get(positionKleur
+					img_color = (CircleImageView) view.findViewById(R.id.image);
+					img_color.setBackgroundColor(colorsList.get(positionKleur
 							.get(0)));
+					/*
+					 * img_color.setImageDrawable(listDrawables.get(positionKleur
+					 * .get(0)));
+					 */
 					if (positionKleur.get(0) == 1) {
 						img_color.setBorderWidth(0);
 						img_color.setBorderColor(this.getResources().getColor(
@@ -269,97 +293,164 @@ public class BaseGridActivity extends ContentBaseActivity implements
 						img_color.setBorderWidth(0);
 						img_color.setBorderColor(Color.parseColor("#ffffff"));
 					}
-					
-					/*
-					((ImageView) view.findViewById(R.id.image))
-							.setImageDrawable(listDrawables.get(positionKleur
-									.get(0)));
-*/					TextView text = (TextView) view.findViewById(R.id.text);
+
+					TextView text = (TextView) view.findViewById(R.id.text);
 					text.setTextColor(this.getResources().getColor(
 							R.color.inactive_button_color));
-					view.findViewById(R.id.image).setTag("unselected");
+					img_color.setTag("unselected");
 					positionKleur.remove(0);
 					viewListKleur.remove(0);
 					positionKleur.add(position);
 					viewListKleur.add(v);
 				}
 
+				for (int i = 0; i < parent.getChildCount(); i++) {
+					unSelectKleurAll(parent.getChildAt(i), i);
+				}
+
 				for (int i = 0; i < viewListKleur.size(); i++) {
-					iv_temp2 = viewListKleur.get(i);
-					if (!(iv_temp2.findViewById(R.id.image).getTag()
-							.equals("selected"))) {
-						iv_temp2.setBackgroundResource(R.drawable.cell);
-						 ((CircleImageView) iv_temp2.findViewById(R.id.image)).setImageDrawable(listDrawables_active
-								.get(positionKleur.get(i)));
-						
-						 ((CircleImageView) iv_temp2.findViewById(R.id.image)).setBorderWidth(10);
-						 ((CircleImageView) iv_temp2.findViewById(R.id.image)).setBorderColor(this.getResources()
-						 .getColor(R.color.active_button_color));
-						
-						
-					/*	((ImageView) iv_temp2.findViewById(R.id.image))
-								.setImageDrawable(listDrawables_active
-										.get(positionKleur.get(i)));
-*/						TextView text = (TextView) iv_temp2
-								.findViewById(R.id.text);
-						text.setTextColor(Color.WHITE);
-						iv_temp2.findViewById(R.id.image).setTag("selected");
-					}
+					selectKleur(viewListKleur.get(i), i);
 				}
-				// selectedCount=0;
 			} else {
-				iv.setBackgroundResource(R.drawable.cell);
-				CircleImageView img_color = (CircleImageView) iv
-						.findViewById(R.id.image);
-				// ((ImageView) iv.findViewById(R.id.image))
-				img_color.setImageDrawable(listDrawables.get(position));
-				if (position == 1) {
-					img_color.setBorderWidth(0);
-					img_color.setBorderColor(this.getResources().getColor(
-							R.color.inactive_button_color));
-				} else {
-					img_color.setBorderWidth(0);
-					img_color.setBorderColor(Color.parseColor("#ffffff"));
-				}
-				TextView text = (TextView) iv.findViewById(R.id.text);
-				text.setTextColor(this.getResources().getColor(
-						R.color.inactive_button_color));
-				iv.findViewById(R.id.image).setTag("unselected");
-				// positionGrootte.remove(position);
-				// viewListKleur.remove(position);
+				unSelectKleur(iv, position);
 			}
 
-			// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-			/*
-			 * Boolean flag = false; View iv = v; View iv_temp = v; View
-			 * iv_temp2 = v;
-			 * 
-			 * if (iv.findViewById(R.id.image).getTag().toString()
-			 * .equals("unselected")) {
-			 * 
-			 * for (int i = 0; i < parent.getChildCount(); i++) { if
-			 * (parent.getChildAt(i).findViewById(R.id.image).getTag()
-			 * .equals("selected")) { flag = true; } } if (flag == false) {
-			 * viewList.clear(); } if (viewList.size() < 3) { viewList.add(v); }
-			 * else if (viewList.size() >= 3 && viewList != null &&
-			 * (viewList.get(0) != v && viewList.get(1) != v && viewList .get(2)
-			 * != v)) { View view = viewList.get(0);
-			 * view.setBackgroundResource(R.drawable.cell);
-			 * view.findViewById(R.id.image).setTag("unselected");
-			 * viewList.remove(0); viewList.add(v); } for (int i = 0; i <
-			 * parent.getChildCount(); i++) { iv_temp = parent.getChildAt(i);
-			 * iv_temp.setBackgroundResource(R.drawable.cell);
-			 * iv_temp.findViewById(R.id.image).setTag("unselected"); }
-			 * 
-			 * for (int i = 0; i < viewList.size(); i++) { iv_temp2 =
-			 * viewList.get(i);
-			 * iv_temp2.setBackgroundResource(R.drawable.cell_select); ;
-			 * iv_temp2.findViewById(R.id.image).setTag("selected"); } } else {
-			 * iv.setBackgroundResource(R.drawable.cell);
-			 * iv.findViewById(R.id.image).setTag("unselected"); }
-			 */
+		}
+	}
+
+	private void selectGrootte(View iv_temp2, int position) {
+		iv_temp2.setBackgroundResource(R.drawable.cell_select);
+		((ImageView) iv_temp2.findViewById(R.id.image))
+				.setImageDrawable(listDrawables_active.get(positionGrootte
+						.get(position)));
+		TextView text = (TextView) iv_temp2.findViewById(R.id.text);
+		text.setTextColor(Color.WHITE);
+		iv_temp2.findViewById(R.id.image).setTag("selected");
+	}
+
+	private void unSelectGrootteAll(View view, int position) {
+		view.setBackgroundResource(R.drawable.cell);
+		((ImageView) view.findViewById(R.id.image))
+				.setImageDrawable(listDrawables.get(position));
+		TextView text = (TextView) view.findViewById(R.id.text);
+		text.setTextColor(this.getResources().getColor(
+				R.color.inactive_button_color));
+		view.findViewById(R.id.image).setTag("unselected");
+	}
+
+	private void unSelectGrootte(View iv, int position) {
+		iv.setBackgroundResource(R.drawable.cell);
+		((ImageView) iv.findViewById(R.id.image))
+				.setImageDrawable(listDrawables.get(position));
+		TextView text = (TextView) iv.findViewById(R.id.text);
+		text.setTextColor(this.getResources().getColor(
+				R.color.inactive_button_color));
+		iv.findViewById(R.id.image).setTag("unselected");
+		for (int counter = 0; counter < positionGrootte.size(); counter++) {
+			if (positionGrootte.get(counter) == position) {
+				positionGrootte.remove(counter);
+				viewListGrootte.remove(counter);
+			}
 		}
 
+	}
+
+	private void unSelect_Silhuette_Snavel(View iv, int position) {
+		iv.setBackgroundResource(R.drawable.cell);
+		((ImageView) iv.findViewById(R.id.image))
+				.setImageDrawable(listDrawables.get(position));
+		TextView text = (TextView) iv.findViewById(R.id.text);
+		text.setTextColor(this.getResources().getColor(
+				R.color.inactive_button_color));
+		iv.findViewById(R.id.image).setTag("unselected");
+
+	}
+
+	private void selectKleur(View iv_temp2, int position) {
+		iv_temp2.setBackgroundResource(R.drawable.cell);
+		CircleImageView image_color = ((CircleImageView) iv_temp2
+				.findViewById(R.id.image));
+
+		image_color.setBackgroundColor(colorsList.get(positionKleur
+				.get(position)));
+		// image_color.setImageDrawable(listDrawables_active.get(positionKleur.get(position)));
+
+		Display display = getWindowManager().getDefaultDisplay();
+		int width = display.getWidth();
+		int height = display.getHeight();
+
+		if (width >= 200 && width < 320) {
+			Log.d("SCREEN_SIZE", "200-LDPI");
+		} else if (width >= 320 && width < 480) {
+			Log.d("SCREEN_SIZE", "320-MDPI");
+		} else if (width >= 480 && width < 720) {
+			Log.d("SCREEN_SIZE", "480-HDPI");
+		} else if (width >= 720 && width < 960) {
+			Log.d("SCREEN_SIZE", "720-XHDPI");
+			// Nexus_Note
+			image_color.setBorderWidth(2);
+		} else if (width >= 960 && width < 1280) {
+			Log.d("SCREEN_SIZE", "960-XXHDPI");
+			// S4
+			image_color.setBorderWidth(10);
+		} else if (width >= 1280) {
+			Log.d("SCREEN_SIZE", "1280-XXXHDPI");
+		} else {
+			Log.d("SCREEN_SIZE", "::UnIdentified::");
+		}
+		image_color.setBorderColor(this.getResources().getColor(
+				R.color.active_button_color));
+		TextView text = (TextView) iv_temp2.findViewById(R.id.text);
+		text.setTextColor(Color.WHITE);
+		image_color.setTag("selected");
+
+	}
+
+	private void unSelectKleur(View iv, int position) {
+		iv.setBackgroundResource(R.drawable.cell);
+		CircleImageView img_color = (CircleImageView) iv
+				.findViewById(R.id.image);
+		img_color.setBackgroundColor(colorsList.get(position));
+		// img_color.setImageDrawable(listDrawables.get(position));
+		if (position == 1) {
+			img_color.setBorderWidth(0);
+			img_color.setBorderColor(this.getResources().getColor(
+					R.color.inactive_button_color));
+		} else {
+			img_color.setBorderWidth(0);
+			img_color.setBorderColor(Color.parseColor("#ffffff"));
+		}
+		TextView text = (TextView) iv.findViewById(R.id.text);
+		text.setTextColor(this.getResources().getColor(
+				R.color.inactive_button_color));
+		iv.findViewById(R.id.image).setTag("unselected");
+
+		for (int counter = 0; counter < positionKleur.size(); counter++) {
+			if (positionKleur.get(counter) == position) {
+				positionKleur.remove(counter);
+				viewListKleur.remove(counter);
+			}
+		}
+	}
+
+	private void unSelectKleurAll(View iv_temp, int position) {
+		iv_temp.setBackgroundResource(R.drawable.cell);
+		CircleImageView img_color = (CircleImageView) iv_temp
+				.findViewById(R.id.image);
+		img_color.setBackgroundColor(colorsList.get(position));
+		// img_color.setImageDrawable(listDrawables.get(position));
+		if (position == 1) {
+			img_color.setBorderWidth(0);
+			img_color.setBorderColor(this.getResources().getColor(
+					R.color.inactive_button_color));
+		} else {
+			img_color.setBorderWidth(0);
+			img_color.setBorderColor(Color.parseColor("#ffffff"));
+		}
+		TextView text = (TextView) iv_temp.findViewById(R.id.text);
+		text.setTextColor(this.getResources().getColor(
+				R.color.inactive_button_color));
+		iv_temp.findViewById(R.id.image).setTag("unselected");
 	}
 
 	@Override
@@ -369,13 +460,20 @@ public class BaseGridActivity extends ContentBaseActivity implements
 
 	@Override
 	protected void onResume() {
-		super.onResume();
+		/*
+		 * if (this instanceof GrootteActivity) { if
+		 * (BaseGridAdapter.viewListGrootteOnResume != null) { for (int i = 0; i
+		 * < BaseGridAdapter.viewListGrootteOnResume.size(); i++) {
+		 * unSelectGrootteAll(BaseGridAdapter.viewListGrootteOnResume.get(i),
+		 * i); adapter.notifyDataSetChanged(); } }
+		 * BaseGridAdapter.viewListGrootteOnResume.clear(); if (viewListGrootte
+		 * != null) { for (int i = 0; i < viewListGrootte.size(); i++) {
+		 * selectGrootte(viewListGrootte.get(i), i); } } }
+		 */super.onResume();
 	}
 
 	private void adjustGridView() {
 		gvMain.setNumColumns(columnNumber);
-		// gvMain.setVerticalSpacing(10);
-		// gvMain.setHorizontalSpacing(10);
 	}
 
 	public void preSetContent(List<Drawable> list, List<Drawable> list_active,
@@ -416,25 +514,29 @@ public class BaseGridActivity extends ContentBaseActivity implements
 
 	@Override
 	public void onBackPressed() {
-		// Log.d("HAI BACK","HAI BACK");
 		Class<?> backActivity = null;
+		Intent intent = null;
 		if (this instanceof SilhuetteActivity) {
 			backActivity = GrootteActivity.class;
+			intent = new Intent(this, backActivity);
 		} else if (this instanceof SnavelActivity) {
 			backActivity = SilhuetteActivity.class;
+			intent = new Intent(this, backActivity);
 		} else if (this instanceof GrootteActivity) {
 			backActivity = MainActivity.class;
+			intent = new Intent(this, backActivity);
 		} else if (this instanceof KleurActivity) {
 			backActivity = SnavelActivity.class;
+			intent = new Intent(this, backActivity);
 		}
-		Intent intent = new Intent(this, backActivity);
+		// intent = new Intent(this, backActivity);
 		startActivity(intent);
 		finish();
 	}
 
-//	public void getResult() {
-//		saveCheaked();
-//	}
+	// public void getResult() {
+	// saveCheaked();
+	// }
 
 	private void startNext() {
 		Intent intent = null;
@@ -452,7 +554,7 @@ public class BaseGridActivity extends ContentBaseActivity implements
 			intent.putExtra("ShowAllBirds", false);
 			intent.putExtra("Caller", "KleurActivity");
 		}
-		saveChecked();	//TODO
+		saveChecked();
 		startActivity(intent);
 	}
 
@@ -469,14 +571,16 @@ public class BaseGridActivity extends ContentBaseActivity implements
 		}
 		if (this instanceof GrootteActivity) {
 			if (positionGrootte != null && positionGrootte.size() > 0) {
-				for (int i = 0; i < GrootteActivity.MAX_NUMBER_SELECTED_ITEMS && i < positionGrootte.size(); i++) {
+				for (int i = 0; i < GrootteActivity.MAX_NUMBER_SELECTED_ITEMS
+						&& i < positionGrootte.size(); i++) {
 					Controller.addSize(positionGrootte.get(i));
 				}
 			}
 		}
 		if (this instanceof KleurActivity) {
 			if (positionKleur != null && positionKleur.size() > 0) {
-				for (int i = 0; i < GrootteActivity.MAX_NUMBER_SELECTED_ITEMS && i < positionKleur.size(); i++) {
+				for (int i = 0; i < GrootteActivity.MAX_NUMBER_SELECTED_ITEMS
+						&& i < positionKleur.size(); i++) {
 					Controller.addColor(positionKleur.get(i));
 				}
 			}
@@ -486,7 +590,7 @@ public class BaseGridActivity extends ContentBaseActivity implements
 	@Override
 	public void onClick(View v) {
 		// Log.d("HAI0000x1","HAI0000x1");
-//		getResult();
+		// getResult();
 	}
 
 	protected OnClickListener onSkipClickListener = new OnClickListener() {

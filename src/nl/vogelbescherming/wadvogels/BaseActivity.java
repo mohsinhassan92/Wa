@@ -2,6 +2,7 @@ package nl.vogelbescherming.wadvogels;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -96,7 +97,6 @@ public class BaseActivity extends FragmentActivity {
 		});
 
 		/*** Showing Tabs not Required here ***/
-
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -246,7 +246,6 @@ public class BaseActivity extends FragmentActivity {
 			tabs.startAnimation(move);
 			view2.startAnimation(move);
 		}
-
 		move.setAnimationListener(new AnimationListener() {
 
 			@Override
@@ -591,17 +590,21 @@ public class BaseActivity extends FragmentActivity {
 	}
 
 	public void showVogelVinderMenuAsActive() {
-	//	View view = findViewById(R.id.relative_footer_left);
 		vogelvinder.setBackgroundColor(Color.parseColor("#226991"));
 	}
 
 	public void showZoekOpNaamMenuAsActive() {
-//		View view = findViewById(R.id.relative_footer_center);
 		zoekOpNaam.setBackgroundColor(Color.parseColor("#226991"));
 	}
 
+	public static boolean isTablet(Context context) {
+		
+        boolean xlarge = ((context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == 4);
+        boolean large = ((context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE);
+        return (xlarge || large);
+    }
+
 	public void showVogelPlekkenMenuAsActive() {
-//		View view = findViewById(R.id.relative_footer_right);
 		vogelplekken.setBackgroundColor(Color.parseColor("#226991"));
 	}
 
