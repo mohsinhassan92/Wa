@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<!-- pressed state -->
+<item android:state_enabled="true" android:state_window_focused="true" android:state_pressed="true" android:drawable="@drawable/arrow_down_blue"/>
+<!-- unselected state -->
+<item android:state_enabled="true" android:state_window_focused="true" android:drawable="@drawable/arrow_down_blue"/>
+<!-- default -->
+<item android:drawable="@drawable/arrow_up_blue"/>
+</selector>

@@ -103,6 +103,7 @@
         android:layout_marginRight="16dp"
         android:background="@drawable/spinner_background"
         android:popupBackground="@drawable/spinner_background"
+        android:prompt="@layout/simple_spinner_item2"
         android:spinnerMode="dropdown"
         android:visibility="visible" />
 

@@ -7,7 +7,9 @@ import nl.vogelbescherming.wadvogels.fonts.Fonts;
 import android.os.Bundle;
 import android.os.IInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
+import android.graphics.drawable.GradientDrawable.Orientation;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,11 +31,13 @@ public class MainActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 
 		if (BaseGridActivity.isTablet(this)) {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 			setContent(R.layout.activity_main_tab);
-
+		} else {
+			setContent(R.layout.activity_main);
 		}
 
-		setContent(R.layout.activity_main);
+		
 		// getIntent().addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		
 		hideTabs();

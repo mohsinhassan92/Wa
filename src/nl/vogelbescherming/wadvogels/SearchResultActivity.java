@@ -58,10 +58,10 @@ public class SearchResultActivity extends ContentBaseActivity {
         spinnerChance.setSelection(spinnerChance.getCount()-1);
         
         spinnerAppears = (Spinner) findViewById(R.id.spinnerAanwezigheid);
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, R.layout.simple_spinner_item, getResources().getStringArray(R.array.appears_items));
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, R.layout.simple_spinner_item2, getResources().getStringArray(R.array.appears_items));
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerAppears.setAdapter(adapter2);
-        spinnerAppears.setSelection(spinnerAppears.getCount()-1);
+//        spinnerAppears.setSelection(spinnerAppears.getCount()-1);
         
         if (locationFromMap != null) {
 //        	setHeader("VOGELGIDS");
@@ -97,7 +97,6 @@ public class SearchResultActivity extends ContentBaseActivity {
         la = new ListAdapter(this, R.layout.list_item, birds);
         listview.setAdapter(la);
         listview.setEmptyView(findViewById(R.id.emptyView));
-        
         
         if (getIntent().getStringExtra("Caller") != null && getIntent().getStringExtra("Caller").contains("KleurActivity")) {
         	hideSearchViews();

@@ -4,5 +4,5 @@
           android:id="@+id/textView"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
-          android:text="Trefkans..."
-          android:drawableRight="@drawable/spinner_drawable"/>
+          android:text="Prompt.."
+          android:drawableRight="@drawable/spinner_drawable2"/>
