@@ -52,6 +52,12 @@ public class BirdSpotsActivity extends ContentBaseActivity {
 	private Map<String, ArrayList<Tide>> mTidesMap;
 	private static AsyncHttpClient client = new AsyncHttpClient();
 
+	private LatLng [] yellowLocations = {new LatLng(53.0789159, 4.8200289), new LatLng(53.251759, 4.949379), 
+			new LatLng(53.395207, 5.335025), new LatLng(53.446928, 5.773243), new LatLng(53.493794, 6.258443), 
+			new LatLng(52.959004, 4.760235), new LatLng(53.400416, 6.015836), new LatLng(53.438141, 6.826703)};
+
+	String [] locationCodes = {"TEXNZE", "VLIELHVN", "TERSLNZE", "NES", "SCHIERMNOG", "DENHDR", "WIERMGDN", "EEMHVN"};
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -67,9 +73,9 @@ public class BirdSpotsActivity extends ContentBaseActivity {
 
 		locations = Controller.getLocations(this);
 
+		mAreaMap = new HashMap<LatLng, String>();
 		mTidesMap = new HashMap<String, ArrayList<Tide>>();
 
-		String [] locationCodes = {"TEXNZE", "VLIELHVN", "TERSLNZE", "NES", "SCHIERMNOG", "DENHDR", "WIERMGDN", "EEMHVN"};
 		if (Utils.isOnline(this)) {
 			for (String code : locationCodes) {
 				String url = getResources().getString(R.string.url_get_regions_info) + code;
@@ -98,96 +104,95 @@ public class BirdSpotsActivity extends ContentBaseActivity {
 		}
 	}
 	private void setUpMap() {
+
+		for (int i = 0; i < yellowLocations.length; i++) {
+			mAreaMap.put(new LatLng(yellowLocations[i].latitude, yellowLocations[i].longitude), locationCodes[i]);
+			mMap.addMarker(new MarkerOptions()
+			.position(new LatLng(yellowLocations[i].latitude, yellowLocations[i].longitude))
+			.icon(BitmapDescriptorFactory.fromResource(R.drawable.pin_yellow)));
+		}
+
 		if (locations != null) {
-			mAreaMap = new HashMap<LatLng, String>();
 			for (Location loc : locations) {
 				String str = loc.getText();
-				String locationCode = loc.getmLocationCode();
 				str = str.replaceAll("\\\\n", " ");
-				BitmapDescriptor pin = BitmapDescriptorFactory.fromResource(R.drawable.pin);
-				if (locationCode.equals("TEXNZE") || locationCode.equals("VLIELHVN") || locationCode.equals("TERSLNZE") || locationCode.equals("NES")
-						|| locationCode.equals("SCHIERMNOG") || locationCode.equals("DENHDR") || locationCode.equals("WIERMGDN") || locationCode.equals("EEMHVN")) {
-					pin = BitmapDescriptorFactory.fromResource(R.drawable.pin_yellow);
-				}
-
 				mAreaMap.put(new LatLng(loc.getLat(), loc.getLng()), loc.getmLocationCode());
-
 				mMap.addMarker(new MarkerOptions()
 				.position(new LatLng(loc.getLat(), loc.getLng()))
 				.title(loc.getName())
 				.snippet(str)
-				.icon(pin));
-				// Setting a custom info window adapter for the google map
-				mMap.setInfoWindowAdapter(new InfoWindowAdapter() {
-
-					// Use default InfoWindow frame
-					@Override
-					public View getInfoWindow(Marker arg0) {
-						return null;
-					}
-
-					// Defines the contents of the InfoWindow
-					@Override
-					public View getInfoContents(final Marker marker) {
-						mMarker = marker;
-						String code = mAreaMap.get(marker.getPosition());
-						isInfoWinShown = true;
-						if (Utils.isOnline(BirdSpotsActivity.this) && (code.equals("TEXNZE") || code.equals("VLIELHVN") || code.equals("TERSLNZE") || code.equals("NES")
-								|| code.equals("SCHIERMNOG") || code.equals("DENHDR") || code.equals("WIERMGDN") || code.equals("EEMHVN"))) {
-							View v = getLayoutInflater().inflate(R.layout.activity_tide_times, null);
-							((TextView) v.findViewById(R.id.datum)).setTypeface(Fonts.getTfFont_regular());
-							((TextView) v.findViewById(R.id.hoog)).setTypeface(Fonts.getTfFont_regular());
-							((TextView)	v.findViewById(R.id.hoogte)).setTypeface(Fonts.getTfFont_regular());
-							ArrayList<Tide> list = mTidesMap.get(code);
-							
-							listView = (ListView) v.findViewById(R.id.tide_time_list);
-							la = new TideTimeAdapter(BirdSpotsActivity.this, list);
-							listView.setAdapter(la);
-							return v;
-						} else {
-							View v = getLayoutInflater().inflate(R.layout.info_map, null);
-							View closebt = v.findViewById(R.id.close_bt);
-							closebt.setOnClickListener(new OnClickListener() {
-
-								@Override
-								public void onClick(View v) {
-								}
-							});
-							TextView title = (TextView) v.findViewById(R.id.title);
-							TextView snippet = (TextView) v.findViewById(R.id.snippet);
-							ImageView image = (ImageView) v.findViewById(R.id.imageView1);
-							
-							if (mAreaMap.get(marker.getPosition()).equalsIgnoreCase("Staatsbosbeheer")) {
-								image.setImageDrawable(getResources().getDrawable(R.drawable.natuurmonumenten)); //TODO
-							} else if (mAreaMap.get(marker.getPosition()).equalsIgnoreCase("Natuurmonumenten")) {
-								image.setImageDrawable(getResources().getDrawable(R.drawable.natuurmonumenten));
-							}
-							
-							title.setText(marker.getTitle());
-							snippet.setText(marker.getSnippet().replaceAll("\n","!"));
-							return v;
-						}
-					}
-				});
-
-				mMap.setOnInfoWindowClickListener(onInfoWindowClickListener);
-
-				mMap.setOnMapClickListener(new OnMapClickListener() {
-
-					@Override
-					public void onMapClick(LatLng latLng) {
-					}
-				});
-				mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
-
-					@Override
-					public boolean onMarkerClick(Marker marker) {
-						return false;
-					}
-				});
+				.icon(BitmapDescriptorFactory.fromResource(R.drawable.pin)));
 			}
-			mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(locations.get(0).getLat(), locations.get(0).getLng()), 8.0f));
 		}
+		// Setting a custom info window adapter for the google map
+		mMap.setInfoWindowAdapter(new InfoWindowAdapter() {
+
+			// Use default InfoWindow frame
+			@Override
+			public View getInfoWindow(Marker arg0) {
+				return null;
+			}
+
+			// Defines the contents of the InfoWindow
+			@Override
+			public View getInfoContents(final Marker marker) {
+				mMarker = marker;
+				String code = mAreaMap.get(marker.getPosition());
+				isInfoWinShown = true;
+				if (Utils.isOnline(BirdSpotsActivity.this) && (code.equals("TEXNZE") || code.equals("VLIELHVN") || code.equals("TERSLNZE") || code.equals("NES")
+						|| code.equals("SCHIERMNOG") || code.equals("DENHDR") || code.equals("WIERMGDN") || code.equals("EEMHVN"))) {
+					View v = getLayoutInflater().inflate(R.layout.activity_tide_times, null);
+					((TextView) v.findViewById(R.id.datum)).setTypeface(Fonts.getTfFont_regular());
+					((TextView) v.findViewById(R.id.hoog)).setTypeface(Fonts.getTfFont_regular());
+					((TextView)	v.findViewById(R.id.hoogte)).setTypeface(Fonts.getTfFont_regular());
+					ArrayList<Tide> list = mTidesMap.get(code);
+
+					listView = (ListView) v.findViewById(R.id.tide_time_list);
+					la = new TideTimeAdapter(BirdSpotsActivity.this, list);
+					listView.setAdapter(la);
+					return v;
+				} else {
+					View v = getLayoutInflater().inflate(R.layout.info_map, null);
+					View closebt = v.findViewById(R.id.close_bt);
+					closebt.setOnClickListener(new OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+						}
+					});
+					TextView title = (TextView) v.findViewById(R.id.title);
+					TextView snippet = (TextView) v.findViewById(R.id.snippet);
+					ImageView image = (ImageView) v.findViewById(R.id.imageView1);
+
+					if (mAreaMap.get(marker.getPosition()).equalsIgnoreCase("Staatsbosbeheer")) {
+						image.setImageDrawable(getResources().getDrawable(R.drawable.natuurmonumenten)); //TODO
+					} else if (mAreaMap.get(marker.getPosition()).equalsIgnoreCase("Natuurmonumenten")) {
+						image.setImageDrawable(getResources().getDrawable(R.drawable.natuurmonumenten));
+					}
+
+					title.setText(marker.getTitle());
+					snippet.setText(marker.getSnippet().replaceAll("\n","!"));
+					return v;
+				}
+			}
+		});
+
+		mMap.setOnInfoWindowClickListener(onInfoWindowClickListener);
+
+		mMap.setOnMapClickListener(new OnMapClickListener() {
+
+			@Override
+			public void onMapClick(LatLng latLng) {
+			}
+		});
+		mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
+
+			@Override
+			public boolean onMarkerClick(Marker marker) {
+				return false;
+			}
+		});
+		mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(locations.get(0).getLat(), locations.get(0).getLng()), 8.0f));
 	}
 
 	private OnInfoWindowClickListener onInfoWindowClickListener = new OnInfoWindowClickListener() {

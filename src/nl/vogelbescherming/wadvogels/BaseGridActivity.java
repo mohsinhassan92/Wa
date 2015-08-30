@@ -571,16 +571,19 @@ public class BaseGridActivity extends ContentBaseActivity implements
 	private void saveChecked() {
 		if (this instanceof SilhuetteActivity) {
 			if (positionSilhuette != -1) {
+				Controller.clearSilhuette();
 				Controller.setSilhuette(positionSilhuette);
 			}
 		}
 		if (this instanceof SnavelActivity) {
 			if (positionSnavel != -1) {
+				Controller.clearBeak();
 				Controller.setBeak(positionSnavel);
 			}
 		}
 		if (this instanceof GrootteActivity) {
 			if (positionGrootte != null && positionGrootte.size() > 0) {
+				Controller.clearSizes();
 				for (int i = 0; i < GrootteActivity.MAX_NUMBER_SELECTED_ITEMS
 						&& i < positionGrootte.size(); i++) {
 					Controller.addSize(positionGrootte.get(i));
@@ -589,6 +592,7 @@ public class BaseGridActivity extends ContentBaseActivity implements
 		}
 		if (this instanceof KleurActivity) {
 			if (positionKleur != null && positionKleur.size() > 0) {
+				Controller.clearColors();
 				for (int i = 0; i < GrootteActivity.MAX_NUMBER_SELECTED_ITEMS
 						&& i < positionKleur.size(); i++) {
 					Controller.addColor(positionKleur.get(i));
