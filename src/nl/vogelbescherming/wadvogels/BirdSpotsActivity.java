@@ -146,10 +146,11 @@ public class BirdSpotsActivity extends ContentBaseActivity {
 					((TextView) v.findViewById(R.id.hoog)).setTypeface(Fonts.getTfFont_regular());
 					((TextView)	v.findViewById(R.id.hoogte)).setTypeface(Fonts.getTfFont_regular());
 					ArrayList<Tide> list = mTidesMap.get(code);
-
-					listView = (ListView) v.findViewById(R.id.tide_time_list);
-					la = new TideTimeAdapter(BirdSpotsActivity.this, list);
-					listView.setAdapter(la);
+					if (list != null) {
+						listView = (ListView) v.findViewById(R.id.tide_time_list);
+						la = new TideTimeAdapter(BirdSpotsActivity.this, list);
+						listView.setAdapter(la);
+					}
 					return v;
 				} else {
 					View v = getLayoutInflater().inflate(R.layout.info_map, null);

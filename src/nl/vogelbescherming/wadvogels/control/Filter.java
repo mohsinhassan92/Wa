@@ -68,10 +68,10 @@ public class Filter {
 		}
 		
 		for (Integer filterParam : list) {
-			if (and){
+			if (and) {
 				tempResult = filter(filterType, filterParam, result);
 				result = tempResult;
-			} else{
+			} else {
 				tempResult = filter(filterType, filterParam, currentBirds);
 				result.addAll(tempResult);
 			}

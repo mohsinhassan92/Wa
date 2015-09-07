@@ -1,5 +1,7 @@
 package nl.vogelbescherming.wadvogels;
 
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -181,6 +183,10 @@ public class BaseActivity extends FragmentActivity {
 			public void onClick(View v) {
 				Intent intent = new Intent(BaseActivity.this,
 						MainActivity.class);
+				BaseGridActivity.positionGrootte = new ArrayList<Integer>();
+				BaseGridActivity.positionKleur = new ArrayList<Integer>();
+				BaseGridActivity.positionSilhuette = -1;
+				BaseGridActivity.positionSnavel = -1;
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				intent.putExtra("ShowAllBirds", true);
 				startActivity(intent);

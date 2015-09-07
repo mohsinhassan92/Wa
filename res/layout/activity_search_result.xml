@@ -8,8 +8,8 @@
         android:id="@+id/backView"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:gravity="center_vertical"
         android:layout_alignParentTop="true"
+        android:gravity="center_vertical"
         android:visibility="gone" >
 
         <ImageView
@@ -78,42 +78,68 @@
         android:text="Deze zoekterm heeft geen resultaten opgeleverd.\nGa terug en probeer het opnieuw."
         android:visibility="gone" />
 
-    <Spinner
-        android:id="@+id/spinnerTrefkans"
+    <LinearLayout
+        android:id="@+id/chances"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/filterContainer"
-        android:layout_marginBottom="10dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:background="@drawable/spinner_background"
-        android:popupBackground="@drawable/spinner_background"
-        android:spinnerMode="dropdown"
-        android:visibility="visible" />
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        android:tag="closed"
+        android:layout_below="@+id/filterContainer" >
 
-    <Spinner
-        android:id="@+id/spinnerAanwezigheid"
+        <nl.vogelbescherming.wadvogels.view.CustomSpinner
+            android:id="@+id/spinnerTrefkans"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/spinner_background"
+            android:popupBackground="@drawable/spinner_background"
+            android:spinnerMode="dropdown"
+            android:visibility="visible" />
+        
+        <TextView
+            android:id="@+id/tvTrefkans"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Trefkans.."
+            android:visibility="gone"
+            android:drawableRight="@drawable/arrow_down_blue"/>
+        
+        
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/appears"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/spinnerTrefkans"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:background="@drawable/spinner_background"
-        android:popupBackground="@drawable/spinner_background"
-        android:prompt="@layout/simple_spinner_item2"
-        android:spinnerMode="dropdown"
-        android:visibility="visible" />
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="10dp"
+        android:layout_below="@+id/chances" >
+
+        <nl.vogelbescherming.wadvogels.view.CustomSpinner
+            android:id="@+id/spinnerAanwezigheid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/spinner_background"
+            android:popupBackground="@drawable/spinner_background"
+            android:prompt="@layout/simple_spinner_item2"
+            android:spinnerMode="dropdown"
+            android:visibility="visible" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/buttonSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/spinnerAanwezigheid"
-        android:layout_alignRight="@+id/spinnerAanwezigheid"
-        android:layout_below="@+id/spinnerAanwezigheid"
+        android:layout_alignLeft="@+id/appears"
+        android:layout_alignRight="@+id/appears"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_below="@+id/appears"
         android:background="@color/blue_bg"
         android:text="@string/search"
         android:textColor="@color/white"

@@ -49,7 +49,7 @@ public class BaseGridActivity extends ContentBaseActivity implements
 	private int list_item_id;
 	private static List<View> viewListGrootte = new ArrayList<View>();
 	// public static List<View> viewListGrootteOnResume = new ArrayList<View>();
-	public static List<Integer> positionGrootte = new ArrayList<Integer>();
+	public static List<Integer> positionGrootte;
 	public static int positionSilhuette = -1;
 	public static int positionSnavel = -1;
 	public static List<Integer> positionKleur = new ArrayList<Integer>();
@@ -63,6 +63,10 @@ public class BaseGridActivity extends ContentBaseActivity implements
 		super.onCreate(savedInstanceState);
 		setContent(R.layout.grid);
 
+		if (positionGrootte == null) {
+			positionGrootte = new ArrayList<Integer>();
+		}
+		
 		adapter = new BaseGridAdapter(this, list_item_id, R.id.image,
 				listDrawables, listDrawables_active, maxItemselected,
 				columnNumber, rowNumber, selectedItems, padding, cellHeight,
@@ -75,9 +79,7 @@ public class BaseGridActivity extends ContentBaseActivity implements
 		Display display = getWindowManager().getDefaultDisplay();
 		int width = display.getWidth();
 		int height = display.getHeight();
-		// Toast.makeText(this, "Width"+width+"::Height"+height,
-		// Toast.LENGTH_SHORT).show();
-		// */
+		/*/
 		if (width >= 200 && width < 320) {
 			Toast.makeText(this, "200-LDPI", Toast.LENGTH_SHORT).show();
 		} else if (width >= 320 && width < 480) {
@@ -91,43 +93,7 @@ public class BaseGridActivity extends ContentBaseActivity implements
 		} else if (width >= 1280) {
 			Toast.makeText(this, "1280-XXXHDPI", Toast.LENGTH_SHORT).show();
 		}
-
-		// */
-
-		/*
-		 * / int density= getResources().getDisplayMetrics().densityDpi;
-		 * if(density==DisplayMetrics.DENSITY_LOW) { Toast.makeText(this,
-		 * "LDPI", Toast.LENGTH_SHORT).show(); }else
-		 * if(density==DisplayMetrics.DENSITY_MEDIUM){ Toast.makeText(this,
-		 * "MDPI", Toast.LENGTH_SHORT).show(); }else
-		 * if(density==DisplayMetrics.DENSITY_HIGH){ Toast.makeText(this,
-		 * "HDPI", Toast.LENGTH_SHORT).show(); }else
-		 * if(density==DisplayMetrics.DENSITY_XHIGH){ Toast.makeText(this,
-		 * "xHDPI", Toast.LENGTH_SHORT).show(); } //
-		 */
-
-		/*
-		 * / switch(density) { case DisplayMetrics.DENSITY_LOW:
-		 * Toast.makeText(this, "LDPI", Toast.LENGTH_SHORT).show(); break; case
-		 * DisplayMetrics.DENSITY_MEDIUM: Toast.makeText(this, "MDPI",
-		 * Toast.LENGTH_SHORT).show(); break; case DisplayMetrics.DENSITY_HIGH:
-		 * Toast.makeText(this, "HDPI", Toast.LENGTH_SHORT).show(); break; case
-		 * DisplayMetrics.DENSITY_XHIGH: Toast.makeText(this, "XHDPI",
-		 * Toast.LENGTH_SHORT).show(); break; } //
-		 */
-
-		/*
-		 * int screenSize = getResources().getConfiguration().screenLayout &
-		 * Configuration.SCREENLAYOUT_SIZE_MASK;
-		 * 
-		 * String toastMsg; switch(screenSize) { case
-		 * Configuration.SCREENLAYOUT_SIZE_LARGE: toastMsg = "Large screen";
-		 * break; case Configuration.SCREENLAYOUT_SIZE_NORMAL: toastMsg =
-		 * "Normal screen"; break; case Configuration.SCREENLAYOUT_SIZE_SMALL:
-		 * toastMsg = "Small screen"; break; default: toastMsg =
-		 * "Screen size is neither large, normal or small"; }
-		 * Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show(); //
-		 */
+		//*/
 	}
 
 	@Override
@@ -149,8 +115,8 @@ public class BaseGridActivity extends ContentBaseActivity implements
 					}
 				}
 				if (flag == false) {
-					viewListGrootte.clear();
-					positionGrootte.clear();
+					if (viewListGrootte != null)	viewListGrootte.clear();
+					if (positionGrootte != null)	positionGrootte.clear();
 				}
 				if (viewListGrootte.size() < 2) {
 					viewListGrootte.add(v);
@@ -215,6 +181,7 @@ public class BaseGridActivity extends ContentBaseActivity implements
 				adapter.notifyDataSetChanged();
 			} else {
 				unSelect_Silhuette_Snavel(v, position);
+				positionSilhuette = -1;
 			}
 		}
 		// **************************************SnavelActivity*************************************************
@@ -244,6 +211,7 @@ public class BaseGridActivity extends ContentBaseActivity implements
 				adapter.notifyDataSetChanged();
 			} else {
 				unSelect_Silhuette_Snavel(v, position);
+				positionSnavel = -1;
 			}
 		}
 		// *******************************************KleurActivity***********************************
@@ -266,13 +234,12 @@ public class BaseGridActivity extends ContentBaseActivity implements
 					}
 				}
 				if (flag == false) {
-					viewListKleur.clear();
-					positionKleur.clear();
+					if (viewListKleur != null)	viewListKleur.clear();
+					if (positionKleur != null)	positionKleur.clear();
 				}
 				if (viewListKleur.size() < 3) {
 					viewListKleur.add(v);
 					positionKleur.add(position);
-
 				} else if (viewListKleur.size() >= 3
 						&& viewListKleur != null
 						&& (viewListKleur.get(0) != v
@@ -570,20 +537,20 @@ public class BaseGridActivity extends ContentBaseActivity implements
 
 	private void saveChecked() {
 		if (this instanceof SilhuetteActivity) {
+			Controller.clearSilhuette();
 			if (positionSilhuette != -1) {
-				Controller.clearSilhuette();
 				Controller.setSilhuette(positionSilhuette);
 			}
 		}
 		if (this instanceof SnavelActivity) {
+			Controller.clearBeak();
 			if (positionSnavel != -1) {
-				Controller.clearBeak();
 				Controller.setBeak(positionSnavel);
 			}
 		}
 		if (this instanceof GrootteActivity) {
+			Controller.clearSizes();
 			if (positionGrootte != null && positionGrootte.size() > 0) {
-				Controller.clearSizes();
 				for (int i = 0; i < GrootteActivity.MAX_NUMBER_SELECTED_ITEMS
 						&& i < positionGrootte.size(); i++) {
 					Controller.addSize(positionGrootte.get(i));
@@ -591,8 +558,8 @@ public class BaseGridActivity extends ContentBaseActivity implements
 			}
 		}
 		if (this instanceof KleurActivity) {
+			Controller.clearColors();
 			if (positionKleur != null && positionKleur.size() > 0) {
-				Controller.clearColors();
 				for (int i = 0; i < GrootteActivity.MAX_NUMBER_SELECTED_ITEMS
 						&& i < positionKleur.size(); i++) {
 					Controller.addColor(positionKleur.get(i));
