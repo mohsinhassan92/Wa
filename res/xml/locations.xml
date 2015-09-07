@@ -1,5 +1,3 @@
-  <!-- New Recors -->
-  
 <Records>
   <!-- Texel -->
   <Record>
@@ -309,332 +307,423 @@
   </Record>
   <Record>
     <Row
-      Name="Bomenland"
-      Lat="53.27044891839713"
-      Lng="4.975690841674805"
-      Text="Wat voor leefgebied?: Bos  Welke vogels kun je er vinden?: Ideale plek om het fraaie goudhaantje te zien, het subtiel getekende groene zangvogeltje met de oranjegele streep (‘goud’) bovenop zijn kop. Verder houtsnip, boomkruiper, grote bonte specht, tjiftjaf en appelvink.
-"
-      LocationCode="VLIELHVN"
+      Name="Duinmeer bij Hollum"
+      Lat="53.4604081842"
+      Lng="5.65295830261"
+      Text="Een goede plek om wintertaling, nonnetje en smienten te bekijken. Misschien zie je zelfs een blauwe kiekendief."
+      LocationCode="Staatsbosbeheer"
     />
   </Record>
   <Record>
     <Row
-      Name="Dodemansbol"
-      Lat="53.27170648647596"
-      Lng="4.990754127502441"
-      Text="Wat voor leefgebied?: Wad  Welke vogels kun je er vinden?: Mooi uitzicht op het wad en breed scala aan typische Waddenvogels te zien waaronder, eider, lepelaar, rosse grutto, kemphaan, wulp, kluut, bonte strandloper, krombekstrandloper, kanoet, steenloper en bergeend. Ook regelmatig velduilen te zien.
-"
-      LocationCode="VLIELHVN"
+      Name="Hagendoornveld"
+      Lat="53.4517749655"
+      Lng="5.74904188514"
+      Text="Langs de slikrandjes lopen hier vaak steltlopers op zoek naar eten. In de eendenkooi zitten vooral ’s winters veel eenden en meeuwen. Boven het Hagedoornveld vliegen vaak bruine en blauwe kiekendieven."
+      LocationCode="Staatsbosbeheer"
     />
   </Record>
   <Record>
     <Row
-      Name="Oude Eendenkooi"
-      Lat="53.27424717441858"
-      Lng="4.997363090515137"
-      Text="Wat voor leefgebied?: Bos en grasland  Welke vogels kun je er vinden?: Verschillende soorten zwanen en ganzen, sijsjes en kwikstaarten. Ook een goede plek voor bosvogels (spechten, houtsnip, goudhaan, vuurgoudhaan en soms zeldzame bladkoning). Maar bij vogelliefhebbers ook bekend als vindplaats voor rariteiten en bijzondere soorten.
-"
-      LocationCode="VLIELHVN"
+      Name="Ballumerbocht"
+      Lat="53.4407703297"
+      Lng="5.72037267598"
+      Text="Mooi uitzicht over het wad. Tijdens laagwater zijn hier volop steltlopers zoals scholeksters, wulpen en plevieren te bewonderen."
+      LocationCode="Staatsbosbeheer"
     />
   </Record>
   <Record>
     <Row
-      Name="Cranberryvlakte"
-      Lat="53.29118123539367"
-      Lng="5.023584365844727"
-      Text="Wat voor leefgebied?: Duinen  Welke vogels kun je er vinden?: Typische duinsoorten als blauwe kiekendief, tapuit en velduil. Maar ook havik, slechtvalk, roodborsttapuit en veldleeuwerik. In de trektijd maak je hier kans op beflijster en ijsgors.
-"
-      LocationCode="VLIELHVN"
+      Name="Vogelpôlle"
+      Lat="53.4261332879"
+      Lng="5.66384786596"
+      Text="Kijk vanaf de dijk uit over het wad en aan de andere kant het weidevogelgebied vol grote groepen ganzen. Beginnend laagwater is het beste tijdstip om hier te kijken. Kans op leuke soorten als goudplevier, watersnip, steenloper en rosse grutto."
+      LocationCode="Staatsbosbeheer"
     />
   </Record>
   <Record>
     <Row
-      Name="Westerse veld"
-      Lat="53.291514717692344"
-      Lng="5.058689117431641"
-      Text="Wat voor leefgebied?: Grasland  Welke vogels kun je er vinden?: Vaak kneu en barmsijs te zien. Verder ganzen, kwikstaarten, grutto, meeuwen, kievit, spreeuw, roek, tureluur, steenloper, bontbekplevier, oeverpieper en graspieper.
-"
-      LocationCode="VLIELHVN"
+      Name="Dijk bij de Reeweg"
+      Lat="53.43909374669320"
+      Lng="5.77460289001464"
+      Text="Vaak groepen rotganzen en goudplevieren te zien in het weiland. Met een goede verrekijker kun je zeehonden op een zandplaat zien liggen. In de trektijd kun je hier sneeuwgors, regenwulp en kemphaan tegenkomen."
+      LocationCode="Staatsbosbeheer"
     />
   </Record>
   <Record>
     <Row
-      Name="Oostpunt"
-      Lat="53.30339012070351"
-      Lng="5.0997161865234375"
-      Text="Wat voor leefgebied?: Strand
-
-      Welke vogels kun je er vinden?: Schelpenrijk stuk strand met veel Noordzeestrandsoorten zoals drieteenstrandloper, steenloper, paarse strandloper, eider, middelste zaagbek, stormmeeuw, zilvermeeuw, kokmeeuw. Verder uit de kust kans op zeekoet, roodkeelduiker, maar ook zeehonden."
-      LocationCode="VLIELHVN"
+      Name="Oerder Blinkert"
+      Lat="53.4572964054"
+      Lng="5.90310617306"
+      Text="Uitzichtpunt op het hoogste duin van Ameland. Grote kans om jagende kiekendieven te zien. In de bosjes zitten tijdens de trektijd veel zangvogels."
+      LocationCode="It Fryske Gea"
     />
-  </Record><Record>
+  </Record>
+  <Record>
+    <Row
+      Name="Kooiduinen"
+      Lat="53.45136254232420"
+      Lng="5.841808319091790"
+      Text="Tijdens hoogwater zijn hier veel steltlopers te zien. Kijk ook uit naar slechtvalken en sneeuwgorzen."
+      LocationCode="Staatsbosbeheer"
+    />
+  </Record>
+  <Record>
+    <Row
+      Name="Strandpaviljoen de Buren van Nes "
+      Lat="53.460146611951300"
+      Lng="5778712034225460"
+      Text="In het najaar zijn hier met een verrekijker veel zeevogels te zien. Zee-eenden en jan-van-genten zijn ook met het blote oog soms goed te zien."
+      LocationCode=""
+    />
+  </Record>
+  <Record>
+    <Row
+      Name="Pier"
+      Lat="53.435910949102000"
+      Lng="5.775343179702750"
+      Text="Mooie plek om scholeksters te zien. Direct oostelijk van de pier ligt een kleine kwelder die door steltlopers als hoogwatervluchtplaats wordt gebruikt."
+      LocationCode=""
+    />
+  </Record>
+  
+  <!-- Schiermonnikoog -->
+  
+  <Record>
     <Row
       Name="Veerdam"
-      Lat="53.47222158198999"
-      Lng="6.200637813890353"
-      Text="Wat voor leefgebied?: Aan de oostzijde van de veerdam liggen kwelders.  Welke vogels kun je er vinden?: Steltlopers (rosse grutto, zilverplevier, wulp, tureluur, bonte strandloper), eenden (bergeend, eidereend, pijlstaart) en rotganzen, in de winter met enige regelmaat sneeuwgorzen, strandleeuweriken en fraters.
-"
-      LocationCode="SCHIERMNOG"
+      Lat="53.47222158198990"
+      Lng="6.200637813890350"
+      Text="Aan de oostzijde van de Veerdam liggen kwelders met verschillende soorten eenden zoals de bergeend, eidereend en pijlstaart."
+      LocationCode="Natuurmonumenten"
     />
   </Record>
   <Record>
     <Row
       Name="Banckspolder"
-      Lat="53.47733002391635"
-      Lng="6.188449856126681"
-      Text="Wat voor leefgebied?: Poldergebied tussen de veerdam en het dorp Schiermonnikoog.  Welke vogels kun je er vinden?: In het voorjaar weidevogels (grutto, tureluur, kievit, veldleeuwerik, wulp). In het winterhalfjaar groepen ganzen (tussen rotganzen regelmatig witbuikrotgans, zwarte rotgans en ook prachtige roodhalsgans) en steltlopers als goudplevier.
-"
-      LocationCode="SCHIERMNOG"
+      Lat="53.47733002391630"
+      Lng="6.188449856126680"
+      Text="Tijdens het voorjaar zie je veel weidevogels als grutto, tureluur en kievit in dit poldergebied en in de winter groepen ganzen en steltlopers zoals de goudplevier."
+      LocationCode=""
     />
   </Record>
   <Record>
     <Row
       Name="Oosterkwelder"
-      Lat="53.478249478155384"
-      Lng="6.2210655203671195"
-      Text="Wat voor leefgebied?: Kweldergebied dat vanaf de waddijk goed is te overzien. Hier bevindt zich ook een hoogwatervluchtplaats waar veel steltlopers gebruik van maken.  Welke vogels kun je er vinden?: Uiteraard veel steltlopers. Verder bruine kiekendief, sperwer, watersnip, velduil en veel kleine zangvogels. In de winter ganzen en roofvogels (slechtvalk, smelleken, ruigpootbuizerd, blauwe kiekendief), met regelmaat ook sneeuwgorzen, strandleeuweriken en fraters. In de trektijd vaak piepers en tapuiten.
-"
-      LocationCode="SCHIERMNOG"
+      Lat="53.478249478155300"
+      Lng="6.2210655203671100"
+      Text="Dit kweldergebied is vanaf de waddijk goed te overzien. In de winter zie je hier veel ganzen en roofvogels en in de trektijd piepers en tapuiten. Met veel geluk en geduld een velduil."
+      LocationCode="Natuurmonumenten"
     />
   </Record>
   <Record>
     <Row
       Name="Kobbeduinen"
-      Lat="5.34888728374002E+15"
-      Lng="6.2141990652889945"
-      Text="Wat voor leefgebied?: Laag duingebied met veel struweel.   Welke vogels kun je er vinden?: Veel zangvogels. Koekoek, nachtegaal, grauwe en bonte vliegenvanger, tapuit, paapje, sprinkhaanzanger. In trektijd kans op beflijster en klapekster.
-"
-      LocationCode="SCHIERMNOG"
+      Lat="53.48887283740020"
+      Lng="6.2141990652889900"
+      Text="Laag duingebied met veel zangvogels zoals de koekoek, nachtegaal, tapuit, paapje en sprinkhaanzanger."
+      LocationCode="Natuurmonumenten"
     />
   </Record>
   <Record>
     <Row
       Name="De Marlijn"
-      Lat="53.499544591117726"
-      Lng="6.188621517503634"
-      Text="Wat voor leefgebied?: Strandpaviljoen aan Noordzeestrand. Beste plek van Schiermonnikoog voor het waarnemen van zeevogeltrek in het najaar. Ook in voor- en najaar zangvogeltrek over duinen.  Welke vogels kun je er vinden?: Meeuwen en drieteenstrandlopers. Over zee tijdens najaar o.a. jan-van-gent, kleine jager en zwarte zee-eend, eidereend en sterns.
-"
-      LocationCode="SCHIERMNOG"
+      Lat="53.499544591117700"
+      Lng="6.188621517503630"
+      Text="Vanaf dit strandpaviljoen kun je in het najaar de zeevogeltrek en tijdens het voor- en najaar de zangvogeltrek prachtig beleven."
+      LocationCode=""
     />
   </Record>
   <Record>
     <Row
       Name="Groene Glop"
-      Lat="53.483459342508205"
-      Lng="6.1850166285876185"
-      Text="Wat voor leefgebied?: Bos waar diverse vogelsoorten (met name kleine zangvogels) voor onderzoek worden gevangen en geringd. Regelmatig worden er in het gebied excursies gegeven door Natuurmonumenten.  Welke vogels kun je er vinden?: Bosvogels, maar ook andere soorten. Koekoek, winterkoning, goudhaan, houtsnip, kleine en grote bonte specht, boomkruiper, zwartkop en bonte vliegenvanger.
-"
-      LocationCode="SCHIERMNOG"
+      Lat="53.483459342508200"
+      Lng="6.1850166285876100"
+      Text="Bos waar kleine zangvogels voor onderzoek worden gevangen en geringd. Regelmatig worden er in het gebied excursies gegeven door Natuurmonumenten."
+      LocationCode="Natuurmonumenten"
     />
   </Record>
   <Record>
     <Row
       Name="Jachthaven"
-      Lat="53.46940656739976"
-      Lng="6.167221067589708"
-      Text="Wat voor leefgebied?: Wad. Vanaf de jachthavenpier goed te overzien.  Welke vogels kun je er vinden?: Veel steltlopers (kanoet, bonte strandloper, bontbekplevier, rosse grutto, zilverplevier) en dwergstern.
-"
-      LocationCode="SCHIERMNOG"
+      Lat="53.46940656739970"
+      Lng="6.167221067589700"
+      Text="Vanaf de pier kijk je uit over het wad met veel steltlopers zoals kanoeten, bonte strandlopers, bontbekplevieren en rosse grutto's."
+      LocationCode=""
     />
   </Record>
   <Record>
     <Row
       Name="Westerplas"
-      Lat="53.47314114692092"
-      Lng="6.149826046312228"
-      Text="Wat voor leefgebied?: Groot duinmeer, te overzien van meerdere punten. Aan zuidzijde vogelkijkhut.  Welke vogels kun je er vinden?: Diverse soorten eenden (krakeend, slobeend, wintertaling, smient, pijlstaart), bruine kiekendief, lepelaar, kleine zilverreiger en waterral. Vaak veel meeuwen op de plas.  In het riet en struweel langs de plas veel zangvogels als barmsijs, blauwborst en rietgors.
-"
-      LocationCode="SCHIERMNOG"
+      Lat="53.47314114692090"
+      Lng="6.149826046312220"
+      Text="Groot duinmeer met verschillende soorten eenden, lepelaars en kleine zilverreiger. In het riet langs de plas veel zangvogels als barmsijs, blauwborst en rietgors."
+      LocationCode="Natuurmonumenten"
     />
   </Record>
   <Record>
     <Row
       Name="Westerstrand"
-      Lat="53.47467371086146"
-      Lng="6.133518215501681"
-      Text="Wat voor leefgebied?: Strand vanaf meerdere strandopgangen bereikbaar.  Welke vogels kun je er vinden?: Altijd kans op meeuwen, strandlopers. Ook kiekendieven. In de doortrek en winterperiode met regelmaat sneeuw- en ijsgorzen, strandleeuweriken en fraters, slechtvalk, blauwe kiekendief en velduil.
-"
-      LocationCode="SCHIERMNOG"
+      Lat="53.47467371086140"
+      Lng="6.133518215501680"
+      Text="Dit strand, waar verschillende soorten meeuwen en strandlopers te zien zijn, is vanaf meerdere strandopgangen bereikbaar. Kijk tijdens de winter ook uit naar velduilen."
+      LocationCode=""
     />
   </Record>
   <Record>
     <Row
       Name="Klein Zwitserland"
       Lat="53.479475386148"
-      Lng="6.150169369066134"
-      Text="Wat voor leefgebied?: Vakantiehuisjescomplex in binnenduinrand. Goede plek tijdens de trektijd voor diverse soorten zangvogels (inclusief zeldzaamheden). Goed te overzien vanaf paden.  Welke vogels kun je er vinden?: Sprinkhaanzanger, zanglijster, goudhaan, sijs, zwarte mees, barmsijs (broedvogel op eiland), diverse soorten andere zangvogels als roodstaarten, vliegenvangers en loofzangers (waaronder de zeldzame bladkoning).
-"
-      LocationCode="SCHIERMNOG"
+      Lng="6.150169369066130"
+      Text="Vanaf dit vakantiehuisjescomplex in de binnenduinrand kun je tijdens de trektijd veel zangvogels zien zoals roodstaarten en de zeldzame bladkoning."
+      LocationCode=""
     />
   </Record>
+  
+  <!-- Noord-Holand -->
+  
   <Record>
     <Row
-      Name="Noordvaarder"
-      Lat="53.356903841363305"
-      Lng="5.176277160644531"
-      Text="Wat voor leefgebied?: Uitgestrekte strandvlakte met jonge duinen.  Welke vogels kun je er vinden?: Steltlopers (o.m. kanoet en bonte strandloper), eidereend, bontbekplevier, tapuit, bruine kiekendief. Verder veel zeevogels en zeevogeltrek.
-"
-      LocationCode="TERSLNZE"
-    />
-  </Record>
-  <Record>
-    <Row
-      Name="Kroonpolders"
-      Lat="53.37677497506021"
-      Lng="5.1903533935546875"
-      Text="Wat voor leefgebied?: Grootste duinmeer op Terschelling, goed te overzien vanaf de duintoppen.  Welke vogels kun je er vinden?: Bruine kiekendief, fuut, baardmees, nachtegaal, blauwborst, verschillende soorten eenden. Goed observatiepunt voor trekvogels.
-"
-      LocationCode="TERSLNZE"
-    />
-  </Record>
-  <Record>
-    <Row
-      Name="Bossen bij West-Terschelling"
-      Lat="53.376570165292875"
-      Lng="5.215930938720703"
-      Text="Wat voor leefgebied?: Grotendeels aangeplante bossen. Veel variatie in soorten bomen.  Welke vogels kun je er vinden?: Nachtegaal, fluiter, houtsnip, zwarte mees, goudhaantje, sperwer, doortrekkende zangvogels tijdens de voor- en najaarstrek.
-"
-      LocationCode="TERSLNZE"
-    />
-  </Record>
-  <Record>
-    <Row
-      Name="Stryp (Seerijp) en Sehaal"
-      Lat="53.37493165169552"
-      Lng="5.306053161621094"
-      Text="Wat voor leefgebied?: Wad. Goed vanaf de dijk te overzien.   Welke vogels kun je er vinden?: Veel steltlopers (o.m. zilverplevier, goudplevier, bontbekplevier, groenpootruiter, zwarte ruiter, tureluur, scholekster, kleine strandloper), bergeend, eidereend, middelste zaagbek, rotgans en lepelaar.
-"
-      LocationCode="TERSLNZE"
-    />
-  </Record>
-  <Record>
-    <Row
-      Name="Styperpolder"
-      Lat="53.37421478217421"
-      Lng="5.2878570556640625"
-      Text="Wat voor leefgebied?: Kleine polder ten zuiden van Midsland. Weidevogelgebied. Goed vanaf de dijk te overzien.  Welke vogels kun je er vinden?: Rotgans (bijna jaarlijks ook zeldzame roodhalsgans), grutto, tureluur, graspieper, slobeend, kuifeend, bergeend, wintertaling, krakeend, gele kwikstaart.
-"
-      LocationCode="TERSLNZE"
-    />
-  </Record>
-  <Record>
-    <Row
-      Name="Liesinger (of Eerste) Plak"
-      Lat="53.39830010800172"
-      Lng="5.324892997741699"
-      Text="Wat voor leefgebied?: Ondiepe duinplas bij Lies – “vogelen vanaf een bank”.  Welke vogels kun je er vinden?: Eenden (krakeend, slobeend, bergeend, wintertaling, soms zomertaling), steltlopers (groenpootruiter, grutto, tureluur, oeverloper, witgatje), blauwe reiger, huiszwaluw, boerenzwaluw, oeverzwaluw, graspieper, blauwe kiekendief. Goed punt om overvliegende trekvogels te observeren.
-"
-      LocationCode="TERSLNZE"
-    />
-  </Record>
-  <Record>
-    <Row
-      Name="Koegelwieck"
-      Lat="53.406871297662086"
-      Lng="5.3276824951171875"
-      Text="Wat voor leefgebied?: Gevarieerd duingebied tussen het Formerumer en Hoornerbos.  Welke vogels kun je er vinden?: Blauwe kiekendief, bruine kiekendief, velduil, wulp, tapuit, roodborsttapuit, beflijster.
-"
-      LocationCode="TERSLNZE"
-    />
-  </Record>
-  <Record>
-    <Row
-      Name="De Grie en St Janshoek"
-      Lat="53.405131613759494"
-      Lng="5.411624908447266"
-      Text="Wat voor leefgebied?: Rand van het wad, met kooibosjes en een natte weide.  Welke vogels kun je er vinden?: Slechtvalk, wulp, tureluur, groenpootruiter, kluut, zilverplevier, bontbekplevier, bergeend, lepelaar, kleine zilverreiger, gele kwikstaart (noordse gele kwikstaart tijdens voorjaarstrek in mei), zangvogels in kooibosjes (niet vrij toegankelijk).
-"
-      LocationCode="TERSLNZE"
-    />
-  </Record>
-  <Record>
-    <Row
-      Name="Jan Thijssensduin en Berkenvallei"
-      Lat="53.415773272268396"
-      Lng="5.418148040771484"
-      Text="Wat voor leefgebied?: Hoog duin aan de rand van de Westelijke Boschplaat met natuurlijk berken- en eikenbos.  Welke vogels kun je er vinden?: Blauwe en bruine kiekendief, slechtvalk, velduil, lepelaar, kleine mantelmeeuw, roodborsttapuit, sprinkhaanzanger, rietzanger, blauwborst, barmsijs, nachtegaal. Goed observatiepunt voor trekvogels. De Boschplaat zelf is tijdens het broedseizoen niet toegankelijk.
-"
-      LocationCode="TERSLNZE"
-    />
-  </Record>
-  <Record>
-    <Row
-      Name="Noordzeestrand bij Paal 18"
-      Lat="53.42334360051518"
-      Lng="5.3870344161987305"
-      Text="Wat voor leefgebied?: Breed Noordzeestrand. Goede plek voor zeevogeltrek (vanaf duintoppen). Leuk strandpaviljoen Heartbreak Hotel.  Welke vogels kun je er vinden?: Vaak duizenden meeuwen op het strand, incl. grote mantelmeeuw. Verder drieteenstrandloper, strandplevier, bontbekplevier. Zeevogeltrek, inclusief jan-van-gent, fuut, zwarte zee-eend, eidereend, grote stern, kleine jager en allerlei verrassingen. Ook veel zangvogeltrek over de zeeduinen.
-"
-      LocationCode="TERSLNZE"
+      Name="&apos;t Kuitje"
+      Lat="52.93438788"
+      Lng="4.791626930"
+      Text="Mooi uitzicht over de spuisluizen en tijdens laag water op het drooggevallen wad. Kans op rosse grutto, lepelaar, eidereend, wulp en kleine zilverreiger."
+      LocationCode="Landschap Noord-Holland"
     />
   </Record>
   <Record>
     <Row
       Name="Balgzandpolder"
-      Lat="52.913586356840014"
-      Lng="4.800896644592285"
-      Text="Wat voor leefgebied?: Binnendijkse hoogwatervluchtplaats en broedterrein. Goed zicht op de vogels vanachter een kijkscherm.  Welke vogels kun je er vinden?: Grauwe gans, rotgans, smient, pijlstaart, wintertaling, lepelaar, aalscholver, kleine zilverreiger, scholekster, tureluur, kievit, bonte strandloper, groenpootruiter, bruine kiekendief.
-"
-      LocationCode="DENHDR"
+      Lat="52.913586356"
+      Lng="4.8008966445"
+      Text="Binnendijkse hoogwatervluchtplaats en broedterrein. Goed zicht op vogels zoals wintertaling, lepelaar en tureluur vanachter een kijkscherm soms heel dichtbij."
+      LocationCode="Landschap Noord-Holland"
     />
   </Record>
   <Record>
     <Row
-      Name="Balgzand- uitkijkhut t.h.v. Ewijcksluis"
+      Name="Balgzand op de dijk"
+      Lat="52.898218547980356"
+      Lng="4.8468017573759425"
+      Text="Vanaf hier kijk je uit over droogvallend wad, waar vele vogels komen zoeken naar voedsel, zoals de goud- en zilverplevier en talloze andere steltlopers."
+      LocationCode="Landschap Noord-Holland"
+    />
+  </Record>
+  <Record>
+    <Row
+      Name="Verzakking"
+      Lat="52.886807"
+      Lng="4.876067"
+      Text="In deze binnendijkse rietvelden zijn vaak bijzondere ganzen te zien, zoals de grauwe gans, brandgans en Canadese gans."
+      LocationCode=""
+    />
+  </Record>
+  <Record>
+    <Row
+      Name="Peilhuisje Wieringen"
+      Lat="52.895791"
+      Lng="4.911744"
+      Text="Vrij uitzicht over wad, een smal schor en rietruigte. Kans op bergeend, kluut, pijlstaart, fazant en rietzanger. Bij opkomend tij veel langsvliegende vogels op weg naar Balgzand of Normerven."
+      LocationCode=""
+    />
+  </Record>
+  <Record>
+    <Row
+      Name="Oeverse Schor"
+      Lat="52.9372848"
+      Lng="5.029249191"
+      Text="Uitzicht op de haven, het wad en de pieren. Rosse grutto's, futen, sterns, plevieren en meeuwen zijn hier vaak  te zien. In de trektijd vaak verrassingen."
+      LocationCode="Staatsbosbeheer"
+    />
+  </Record>
+  <Record>
+    <Row
+      Name="Oude Haven"
+      Lat="52.942535"
+      Lng="5.030493736"
+      Text="Deze oude havenmond is een hoogwatervluchtplaats voor verschillende vogels zoals kluten, scholeksters en bergeenden. De oude leidam voor de ingang van de haven wordt in de toekomst omgetoverd tot het fraaie broedeiland Vogelsand. Nu al broeden er lepelaars."
+      LocationCode=""
+    />
+  </Record>
+  <Record>
+    <Row
+      Name="Kleiput Vatrop"
+      Lat="52.9351380"
+      Lng="5.0010538101"
+      Text="Aan de vasteland kant van de dijk een binnendijkse plas. Volop wulpen, zwarte sterns en kluten te bewonderen."
+      LocationCode="Staatsbosbeheer"
+    />
+  </Record>
+  <Record>
+    <Row
+      Name="Amstelmeer"
+      Lat="52.877010699"
+      Lng="4.89139437607"
+      Text="Deze zoetwaterplas is een heus vogelparadijs. Vele soorten vogels te zien gedurende alle jaargetijden."
+      LocationCode="Staatsbosbeheer"
+    />
+  </Record>
+  <Record>
+    <Row
+      Name="Balgzand - kijkhut t.h.v. Ewijcksluis"
       Lat="52.88737618455247"
       Lng="4.874711036682129"
-      Text="Wat voor leefgebied?:  Droogvallend wad. Goed te overzien.  Welke vogels kun je er vinden?: Rotgans, bergeend, lepelaar, scholekster, goudplevier, zilverplevier, bontbekplevier, rosse grutto, wulp, bonte strandloper, visdief, bruine kiekendief.
-"
-      LocationCode="DENHDR"
+      Text="Droogvallend wad. Goed te overzien met veel vogels zoals rotgans, bergeend, lepelaar, scholekster, goudplevier, zilverplevier, bontbekplevier, rosse grutto, wulp, bonte strandloper en visdief."
+      LocationCode="Landschap Noord-Holland"
+    />
+  </Record>
+  
+  
+  <!-- Friesland -->
+  
+  <Record>
+    <Row
+      Name="Bantpolder"
+      Lat="53.4022660969531"
+      Lng="6.13655090332031"
+      Text="Open weidegebied waar wadvogels broeden en grote groepen ganzen overwinteren."
+      LocationCode="Natuurmonumenten"
     />
   </Record>
   <Record>
     <Row
-      Name="&apos;t Kuitje"
-      Lat="52.93438788349439"
-      Lng="4.791626930236816"
-      Text="Wat voor leefgebied?: Droogvallend wad. Tijdens laag water uitzicht op drooggevallen plaat.  Welke vogels kun je er vinden?: Rotgans, eidereend, scholekster, wulp, tureluur, rosse grutto, aalscholver, bonte strandloper, kleine zilverreiger, kokmeeuw, lepelaar.
-"
-      LocationCode="DENHDR"
+      Name="Peazemerlannen"
+      Lat="53.4029313234128"
+      Lng="6.08582496643066"
+      Text="Bijzonder natuurgebied dat ooit is ontstaan doordat een zware storm een gat in de dijk sloeg. Nu kun je er vogels als de goud- én zilverplevier bewonderen."
+      LocationCode="It Fryske Gea"
     />
   </Record>
   <Record>
     <Row
-      Name="Schor bij Den Oever"
-      Lat="52.93728481553802"
-      Lng="5.02924919128418"
-      Text="Wat voor leefgebied?: Wad en schor. Hoogwatervluchtplaats.  Welke vogels kun je er vinden?: Bergeend, pijlstaart, lepelaar, aalscholver, scholekster, kluut, goudplevier, bontbekplevier, tureluur, wulp, rosse grutto, bonte strandloper, zwarte stern, visdief.
-"
-      LocationCode="DENOVBTN"
+      Name="Hegewiersterfjild"
+      Lat="53.1510890089"
+      Lng="5.42867117294"
+      Text="Binnendijks broedgebied voor weidevogels zoals grutto en kievit. Ook het visdiefje en de kleine plevier bevolken deze natte weilanden met grote aantallen."
+      LocationCode="Natuurmonumenten"
     />
   </Record>
   <Record>
     <Row
-      Name="Den Oever- Oude Haven"
-      Lat="52.942535010603144"
-      Lng="5.03049373626709"
-      Text="Wat voor leefgebied?:  Oude havenmond, hoogwatervluchtplaats.  Welke vogels kun je er vinden?: Bergeend, smient, wintertaling, scholekster, kluut, goudplevier, zilverplevier, wulp, tureluur, bonte strandloper, kokmeeuw, visdief, zwarte stern.
-"
-      LocationCode="DENOVBTN"
+      Name="Zwarte Haan"
+      Lat="53.3096422819"
+      Lng="5.62559392466005"
+      Text="Slikvelden en kwelders waar in het voorjaar veel vogels zoals de tureluur, slechtvalk en bergeend broeden."
+      LocationCode="It Fryske Gea"
     />
   </Record>
   <Record>
     <Row
-      Name="Kleipunt Vatrop"
-      Lat="52.9351380005754"
-      Lng="5.001053810119629"
-      Text="Wat voor leefgebied?: Aan de ene kant van de dijk een binnendijkse plas, aan de andere kant het wad.  Welke vogels kun je er vinden?: Rotgans, tureluur, wulp, rosse grutto, zwarte stern, kluut, pijlstaart.
-"
-      LocationCode="DENOVBTN"
+      Name="Noard-Fryslân Bûtendyks"
+      Lat="53.3336178131"
+      Lng="5.73495938899"
+      Text="Kijk uit over de zomerpolder en kwelders vanaf de oude bunker. Kans op wulpen, rotganzen en brandganzen en vele andere soorten vogels."
+      LocationCode="It Fryske Gea"
     />
   </Record>
   <Record>
     <Row
-      Name="Normerven"
-      Lat="52.90574438236583"
-      Lng="4.941015243530273"
-      Text="Wat voor leefgebied?: Kijkscherm met uitzicht op belangrijke hoogwatervluchtplaats waar duizenden vogels rusten tijdens hoog water.  Welke vogels kun je er vinden?: Bergeend, lepelaar, rotgans, scholekster, kluut, wulp, tureluur, zwarte ruiter, kanoet, bonte strandloper, eidereend, aalscholver.
-"
-      LocationCode="DENOVBTN"
+      Name="Ezumakeeg-Noord"
+      Lat="53.3546582197"
+      Lng="6.15289235428997"
+      Text="Binnendijks zoetwatergebied met kans op vogels als de zeearend, zwarte ruiter en kemphaan."
+      LocationCode="Staatsbosbeheer"
+    />
+  </Record>
+  <Record>
+    <Row
+      Name="Grândyk"
+      Lat="53.3871677774017"
+      Lng="5.88695526123046"
+      Text="Mooi uitzicht vanaf de pier van de veerboot naar Ameland op de Holwerterwestpolder tjokvol vogels. O.m. bontbekplevier, blauwe kiekendief en steenloper te zien."
+      LocationCode="It Fryske Gea"
+    />
+  </Record>
+  <Record>
+    <Row
+      Name="Kwelder bij Wierum"
+      Lat="53.4022405111123"
+      Lng="6.02329730987548"
+      Text="Prachtige kleine (afslag)kwelder te bekijken vanaf de dijk, met kluten, bonte strandlopers en kanoeten."
+      LocationCode=""
+    />
+  </Record>
+  <Record>
+    <Row
+      Name="Westhoek"
+      Lat="53.272530"
+      Lng="5.553245"
+      Text="Betoverend geulenlandschap bij eb met veel steltlopers en kans op slechtvalken. Boven het wad vaak spectaculaire vluchten van grote groepen steltlopers."
+      LocationCode="It Fryske Gea"
+    />
+  </Record>
+  
+  
+  <!-- Groningen -->
+  
+  <Record>
+    <Row
+      Name="Feddema’s Plas"
+      Lat="53.40615496584731"
+      Lng="6.364688873291016"
+      Text="Kleine brakke waterplas vol met vele soorten rietvogels.  Regelmatig rusten, eten en broeden hier groepen scholeksters, tureluurs en zwarte ruiters."
+      LocationCode="Het Groninger Landschap"
+    />
+  </Record>
+  
+  <Record>
+    <Row
+      Name="Deikum"
+      Lat="53.41587558298522"
+      Lng="6.414299011230469"
+      Text="Hier wordt een binnendijks brakwatergebied met zilt grasland aangelegd. Toekomstig paradijs voor kolonies broedende kluten, kokmeeuwen en visdiefjes."
+      LocationCode="Het Groninger Landschap"
+    />
+  </Record>
+  
+  <Record>
+    <Row
+      Name="Vogelakker Nieuw Lotven"
+      Lat="53.42518482792093"
+      Lng="6.54510498046875"
+      Text="Akker met afwisselend stroken luzerne, akkerkruiden en graan. Kans op velduil, blauwe kiekendief en veldleeuwerik."
+      LocationCode="Het Groninger Landschap"
+    />
+  </Record>
+  <Record>
+    <Row
+      Name="Polder Breebaart"
+      Lat="53.29189950172525"
+      Lng="7.077341079711913"
+      Text="Voormalige polder waar getijwerking in teruggebracht is. Nu een waterrijk, binnendijks natuurgebied met kijkhut en kans op lepelaars, grauwe franjepoot, witvleugelstern en zeearend."
+      LocationCode="Het Groninger Landschap"
+    />
+  </Record>
+  <Record>
+    <Row
+      Name="Dollard De Kiekkaaste"
+      Lat="53.24179714722195"
+      Lng="7.2090911865234375"
+      Text="De Kiekkaaste is de enige buitendijkse vogelkijkhut van Nederland. Goed uitzicht op de slikvelden van de Dollard met bonte strandloper, brandgans en bruine kiekendief. Som zie je hier zeldzame fraters."
+      LocationCode="Het Groninger Landschap"
+    />
+  </Record>
+  <Record>
+    <Row
+      Name="Uithuizerwad en Ruidhorn"
+      Lat="53.457802241677975"
+      Lng="6.6790008544921875"
+      Text="Buitendijkse kwelder (Uithuizerwad) grenzend aan binnendijks natuurgebied (Ruidhorn). Kans op bergeend, eidereend, broedende kluten en roofvogels."
+      LocationCode="Natuurmonumenten"
+    />
+  </Record>
+  <Record>
+    <Row
+      Name="Noordpolderzijl"
+      Lat="53.433264827464036 "
+      Lng="6.58230185508728"
+      Text="Zomerpolder en kwelder waar je tijdens winterhalfjaar  zeer grote groepen ganzen kunt  zien."
+      LocationCode="Het Groninger Landschap"
     />
   </Record>
   <Record>
@@ -642,139 +731,54 @@
       Name="Klutenplas"
       Lat="53.42458132078126"
       Lng="6.523532863939181"
-      Text="Wat voor leefgebied?: Binnendijks brakwatergebied. Belangrijk broed-, rust- en foerageergebied voor steltlopers en sterns.  Welke vogels kun je er vinden?: Scholekster, tureluur, kievit, kleine plevier, kluut, sterns, kokmeeuw. Zeer veel vogels (stellopers, eenden en ganzen) verblijven hier wanneer de buitendijkse kwelders onder water staan.
-"
-      LocationCode="LAUWOG"
+      Text="Binnendijks brakwatergebied. Veel stellopers, eenden en ganzen verblijven hier wanneer de buitendijkse kwelders onder water staan. En kluten natuurlijk."
+      LocationCode="Het Groninger Landschap"
     />
   </Record>
   <Record>
     <Row
       Name="Punt van Reide"
       Lat="53.30395431254136"
-      Lng="7.085151672363281"
-      Text="Wat voor leefgebied?: Hoogwatervluchtplaats en broedgebied. Mooi uitzicht vanaf de waddendijk. Zeehonden en vogels zijn van dichtbij te zien vanachter de observatiewand.  Welke vogels kun je er vinden?: Wulp, rosse grutto, kluut, goudplevier, scholekster, tureluur, noordse stern, visdief, bontbekplevier.
-"
-      LocationCode="DELFZL"
+      Lng="5.7085151672363281"
+      Text="Hoogwatervluchtplaats en broedgebied met kans op vogels als wulp, rosse grutto en bontbekplevier."
+      LocationCode="Het Groninger Landschap"
     />
   </Record>
   <Record>
     <Row
-      Name="Polder Breebaart"
-      Lat="53.2941582385"
-      Lng="7.076429241340065"
-      Text="Wat voor leefgebied?: Kwelderachtig brakwatergebied. Voormalige polder waar getijwerking in teruggebracht is. Nu een waterrijk, binnendijks natuurgebied. Er is een vogelkijkhut aanwezig.  Welke vogels kun je er vinden?: Brandgans, smient, kolgans, wintertaling, lepelaar, kluut, goudplevier, bontbekplevier, zwarte ruiter, tureluur, bonte strandloper, bruine kiekendief, torenvalk.
-"
-      LocationCode="DELFZL"
+      Name="Rietzuivering"
+      Lat="53.40825276067112"
+      Lng="6.225042343139648"
+      Text="Plas vlakbij haven Lauwersoog met volop vogels tijdens  het broedseizoen zoals de rietzanger en bergeend. Met kijkhut. Nachtegaal, sprinkhaanzanger, braamsluiper en kleine karekiet zingen hier ook hun lied."
+      LocationCode="Staatsbosbeheer"
     />
   </Record>
   <Record>
     <Row
-      Name="Dollard – De Kiekkaaste"
-      Lat="53.236717798"
-      Lng="7.206411795429972"
-      Text="Wat voor leefgebied?: Goed uitzicht op de slikvelden van de Dollard. Buitendijkse vogelkijkhut, het pad kan erg blubberig zijn. Niet aan te raden om te bezoeken bij harde wind.  Welke vogels kun je er vinden?: Bonte strandloper, kluut, brandgans, kokmeeuw, bruine kiekendief, wintertaling, spreeuw, zwarte ruiter, baardman, frater.
-"
-      LocationCode="DELFZL"
+      Name="Pier van Oterdum"
+      Lat="53.3125701343207"
+      Lng="7.010393142700195"
+      Text="Groot broedeiland speciaal aangelegd voor visdieven en noordse sterns."
+      LocationCode=""
     />
   </Record>
   <Record>
     <Row
-      Name="Lauwersmeer – Vogelkijkhut Rietzuivering"
-      Lat="53.4088315154"
-      Lng="6.224368223500051"
-      Text="Wat voor leefgebied?: Plas, vlakbij haven Lauwersoog. Leukst om tijdens het broedseizoen te bezoeken.  Welke vogels kun je er vinden?: Kuifeend, bergeend, koekoek, kramsvogel, rietzanger, nachtegaal, bruine kiekendief, wintertaling, lepelaar, baardman.
-"
-      LocationCode="LAUWOG"
+      Name="Jaap Deensgat"
+      Lat="53.3619076632"
+      Lng="6.25130464935"
+      Text="Porseleinhoen, roerdomp en allerlei trekvogels worden hier gezien. In de omliggende rietlanden kun je karekieten, rietzangers en rietgorzen verwachten. Met kijkhut."
+      LocationCode="Staatsbosbeheer"
     />
   </Record>
+  
   <Record>
     <Row
-      Name="Haven Noordpolderzijl"
-      Lat="53.433264827464036"
-      Lng="6.58230185508728"
-      Text="Wat voor leefgebied?: Zomerpolder en kwelder. Grote afstand dus verrekijker of telescoop noodzakelijk.   Welke vogels kun je er vinden?: Zeer grote groepen ganzen in winterhalfjaar (ook binnendijks) rotgans, brandgans, bergeend, scholekster, kievit, frater, bruine kiekendief, blauwe kiekendief, tureluur.
-"
-      LocationCode="LAUWOG"
-    />
-  </Record>
-  <Record>
-    <Row
-      Name="Uithuizerwad en Ruidhoorn"
-      Lat="53.457802241677975"
-      Lng="6.6790008544921875"
-      Text="Wat voor leefgebied?: Buitendijks kwelder (Uithuizerwad), binnendijks natuurgebied (Ruidhoorn). De gebieden zij niet toegankelijk maar goed te overzien vanachter de 3 kijkschermen.  Welke vogels kun je er vinden?: Bergeend, eidereend, scholekster, bonte strandloper, sneeuwgors, kanoet, wulp, rosse grutto, bontbekplevier, zilverplevier, tureluur, kluut (veel broedende kluten in Ruidhoorn).
-"
-      LocationCode="LAUWOG"
-    />
-  </Record>
-  <Record>
-    <Row
-      Name="Zwarte Haan"
-      Lat="53.3096422819"
-      Lng="5.625593924660052"
-      Text="Wat voor leefgebied?: Zomerpolders en kwelders, in het voorjaar broeden hier veel vogels.  Welke vogels kun je er vinden?: Tureluur, gele kwikstaart, kokmeeuw, zilvermeeuw, kluut, visdief, noordse stern, slechtvalk, buizerd, blauwe kiekendief, bergeend, rotgans.
-"
-      LocationCode="HARLGN"
-    />
-  </Record>
-  <Record>
-    <Row
-      Name="Uitkijkplateau Noard-Fryslân Bûtendyks"
-      Lat="53.3336178131"
-      Lng="5.73495938899"
-      Text="Wat voor leefgebied?:  Zomerpolder en kwelder. Uitkijkpunt bovenop een oude bunker.  Welke vogels kun je er vinden?: Slechtvalk, rotgans, brandgans, bergeend, bonte strandloper, goudplevier, scholekster, kanoet, wulp, smient
-"
-      LocationCode="HARLGN"
-    />
-  </Record>
-  <Record>
-    <Row
-      Name="Kijkheuvel Ezumakeeg-Noord - Lauwersmeer"
-      Lat="53.3546582197"
-      Lng="6.152892354289975"
-      Text="Wat voor leefgebied?: Binnendijks zoetwatergebied.  Welke vogels kun je er vinden?: Brandgans, zeearend, steltkluut, roerdomp, bergeend, slobeend, kluut, kievit, bontbekplevier, zwarte ruiter, kemphaan
-"
-      LocationCode="LAUWOG"
-    />
-  </Record>
-  <Record>
-    <Row
-      Name="Bantpolder"
-      Lat="53.40226609695317"
-      Lng="6.1365509033203125"
-      Text="Wat voor leefgebied?: Open weidegebied, broedgebied en hoogwatervluchtplaats voor wadvogels en overwinteringsgebied voor grote groepen ganzen.  Welke vogels kun je er vinden?: Brandgans, bergeend, smient, goudplevier, wulp, spreeuw, rotgans, kievit, buine kiekendief, scholekster, grutto, tureluur, kluut.
-"
-      LocationCode="LAUWOG"
-    />
-  </Record>
-  <Record>
-    <Row
-      Name="Peazemerlannen"
-      Lat="53.402931323412815"
-      Lng="6.085824966430664"
-      Text="Wat voor leefgebied?: Kwelder en zomerpolder. Welke vogels kun je er vinden?: Rotgans, brandgans, bergeend, scholekster, goudplevier, zilverplevier, bontbekplevier, rosse grutto, tureluur, wulp, bonte strandloper, frater, spreeuw, blauwe kiekendief, kluut, zwartpootruiter, groenpootruiter, kievit.
-"
-      LocationCode="LAUWOG"
-    />
-  </Record>
-  <Record>
-    <Row
-      Name="Grândyk - Holwerd"
-      Lat="53.38716777740174"
-      Lng="5.886955261230469"
-      Text="Wat voor leefgebied?: Pier en links en rechts daarvan kwelders en zomerpolders. (Holwerterwestpolder)  Welke vogels kun je er vinden?: Scholekster, kluut, bontbekplevier, wulp, tureluur, bonte strandloper, bergeend, rotgans, steenloper, kanoet, blauwe kiekendief, tapuit.
-"
-      LocationCode="LAUWOG"
-    />
-  </Record>
-  <Record>
-    <Row
-      Name="Kwelder bij Wierum"
-      Lat="53.40224051111235"
-      Lng="6.023297309875488"
-      Text="Wat voor leefgebied?:  Prachtige kleine (afslag)kwelder. Mooi te bekijken vanaf de dijk.  Welke vogels kun je er vinden?: Scholekster, kluut, wulp, tureluur, bonte strandloper, bergeend, rotgans, steenloper, kanoet, blauwe kiekendief, tapuit.
-"
-      LocationCode="LAUWOG"
+      Name="De Rug"
+      Lat="53.36928000282089"
+      Lng="6.220779417199083"
+      Text="Gelegen bij de Zuidelijke Ballastplaat ligt dit observatieplateau. U kunt hier allerlei roofvogels zien, waaronder zeearend, blauwe kiekendief, bruine kiekendief en slechtvalk."
+      LocationCode="Staatsbosbeheer"
     />
   </Record>
 </Records>
