@@ -115,14 +115,14 @@ public class Controller {
 //		if (!filter.isFilterEnable())
 //			return getBirds(context);
 		if (!filter.isFilterEnable())
-			return result;
+			return birds;
 		
 		result = filter.filterSulhuette(getBirds(context));
 		result = filter.filterColors(result);
 		result = filter.filterSizes(result);
 		result = filter.filterBeak(result);
 		
-		//result = filter.sortBirds(result); // Remove repeted birds,
+		result = filter.sortBirds(result); // Remove repeted birds,
 		Collections.sort(result, new Comparator<Bird>() {
 			@Override
 			public int compare(Bird lhs, Bird rhs) {

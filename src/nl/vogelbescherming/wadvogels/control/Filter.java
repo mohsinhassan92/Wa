@@ -111,9 +111,9 @@ public class Filter {
 		}
 		return result;
 	}
-	public List<Bird> sortBirds(List<Bird> sortingArray) {
+	public ArrayList<Bird> sortBirds(List<Bird> sortingArray) {
 		//List<Bird> result = new ArrayList(sortingArray);
-		List<Bird> result = new LinkedList<Bird>();
+		ArrayList<Bird> result = new ArrayList<Bird>();
 		for(int i = 0; i < sortingArray.size(); i++){
 			Bird curBird = sortingArray.get(i);
 			if (result.contains(curBird)){

@@ -448,6 +448,14 @@ public class BaseGridActivity extends ContentBaseActivity implements
 		 * selectGrootte(viewListGrootte.get(i), i); } } }
 		 */super.onResume();
 	}
+	
+	public static List<View> getGrooteViews() {
+		return viewListGrootte;
+	}
+	
+	public static List<View> getKleurViews() {
+		return viewListKleur;
+	}
 
 	private void adjustGridView() {
 		gvMain.setNumColumns(columnNumber);

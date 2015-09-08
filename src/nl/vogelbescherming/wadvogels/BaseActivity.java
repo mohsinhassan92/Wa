@@ -126,9 +126,9 @@ public class BaseActivity extends FragmentActivity {
 						break;
 					case R.id.btnVOGELVINDER:
 						if (!(BaseActivity.this instanceof SilhuetteActivity)) {
-							Controller.clearMyBird();
 							i = new Intent(BaseActivity.this,
 									SilhuetteActivity.class);
+							i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						}
 						break;
 					case R.id.btnVOGELPLEKKEN:
@@ -139,7 +139,10 @@ public class BaseActivity extends FragmentActivity {
 						break;
 					}
 					if (i != null) {
-						BaseActivity.this.startActivity(i);
+						clearData();
+						Controller.clearMyBird();
+						startActivity(i);
+						finish();
 					}
 				}
 			});
@@ -154,7 +157,7 @@ public class BaseActivity extends FragmentActivity {
 		textBwBtns.setTypeface(typeFaceFooterButtons);
 
 		if (Controller.getFilteredBirds(BaseActivity.this) != null) {
-			int size = Controller.getFilteredBirds(BaseActivity.this).size();
+			int size = ((ArrayList<Bird>) Controller.getFilteredBirds(this)).size();
 			textBwBtns.setText(size + " Resultaten");
 		}
 		
@@ -183,10 +186,7 @@ public class BaseActivity extends FragmentActivity {
 			public void onClick(View v) {
 				Intent intent = new Intent(BaseActivity.this,
 						MainActivity.class);
-				BaseGridActivity.positionGrootte = new ArrayList<Integer>();
-				BaseGridActivity.positionKleur = new ArrayList<Integer>();
-				BaseGridActivity.positionSilhuette = -1;
-				BaseGridActivity.positionSnavel = -1;
+				clearData();
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				intent.putExtra("ShowAllBirds", true);
 				startActivity(intent);
@@ -212,6 +212,19 @@ public class BaseActivity extends FragmentActivity {
 		isTabsDown = true;
 		label.setImageResource(R.drawable.plus);
 		super.onResume();
+	}
+	
+	public void clearData() {
+		BaseGridActivity.positionGrootte = new ArrayList<Integer>();
+		BaseGridActivity.positionKleur = new ArrayList<Integer>();
+		BaseGridActivity.positionSilhuette = -1;
+		BaseGridActivity.positionSnavel = -1;
+		BaseGridActivity.getGrooteViews().clear();
+		BaseGridActivity.getKleurViews().clear();
+		Controller.clearBeak();
+		Controller.clearSizes();
+		Controller.clearColors();
+		Controller.clearSilhuette();
 	}
 
 	public void hideTabs() {
