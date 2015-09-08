@@ -81,5 +81,67 @@
           		<font color="#898F8E">vallen het meest op?</font>
   		]]>
     </string>
- 
+
+    <!-- Strings for Tablet -->
+
+    <string name="sub_header_grootte_tab">
+<![CDATA[
+          		<font color="#939598" >Hoe </font>
+          		<font color="#297faf">groot </font>
+          		<font color="#939598">is de vogel ongeveer?</font>
+  		]]>
+    </string>
+    <string name="sub_header_silhuette_tab">
+<![CDATA[
+          		<font color="#898F8E" >Op welk </font>
+          		<font color="#0072A0">silhouet </font>
+          		<font color="#898F8E">lijkt de vogel het meest?</font>
+  		]]>
+    </string>
+    <string name="sub_header_snavel_tab">
+<![CDATA[
+          		<font color="#898F8E" >Wat voor soort </font>
+          		<font color="#0072A0">snavel </font>
+          		<font color="#898F8E">heeft de vogel?</font>
+  		]]>
+    </string>
+    <string name="sub_header_kleur_tab">
+<![CDATA[
+          		<font color="#898F8E" >Welke 3 </font>
+          		<font color="#0072A0">kleuren </font>
+          		<font color="#898F8E">vallen het meest op?</font>
+  		]]>
+    </string>
+
+  		<!-- String_Grootte_Tablet -->
+    <string name="text_groottebird_1">ALS EEN MUS (MINDER DAN 16 CM)</string>
+    <string name="text_groottebird_2">ALS EEN MEREL (17 T/M 30 CM)</string>
+    <string name="text_groottebird_3">ALS EEN KRAAI (30 T/M 65 CM)</string>
+    <string name="text_groottebird_4">ALS EEN REIGER (MEER DAN 65 CM)</string>
+    
+        <!-- String_Silhoute_Tablet -->
+    <string name="text_silhoutebird_1">EEND/GANS</string>
+    <string name="text_silhoutebird_2">STELTLOPER</string>
+    <string name="text_silhoutebird_3">MEEUW/STERN</string>
+    <string name="text_silhoutebird_4">MUS/MEES</string>
+    <string name="text_silhoutebird_5">MERELACHTIG</string>
+    <string name="text_silhoutebird_6">LANG</string>
+    <string name="text_silhoutebird_7">ROOFVOGEL</string>
+    <string name="text_silhoutebird_8">ZWALUW</string>
+    <string name="text_silhoutebird_9">DIVERS</string>
+
+            <!-- String_Silhoute_Tablet -->
+    <string name="text_snavelbird_1">LANG EN DUN</string>
+    <string name="text_snavelbird_2">HALFLANG EN DUN</string>
+    <string name="text_snavelbird_3">KORT EN DUN</string>
+    <string name="text_snavelbird_4">EENG OF GANS</string>
+    <string name="text_snavelbird_5">KEGELVORMIG</string>
+    <string name="text_snavelbird_6">DIK EN SCHERP</string>
+    <string name="text_snavelbird_7">HAAKVORMIG</string>
+    <string name="text_snavelbird_8">GEBOGEN</string>
+    <string name="text_snavelbird_9">DOLKVORMIG</string>
+    
+    
+
+
 </resources>

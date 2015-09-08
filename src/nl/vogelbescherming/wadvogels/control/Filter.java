@@ -54,7 +54,7 @@ public class Filter {
 		List<Bird> filterBirds = filter(Filters.Silhouette, myBird.getSilhouette(), currentBirds, false);
 		return filterBirds;
 	}
-	// При желании все можно переделать в Object и фильтры будут работать
+	// ??? ??????? ??? ????? ?????????? ? Object ? ??????? ????? ????????
 	private List<Bird> filter(Filters filterType, List<Integer> list, List<Bird> currentBirds, boolean and) {
 		List<Bird> result = new ArrayList<Bird>();
 		if (list == null || list.size() == 0) {

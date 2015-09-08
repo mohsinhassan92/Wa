@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -58,7 +59,17 @@ public class BaseActivity extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.base);
+		if(BaseActivity.isTablet(this))
+		{
+			setContentView(R.layout.base_tab);
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+			findViewById(R.id.relative_footer).setVisibility(View.GONE);
+			
+			
+		}else{
+			setContentView(R.layout.base);
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		}
 		hideTabs();
 
 		vogelvinder = findViewById(R.id.relative_footer_left);
@@ -126,6 +137,7 @@ public class BaseActivity extends FragmentActivity {
 						break;
 					case R.id.btnVOGELVINDER:
 						if (!(BaseActivity.this instanceof SilhuetteActivity)) {
+							Controller.clearMyBird();
 							i = new Intent(BaseActivity.this,
 									SilhuetteActivity.class);
 							i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -239,6 +251,10 @@ public class BaseActivity extends FragmentActivity {
 	public void hideHomeIcon()
 	{
 		findViewById(R.id.home_iv).setVisibility(View.GONE);
+	}
+	public void hideListIcon()
+	{
+		findViewById(R.id.all_birds).setVisibility(View.GONE);
 	}
 	public void showFooterMenu() {
 		findViewById(R.id.relative_footer).setVisibility(View.VISIBLE);

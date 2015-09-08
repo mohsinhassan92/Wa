@@ -4,6 +4,9 @@ import android.content.Context;
 import android.text.BoringLayout;
 import android.util.Log;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
@@ -13,6 +16,10 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import nl.vogelbescherming.wadvogels.R;
 import nl.vogelbescherming.wadvogels.fonts.Fonts;

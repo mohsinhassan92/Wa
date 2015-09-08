@@ -568,7 +568,7 @@ public class BaseGridActivity extends ContentBaseActivity implements
 		if (this instanceof KleurActivity) {
 			Controller.clearColors();
 			if (positionKleur != null && positionKleur.size() > 0) {
-				for (int i = 0; i < GrootteActivity.MAX_NUMBER_SELECTED_ITEMS
+				for (int i = 0; i < KleurActivity.MAX_NUMBER_SELECTED_ITEMS
 						&& i < positionKleur.size(); i++) {
 					Controller.addColor(positionKleur.get(i));
 				}
