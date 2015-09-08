@@ -1,0 +1,1267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:id="@+id/baseHeaderContainer"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/header_bg_tab"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="visible" >
+
+        <ImageView
+            android:id="@+id/home_iv"
+            android:layout_width="180dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:padding="8dp"
+            android:src="@drawable/backarrow_icon_tab"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/all_birds"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:padding="8dp"
+            android:src="@drawable/list_icon_tab"
+            android:visibility="visible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/baseTitleContainer"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/baseHeaderContainer"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:visibility="gone" >
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/baseContentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/relative_buttons_container"
+        android:layout_below="@id/baseTitleContainer"
+        android:orientation="vertical"
+        android:visibility="gone" >
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/radiogroupContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" >
+
+        <LinearLayout
+            android:id="@+id/radiogroup"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tab_height"
+            android:layout_alignParentBottom="true"
+            android:background="#bcbcbc"
+            android:orientation="horizontal"
+            android:visibility="gone" >
+
+            <ImageView
+                android:id="@+id/btnVOGELVINDER"
+                style="@style/navbar_button"
+                android:src="@drawable/vogelvinder_item" />
+
+            <ImageView
+                android:id="@+id/btnZoek"
+                style="@style/navbar_button"
+                android:src="@drawable/film_item" />
+
+            <ImageView
+                android:id="@+id/btnVOGELPLEKKEN"
+                style="@style/navbar_button"
+                android:src="@drawable/vogelplekken_item" />
+
+            <ImageView
+                android:id="@+id/btnVOGELBESCHERMING"
+                style="@style/navbar_button"
+                android:src="@drawable/vogelbescherming_item" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/radiogroup"
+            android:layout_alignWithParentIfMissing="true" >
+
+            <View
+                android:id="@+id/border"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:background="#0072ba" />
+
+            <ImageView
+                android:id="@+id/label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/border"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:paddingTop="25dp"
+                android:src="@drawable/plus"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/container_vogelvinder_tab"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/relative_buttons_container"
+        android:layout_below="@id/baseHeaderContainer"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <LinearLayout
+            android:id="@+id/container_grootte"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/container_text_grootte"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/text_grootte_tab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textSize="16sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/container_items_grootte"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:id="@+id/relative_item1_grootte"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|center_horizontal"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/imgvw_groottebird_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="3"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/black_bird_4" />
+
+                    <TextView
+                        android:id="@+id/txtvw_groottebird_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/imgvw_groottebird_1"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/text_groottebird_1"
+                        android:textColor="@color/inactive_button_color"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/relative_item2_grootte"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|center_horizontal"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/imgvw_groottebird_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="3"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/bird_on_bt_2" />
+
+                    <TextView
+                        android:id="@+id/txtvw_groottebird_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/imgvw_groottebird_2"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/text_groottebird_2"
+                        android:textColor="@color/inactive_button_color"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/relative_item3_grootte"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|center_horizontal"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/imgvw_groottebird_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="3"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/bird_on_bt_3" />
+
+                    <TextView
+                        android:id="@+id/txtvw_groottebird_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/imgvw_groottebird_3"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/text_groottebird_3"
+                        android:textColor="@color/inactive_button_color"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/relative_item4_grootte"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|center_horizontal"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/imgvw_groottebird_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="3"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/bird_on_bt_4" />
+
+                    <TextView
+                        android:id="@+id/txtvw_groottebird_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/imgvw_groottebird_4"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/text_groottebird_4"
+                        android:textColor="@color/inactive_button_color"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/container_silhoute"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/light_grey_list_item"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/container_text_silhoute"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/text_silhoute_tab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textSize="16sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/container_items_silhoute"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:id="@+id/relative_item1_silhoute"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/imgvw_silhoutebird_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="3"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/black_bird_1" />
+
+                    <TextView
+                        android:id="@+id/txtvw_silhoutebird_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_below="@id/imgvw_silhoutebird_1"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center|center_horizontal"
+                        android:text="@string/text_silhoutebird_1"
+                        android:textColor="@color/inactive_button_color"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/relative_item2_silhoute"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/imgvw_silhoutebird_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="3"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/black_bird_2" />
+
+                    <TextView
+                        android:id="@+id/txtvw_silhoutebird_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_below="@id/imgvw_silhoutebird_2"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center|center_horizontal"
+                        android:text="@string/text_silhoutebird_2"
+                        android:textColor="@color/inactive_button_color"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/relative_item3_silhoute"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/imgvw_silhoutebird_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="3"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/black_bird_3" />
+
+                    <TextView
+                        android:id="@+id/txtvw_silhoutebird_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_below="@id/imgvw_silhoutebird_3"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center|center_horizontal"
+                        android:text="@string/text_silhoutebird_3"
+                        android:textColor="@color/inactive_button_color"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/relative_item4_silhoute"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/imgvw_silhoutebird_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="3"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/black_bird_4" />
+
+                    <TextView
+                        android:id="@+id/txtvw_silhoutebird_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_below="@id/imgvw_silhoutebird_4"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center|center_horizontal"
+                        android:text="@string/text_silhoutebird_4"
+                        android:textColor="@color/inactive_button_color"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/relative_item5_silhoute"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/imgvw_silhoutebird_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="3"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/black_bird_5" />
+
+                    <TextView
+                        android:id="@+id/txtvw_silhoutebird_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_below="@id/imgvw_silhoutebird_5"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center|center_horizontal"
+                        android:text="@string/text_silhoutebird_5"
+                        android:textColor="@color/inactive_button_color"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/relative_item6_silhoute"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/imgvw_silhoutebird_6"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="3"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/black_bird_6" />
+
+                    <TextView
+                        android:id="@+id/txtvw_silhoutebird_6"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_below="@id/imgvw_silhoutebird_6"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center|center_horizontal"
+                        android:text="@string/text_silhoutebird_6"
+                        android:textColor="@color/inactive_button_color"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/relative_item7_silhoute"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/imgvw_silhoutebird_7"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="3"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/black_bird_7" />
+
+                    <TextView
+                        android:id="@+id/txtvw_silhoutebird_7"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_below="@id/imgvw_silhoutebird_7"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center|center_horizontal"
+                        android:text="@string/text_silhoutebird_7"
+                        android:textColor="@color/inactive_button_color"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/relative_item8_silhoute"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/imgvw_silhoutebird_8"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="3"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/black_bird_8" />
+
+                    <TextView
+                        android:id="@+id/txtvw_silhoutebird_8"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_below="@id/imgvw_silhoutebird_8"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center|center_horizontal"
+                        android:text="@string/text_silhoutebird_8"
+                        android:textColor="@color/inactive_button_color"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/relative_item9_silhoute"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/imgvw_silhoutebird_9"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="3"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/black_bird_9" />
+
+                    <TextView
+                        android:id="@+id/txtvw_silhoutebird_9"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_below="@id/imgvw_silhoutebird_9"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center|center_horizontal"
+                        android:text="@string/text_silhoutebird_9"
+                        android:textColor="@color/inactive_button_color"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/container_snavel"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/container_text_snavel"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/text_snavel_tab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textSize="16sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/container_items_snavel"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:id="@+id/relative_item1_snavel"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/imgvw_snavelbird_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="3"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/nose1" />
+
+                    <TextView
+                        android:id="@+id/txtvw_snavelbird_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_below="@id/imgvw_snavelbird_1"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center|center_horizontal"
+                        android:text="@string/text_snavelbird_1"
+                        android:textColor="@color/inactive_button_color"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/relative_item2_snavel"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/imgvw_snavelbird_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="3"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/nose2" />
+
+                    <TextView
+                        android:id="@+id/txtvw_snavelbird_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_below="@id/imgvw_snavelbird_2"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center|center_horizontal"
+                        android:text="@string/text_snavelbird_2"
+                        android:textColor="@color/inactive_button_color"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/relative_item3_snavel"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/imgvw_snavelbird_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="3"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/nose3" />
+
+                    <TextView
+                        android:id="@+id/txtvw_snavelbird_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_below="@id/imgvw_snavelbird_3"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center|center_horizontal"
+                        android:text="@string/text_snavelbird_3"
+                        android:textColor="@color/inactive_button_color"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/relative_item4_snavel"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/imgvw_snavelbird_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="3"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/nose4" />
+
+                    <TextView
+                        android:id="@+id/txtvw_snavelbird_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_below="@id/imgvw_snavelbird_4"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center|center_horizontal"
+                        android:text="@string/text_snavelbird_4"
+                        android:textColor="@color/inactive_button_color"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/relative_item5_snavel"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/imgvw_snavelbird_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="3"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/nose5" />
+
+                    <TextView
+                        android:id="@+id/txtvw_snavelbird_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_below="@id/imgvw_snavelbird_5"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center|center_horizontal"
+                        android:text="@string/text_snavelbird_5"
+                        android:textColor="@color/inactive_button_color"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/relative_item6_snavel"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/imgvw_snavelbird_6"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="3"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/nose6" />
+
+                    <TextView
+                        android:id="@+id/txtvw_snavelbird_6"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_below="@id/imgvw_snavelbird_6"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center|center_horizontal"
+                        android:text="@string/text_snavelbird_6"
+                        android:textColor="@color/inactive_button_color"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/relative_item7_snavel"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/imgvw_snavelbird_7"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="3"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/nose7" />
+
+                    <TextView
+                        android:id="@+id/txtvw_snavelbird_7"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_below="@id/imgvw_snavelbird_7"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center|center_horizontal"
+                        android:text="@string/text_snavelbird_7"
+                        android:textColor="@color/inactive_button_color"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/relative_item8_snavel"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/imgvw_snavelbird_8"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="3"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/nose8" />
+
+                    <TextView
+                        android:id="@+id/txtvw_snavelbird_8"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_below="@id/imgvw_snavelbird_8"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center|center_horizontal"
+                        android:text="@string/text_snavelbird_8"
+                        android:textColor="@color/inactive_button_color"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/relative_item9_snavel"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/imgvw_snavelbird_9"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="3"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/nose9" />
+
+                    <TextView
+                        android:id="@+id/txtvw_snavelbird_9"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_below="@id/imgvw_snavelbird_9"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center|center_horizontal"
+                        android:text="@string/text_snavelbird_9"
+                        android:textColor="@color/inactive_button_color"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/container_kleur"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/light_grey_list_item"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/container_text_kleur"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/text_kleur_tab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textSize="16sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/container_items_kleur"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:id="@+id/relative_item1_kleur"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/imgvw_kleurbird_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="1"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/color_1_black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/relative_item2_kleur"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/imgvw_kleurbird_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="1"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/color_2_white" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/relative_item3_kleur"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/imgvw_kleurbird_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="1"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/color_3_grey" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/relative_item4_kleur"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/imgvw_kleurbird_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="1"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/color_4_yellow" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/relative_item5_kleur"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/imgvw_kleurbird_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="1"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/color_5_orange" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/relative_item6_kleur"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/imgvw_kleurbird_6"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="1"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/color_6_red" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/relative_item7_kleur"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/imgvw_kleurbird_7"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="1"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/color_7_greyishblue" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/relative_item8_kleur"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/imgvw_kleurbird_8"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="1"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/color_8_green" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/relative_item9_kleur"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/imgvw_kleurbird_9"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="1"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/color_9_brown" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_buttons_container"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_above="@+id/relative_footer"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white"
+        android:gravity="center_vertical|center" >
+
+        <Button
+            android:id="@+id/button_vorige"
+            android:layout_width="275dp"
+            android:layout_height="42dp"
+            android:layout_toLeftOf="@id/textBwBtns"
+            android:background="@color/inactive_button_color"
+            android:gravity="center"
+            android:text="Selectie wissen"
+            android:textColor="@android:color/white"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/textBwBtns"
+            android:layout_width="350dp"
+            android:layout_height="42dp"
+            android:layout_alignTop="@id/button_vorige"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/light_grey_list_item"
+            android:gravity="center"
+            android:text="1.001 vogels gevonden"
+            android:textColor="@color/active_button_color"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/button_verder"
+            android:layout_width="275dp"
+            android:layout_height="42dp"
+            android:layout_toRightOf="@id/textBwBtns"
+            android:background="@color/active_button_color"
+            android:fontFamily="fonts/Museo500-Regular.otf"
+            android:gravity="center"
+            android:text="Bekijk resultaten"
+            android:textColor="@android:color/white"
+            android:textSize="17sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/relative_footer"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/rectangle_footer" >
+
+        <RelativeLayout
+            android:id="@+id/relative_footer_left"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_weight="1"
+            android:paddingLeft="5dp" >
+
+            <ImageView
+                android:id="@+id/search"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/search_symbol_footer" />
+
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="21dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/search"
+                android:src="@drawable/text_vogelvinder_footer" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relative_footer_center"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_toRightOf="@id/relative_footer_left"
+            android:layout_weight="1"
+            android:paddingLeft="5dp" >
+
+            <ImageView
+                android:id="@+id/edit"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/edit_symbol_footer" />
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="23dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/edit"
+                android:src="@drawable/text_zoek_footer" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relative_footer_right"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_toRightOf="@id/relative_footer_center"
+            android:layout_weight="1"
+            android:paddingLeft="5dp" >
+
+            <ImageView
+                android:id="@+id/gear"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/gear_symbol_footer" />
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="23dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@id/gear"
+                android:src="@drawable/text_vogelplekken_footer" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>
