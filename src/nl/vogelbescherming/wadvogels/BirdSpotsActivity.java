@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -44,7 +45,7 @@ public class BirdSpotsActivity extends ContentBaseActivity {
 	private GoogleMap mMap;
 	private List<Location> locations;
 	private Map<LatLng, String> mAreaMap;
-	//	private String code;
+	// private String code;
 	private boolean isInfoWinShown;
 	private Marker mMarker;
 	private ListView listView;
@@ -63,7 +64,6 @@ public class BirdSpotsActivity extends ContentBaseActivity {
 		super.onCreate(savedInstanceState);
 
 		setContent(R.layout.activity_bird_spots);
-
 		setButton(R.drawable.map_button_state);
 		showButton(false);
 		showAllBirdsButton(false);
@@ -72,7 +72,6 @@ public class BirdSpotsActivity extends ContentBaseActivity {
 		hideTitleContainer();
 
 		locations = Controller.getLocations(this);
-
 		mAreaMap = new HashMap<LatLng, String>();
 		mTidesMap = new HashMap<String, ArrayList<Tide>>();
 
@@ -132,7 +131,6 @@ public class BirdSpotsActivity extends ContentBaseActivity {
 			public View getInfoWindow(Marker arg0) {
 				return null;
 			}
-
 			// Defines the contents of the InfoWindow
 			@Override
 			public View getInfoContents(final Marker marker) {
@@ -142,7 +140,7 @@ public class BirdSpotsActivity extends ContentBaseActivity {
 				if (Utils.isOnline(BirdSpotsActivity.this) && (code.equals("TEXNZE") || code.equals("VLIELHVN") || code.equals("TERSLNZE") || code.equals("NES")
 						|| code.equals("SCHIERMNOG") || code.equals("DENHDR") || code.equals("WIERMGDN") || code.equals("EEMHVN"))) {
 					View v = getLayoutInflater().inflate(R.layout.activity_tide_times, null);
-					((TextView) v.findViewById(R.id.datum)).setTypeface(Fonts.getTfFont_regular());
+								((TextView) v.findViewById(R.id.datum)).setTypeface(Fonts.getTfFont_regular());
 					((TextView) v.findViewById(R.id.hoog)).setTypeface(Fonts.getTfFont_regular());
 					((TextView)	v.findViewById(R.id.hoogte)).setTypeface(Fonts.getTfFont_regular());
 					ArrayList<Tide> list = mTidesMap.get(code);
@@ -151,14 +149,23 @@ public class BirdSpotsActivity extends ContentBaseActivity {
 						la = new TideTimeAdapter(BirdSpotsActivity.this, list);
 						listView.setAdapter(la);
 					}
+					if(BaseActivity.isTablet(BirdSpotsActivity.this))
+					{
+						v.setLayoutParams(new RelativeLayout.LayoutParams(300, RelativeLayout.LayoutParams.WRAP_CONTENT));						
+					}
 					return v;
+					
 				} else {
 					View v = getLayoutInflater().inflate(R.layout.info_map, null);
+				if(BaseActivity.isTablet(BirdSpotsActivity.this))
+				{
+					v.setLayoutParams(new RelativeLayout.LayoutParams(300, RelativeLayout.LayoutParams.WRAP_CONTENT));					
+				}
 					View closebt = v.findViewById(R.id.close_bt);
 					closebt.setOnClickListener(new OnClickListener() {
-
 						@Override
 						public void onClick(View v) {
+							
 						}
 					});
 					TextView title = (TextView) v.findViewById(R.id.title);

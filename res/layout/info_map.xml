@@ -18,7 +18,7 @@
 	    android:id="@+id/close_bt"
 	    android:padding="2dp"
 	    android:layout_alignParentRight="true"
-	    android:src="@drawable/close_bt"/>
+	    android:src="@drawable/ic_cross"/>
 	<TextView android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 	    android:id="@+id/snippet"

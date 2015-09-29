@@ -140,12 +140,12 @@ public class BaseGridActivity extends ContentBaseActivity implements
 					viewListGrootte.add(v);
 				}
 
-				// *
+			
 				for (int i = 0; i < parent.getChildCount(); i++) {
 					unSelectGrootteAll(parent.getChildAt(i), i);
 					adapter.notifyDataSetChanged();
 				}
-				// */
+			
 				for (int i = 0; i < viewListGrootte.size(); i++) {
 					selectGrootte(viewListGrootte.get(i), i);
 				}
@@ -291,7 +291,6 @@ public class BaseGridActivity extends ContentBaseActivity implements
 			int size = Controller.getFilteredBirds(BaseGridActivity.this).size();
 			textBwBtns.setText(size + " Resultaten");
 		}
-		
 	}
 
 	private void selectGrootte(View iv_temp2, int position) {

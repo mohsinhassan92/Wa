@@ -33,61 +33,112 @@ public class MainActivity extends BaseActivity {
 		if (BaseGridActivity.isTablet(this)) {
 			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 			setContent(R.layout.activity_main_tab);
+			hideListIcon();
+			button1 = findViewById(R.id.relativeLayout1);
+			button1.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					// Intent i = new Intent(MainActivity.this,
+					// BirdGuideActivity.class);
+					Intent intent = new Intent(MainActivity.this,
+							VogelvinderActivityTablet.class);
+					startActivity(intent);
+
+				}
+			});
+
+			button2 = findViewById(R.id.relativeLayout2);
+			button2.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					Intent i = new Intent(MainActivity.this,
+							SearchResultBirdDetailTabletActivity.class);
+					i.putExtra("ShowAllBirds", true);
+					i.putExtra("Caller", "MainActivity");
+					startActivity(i);
+				}
+			});
+			button3 = findViewById(R.id.relativeLayout3);
+			button3.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					Intent i = new Intent(MainActivity.this,
+							BirdSpotsActivity.class);
+					startActivity(i);
+				}
+			});
+
+			button4 = findViewById(R.id.infoIV);
+			button4.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					Intent i = new Intent(MainActivity.this, InfoActivity.class);
+					startActivity(i);
+				}
+			});
+
 		} else {
 			setContent(R.layout.activity_main);
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		}
 
-		
 		// getIntent().addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		
+
 		hideTabs();
 		hideButtons();
 		hideFooterMenu();
 		hideHomeIcon();
-		button1 = findViewById(R.id.relativeLayout1);
-		button1.setOnClickListener(new OnClickListener() {
+		if (!BaseGridActivity.isTablet(this)) {
+			button1 = findViewById(R.id.relativeLayout1);
+			button1.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				// Intent i = new Intent(MainActivity.this,
-				// BirdGuideActivity.class);
-				Intent intent = new Intent(MainActivity.this,
-						GrootteActivity.class);
-				startActivity(intent);
-			}
-		});
-		button2 = findViewById(R.id.relativeLayout2);
-		button2.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					// Intent i = new Intent(MainActivity.this,
+					// BirdGuideActivity.class);
+					Intent intent = new Intent(MainActivity.this,
+							GrootteActivity.class);
+					startActivity(intent);
+				}
+			});
 
-			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(MainActivity.this,
-						SearchResultActivity.class);
-				i.putExtra("ShowAllBirds", true);
-				i.putExtra("Caller", "MainActivity");
-				startActivity(i);
-			}
-		});
-		button3 = findViewById(R.id.relativeLayout3);
-		button3.setOnClickListener(new OnClickListener() {
+			button2 = findViewById(R.id.relativeLayout2);
+			button2.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(MainActivity.this,
-						BirdSpotsActivity.class);
-				startActivity(i);
-			}
-		});
+				@Override
+				public void onClick(View v) {
+					Intent i = new Intent(MainActivity.this,
+							SearchResultActivity.class);
+					i.putExtra("ShowAllBirds", true);
+					i.putExtra("Caller", "MainActivity");
+					startActivity(i);
+				}
+			});
+			button3 = findViewById(R.id.relativeLayout3);
+			button3.setOnClickListener(new OnClickListener() {
 
-		button4 = findViewById(R.id.infoIV);
-		button4.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent i = new Intent(MainActivity.this,
+							BirdSpotsActivity.class);
+					startActivity(i);
+				}
+			});
 
-			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(MainActivity.this, InfoActivity.class);
-				startActivity(i);
-			}
-		});
+			button4 = findViewById(R.id.infoIV);
+			button4.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					Intent i = new Intent(MainActivity.this, InfoActivity.class);
+					startActivity(i);
+				}
+			});
+		}
 	}
 
 	@Override

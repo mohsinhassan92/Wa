@@ -155,7 +155,7 @@ public class Controller {
 		}
 		return newbirds;
 	}
-	
+
 	public static ArrayList<AstronomicalTideGroup> getAstronomicalTide(String code){
 //		if (astronomicalTide != null)
 //			return astronomicalTide;

@@ -54,7 +54,7 @@ public class Filter {
 		List<Bird> filterBirds = filter(Filters.Silhouette, myBird.getSilhouette(), currentBirds, false);
 		return filterBirds;
 	}
-	// ??? ??????? ??? ????? ?????????? ? Object ? ??????? ????? ????????
+	
 	private List<Bird> filter(Filters filterType, List<Integer> list, List<Bird> currentBirds, boolean and) {
 		List<Bird> result = new ArrayList<Bird>();
 		if (list == null || list.size() == 0) {
@@ -101,7 +101,6 @@ public class Filter {
 			case Size:       params = new ArrayList<Integer>(bird.getSizes());
 				break;
 			}
-			
 			for (Integer param : params){
 				if (param == filterParam){
 					result.add(bird);
