@@ -3,9 +3,11 @@ package nl.vogelbescherming.wadvogels;
 import java.util.ArrayList;
 import java.util.List;
 
+import nl.vogelbescherming.wadvogels.control.Controller;
 import nl.vogelbescherming.wadvogels.fonts.Fonts;
 import nl.vogelbescherming.wadvogels.view.CircleImageView;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -18,6 +20,7 @@ import android.widget.TextView;
 public class VogelvinderActivityTablet extends Activity {
 
 	// ---------------------Attributes
+	private View backButtonTab;
 	private List<Integer> positionGrootte = new ArrayList<Integer>();
 	private int positionSilhoute = -1;
 	private int positionSnavel = -1;
@@ -130,7 +133,6 @@ public class VogelvinderActivityTablet extends Activity {
 	}
 
 	// ********************Snavel Methods******************
-
 	private List<Drawable> createListSnavel() {
 		List<Drawable> temp = new ArrayList<Drawable>(TABLE_ITEM_NUMBER_SNAVEL);
 		temp.add(getResources().getDrawable(R.drawable.nose1));
@@ -203,11 +205,19 @@ public class VogelvinderActivityTablet extends Activity {
 		return temp;
 	}
 
-	// ------------------------OnCreate
+	// ---------------------//----------------------------//-------------------OnCreate---------------------//---------------------------//
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.base_tab);
+		backButtonTab = findViewById(R.id.home_iv);
+		backButtonTab.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				onBackPressed();
+			}
+		});
 		findViewById(R.id.relative_footer).setVisibility(View.GONE);
 		findViewById(R.id.container_vogelvinder_tab)
 				.setVisibility(View.VISIBLE);
@@ -228,6 +238,7 @@ public class VogelvinderActivityTablet extends Activity {
 
 		setTextGrooteSilhouteSnavelkleur();
 		invisible_silhoute_snavel_kleur();
+
 		// Binding of Grootte Listener
 		setGrooteListener();
 		// Binding of Silhoute Listener
@@ -238,81 +249,141 @@ public class VogelvinderActivityTablet extends Activity {
 		setKleurListener();
 
 		setSelectieWissenListener();
+		findViewById(R.id.button_verder)
+				.setOnClickListener(onSkipClickListener);
+		TextView textBwBtns = (TextView) findViewById(R.id.textBwBtns);
+		if (Controller.getBirds(VogelvinderActivityTablet.this) != null) {
+			int size = Controller.getBirds(VogelvinderActivityTablet.this)
+					.size();
+			textBwBtns.setText(size + "vogels gevonden");
+		}
 	}
-	
-	private void setSelectieWissenListener(){
-		View view_btn=findViewById(R.id.button_vorige);
+
+	protected OnClickListener onSkipClickListener = new OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			Controller.clearSilhuette();
+
+			Controller.clearBeak();
+
+			Controller.clearSizes();
+
+			Controller.clearColors();
+			startNext();
+		}
+	};
+
+	private void startNext() {
+		Intent intent = null;
+		intent = new Intent(this, SearchResultBirdDetailTabletActivity.class);
+		intent.putExtra("ShowAllBirds", false);
+		intent.putExtra("Caller", "VogelvinderActivityTablet");
+		saveChecked();
+		startActivity(intent);
+	}
+
+	private void saveChecked() {
+		Controller.clearSilhuette();
+		if (positionSilhoute != -1) {
+			Controller.setSilhuette(positionSilhoute);
+		}
+		Controller.clearBeak();
+		if (positionSnavel != -1) {
+			Controller.setBeak(positionSnavel);
+		}
+		Controller.clearSizes();
+		if (positionGrootte != null && positionGrootte.size() > 0) {
+			for (int i = 0; i < GrootteActivity.MAX_NUMBER_SELECTED_ITEMS
+					&& i < positionGrootte.size(); i++) {
+				Controller.addSize(positionGrootte.get(i));
+			}
+		}
+		Controller.clearColors();
+		if (positionKleur != null && positionKleur.size() > 0) {
+			for (int i = 0; i < KleurActivity.MAX_NUMBER_SELECTED_ITEMS
+					&& i < positionKleur.size(); i++) {
+				Controller.addColor(positionKleur.get(i));
+			}
+		}
+	}
+
+	private void setSelectieWissenListener() {
+		View view_btn = findViewById(R.id.button_vorige);
 		view_btn.setOnClickListener(selectieWissenListener);
-	
 	}
-	
+
 	private OnClickListener selectieWissenListener = new OnClickListener() {
 
 		@Override
 		public void onClick(View v) {
-		
-			for(int counter=0;counter<viewHelperGrootte.size();counter++)
-			{
+			Controller.clearSizes();
+			Controller.clearSilhuette();
+			Controller.clearBeak();
+			Controller.clearColors();
+			for (int counter = 0; counter < viewHelperGrootte.size(); counter++) {
 				viewHelperGrootte.get(counter).setSelected(false);
 			}
 			viewListGrootteSelection.clear();
 			positionGrootte.clear();
-			
-			for(int counter=0;counter<viewHelperSilhoute.size();counter++)
-			{
+
+			for (int counter = 0; counter < viewHelperSilhoute.size(); counter++) {
 				viewHelperSilhoute.get(counter).setSelected(false);
 			}
-			positionSilhoute=-1;
-			
-			for(int counter=0;counter<viewHelperSnavel.size();counter++)
-			{
+			positionSilhoute = -1;
+
+			for (int counter = 0; counter < viewHelperSnavel.size(); counter++) {
 				viewHelperSnavel.get(counter).setSelected(false);
 			}
-			positionSnavel=-1;
-			
-			for(int counter=0;counter<viewHelperKleur.size();counter++)
-			{
+			positionSnavel = -1;
+
+			for (int counter = 0; counter < viewHelperKleur.size(); counter++) {
 				viewHelperKleur.get(counter).setSelected(false);
 			}
 			viewListKleurSelection.clear();
 			positionKleur.clear();
-			
-			for(int counter=0;counter<viewListGrootte.size();counter++)
-			{
-				unSelectGrootteAll(viewListGrootte.get(counter), viewHelperGrootte.get(counter), counter);
+
+			for (int counter = 0; counter < viewListGrootte.size(); counter++) {
+				unSelectGrootteAll(viewListGrootte.get(counter),
+						viewHelperGrootte.get(counter), counter);
 			}
-			
-			for(int counter=0;counter<viewListSilhoute.size();counter++)
-			{
-				unSelectSilhouteAll(viewListSilhoute.get(counter), viewHelperSilhoute.get(counter), counter);
+
+			for (int counter = 0; counter < viewListSilhoute.size(); counter++) {
+				unSelectSilhouteAll(viewListSilhoute.get(counter),
+						viewHelperSilhoute.get(counter), counter);
 			}
-			for(int counter=0;counter<viewListSnavel.size();counter++)
-			{
-				unSelectSnavelAll(viewListSnavel.get(counter), viewHelperSnavel.get(counter), counter);
+			for (int counter = 0; counter < viewListSnavel.size(); counter++) {
+				unSelectSnavelAll(viewListSnavel.get(counter),
+						viewHelperSnavel.get(counter), counter);
 			}
-			for(int counter=0;counter<viewListKleur.size();counter++)
-			{
-				unSelectKleurAll(viewListKleur.get(counter), viewHelperKleur.get(counter), counter);
+			for (int counter = 0; counter < viewListKleur.size(); counter++) {
+				unSelectKleurAll(viewListKleur.get(counter),
+						viewHelperKleur.get(counter), counter);
 			}
-			findViewById(R.id.container_vogelvinder_tab)
-			.setVisibility(View.VISIBLE);
+			findViewById(R.id.container_vogelvinder_tab).setVisibility(
+					View.VISIBLE);
 			setTextGrooteSilhouteSnavelkleur();
 			visible_grootte();
-			
-		//	visible_silhoute();
-		//	visible_snavel();
-		//	visible_kleur();
+
+			// visible_silhoute();
+			// visible_snavel();
+			// visible_kleur();
 
 			invisible_silhoute_snavel_kleur();
 			findViewById(R.id.button_vorige).setBackgroundColor(
-					getResources().getColor(R.color.inactive_button_color));	
+					getResources().getColor(R.color.inactive_button_color));
+
+			// Update the Text Btwn Buttons
+			saveChecked();
+			TextView textBwBtns = (TextView) findViewById(R.id.textBwBtns);
+			if (Controller.getFilteredBirds(VogelvinderActivityTablet.this) != null) {
+				int size = Controller.getFilteredBirds(
+						VogelvinderActivityTablet.this).size();
+				textBwBtns.setText(size + " vogels gevonden");
+			}
 		}
 	};
 
-	
-	
-
-	//*/
+	// */
 	private OnClickListener grootteListener = new OnClickListener() {
 
 		@Override
@@ -367,18 +438,252 @@ public class VogelvinderActivityTablet extends Activity {
 				for (int i = 0; i < viewListGrootteSelection.size(); i++) {
 					selectGrootte(viewListGrootteSelection.get(i), i);
 				}
-				findViewById(R.id.button_vorige).setBackgroundColor(getResources().getColor(R.color.active_button_color));
+
+				/*
+				 * // Grootte inActive() for (int i = 0; i <
+				 * viewListGrootte.size(); i++) { if (positionGrootte != null &&
+				 * positionGrootte.size() < 2 && viewListGrootte.get(i).getTag()
+				 * != positionGrootte .get(0)) {
+				 * inActiveGrootte(viewListGrootte.get(i), i); } else if
+				 * (positionGrootte != null && positionGrootte.size() > 1 &&
+				 * viewListGrootte.get(i).getTag() != positionGrootte .get(0) &&
+				 * viewListGrootte.get(i).getTag() != positionGrootte .get(1)) {
+				 * inActiveGrootte(viewListGrootte.get(i), i); } }
+				 */
+				// Normalize Silhoute
+				for (int i = 0; i < viewListSilhoute.size(); i++) {
+					normalSilhoute(viewListSilhoute.get(i), i);
+				}
+				Controller.clearSizes();
+				Controller.setSize(positionGrootte);
+
+				for (int counter1 = 0; counter1 < viewListSilhoute.size(); counter1++) {
+					// 2 items of Grooote select,1 item of Silhoute
+					// select,Then 1 item of Grrote unselected,,
+					// Now in this Case,,,Unselect n inactive the Silhoute
+					// Selected(if they is no record in DB),,,
+					// and it remains selected in the other case
+					ViewHelperTab viewHelpSilhoute = viewHelperSilhoute
+							.get(counter1);
+					if (viewHelpSilhoute.getSelected() == true) {
+						Controller.setSilhuette((Integer) viewListSilhoute.get(
+								counter1).getTag());
+						int size = Controller.getFilteredBirds(
+								VogelvinderActivityTablet.this).size();
+						if (size == 0) {
+							inActiveSilhoute(viewListSilhoute.get(counter1),
+									counter1);
+							(viewHelperSilhoute.get(counter1))
+									.setSelected(false);
+							Controller.clearSilhuette();
+						} else {
+							viewListSilhoute.get(counter1)
+									.setBackgroundResource(
+											R.drawable.cell_select);
+							viewHelpSilhoute.getImageView().setImageDrawable(
+									listSilhouteActive.get(counter1));
+							TextView text = (TextView) viewHelpSilhoute
+									.getTextView();
+							text.setTextColor(Color.WHITE);
+						}
+					} else {
+						Controller.setSilhuette((Integer) viewListSilhoute.get(
+								counter1).getTag());
+						int size = Controller.getFilteredBirds(
+								VogelvinderActivityTablet.this).size();
+						if (size == 0) {
+							inActiveSilhoute(viewListSilhoute.get(counter1),
+									counter1);
+							(viewHelperSilhoute.get(counter1))
+									.setSelected(false);
+							Controller.clearSilhuette();
+						} else {
+							normalSilhoute(viewListSilhoute.get(counter1),
+									counter1);
+						}
+					}
+				}
+
+				/*
+				 * // Silhoute InActive() for (int counter = 0; counter <
+				 * viewListSilhoute.size(); counter++) {
+				 * Controller.setSilhuette((Integer) viewListSilhoute.get(
+				 * counter).getTag()); int size = Controller.getFilteredBirds(
+				 * VogelvinderActivityTablet.this).size(); if (size == 0) {
+				 * inActiveSilhoute(viewListSilhoute.get(counter), counter);
+				 * Controller.clearSilhuette(); } }
+				 */
+				// Selectie Wissen COlor as Active
+				findViewById(R.id.button_vorige).setBackgroundColor(
+						getResources().getColor(R.color.active_button_color));
 			} else {
+				// when Selected True
 				unSelectGrootte(iv, position);
-		/*		if (positionGrootte.size() < 1) {
-					findViewById(R.id.container_items_silhoute).setVisibility(
-							View.INVISIBLE);
-					findViewById(R.id.container_items_snavel).setVisibility(
-							View.INVISIBLE);
-					findViewById(R.id.container_items_kleur).setVisibility(
-							View.INVISIBLE);
-				}*/
+				boolean flagInactive = false;
+				for (int i = 0; i < viewHelperGrootte.size(); i++) {
+					if (viewHelperGrootte.get(i).getSelected() == true) {
+						flagInactive = true;
+					}
+				}
+				if (flagInactive == false) {
+
+					for (int i = 0; i < viewListGrootte.size(); i++) {
+						normalGrootte(viewListGrootte.get(i), i);
+					}
+				}
+
+				int counter = 0;
+				for (int i = 0; i < viewHelperGrootte.size(); i++) {
+					if (viewHelperGrootte.get(i).getSelected() == true) {
+						counter++;
+					}
+				}
+				/*
+				 * if (counter == 1) { inActiveGrootte(iv, position); }
+				 */
+
+				// Normalize the Silhoute
+				if (counter < 1) {
+					Controller.clearSizes();
+					Controller.setSize(positionGrootte);
+					for (int counter1 = 0; counter1 < viewListSilhoute.size(); counter1++) {
+						// 2 items of Grooote select,1 item of Silhoute
+						// select,Then 1 item of Grrote unselected,,
+						// Now in this Case,,,Unselect n inactive the Silhoute
+						// Selected(if they is no record in DB),,,
+						// and it remains selected in the other case
+						ViewHelperTab viewHelpSilhoute = viewHelperSilhoute
+								.get(counter1);
+						if (viewHelpSilhoute.getSelected() == true) {
+							Controller.setSilhuette((Integer) viewListSilhoute
+									.get(counter1).getTag());
+							int size = Controller.getFilteredBirds(
+									VogelvinderActivityTablet.this).size();
+							if (size == 0) {
+								inActiveSilhoute(
+										viewListSilhoute.get(counter1),
+										counter1);
+								(viewHelperSilhoute.get(counter1))
+										.setSelected(false);
+								Controller.clearSilhuette();
+							} else {
+								viewListSilhoute.get(counter1)
+										.setBackgroundResource(
+												R.drawable.cell_select);
+								viewHelpSilhoute.getImageView()
+										.setImageDrawable(
+												listSilhouteActive
+														.get(counter1));
+								TextView text = (TextView) viewHelpSilhoute
+										.getTextView();
+								text.setTextColor(Color.WHITE);
+							}
+						} else {
+							Controller.setSilhuette((Integer) viewListSilhoute
+									.get(counter1).getTag());
+							int size = Controller.getFilteredBirds(
+									VogelvinderActivityTablet.this).size();
+							if (size == 0) {
+								inActiveSilhoute(
+										viewListSilhoute.get(counter1),
+										counter1);
+								(viewHelperSilhoute.get(counter1))
+										.setSelected(false);
+								Controller.clearSilhuette();
+							} else {
+								normalSilhoute(viewListSilhoute.get(counter1),
+										counter1);
+							}
+
+						}
+					}
+				} else if (counter == 1) {
+					// Normalize Silhoute
+					for (int i = 0; i < viewListSilhoute.size(); i++) {
+						normalSilhoute(viewListSilhoute.get(i), i);
+					}
+					Controller.clearSizes();
+					Controller.setSize(positionGrootte);
+
+					for (int counter1 = 0; counter1 < viewListSilhoute.size(); counter1++) {
+						// 2 items of Grooote select,1 item of Silhoute
+						// select,Then 1 item of Grrote unselected,,
+						// Now in this Case,,,Unselect n inactive the Silhoute
+						// Selected(if they is no record in DB),,,
+						// and it remains selected in the other case
+						ViewHelperTab viewHelpSilhoute = viewHelperSilhoute
+								.get(counter1);
+						if (viewHelpSilhoute.getSelected() == true) {
+							Controller.setSilhuette((Integer) viewListSilhoute
+									.get(counter1).getTag());
+							int size = Controller.getFilteredBirds(
+									VogelvinderActivityTablet.this).size();
+							if (size == 0) {
+								inActiveSilhoute(
+										viewListSilhoute.get(counter1),
+										counter1);
+								(viewHelperSilhoute.get(counter1))
+										.setSelected(false);
+								// Controller.clearSilhuette();
+							} else {
+								viewListSilhoute.get(counter1)
+										.setBackgroundResource(
+												R.drawable.cell_select);
+								viewHelpSilhoute.getImageView()
+										.setImageDrawable(
+												listSilhouteActive
+														.get(counter1));
+								TextView text = (TextView) viewHelpSilhoute
+										.getTextView();
+								text.setTextColor(Color.WHITE);
+							}
+						} else {
+							Controller.setSilhuette((Integer) viewListSilhoute
+									.get(counter1).getTag());
+							int size = Controller.getFilteredBirds(
+									VogelvinderActivityTablet.this).size();
+							if (size == 0) {
+								inActiveSilhoute(
+										viewListSilhoute.get(counter1),
+										counter1);
+								(viewHelperSilhoute.get(counter1))
+										.setSelected(false);
+								// Controller.clearSilhuette();
+							} else {
+								normalSilhoute(viewListSilhoute.get(counter1),
+										counter1);
+							}
+						}
+					}
+
+					/*
+					 * // Silhoute InActive() for (int count = 0; count <
+					 * viewListSilhoute.size(); count++) {
+					 * Controller.setSilhuette((Integer) viewListSilhoute.get(
+					 * count).getTag()); int size = Controller.getFilteredBirds(
+					 * VogelvinderActivityTablet.this).size(); if (size == 0) {
+					 * inActiveSilhoute(viewListSilhoute.get(count), count);
+					 * Controller.clearSilhuette(); } }
+					 */}
+
+				/*
+				 * if (positionGrootte.size() < 1) {
+				 * findViewById(R.id.container_items_silhoute).setVisibility(
+				 * View.INVISIBLE);
+				 * findViewById(R.id.container_items_snavel).setVisibility(
+				 * View.INVISIBLE);
+				 * findViewById(R.id.container_items_kleur).setVisibility(
+				 * View.INVISIBLE); }
+				 */
 			}
+			saveChecked();
+			TextView textBwBtns = (TextView) findViewById(R.id.textBwBtns);
+			if (Controller.getFilteredBirds(VogelvinderActivityTablet.this) != null) {
+				int size = Controller.getFilteredBirds(
+						VogelvinderActivityTablet.this).size();
+				textBwBtns.setText(size + " vogels gevonden");
+			}
+
 		}
 	};
 	// */
@@ -413,8 +718,160 @@ public class VogelvinderActivityTablet extends Activity {
 				viewhelpSilhoute.setSelected(true);
 				positionSilhoute = position;
 				visible_snavel();
+
+				for (int i = 0; i < viewListSilhoute.size(); i++) {
+					if (positionSilhoute != -1
+							&& ((Integer) viewListSilhoute.get(i).getTag()) != positionSilhoute) {
+
+						Controller.setSilhuette(i);
+						int size = Controller.getFilteredBirds(
+								VogelvinderActivityTablet.this).size();
+						if (size == 0) {
+							inActiveSilhoute(viewListSilhoute.get(i), i);
+						} else {
+							normalSilhoute(viewListSilhoute.get(i), i);
+						}
+					}
+				}
+
+				/*
+				 * // InActive Silhoute on Selection for (int i = 0; i <
+				 * viewListSilhoute.size(); i++) { if (positionSilhoute != -1 &&
+				 * ((Integer) viewListSilhoute.get(i).getTag()) !=
+				 * positionSilhoute) { inActiveSilhoute(viewListSilhoute.get(i),
+				 * i); } }
+				 */
+
+				// Normalize Snavel
+				for (int i = 0; i < viewListSnavel.size(); i++) {
+					normalSnavel(viewListSnavel.get(i), i);
+				}
+				Controller.clearSizes();
+				Controller.clearSilhuette();
+				Controller.setSize(positionGrootte);
+				Controller.setSilhuette(positionSilhoute);
+
+				for (int counter1 = 0; counter1 < viewListSnavel.size(); counter1++) {
+					// 2 items of Grooote select,1 item of Silhoute
+					// select,Then 1 item of Grrote unselected,,
+					// Now in this Case,,,Unselect n inactive the Silhoute
+					// Selected(if they is no record in DB),,,
+					// and it remains selected in the other case
+					ViewHelperTab viewHelpSnavel = viewHelperSnavel
+							.get(counter1);
+					if (viewHelpSnavel.getSelected() == true) {
+						Controller.setBeak(counter1);
+						int size = Controller.getFilteredBirds(
+								VogelvinderActivityTablet.this).size();
+						if (size == 0) {
+							inActiveSnavel(viewListSnavel.get(counter1),
+									counter1);
+							(viewHelperSnavel.get(counter1)).setSelected(false);
+							// Controller.clearBeak();
+						} else {
+							viewListSnavel.get(counter1).setBackgroundResource(
+									R.drawable.cell_select);
+							viewHelpSnavel.getImageView().setImageDrawable(
+									listSnavelActive.get(counter1));
+							TextView text1 = (TextView) viewHelpSnavel
+									.getTextView();
+							text1.setTextColor(Color.WHITE);
+						}
+					} else {
+						Controller.setBeak((Integer) viewListSnavel.get(
+								counter1).getTag());
+						int size = Controller.getFilteredBirds(
+								VogelvinderActivityTablet.this).size();
+						if (size == 0) {
+							inActiveSnavel(viewListSnavel.get(counter1),
+									counter1);
+							(viewHelperSnavel.get(counter1)).setSelected(false);
+							// Controller.clearBeak();
+						} else {
+							normalSnavel(viewListSnavel.get(counter1), counter1);
+						}
+					}
+				}
 			} else {
+				// when Silhoute Selected is True--Means We are going to
+				// UnSelect Silhoute
 				unSelectSilhoute(v, position);
+				// Normalize all Silhouute
+				for (int counter = 0; counter < viewListSilhoute.size(); counter++) {
+					normalSilhoute(viewListSilhoute.get(counter), counter);
+				}
+				// */Filter InActive Birds
+				for (int counter = 0; counter < viewListSilhoute.size(); counter++) {
+					Controller.setSilhuette(counter);
+					int size = Controller.getFilteredBirds(
+							VogelvinderActivityTablet.this).size();
+					if (size == 0) {
+						inActiveSilhoute(viewListSilhoute.get(counter), counter);
+					} else {
+						normalSilhoute(viewListSilhoute.get(counter), counter);
+					}
+				}
+				// Snavel Selected or Unselected-Inactive
+
+				// Normalize Snavel
+				for (int i = 0; i < viewListSnavel.size(); i++) {
+					normalSnavel(viewListSnavel.get(i), i);
+				}
+				/*
+				 * Controller.clearSizes(); Controller.clearSilhuette();
+				 * Controller.setSize(positionGrootte);
+				 * Controller.setSilhuette(positionSilhoute);
+				 */
+
+				for (int counter1 = 0; counter1 < viewListSnavel.size(); counter1++) {
+					// 2 items of Grooote select,1 item of Silhoute
+					// select,Then 1 item of Grrote unselected,,
+					// Now in this Case,,,Unselect n inactive the Silhoute
+					// Selected(if they is no record in DB),,,
+					// and it remains selected in the other case
+					ViewHelperTab viewHelpSnavel = viewHelperSnavel
+							.get(counter1);
+					if (viewHelpSnavel.getSelected() == true) {
+						Controller.setBeak(counter1);
+						int size = Controller.getFilteredBirds(
+								VogelvinderActivityTablet.this).size();
+						if (size == 0) {
+							inActiveSnavel(viewListSnavel.get(counter1),
+									counter1);
+							(viewHelperSnavel.get(counter1)).setSelected(false);
+							// Controller.clearBeak();
+						} else {
+							viewListSnavel.get(counter1).setBackgroundResource(
+									R.drawable.cell_select);
+							viewHelpSnavel.getImageView().setImageDrawable(
+									listSnavelActive.get(counter1));
+							TextView text1 = (TextView) viewHelpSnavel
+									.getTextView();
+							text1.setTextColor(Color.WHITE);
+						}
+					} else {
+						// Selected False
+						Controller.setBeak(counter1);
+						int size = Controller.getFilteredBirds(
+								VogelvinderActivityTablet.this).size();
+						if (size == 0) {
+							inActiveSnavel(viewListSnavel.get(counter1),
+									counter1);
+							(viewHelperSnavel.get(counter1)).setSelected(false);
+							// Controller.clearBeak();
+						} else {
+							normalSnavel(viewListSnavel.get(counter1), counter1);
+						}
+					}
+				}
+			}
+			// TextBetween Buttons Count Updation
+			saveChecked();
+			TextView textBwBtns = (TextView) findViewById(R.id.textBwBtns);
+			if (Controller.getFilteredBirds(VogelvinderActivityTablet.this) != null) {
+				int size = Controller.getFilteredBirds(
+						VogelvinderActivityTablet.this).size();
+				textBwBtns.setText(size + "vogels gevonden");
 			}
 		}
 	};
@@ -449,9 +906,53 @@ public class VogelvinderActivityTablet extends Activity {
 				positionSnavel = position;
 				visible_kleur();
 
+				for (int i = 0; i < viewListSnavel.size(); i++) {
+					if (positionSnavel != -1
+							&& ((Integer) viewListSnavel.get(i).getTag()) != positionSnavel) {
+
+						Controller.setBeak(i);
+						int size = Controller.getFilteredBirds(
+								VogelvinderActivityTablet.this).size();
+						if (size == 0) {
+							inActiveSnavel(viewListSnavel.get(i), i);
+						} else {
+							normalSnavel(viewListSnavel.get(i), i);
+						}
+					}
+				}
+
+				/*
+				 * // InActive Snavel on Selection for (int i = 0; i <
+				 * viewListSnavel.size(); i++) { if (positionSnavel != -1 &&
+				 * ((Integer) viewListSnavel.get(i).getTag()) != positionSnavel)
+				 * { inActiveSnavel(viewListSnavel.get(i), i); } }
+				 */
 			} else {
 				unSelectSnavel(v, position);
+				// */Filter InActive Birds
+				for (int counter = 0; counter < viewListSnavel.size(); counter++) {
+					Controller.setBeak((Integer) viewListSnavel.get(counter)
+							.getTag());
+					int size = Controller.getFilteredBirds(
+							VogelvinderActivityTablet.this).size();
+					if (size == 0) {
+						inActiveSnavel(viewListSnavel.get(counter), counter);
+					} else {
+						normalSnavel(viewListSnavel.get(counter), counter);
+					}
+				}
+				// */
+
 			}
+			// TextBetween Buttons Count Updation
+			saveChecked();
+			TextView textBwBtns = (TextView) findViewById(R.id.textBwBtns);
+			if (Controller.getFilteredBirds(VogelvinderActivityTablet.this) != null) {
+				int size = Controller.getFilteredBirds(
+						VogelvinderActivityTablet.this).size();
+				textBwBtns.setText(size + "vogels gevonden");
+			}
+
 		}
 	};
 	private OnClickListener kleurListener = new OnClickListener() {
@@ -465,7 +966,6 @@ public class VogelvinderActivityTablet extends Activity {
 			ViewHelperTab viewhelpKleur = ((ViewHelperTab) viewHelperKleur
 					.get(position));
 			if (viewhelpKleur.getSelected() == false) {
-				
 
 				for (int i = 0; i < viewHelperKleur.size(); i++) {
 					if (viewHelperKleur.get(i).getSelected() == true) {
@@ -482,12 +982,13 @@ public class VogelvinderActivityTablet extends Activity {
 				} else if (viewListKleurSelection.size() >= 3
 						&& viewListKleurSelection != null
 						&& (viewListKleurSelection.get(0) != v
-						&& viewListKleurSelection.get(1) != v 
-						&& viewListKleurSelection.get(2) != v)) {
+								&& viewListKleurSelection.get(1) != v && viewListKleurSelection
+								.get(2) != v)) {
 					View view = viewListKleurSelection.get(0);
 					ViewHelperTab viewhelpKleurTemp = viewHelperKleur
 							.get((Integer) view.getTag());
-					view.setBackgroundColor(getResources().getColor(R.color.light_grey_list_item));
+					view.setBackgroundColor(getResources().getColor(
+							R.color.light_grey_list_item));
 
 					viewhelpKleurTemp.getImageView().setImageDrawable(
 							listKleur.get(positionKleur.get(0)));
@@ -509,14 +1010,23 @@ public class VogelvinderActivityTablet extends Activity {
 			} else {
 				unSelectKleur(iv, position);
 			}
+			// TextBetween Buttons Count Updation
+			saveChecked();
+			TextView textBwBtns = (TextView) findViewById(R.id.textBwBtns);
+			if (Controller.getFilteredBirds(VogelvinderActivityTablet.this) != null) {
+				int size = Controller.getFilteredBirds(
+						VogelvinderActivityTablet.this).size();
+				textBwBtns.setText(size + "vogels gevonden");
+			}
 		}
 	};
 
-	//*/
+	// */
 	private void setGrooteListener() {
 		View item1Grootte = findViewById(R.id.relative_item1_grootte);
 		item1Grootte.setOnClickListener(grootteListener);
 		item1Grootte.setTag(0);
+
 		ViewHelperTab viewHelperTab1 = new ViewHelperTab();
 		viewHelperTab1.setImageView((ImageView) item1Grootte
 				.findViewById(R.id.imgvw_groottebird_1));
@@ -914,8 +1424,66 @@ public class VogelvinderActivityTablet extends Activity {
 		text.setTextColor(getResources()
 				.getColor(R.color.inactive_button_color));
 		viewhelpSilhoute.setSelected(false);
-/*		findViewById(R.id.container_items_snavel).setVisibility(View.INVISIBLE);
-		findViewById(R.id.container_items_kleur).setVisibility(View.INVISIBLE);*/
+		positionSilhoute = -1;
+		/*
+		 * findViewById(R.id.container_items_snavel).setVisibility(View.INVISIBLE
+		 * );
+		 * findViewById(R.id.container_items_kleur).setVisibility(View.INVISIBLE
+		 * );
+		 */
+	}
+
+	// Silhoute
+	private void inActiveSilhoute(View iv, int position) {
+		ViewHelperTab viewhelpSilhoute = ((ViewHelperTab) viewHelperSilhoute
+				.get(position));
+		iv.setBackgroundResource(R.drawable.cell);
+		iv.setBackgroundColor(getResources().getColor(
+				R.color.light_grey_list_item));
+		viewhelpSilhoute.getImageView().setImageDrawable(
+				listSilhouteInActive.get(position));
+		TextView text = (TextView) viewhelpSilhoute.getTextView();
+		text.setTextColor(getResources().getColor(R.color.inactive_bird_color));
+		iv.setClickable(false);
+	}
+
+	private void normalSilhoute(View iv, int position) {
+		ViewHelperTab viewhelpSilhoute = ((ViewHelperTab) viewHelperSilhoute
+				.get(position));
+		iv.setBackgroundResource(R.drawable.cell);
+		iv.setBackgroundColor(getResources().getColor(
+				R.color.light_grey_list_item));
+		viewhelpSilhoute.getImageView().setImageDrawable(
+				listSilhoute.get(position));
+		TextView text = (TextView) viewhelpSilhoute.getTextView();
+		text.setTextColor(getResources()
+				.getColor(R.color.inactive_button_color));
+		iv.setClickable(true);
+	}
+
+	// Snavel
+
+	private void inActiveSnavel(View iv, int position) {
+		ViewHelperTab viewhelpSnavel = ((ViewHelperTab) viewHelperSnavel
+				.get(position));
+		iv.setBackgroundResource(R.drawable.cell);
+		viewhelpSnavel.getImageView().setImageDrawable(
+				listSnavelInActive.get(position));
+		TextView text = (TextView) viewhelpSnavel.getTextView();
+		text.setTextColor(getResources().getColor(R.color.inactive_bird_color));
+		iv.setClickable(false);
+	}
+
+	private void normalSnavel(View iv, int position) {
+		ViewHelperTab viewhelpSnavel = ((ViewHelperTab) viewHelperSnavel
+				.get(position));
+		iv.setBackgroundResource(R.drawable.cell);
+		viewhelpSnavel.getImageView()
+				.setImageDrawable(listSnavel.get(position));
+		TextView text = (TextView) viewhelpSnavel.getTextView();
+		text.setTextColor(getResources()
+				.getColor(R.color.inactive_button_color));
+		iv.setClickable(true);
 	}
 
 	private void unSelectSnavel(View iv, int position) {
@@ -928,7 +1496,11 @@ public class VogelvinderActivityTablet extends Activity {
 		text.setTextColor(getResources()
 				.getColor(R.color.inactive_button_color));
 		viewhelpSnavel.setSelected(false);
-/*		findViewById(R.id.container_items_kleur).setVisibility(View.INVISIBLE);*/
+		positionSnavel = -1;
+		/*
+		 * findViewById(R.id.container_items_kleur).setVisibility(View.INVISIBLE)
+		 * ;
+		 */
 	}
 
 	private void selectGrootte(View iv_temp2, int position) {
@@ -947,19 +1519,23 @@ public class VogelvinderActivityTablet extends Activity {
 		viewTemp.setBackgroundResource(R.drawable.cell);
 		viewHelpTemp.getImageView().setImageDrawable(listGrootte.get(position));
 		TextView text = (TextView) viewHelpTemp.getTextView();
-		text.setTextColor(getResources().getColor(
-				R.color.inactive_button_color));
+		text.setTextColor(getResources()
+				.getColor(R.color.inactive_button_color));
 		viewHelpTemp.setSelected(false);
 	}
+
 	private void unSelectSilhouteAll(View viewTemp, ViewHelperTab viewHelpTemp,
 			int position) {
-		viewTemp.setBackgroundColor(getResources().getColor(R.color.light_grey_list_item));
-		viewHelpTemp.getImageView().setImageDrawable(listSilhoute.get(position));
+		viewTemp.setBackgroundColor(getResources().getColor(
+				R.color.light_grey_list_item));
+		viewHelpTemp.getImageView()
+				.setImageDrawable(listSilhoute.get(position));
 		TextView text = (TextView) viewHelpTemp.getTextView();
 		text.setTextColor(this.getResources().getColor(
 				R.color.inactive_button_color));
 		viewHelpTemp.setSelected(false);
 	}
+
 	private void unSelectSnavelAll(View viewTemp, ViewHelperTab viewHelpTemp,
 			int position) {
 		viewTemp.setBackgroundResource(R.drawable.cell);
@@ -986,30 +1562,51 @@ public class VogelvinderActivityTablet extends Activity {
 				viewListGrootteSelection.remove(counter);
 			}
 		}
+	}
 
-	} //
+	private void inActiveGrootte(View iv, int position) {
+		ViewHelperTab viewHelpTemp = viewHelperGrootte.get((Integer) iv
+				.getTag());
+		iv.setBackgroundResource(R.drawable.cell);
+		viewHelpTemp.getImageView().setImageDrawable(
+				listGrootteInActive.get(position));
+		TextView text = (TextView) viewHelpTemp.getTextView();
+		text.setTextColor(getResources().getColor(R.color.inactive_bird_color));
+	}
 
-	
+	private void normalGrootte(View iv, int position) {
+		ViewHelperTab viewHelpTemp = viewHelperGrootte.get((Integer) iv
+				.getTag());
+		iv.setBackgroundResource(R.drawable.cell);
+		viewHelpTemp.getImageView().setImageDrawable(listGrootte.get(position));
+		TextView text = (TextView) viewHelpTemp.getTextView();
+		text.setTextColor(getResources()
+				.getColor(R.color.inactive_button_color));
+	}
+
 	private void selectKleur(View iv_temp2, int position) {
 		ViewHelperTab viewHelpTemp = viewHelperKleur.get((Integer) iv_temp2
 				.getTag());
-		iv_temp2.setBackgroundColor(getResources().getColor(R.color.light_grey_list_item));
+		iv_temp2.setBackgroundColor(getResources().getColor(
+				R.color.light_grey_list_item));
 		viewHelpTemp.getImageView().setImageDrawable(
 				listKleurActive.get(positionKleur.get(position)));
 		viewHelpTemp.setSelected(true);
 	}
 
-	private void unSelectKleurAll(View viewTemp, ViewHelperTab viewHelpTemp,int position) {	
-		viewTemp.setBackgroundColor(getResources().getColor(R.color.light_grey_list_item));
+	private void unSelectKleurAll(View viewTemp, ViewHelperTab viewHelpTemp,
+			int position) {
+		viewTemp.setBackgroundColor(getResources().getColor(
+				R.color.light_grey_list_item));
 		viewHelpTemp.getImageView().setImageDrawable(listKleur.get(position));
 		viewHelpTemp.setSelected(false);
 	}
 
 	private void unSelectKleur(View iv, int position) {
 
-		ViewHelperTab viewHelpTemp = viewHelperKleur.get((Integer) iv
-				.getTag());
-		iv.setBackgroundColor(getResources().getColor(R.color.light_grey_list_item));
+		ViewHelperTab viewHelpTemp = viewHelperKleur.get((Integer) iv.getTag());
+		iv.setBackgroundColor(getResources().getColor(
+				R.color.light_grey_list_item));
 		viewHelpTemp.getImageView().setImageDrawable(listKleur.get(position));
 		viewHelpTemp.setSelected(false);
 		for (int counter = 0; counter < positionKleur.size(); counter++) {

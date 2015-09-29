@@ -1,0 +1,584 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/linear_search_container_tab"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:id="@+id/filterContainer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginBottom="7dp"
+            android:layout_marginTop="7dp" >
+
+            <EditText
+                android:id="@+id/filter"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/search_input"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:hint="Trefwoorden..."
+                android:paddingBottom="5dp"
+                android:paddingLeft="16dp"
+                android:paddingTop="5dp"
+                android:singleLine="true"
+                android:textColorHint="#dad8d8" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/chances"
+           android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginBottom="7dp"
+            android:layout_marginTop="7dp" 
+            android:orientation="horizontal"
+            android:tag="closed" >
+
+            <nl.vogelbescherming.wadvogels.view.CustomSpinner
+                android:id="@+id/spinnerTrefkans"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/spinner_background"
+                android:popupBackground="@drawable/spinner_background"
+                android:gravity="center"
+                android:spinnerMode="dropdown"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/tvTrefkans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/arrow_down_blue"
+                android:layout_gravity="center"
+                android:text="Trefkans.."
+                android:visibility="visible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/appears"
+             android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginBottom="7dp"
+            android:layout_marginTop="7dp" 
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp" >
+
+            <nl.vogelbescherming.wadvogels.view.CustomSpinner
+                android:id="@+id/spinnerAanwezigheid"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/spinner_background"
+                android:popupBackground="@drawable/spinner_background"
+                android:prompt="@layout/simple_spinner_item2"
+                android:spinnerMode="dropdown"
+                android:visibility="visible" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/buttonSearch"
+             android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_marginBottom="13dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" 
+            android:background="@color/blue_bg"
+            android:text="@string/search"
+            android:textColor="@color/white"
+            android:visibility="visible" />
+    </LinearLayout>
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="9"
+    android:orientation="horizontal"
+    >
+      <RelativeLayout
+          android:id="@+id/container_listView_tab"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/bg" >
+
+        <RelativeLayout
+            android:id="@+id/backView"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentTop="true"
+            android:gravity="center_vertical"
+            android:visibility="gone" >
+
+            <ImageView
+                android:id="@+id/backBtn"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="8dp"
+                android:src="@drawable/ic_back" />
+
+            <TextView
+                android:id="@+id/backTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/backBtn"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@+id/backBtn"
+                android:text="Zoekopdracht aanpassen"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/blue_spinner_color" />
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/backView"
+            android:layout_marginTop="10dp"
+            android:divider="#000000"
+            android:visibility="gone" >
+        </ListView>
+
+        <TextView
+            android:id="@+id/emptyView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="Deze zoekterm heeft geen resultaten opgeleverd.\nGa terug en probeer het opnieuw."
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <!-- Bird Detail Xml -->
+
+    <LinearLayout
+        android:id="@+id/linear_bird_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/bg"
+        android:orientation="vertical"
+        android:visibility="invisible" >
+
+        <RelativeLayout
+            android:id="@+id/titleBar1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/white" >
+
+            <RelativeLayout
+                android:id="@+id/soundView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical" >
+
+                <ImageView
+                    android:id="@+id/soundButton"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8dp"
+                    android:background="@drawable/ic_sound" />
+
+                <TextView
+                    android:id="@+id/soundTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8dp"
+                    android:layout_toLeftOf="@+id/soundButton"
+                    android:text="Beluister"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/blue_bg" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/backView1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:visibility="invisible" >
+
+                <ImageView
+                    android:id="@+id/backBtn1"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:src="@drawable/ic_back" />
+
+                <TextView
+                    android:id="@+id/backTV1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/backBtn1"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@+id/backBtn1"
+                    android:gravity="center_vertical"
+                    android:text="Terug"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/blue_bg" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/titleBar2"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical|left"
+                android:singleLine="true"
+                android:text="Bird Name"
+                android:textColor="@color/text_color"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/name"
+                android:layout_below="@+id/name"
+                android:text="Description here"
+                android:textColor="@color/text_color"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <nl.vogelbescherming.wadvogels.util.HackyScrollView
+            android:id="@+id/scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:scrollbarStyle="outsideOverlay" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <nl.vogelbescherming.wadvogels.util.HackyViewPager
+                    android:id="@+id/profiles"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/white" />
+
+                <LinearLayout
+                    android:id="@+id/info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical" >
+
+                    <TableLayout
+                        android:id="@+id/infoBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" >
+
+                        <TableRow
+                            android:id="@+id/tableRow1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" >
+
+                            <TextView
+                                android:id="@+id/voorkomen_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="MAIN HEADER"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:textColor="@color/text_color"
+                                android:textSize="@dimen/text_size" />
+
+                            <TextView
+                                android:id="@+id/voorkomen_content"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_weight="3"
+                                android:text="MAIN HEADER"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:textColor="@color/text_color"
+                                android:textSize="@dimen/text_size" />
+                        </TableRow>
+
+                        <TableRow
+                            android:id="@+id/tableRow2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" >
+
+                            <TextView
+                                android:id="@+id/trefkans_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="MAIN HEADER"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:textColor="@color/text_color"
+                                android:textSize="@dimen/text_size" />
+
+                            <TextView
+                                android:id="@+id/trefkans_content"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_weight="3"
+                                android:text="MAIN HEADER"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:textColor="@color/text_color"
+                                android:textSize="@dimen/text_size" />
+                        </TableRow>
+
+                        <TableRow
+                            android:id="@+id/tableRow3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" >
+
+                            <TextView
+                                android:id="@+id/grootte_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="MAIN HEADER"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:textColor="@color/text_color"
+                                android:textSize="@dimen/text_size" />
+
+                            <TextView
+                                android:id="@+id/grootte_content"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_weight="3"
+                                android:text="MAIN HEADER"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:textColor="@color/text_color"
+                                android:textSize="@dimen/text_size" />
+                        </TableRow>
+                    </TableLayout>
+
+                    <TextView
+                        android:id="@+id/description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="15dp"
+                        android:paddingTop="10dp"
+                        android:text="Het is een adembenemend schouwspel; een jagende boomvalk 
+die met hoge snelheid en een luide &apos;tsjak&apos; een libel uit de lucht 
+grijpt. Boomvalken zijn gespecialiseerd in het vangen van 
+vliegende prooidieren Lees meer..."
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="@dimen/text_size" />
+
+                    <LinearLayout
+                        android:id="@+id/in_shadow"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/snavel_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Snavel"
+                            android:textColor="@color/text_color"
+                            android:textSize="@dimen/text_size" />
+
+                        <TextView
+                            android:id="@+id/snavel_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="15dp"
+                            android:text="MAIN HEADER"
+                            android:textColor="@color/text_color"
+                            android:textSize="@dimen/text_size" />
+
+                        <TextView
+                            android:id="@+id/poten_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Poten"
+                            android:textColor="@color/text_color"
+                            android:textSize="@dimen/text_size" />
+
+                        <TextView
+                            android:id="@+id/poten_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="15dp"
+                            android:text="MAIN HEADER"
+                            android:textColor="@color/text_color"
+                            android:textSize="@dimen/text_size" />
+
+                        <TextView
+                            android:id="@+id/opvallende_kenmerken_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Opvallende Kenmerken"
+                            android:textColor="@color/text_color"
+                            android:textSize="@dimen/text_size" />
+
+                        <TextView
+                            android:id="@+id/opvallende_kenmerken_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="15dp"
+                            android:text="MAIN HEADER"
+                            android:textColor="@color/text_color"
+                            android:textSize="@dimen/text_size" />
+
+                        <TextView
+                            android:id="@+id/gedrag_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Gedrag"
+                            android:textColor="@color/text_color"
+                            android:textSize="@dimen/text_size" />
+
+                        <TextView
+                            android:id="@+id/gedrag_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="15dp"
+                            android:text="MAIN HEADER"
+                            android:textColor="@color/text_color"
+                            android:textSize="@dimen/text_size" />
+
+                        <TextView
+                            android:id="@+id/voedsel_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Voedsel"
+                            android:textColor="@color/text_color"
+                            android:textSize="@dimen/text_size" />
+
+                        <TextView
+                            android:id="@+id/voedsel_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="15dp"
+                            android:text="MAIN HEADER"
+                            android:textColor="@color/text_color"
+                            android:textSize="@dimen/text_size" />
+
+                        <TextView
+                            android:id="@+id/leefgebied_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Leefgebied"
+                            android:textColor="@color/text_color"
+                            android:textSize="@dimen/text_size" />
+
+                        <TextView
+                            android:id="@+id/leefgebied_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="15dp"
+                            android:text="MAIN HEADER"
+                            android:textColor="@color/text_color"
+                            android:textSize="@dimen/text_size" />
+
+                        <TextView
+                            android:id="@+id/verspreiding_in_europa_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Verspreiding in Europa"
+                            android:textColor="@color/text_color"
+                            android:textSize="@dimen/text_size" />
+
+                        <TextView
+                            android:id="@+id/verspreiding_in_europa_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="15dp"
+                            android:text="MAIN HEADER"
+                            android:textColor="@color/text_color"
+                            android:textSize="@dimen/text_size" />
+
+                        <TextView
+                            android:id="@+id/engelse_naam_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Engelse naam"
+                            android:textColor="@color/text_color"
+                            android:textSize="@dimen/text_size" />
+
+                        <TextView
+                            android:id="@+id/engelse_naam_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="15dp"
+                            android:text="MAIN HEADER"
+                            android:textColor="@color/text_color"
+                            android:textSize="@dimen/text_size" />
+
+                        <TextView
+                            android:id="@+id/latijnse_naam_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Latijnse naam"
+                            android:textColor="@color/text_color"
+                            android:textSize="@dimen/text_size" />
+
+                        <TextView
+                            android:id="@+id/latijnse_naam_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="15dp"
+                            android:text="MAIN HEADER"
+                            android:textColor="@color/text_color"
+                            android:textSize="@dimen/text_size" />
+
+                        <TextView
+                            android:id="@+id/meer_informative_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Meer informatie"
+                            android:textColor="@color/text_color"
+                            android:textSize="@dimen/text_size" />
+
+                        <TextView
+                            android:id="@+id/meer_informative_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:autoLink="web"
+                            android:paddingBottom="15dp"
+                            android:text="MAIN HEADER"
+                            android:textColor="@color/text_color"
+                            android:textSize="@dimen/text_size" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </nl.vogelbescherming.wadvogels.util.HackyScrollView>
+    </LinearLayout>
+    
+    
+</LinearLayout>
+  
+</LinearLayout>

@@ -49,6 +49,7 @@ public class SearchResultActivity extends ContentBaseActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		setContent(R.layout.activity_search_result);
 		showAllBirds = getIntent().getExtras().getBoolean("ShowAllBirds");
 		Location locationFromMap = (Location) getIntent().getExtras().get("locationFromMap");
@@ -98,7 +99,7 @@ public class SearchResultActivity extends ContentBaseActivity {
 			}
 		}
 
-		//        if (getIntent().getStringExtra("Caller") == null || !getIntent().getStringExtra("Caller").equals("MainActivity")) {
+		//if (getIntent().getStringExtra("Caller") == null || !getIntent().getStringExtra("Caller").equals("MainActivity")) {
 		if(birds.size() == 0) {
 			new AlertDialog.Builder(this)
 			.setMessage("Deze zoekterm heeft geen resultaten opgeleverd. Ga terug en probeer het opnieuw.")
@@ -127,7 +128,6 @@ public class SearchResultActivity extends ContentBaseActivity {
 		}
 
 		btnSearch.setOnClickListener(new View.OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
 				int chance = spinnerChance.getSelectedItemPosition();
@@ -136,7 +136,7 @@ public class SearchResultActivity extends ContentBaseActivity {
 				birds = Controller.getSelectedBirds(SearchResultActivity.this, ++chance, ++appears, searchText);
 				la.setFiller(birds);
 				la.notifyDataSetChanged();
-				//        		listview.setVisibility(View.VISIBLE);
+				//listview.setVisibility(View.VISIBLE);
 				Utils.hideKeyBoard(SearchResultActivity.this, etSearch);
 			}
 		});

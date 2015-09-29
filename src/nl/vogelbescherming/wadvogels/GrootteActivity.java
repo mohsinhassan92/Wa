@@ -12,11 +12,13 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import nl.vogelbescherming.wadvogels.R;
+import nl.vogelbescherming.wadvogels.R.drawable;
 import nl.vogelbescherming.wadvogels.control.Controller;
 
 public class GrootteActivity extends BaseGridActivity {
@@ -41,6 +43,7 @@ public class GrootteActivity extends BaseGridActivity {
 		temp.add(getResources().getDrawable(R.drawable.bird_on_bt_4));
 		return temp;
 	}
+	
 
 	private List<Drawable> createListActive() {
 		List<Drawable> temp = new ArrayList<Drawable>(TABLE_ITEM_NUMBER);
@@ -50,6 +53,7 @@ public class GrootteActivity extends BaseGridActivity {
 		temp.add(getResources().getDrawable(R.drawable.bird_on_bt_4_active));
 		return temp;
 	}
+	
 	private List<String> createText() {
 		List<String> temp = new ArrayList<String>(TABLE_ITEM_NUMBER);
 		temp.add("ALS EEN MUS\n(MINDER DAN 16 CM)");
@@ -70,6 +74,11 @@ public class GrootteActivity extends BaseGridActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 
+		
+		if(BaseActivity.isTablet(this)){
+		//	hideFooterMenu();
+		//	hideButtons();
+		}
 		// hideTabs();
 		list = createList();
 		list_active = createListActive();
