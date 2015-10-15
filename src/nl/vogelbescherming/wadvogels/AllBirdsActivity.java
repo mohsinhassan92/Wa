@@ -72,7 +72,7 @@ public class AllBirdsActivity extends ContentBaseActivity {
 		
         /*******	MH	***********/
         /*		Alphabetical Scroll List	*/ //TODO
-        //*/
+        /*/
 		final QuickScroll fastTrack = QuickScroll.class.cast(root.findViewById(R.id.quickscroll));
 		fastTrack.init(QuickScroll.TYPE_POPUP, listview, la, QuickScroll.STYLE_NONE);
 		fastTrack.setFixedSize(2);

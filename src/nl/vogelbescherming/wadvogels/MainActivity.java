@@ -136,6 +136,7 @@ public class MainActivity extends BaseActivity {
 					startActivity(i);
 				}
 			});
+			
 			button3 = findViewById(R.id.relativeLayout3);
 			button3.setOnClickListener(new OnClickListener() {
 
@@ -146,9 +147,20 @@ public class MainActivity extends BaseActivity {
 					startActivity(i);
 				}
 			});
-
-			button4 = findViewById(R.id.infoIV);
+			
+			button4 = findViewById(R.id.relativeLayout4);
 			button4.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					Intent i = new Intent(MainActivity.this,
+							MapActivity2.class);
+					startActivity(i);
+				}
+			});
+			
+			buttonInfo = findViewById(R.id.infoIV);
+			buttonInfo.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {

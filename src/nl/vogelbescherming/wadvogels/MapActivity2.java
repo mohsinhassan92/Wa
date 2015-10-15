@@ -43,7 +43,6 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 public class MapActivity2 extends ContentBaseActivity {
 
 	private GoogleMap mMap;
-	//	private List<Location> locations;
 	private Map<LatLng, String> mAreaMap;
 	// private String code;
 	private boolean isInfoWinShown;
@@ -72,7 +71,7 @@ public class MapActivity2 extends ContentBaseActivity {
 		hideTitleContainer();
 
 		mAreaMap = new HashMap<LatLng, String>();
-		//		mTidesMap = new HashMap<String, ArrayList<Tide>>();
+		mTidesMap = new HashMap<String, ArrayList<Tide>>();
 
 		if (Utils.isOnline(this)) {
 			for (String code : locationCodes) {
