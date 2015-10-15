@@ -24,16 +24,19 @@ public class MainActivity extends BaseActivity {
 	private View button2;
 	private View button3;
 	private View button4;
+	private View buttonInfo;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		new Controller().init(this);
 		super.onCreate(savedInstanceState);
+		getIntent().addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
 		if (BaseGridActivity.isTablet(this)) {
 			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 			setContent(R.layout.activity_main_tab);
 			hideListIcon();
+			
 			button1 = findViewById(R.id.relativeLayout1);
 			button1.setOnClickListener(new OnClickListener() {
 
@@ -60,19 +63,31 @@ public class MainActivity extends BaseActivity {
 					startActivity(i);
 				}
 			});
+			
 			button3 = findViewById(R.id.relativeLayout3);
 			button3.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
 					Intent i = new Intent(MainActivity.this,
-							BirdSpotsActivity.class);
+							MapActivity1.class);
+					startActivity(i);
+				}
+			});
+			
+			button4 = findViewById(R.id.relativeLayout4);
+			button4.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					Intent i = new Intent(MainActivity.this,
+							MapActivity2.class);
 					startActivity(i);
 				}
 			});
 
-			button4 = findViewById(R.id.infoIV);
-			button4.setOnClickListener(new OnClickListener() {
+			buttonInfo = findViewById(R.id.infoIV);
+			buttonInfo.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
@@ -92,7 +107,10 @@ public class MainActivity extends BaseActivity {
 		hideButtons();
 		hideFooterMenu();
 		hideHomeIcon();
+		hideTopHeaderContainer();
+		
 		if (!BaseGridActivity.isTablet(this)) {
+			clearData();
 			button1 = findViewById(R.id.relativeLayout1);
 			button1.setOnClickListener(new OnClickListener() {
 
@@ -124,7 +142,7 @@ public class MainActivity extends BaseActivity {
 				@Override
 				public void onClick(View v) {
 					Intent i = new Intent(MainActivity.this,
-							BirdSpotsActivity.class);
+							MapActivity1.class);
 					startActivity(i);
 				}
 			});

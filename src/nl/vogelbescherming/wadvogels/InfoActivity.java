@@ -52,7 +52,13 @@ public class InfoActivity extends BaseActivity implements OnClickListener {
 		createExpandView(ruvo, "Rust voor vogels, Ruimte voor mensen.", "par_2");
 		createExpandView(waar, "Waarom is rust zo belangrijk voor vogels?",
 				"par_3");
-		createExpandView(gebr, "Gebruikstips", "par_4");
+		if(BaseActivity.isTablet(InfoActivity.this))
+		{
+			createExpandView(gebr, "Gebruikstips", "par_4_tab");
+		}
+		else{
+			createExpandView(gebr, "Gebruikstips", "par_4");			
+		}
 		createExpandView(cred, "Credits", "par_5");
 		createExpandView(vogned, "Vogelbescherming Nederland", "par_1");
 	}

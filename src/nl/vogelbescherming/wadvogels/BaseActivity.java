@@ -105,7 +105,7 @@ public class BaseActivity extends FragmentActivity {
 			public void onClick(View v) {
 				vogelplekken.setBackgroundColor(Color.parseColor("#226991"));
 				Intent i = new Intent(BaseActivity.this,
-						BirdSpotsActivity.class);
+						MapActivity1.class);
 				startActivity(i);
 			}
 		});
@@ -145,9 +145,9 @@ public class BaseActivity extends FragmentActivity {
 						}
 						break;
 					case R.id.btnVOGELPLEKKEN:
-						if (!(BaseActivity.this instanceof BirdSpotsActivity)) {
+						if (!(BaseActivity.this instanceof MapActivity1)) {
 							i = new Intent(BaseActivity.this,
-									BirdSpotsActivity.class);
+									MapActivity1.class);
 						}
 						break;
 					}
@@ -186,10 +186,19 @@ public class BaseActivity extends FragmentActivity {
 			
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(BaseActivity.this, AllBirdsActivity.class);
-				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				intent.putExtra("ShowAllBirds", true);
-				startActivity(intent);
+				if(BaseActivity.isTablet(BaseActivity.this))
+				{
+					Intent intent = new Intent(BaseActivity.this, SearchResultBirdDetailTabletActivity.class);
+					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					intent.putExtra("ShowAllBirdsTab", true);
+					startActivity(intent);
+				}
+				else{
+					Intent intent = new Intent(BaseActivity.this, AllBirdsActivity.class);
+					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					intent.putExtra("ShowAllBirds", true);
+					startActivity(intent);
+				}
 			}
 		});
 		
@@ -251,7 +260,11 @@ public class BaseActivity extends FragmentActivity {
 	
 	public void hideHomeIcon()
 	{
-		findViewById(R.id.home_iv).setVisibility(View.GONE);
+		findViewById(R.id.home_iv).setVisibility(View.INVISIBLE);
+	}
+	public void hideTopHeaderContainer() {
+		findViewById(R.id.baseHeaderContainer).setVisibility(View.GONE);
+		
 	}
 	public void hideListIcon()
 	{

@@ -139,8 +139,7 @@ public class BaseGridActivity extends ContentBaseActivity implements
 					positionGrootte.add(position);
 					viewListGrootte.add(v);
 				}
-
-			
+				
 				for (int i = 0; i < parent.getChildCount(); i++) {
 					unSelectGrootteAll(parent.getChildAt(i), i);
 					adapter.notifyDataSetChanged();
@@ -179,7 +178,8 @@ public class BaseGridActivity extends ContentBaseActivity implements
 				iv.findViewById(R.id.image).setTag("selected");
 				positionSilhuette = position;
 				adapter.notifyDataSetChanged();
-			} else {
+			} else if(iv.findViewById(R.id.image).getTag().toString()
+					.equals("selected")){
 				unSelect_Silhuette_Snavel(v, position);
 				positionSilhuette = -1;
 			}
@@ -209,7 +209,8 @@ public class BaseGridActivity extends ContentBaseActivity implements
 				iv.findViewById(R.id.image).setTag("selected");
 				positionSnavel = position;
 				adapter.notifyDataSetChanged();
-			} else {
+			} else if(iv.findViewById(R.id.image).getTag().toString()
+					.equals("selected")) {
 				unSelect_Silhuette_Snavel(v, position);
 				positionSnavel = -1;
 			}
@@ -509,6 +510,7 @@ public class BaseGridActivity extends ContentBaseActivity implements
 		} else if (this instanceof GrootteActivity) {
 			backActivity = MainActivity.class;
 			intent = new Intent(this, backActivity);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		} else if (this instanceof KleurActivity) {
 			backActivity = SnavelActivity.class;
 			intent = new Intent(this, backActivity);

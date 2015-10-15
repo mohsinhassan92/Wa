@@ -6,6 +6,23 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="vertical" 
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Vogels van het waddengebied"
+            android:textColor="@color/active_button_color"
+            android:textSize="17sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:gravity="center"
@@ -35,6 +52,13 @@
             android:layout_marginTop="16dp"
             android:scaleType="fitXY"
             android:src="@drawable/menu3" />
+        <ImageView
+            android:id="@+id/relativeLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="16dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/menu4" />
     </LinearLayout>
 
     <ImageView

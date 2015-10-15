@@ -105,9 +105,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
+        android:clickable="false"
+        android:focusable="false"
         android:scrollbarStyle="outsideOverlay" >
 
         <LinearLayout
+            android:id="@+id/container_viewPager_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >

@@ -28,7 +28,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:layout_weight="1"
-            android:text="Beleef de waddennatuur"
+            android:text="Vogels van het waddengebied"
             android:textColor="@android:color/white"
             android:textSize="17sp" />
        

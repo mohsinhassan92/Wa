@@ -53,7 +53,8 @@ public class AllBirdsActivity extends ContentBaseActivity {
 	        }
 	        Collections.sort(birds);
         }
-        if(birds.size() == 0){
+        
+        if (birds.size() == 0) {
         	new AlertDialog.Builder(this)
     		.setMessage("Deze zoekterm heeft geen resultaten opgeleverd. Ga terug en probeer het opnieuw.")
     		.setPositiveButton("Ok", new OnClickListener() {
@@ -69,12 +70,16 @@ public class AllBirdsActivity extends ContentBaseActivity {
         listview.setAdapter(la);
         listview.setEmptyView(root.findViewById(R.id.emptyView));
 		
+        /*******	MH	***********/
+        /*		Alphabetical Scroll List	*/ //TODO
+        //*/
 		final QuickScroll fastTrack = QuickScroll.class.cast(root.findViewById(R.id.quickscroll));
 		fastTrack.init(QuickScroll.TYPE_POPUP, listview, la, QuickScroll.STYLE_NONE);
 		fastTrack.setFixedSize(2);
 		fastTrack.setPopupColor(QuickScroll.BLUE_LIGHT, QuickScroll.BLUE_LIGHT_SEMITRANSPARENT, 1, Color.WHITE, 1);
 		
 		root.addView(createAlphabetTrack());
+		//*/
 		
 		setContentView(root);
         hideButtons();

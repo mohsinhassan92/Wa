@@ -21,6 +21,7 @@ public class VogelvinderActivityTablet extends Activity {
 
 	// ---------------------Attributes
 	private View backButtonTab;
+	private View allBirdsIV;
 	private List<Integer> positionGrootte = new ArrayList<Integer>();
 	private int positionSilhoute = -1;
 	private int positionSnavel = -1;
@@ -49,6 +50,7 @@ public class VogelvinderActivityTablet extends Activity {
 	private List<Drawable> listSilhoute = new ArrayList<Drawable>();
 	private List<Drawable> listSilhouteActive = new ArrayList<Drawable>();
 	private List<Drawable> listSilhouteInActive = new ArrayList<Drawable>();
+//	public static List<Drawable> listSilhouteInActiveMob = new ArrayList<Drawable>();
 	private List<Drawable> listSnavel = new ArrayList<Drawable>();
 	private List<Drawable> listSnavelActive = new ArrayList<Drawable>();
 	private List<Drawable> listSnavelInActive = new ArrayList<Drawable>();
@@ -205,11 +207,22 @@ public class VogelvinderActivityTablet extends Activity {
 		return temp;
 	}
 
-	// ---------------------//----------------------------//-------------------OnCreate---------------------//---------------------------//
+	// ---------------------//----------------------------//-------------------OnCreate---------------------//---------------------------//-----------
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.base_tab);
+		allBirdsIV=findViewById(R.id.all_birds);
+		allBirdsIV.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+						Intent intent = new Intent(VogelvinderActivityTablet.this, SearchResultBirdDetailTabletActivity.class);
+					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					intent.putExtra("ShowAllBirds", true);
+					startActivity(intent);
+			}
+		});
 		backButtonTab = findViewById(R.id.home_iv);
 		backButtonTab.setOnClickListener(new OnClickListener() {
 
@@ -439,19 +452,22 @@ public class VogelvinderActivityTablet extends Activity {
 					selectGrootte(viewListGrootteSelection.get(i), i);
 				}
 
-				/*
-				 * // Grootte inActive() for (int i = 0; i <
-				 * viewListGrootte.size(); i++) { if (positionGrootte != null &&
-				 * positionGrootte.size() < 2 && viewListGrootte.get(i).getTag()
-				 * != positionGrootte .get(0)) {
-				 * inActiveGrootte(viewListGrootte.get(i), i); } else if
-				 * (positionGrootte != null && positionGrootte.size() > 1 &&
-				 * viewListGrootte.get(i).getTag() != positionGrootte .get(0) &&
-				 * viewListGrootte.get(i).getTag() != positionGrootte .get(1)) {
-				 * inActiveGrootte(viewListGrootte.get(i), i); } }
-				 */
+				
+				/**************************************************************
+				 * On CLick of Grootte Item,,Silhoute Item will Update,		  *
+				 * If DataBase has no record for a particular Silhoute 		  *
+				 * as against of the grootte item selected,Then that 		  *
+				 * particular zero recorded item wil be marked as InActive	  *
+				 * -->On Unselection of Grootte item,,,Silhoute items will 	  *
+				 * also be changed their UI an Birds COunt on TxtBwBtns 	  *
+				 * will also be modified									  *
+				 * ************************************************************/
+
+				
+				
 				// Normalize Silhoute
 				for (int i = 0; i < viewListSilhoute.size(); i++) {
+				
 					normalSilhoute(viewListSilhoute.get(i), i);
 				}
 				Controller.clearSizes();
@@ -497,22 +513,73 @@ public class VogelvinderActivityTablet extends Activity {
 							(viewHelperSilhoute.get(counter1))
 									.setSelected(false);
 							Controller.clearSilhuette();
-						} else {
+						}else {
 							normalSilhoute(viewListSilhoute.get(counter1),
 									counter1);
 						}
 					}
 				}
-
-				/*
-				 * // Silhoute InActive() for (int counter = 0; counter <
-				 * viewListSilhoute.size(); counter++) {
-				 * Controller.setSilhuette((Integer) viewListSilhoute.get(
-				 * counter).getTag()); int size = Controller.getFilteredBirds(
-				 * VogelvinderActivityTablet.this).size(); if (size == 0) {
-				 * inActiveSilhoute(viewListSilhoute.get(counter), counter);
-				 * Controller.clearSilhuette(); } }
-				 */
+				/**************************************************************
+				 * On CLick of Grootte Item,,Snavel Item will Update,		  *
+				 * If DataBase has no record for a particular Snavel 		  *
+				 * as against of the grootte item selected,Then that 		  *
+				 * particular zero recorded item wil be marked as InActive	  *
+				 * -->On Unselection of Grootte item,,,Snavel items will 	  *
+				 * also be changed their UI an Birds COunt on TxtBwBtns 	  *
+				 * will also be modified									  *
+				 * ************************************************************/
+				// Normalize Snavel
+				for (int i = 0; i < viewListSnavel.size(); i++) {
+				
+					normalSnavel(viewListSnavel.get(i), i);
+				}
+				for (int counter1 = 0; counter1 < viewListSnavel.size(); counter1++) {
+					// 2 items of Grooote select,1 item of Snavel
+					// select,Then 1 item of Grrote unselected,,
+					// Now in this Case,,,Unselect n inactive the Snavel
+					// Selected(if they is no record in DB),,,
+					// and it remains selected in the other case
+					ViewHelperTab viewHelpSnavel = viewHelperSnavel
+							.get(counter1);
+					if (viewHelpSnavel.getSelected() == true) {
+						Controller.setBeak((Integer) viewListSnavel.get(
+								counter1).getTag());
+						int size = Controller.getFilteredBirds(
+								VogelvinderActivityTablet.this).size();
+						if (size == 0) {
+							inActiveSnavel(viewListSnavel.get(counter1),
+									counter1);
+							(viewHelperSnavel.get(counter1))
+									.setSelected(false);
+							Controller.clearBeak();
+						} else {
+							viewListSnavel.get(counter1)
+									.setBackgroundResource(
+											R.drawable.cell_select);
+							viewHelpSnavel.getImageView().setImageDrawable(
+									listSnavelActive.get(counter1));
+							TextView text = (TextView) viewHelpSnavel
+									.getTextView();
+							text.setTextColor(Color.WHITE);
+						}
+					} else {
+						Controller.setBeak((Integer) viewListSnavel.get(
+								counter1).getTag());
+						int size = Controller.getFilteredBirds(
+								VogelvinderActivityTablet.this).size();
+						if (size == 0) {
+							inActiveSnavel(viewListSnavel.get(counter1),
+									counter1);
+							(viewHelperSnavel.get(counter1))
+									.setSelected(false);
+							Controller.clearBeak();
+						} else {
+							normalSnavel(viewListSnavel.get(counter1),
+									counter1);
+						}
+					}
+				}
+				 
 				// Selectie Wissen COlor as Active
 				findViewById(R.id.button_vorige).setBackgroundColor(
 						getResources().getColor(R.color.active_button_color));
@@ -525,6 +592,7 @@ public class VogelvinderActivityTablet extends Activity {
 						flagInactive = true;
 					}
 				}
+				
 				if (flagInactive == false) {
 
 					for (int i = 0; i < viewListGrootte.size(); i++) {
@@ -532,16 +600,23 @@ public class VogelvinderActivityTablet extends Activity {
 					}
 				}
 
+				
+				/****************************************************
+				 * The counter is for chek the Selected Status 		*
+				 * and count of Selected Items of Grootte ,			*
+				 * If the counter is (counter<1),This means only 	*
+				 * 1st item of grootte is going to select ,and if 	*
+				 * (counter==1),the 2nd item of Grootte is goinng 	*
+				 * to select,We will manage the Silhoute and Snavel *
+				 * Items accordingly								*
+				 ****************************************************/
+				
 				int counter = 0;
 				for (int i = 0; i < viewHelperGrootte.size(); i++) {
 					if (viewHelperGrootte.get(i).getSelected() == true) {
 						counter++;
 					}
 				}
-				/*
-				 * if (counter == 1) { inActiveGrootte(iv, position); }
-				 */
-
 				// Normalize the Silhoute
 				if (counter < 1) {
 					Controller.clearSizes();
@@ -655,7 +730,134 @@ public class VogelvinderActivityTablet extends Activity {
 							}
 						}
 					}
+				}
 
+				/****************************************************
+				 * The counter is for chek the Selected Status 		*
+				 * and count of Selected Items of Grootte ,			*
+				 * If the counter is (counter<1),This means only 	*
+				 * 1st item of grootte is going to select ,and if 	*
+				 * (counter==1),the 2nd item of Grootte is goinng 	*
+				 * to select,We will manage the Silhoute and Snavel *
+				 * Items accordingly								*
+				 ****************************************************/
+				// Normalize the Snavel
+				if (counter < 1) {
+					Controller.clearSizes();
+					Controller.setSize(positionGrootte);
+		/*			if(positionSilhoute!=-1)
+					{
+						Controller.clearSilhuette();
+						Controller.setSilhuette(positionSilhoute);
+					}
+		*/			for (int counter1 = 0; counter1 < viewListSnavel.size(); counter1++) {
+						// 2 items of Grooote select,1 item of Snavel
+						// select,Then 1 item of Grrote unselected,,
+						// Now in this Case,,,Unselect n inactive the Snavel
+						// Selected(if they is no record in DB),,,
+						// and it remains selected in the other case
+						ViewHelperTab viewHelpSnavel= viewHelperSnavel
+								.get(counter1);
+						if (viewHelpSnavel.getSelected() == true) {
+							Controller.setBeak((Integer) viewListSnavel
+									.get(counter1).getTag());
+							int size = Controller.getFilteredBirds(
+									VogelvinderActivityTablet.this).size();
+							if (size == 0) {
+								inActiveSnavel(
+										viewListSnavel.get(counter1),
+										counter1);
+								(viewHelperSnavel.get(counter1))
+										.setSelected(false);
+								Controller.clearBeak();
+							} else {
+								viewListSnavel.get(counter1)
+										.setBackgroundResource(
+												R.drawable.cell_select);
+								viewHelpSnavel.getImageView()
+										.setImageDrawable(
+												listSnavelActive
+														.get(counter1));
+								TextView text = (TextView) viewHelpSnavel
+										.getTextView();
+								text.setTextColor(Color.WHITE);
+							}
+						} else {
+							Controller.setBeak((Integer) viewListSnavel
+									.get(counter1).getTag());
+							int size = Controller.getFilteredBirds(
+									VogelvinderActivityTablet.this).size();
+							if (size == 0) {
+								inActiveSnavel(
+										viewListSnavel.get(counter1),
+										counter1);
+								(viewHelperSnavel.get(counter1))
+										.setSelected(false);
+								Controller.clearBeak();
+							} else {
+								normalSnavel(viewListSnavel.get(counter1),
+										counter1);
+							}
+
+						}
+					}
+				} else if (counter == 1) {
+					Controller.clearSizes();
+					Controller.setSize(positionGrootte);
+	/*				Controller.clearSilhuette();
+					Controller.setSilhuette(positionSilhoute);
+	*/				for (int counter1 = 0; counter1 < viewListSnavel.size(); counter1++) {
+						// 2 items of Grooote select,1 item of Snavel
+						// select,Then 1 item of Grrote unselected,,
+						// Now in this Case,,,Unselect n inactive the Snavel
+						// Selected(if they is no record in DB),,,
+						// and it remains selected in the other case
+						ViewHelperTab viewHelpSnavel= viewHelperSnavel
+								.get(counter1);
+						if (viewHelpSnavel.getSelected() == true) {
+							Controller.setBeak((Integer) viewListSnavel
+									.get(counter1).getTag());
+							int size = Controller.getFilteredBirds(
+									VogelvinderActivityTablet.this).size();
+							if (size == 0) {
+								inActiveSnavel(
+										viewListSnavel.get(counter1),
+										counter1);
+								(viewHelperSnavel.get(counter1))
+										.setSelected(false);
+								Controller.clearBeak();
+							} else {
+								viewListSnavel.get(counter1)
+										.setBackgroundResource(
+												R.drawable.cell_select);
+								viewHelpSnavel.getImageView()
+										.setImageDrawable(
+												listSnavelActive
+														.get(counter1));
+								TextView text = (TextView) viewHelpSnavel
+										.getTextView();
+								text.setTextColor(Color.WHITE);
+							}
+						} else {
+							Controller.setBeak((Integer) viewListSnavel
+									.get(counter1).getTag());
+							int size = Controller.getFilteredBirds(
+									VogelvinderActivityTablet.this).size();
+							if (size == 0) {
+								inActiveSnavel(
+										viewListSnavel.get(counter1),
+										counter1);
+								(viewHelperSnavel.get(counter1))
+										.setSelected(false);
+								Controller.clearBeak();
+							} else {
+								normalSnavel(viewListSnavel.get(counter1),
+										counter1);
+							}
+
+						}
+					}
+				}
 					/*
 					 * // Silhoute InActive() for (int count = 0; count <
 					 * viewListSilhoute.size(); count++) {
@@ -664,7 +866,7 @@ public class VogelvinderActivityTablet extends Activity {
 					 * VogelvinderActivityTablet.this).size(); if (size == 0) {
 					 * inActiveSilhoute(viewListSilhoute.get(count), count);
 					 * Controller.clearSilhuette(); } }
-					 */}
+					 */
 
 				/*
 				 * if (positionGrootte.size() < 1) {
@@ -746,6 +948,7 @@ public class VogelvinderActivityTablet extends Activity {
 				for (int i = 0; i < viewListSnavel.size(); i++) {
 					normalSnavel(viewListSnavel.get(i), i);
 				}
+				
 				Controller.clearSizes();
 				Controller.clearSilhuette();
 				Controller.setSize(positionGrootte);

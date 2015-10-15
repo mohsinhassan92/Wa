@@ -101,7 +101,15 @@
             android:configChanges="keyboardHidden|screenSize|orientation" >
         </activity>
         <activity
-            android:name=".BirdSpotsActivity"
+            android:name=".MapActivityOld"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".MapActivity1"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".MapActivity2"
             android:screenOrientation="portrait" >
         </activity>
         <activity

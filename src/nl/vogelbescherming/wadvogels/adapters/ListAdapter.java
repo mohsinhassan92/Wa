@@ -98,8 +98,7 @@ public class ListAdapter extends BaseAdapter implements Filterable, Scrollable {
 		}
 	}
 
-	// +++++++++++++++++++++++++++++++++++++++++++++++Bird Detail
-	// Activity++++++++++++++++++++++++++++++
+	// +++++++++++++++++++++++++++++++++++++++++++++++Bird Detail Activity++++++++++++++++++++++++++++++
 
 	@Override
 	public int getCount() {
@@ -146,10 +145,10 @@ public class ListAdapter extends BaseAdapter implements Filterable, Scrollable {
 
 		if (position % 2 == 0) {
 			viewHolder.itemContainer.setBackgroundColor(mContext.getResources()
-					.getColor(R.color.white));
+					.getColor(R.color.light_grey_list_item));
 		} else {
 			viewHolder.itemContainer.setBackgroundColor(mContext.getResources()
-					.getColor(R.color.light_grey_list_item));
+					.getColor(R.color.white));
 		}
 
 		Log.i("ImageName", "ImageName - " + bird.getImageName());

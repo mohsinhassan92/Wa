@@ -1,11 +1,13 @@
 package nl.vogelbescherming.wadvogels;
 
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.Display;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,13 +91,56 @@ public class SilhuetteActivity extends BaseGridActivity{
         showVogelVinderMenuAsActive();
         showButton(false);
         setSubHeaderTitle(getResources().getString(R.string.sub_header_silhuette));
-    /*    setButton(R.drawable.verder_state);
-        Display display = getWindowManager().getDefaultDisplay();
-        int width = display.getWidth();  // deprecated
-        int height = display.getHeight();  // deprecated
-        /
-        if (width > 325 && height > 485)
-        	createSeekBar(Controller.getMyBird(), 4);*/
+        //**************************************************************************************
+	/*	for (int counter1 = 0; counter1 < viewListSilhoute.size(); counter1++) {
+			// 2 items of Grooote select,1 item of Silhoute
+			// select,Then 1 item of Grrote unselected,,
+			// Now in this Case,,,Unselect n inactive the Silhoute
+			// Selected(if they is no record in DB),,,
+			// and it remains selected in the other case
+			ViewHelperTab viewHelpSilhoute = viewHelperSilhoute
+					.get(counter1);
+			if (viewHelpSilhoute.getSelected() == true) {
+				Controller.setSilhuette((Integer) viewListSilhoute.get(
+						counter1).getTag());
+				int size = Controller.getFilteredBirds(
+						VogelvinderActivityTablet.this).size();
+				if (size == 0) {
+					inActiveSilhoute(viewListSilhoute.get(counter1),
+							counter1);
+					(viewHelperSilhoute.get(counter1))
+							.setSelected(false);
+					Controller.clearSilhuette();
+				} else {
+					viewListSilhoute.get(counter1)
+							.setBackgroundResource(
+									R.drawable.cell_select);
+					viewHelpSilhoute.getImageView().setImageDrawable(
+							listSilhouteActive.get(counter1));
+					TextView text = (TextView) viewHelpSilhoute
+							.getTextView();
+					text.setTextColor(Color.WHITE);
+				}
+			} else {
+				Controller.setSilhuette((Integer) viewListSilhoute.get(
+						counter1).getTag());
+				int size = Controller.getFilteredBirds(
+						VogelvinderActivityTablet.this).size();
+				if (size == 0) {
+					inActiveSilhoute(viewListSilhoute.get(counter1),
+							counter1);
+					(viewHelperSilhoute.get(counter1))
+							.setSelected(false);
+					Controller.clearSilhuette();
+				} else {
+					normalSilhoute(viewListSilhoute.get(counter1),
+							counter1);
+				}
+			}
+		}
+        
+    */    //*****************************************************************************************
+        
 		View btn_vorige= findViewById(R.id.button_vorige);
 		View btn_verder= findViewById(R.id.button_verder);
 		btn_vorige.setBackgroundColor(getResources().getColor(R.color.active_button_color));		

@@ -30,10 +30,13 @@ import android.support.v4.view.ViewPager;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
+import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
@@ -47,6 +50,7 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SearchResultBirdDetailTabletActivity extends ContentBaseActivity
 		implements OnItemClickListener {
@@ -55,15 +59,20 @@ public class SearchResultBirdDetailTabletActivity extends ContentBaseActivity
 	private ArrayList<Bird> birds = null;
 	private ListAdapter la = null;
 	private Boolean showAllBirds;
+	private Boolean showAllBirdsTabs;
+
 	private CustomSpinner spinnerChance;
 	private Spinner spinnerAppears;
 	private Button btnSearch;
+	private Button btnSearchAllBirds;
 	private EditText etSearch;
+	private EditText etSearchAllBirds;
 	private View backView;
 	ArrayAdapter<String> adapter2;
 	private View containerListView;
 	private View containerSearchArea;
 	private ImageView backButtonTab;
+	private View containerSearchAllBirds;
 
 	// Bird Detail Activity
 	private Bird bird;
@@ -82,6 +91,7 @@ public class SearchResultBirdDetailTabletActivity extends ContentBaseActivity
 	private HackyScrollView scroll;
 	private View info;
 	private View titleBar1, titleBar2, soundView, backViewD;
+	private View dummyView;
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++Bird Detail
 	// Activity+++++++++++++++++++++++++++++
@@ -114,9 +124,12 @@ public class SearchResultBirdDetailTabletActivity extends ContentBaseActivity
 		super.onCreate(savedInstanceState);
 
 		setContent(R.layout.activity_search_result_tab);
+		setRequestedOrientation(Configuration.ORIENTATION_LANDSCAPE);
 		View viewBirdDetail = findViewById(R.id.linear_bird_detail);
 		viewBirdDetail.invalidate();
 		showAllBirds = getIntent().getExtras().getBoolean("ShowAllBirds");
+		showAllBirdsTabs = getIntent().getExtras()
+				.getBoolean("ShowAllBirdsTab");
 		Location locationFromMap = (Location) getIntent().getExtras().get(
 				"locationFromMap");
 
@@ -125,7 +138,9 @@ public class SearchResultBirdDetailTabletActivity extends ContentBaseActivity
 
 		backView = (View) findViewById(R.id.backView);
 		etSearch = (EditText) findViewById(R.id.filter);
+		etSearchAllBirds = (EditText) findViewById(R.id.filter_allbirds);
 		btnSearch = (Button) findViewById(R.id.buttonSearch);
+		btnSearchAllBirds = (Button) findViewById(R.id.buttonSearch_allbirds);
 		spinnerChance = (CustomSpinner) findViewById(R.id.spinnerTrefkans);
 
 		CustomAdapter adapter1 = new CustomAdapter(this,
@@ -166,15 +181,27 @@ public class SearchResultBirdDetailTabletActivity extends ContentBaseActivity
 		if (locationFromMap != null) {
 			hideSearchViews();
 		} else {
+			if (showAllBirdsTabs != null && showAllBirdsTabs) {
+				birds = (ArrayList<Bird>) Controller.getBirds(this);
+			} else {
+				birds = (ArrayList<Bird>) Controller.getFilteredBirds(this);
+			}
 			if (showAllBirds != null && showAllBirds) {
 				birds = (ArrayList<Bird>) Controller.getBirds(this);
 			} else {
 				birds = (ArrayList<Bird>) Controller.getFilteredBirds(this);
 			}
-		}
 
-		// if (getIntent().getStringExtra("Caller") == null ||
-		// !getIntent().getStringExtra("Caller").equals("MainActivity")) {
+		}
+		/*
+		 * if (showAllBirds != null && showAllBirds &&
+		 * (getIntent().getStringExtra("Caller")==null)) { birds =
+		 * (ArrayList<Bird>) Controller.getBirds(this); }else if(showAllBirds !=
+		 * null && showAllBirds){ birds = (ArrayList<Bird>)
+		 * Controller.getBirds(this); } else { birds = (ArrayList<Bird>)
+		 * Controller.getFilteredBirds(this); }
+		 */
+
 		if (birds.size() == 0) {
 			new AlertDialog.Builder(this)
 					.setMessage(
@@ -186,8 +213,13 @@ public class SearchResultBirdDetailTabletActivity extends ContentBaseActivity
 						}
 					}).show();
 		}
-		// }
+		// ************************************************************************
+		// mViewPager = (HackyViewPager) findViewById(R.id.profiles);
+		// scroll = (HackyScrollView) findViewById(R.id.scroll);
+		// ************************************************************************
 
+		dummyView = findViewById(R.id.dummyView);
+		containerSearchAllBirds = findViewById(R.id.linear_search_container_allbirds_tab);
 		containerListView = findViewById(R.id.container_listView_tab);
 		containerSearchArea = findViewById(R.id.linear_search_container_tab);
 		backButtonTab = (ImageView) findViewById(R.id.home_iv);
@@ -197,6 +229,20 @@ public class SearchResultBirdDetailTabletActivity extends ContentBaseActivity
 		listview.setEmptyView(findViewById(R.id.emptyView));
 		listview.setOnItemClickListener(this);
 
+		/*
+		 * if(showAllBirds!=null && showAllBirds) { hideSearchViews();
+		 * backView.setVisibility(View.GONE); showVogelVinderMenuAsActive();
+		 * containerSearchArea.setVisibility(View.GONE);
+		 * containerSearchAllBirds.setVisibility(View.VISIBLE);
+		 * 
+		 * }
+		 */if (showAllBirdsTabs != null && showAllBirdsTabs) {
+			hideSearchViews();
+			backView.setVisibility(View.GONE);
+			showVogelVinderMenuAsActive();
+			containerSearchArea.setVisibility(View.GONE);
+			containerSearchAllBirds.setVisibility(View.VISIBLE);
+		}
 		if (getIntent().getStringExtra("Caller") != null
 				&& (getIntent().getStringExtra("Caller")
 						.contains("VogelvinderActivityTablet"))) {
@@ -208,33 +254,12 @@ public class SearchResultBirdDetailTabletActivity extends ContentBaseActivity
 			backButtonTab.setImageDrawable(getResources().getDrawable(
 					R.drawable.backarrow_zoek_tab));
 
+		} else if ((showAllBirds != null && showAllBirds)
+				|| (showAllBirdsTabs != null && showAllBirdsTabs)) {
+			containerListView.setVisibility(View.VISIBLE);
 		} else {
 			containerListView.setVisibility(View.INVISIBLE);
 		}
-		/*
-		 * if (getIntent().getStringExtra("Caller") != null &&
-		 * (getIntent().getStringExtra("Caller").contains( "MainActivity") )) {
-		 * listview.setVisibility(View.INVISIBLE);
-		 * 
-		 * }
-		 */btnSearch.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				int chance = spinnerChance.getSelectedItemPosition();
-				int appears = spinnerAppears.getSelectedItemPosition();
-				String searchText = etSearch.getText().toString().trim();
-				birds = Controller.getSelectedBirds(
-						SearchResultBirdDetailTabletActivity.this, ++chance,
-						++appears, searchText);
-				la.setFiller(birds);
-				Utils.hideKeyBoard(SearchResultBirdDetailTabletActivity.this,
-						etSearch);
-				la.notifyDataSetChanged();
-				containerListView.setVisibility(View.VISIBLE);
-			}
-		});
-
 		backButtonTab.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -244,28 +269,24 @@ public class SearchResultBirdDetailTabletActivity extends ContentBaseActivity
 
 			}
 		});
-
-		/*
-		 * listview.setOnItemClickListener(new AdapterView.OnItemClickListener()
-		 * {
-		 * 
-		 * @Override public void onItemClick(AdapterView<?> parent, View view,
-		 * int position, long id) { ArrayList<Bird> content = la.getFiller();
-		 * Intent i = new Intent(SearchResultActivity.this,
-		 * BirdDetailActivity.class); i.putExtra("CurrentBird",
-		 * content.get(position)); i.putExtra("Birds", content);
-		 * i.putExtra("Pos", position); startActivity(i); } });
-		 */
 		etSearch.addTextChangedListener(filterTextWatcher);
-		// birdsD = birds;
+		etSearchAllBirds.addTextChangedListener(filterTextWatcher);
 
-		// **********************************Bird
-		// Detail**********************************
+		// **********************************Bird Detail**********************************
 		if (getIntent().getStringExtra("Caller") != null) {
 			if (getIntent().getStringExtra("Caller").contains(
-					"VogelvinderActivityTablet")) {
-				((TextView) findViewById(R.id.backTV1)).setTypeface(Fonts
-						.getTfFont_regular());
+					"VogelvinderActivityTablet")
+					|| getIntent().getStringExtra("Caller").contains(
+							"MainActivity")) {
+				/*
+				 * ((TextView) findViewById(R.id.backTV1)).setTypeface(Fonts
+				 * .getTfFont_regular());
+				 */
+
+				if (getIntent().getStringExtra("Caller").contains(
+						"VogelvinderActivityTablet")) {
+					dummyView.setVisibility(View.VISIBLE);
+				}
 				((TextView) findViewById(R.id.soundTV)).setTypeface(Fonts
 						.getTfFont_regular());
 
@@ -273,20 +294,18 @@ public class SearchResultBirdDetailTabletActivity extends ContentBaseActivity
 				titleBar1 = findViewById(R.id.titleBar1);
 				titleBar2 = findViewById(R.id.titleBar2);
 				soundView = findViewById(R.id.soundView);
-				backViewD = findViewById(R.id.backView1);
+				// backViewD = findViewById(R.id.backView1);
 				scroll = (HackyScrollView) findViewById(R.id.scroll);
 				description = ((TextView) findViewById(R.id.description));
 				infoBar = ((TableLayout) findViewById(R.id.infoBar));
 				soundButton = (ImageView) findViewById(R.id.soundButton);
 				clickBird = bird;
 
-				backViewD.setOnClickListener(new View.OnClickListener() {
-
-					public void onClick(View v) {
-						onBackPressed();
-					}
-				});
-
+				/*
+				 * backViewD.setOnClickListener(new View.OnClickListener() {
+				 * 
+				 * public void onClick(View v) { onBackPressed(); } });
+				 */
 				soundView.setOnClickListener(new View.OnClickListener() {
 
 					@Override
@@ -333,14 +352,165 @@ public class SearchResultBirdDetailTabletActivity extends ContentBaseActivity
 				mViewPager.setAdapter(viewPagerAdapter);
 				mViewPager.setOnPageChangeListener(pageChangeListener);
 				calcLayoutWH(mViewPager, 0);
-				// createContent();
 				mViewPager.setSaveEnabled(false);
 				scroll.setViewPager(mViewPager);
-				viewPagerAdapter.notifyDataSetChanged();
+				mViewPager.invalidate();
 			}
+		} else if (showAllBirdsTabs != null && showAllBirdsTabs) {
+
+			/*
+			 * ((TextView) findViewById(R.id.backTV1)).setTypeface(Fonts
+			 * .getTfFont_regular());
+			 */
+			((TextView) findViewById(R.id.soundTV)).setTypeface(Fonts
+					.getTfFont_regular());
+
+			info = findViewById(R.id.info);
+			titleBar1 = findViewById(R.id.titleBar1);
+			titleBar2 = findViewById(R.id.titleBar2);
+			soundView = findViewById(R.id.soundView);
+			// backViewD = findViewById(R.id.backView1);
+			scroll = (HackyScrollView) findViewById(R.id.scroll);
+			description = ((TextView) findViewById(R.id.description));
+			infoBar = ((TableLayout) findViewById(R.id.infoBar));
+			soundButton = (ImageView) findViewById(R.id.soundButton);
+			clickBird = bird;
+
+			/*
+			 * backViewD.setOnClickListener(new View.OnClickListener() {
+			 * 
+			 * public void onClick(View v) { onBackPressed(); } });
+			 */
+			soundView.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					try {
+						if (mStartPlaying) {
+							mPlayer = new MediaPlayer();
+							Uri uri = Uri.parse("android.resource://"
+									+ getPackageName() + "/raw/"
+									+ clickBird.getSoundName());
+							mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+							mPlayer.setDataSource(getApplicationContext(), uri);
+							mPlayer.prepare();
+							mPlayer.start();
+							mPlayer.setOnCompletionListener(new OnCompletionListener() {
+
+								@Override
+								public void onCompletion(MediaPlayer mp) {
+									mp.release();
+								}
+							});
+						} else {
+							if (mPlayer != null) {
+								Log.i("Sound", "off");
+								try {
+									mPlayer.pause();
+									mPlayer.release();
+								} catch (IllegalStateException ex) {
+								}
+								mPlayer = null;
+							}
+						}
+						mStartPlaying = !mStartPlaying;
+					} catch (IOException e) {
+						Log.e("MP", "prepare() failed");
+					}
+				}
+			});
+			// *********************************************************************************************************************
+			mViewPager = (HackyViewPager) findViewById(R.id.profiles);
+			mViewPager.setOffscreenPageLimit(1);
+			ProfilePagerAdapter viewPagerAdapter = new ProfilePagerAdapter();
+			viewPagerAdapter.notifyDataSetChanged();
+			mViewPager.setAdapter(viewPagerAdapter);
+			mViewPager.setOnPageChangeListener(pageChangeListener);
+			calcLayoutWH(mViewPager, 0);
+			mViewPager.setSaveEnabled(false);
+			scroll.setViewPager(mViewPager);
+			mViewPager.invalidate();
+
 		}
 		// ***********************************Bird
 		// Detail*********************************
+
+		btnSearchAllBirds.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				int chance = spinnerChance.getSelectedItemPosition();
+				int appears = spinnerAppears.getSelectedItemPosition();
+				String searchText = etSearchAllBirds.getText().toString()
+						.trim();
+				birds = Controller.getSelectedBirds(
+						SearchResultBirdDetailTabletActivity.this, 5, 5,
+						searchText);
+				la.setFiller(birds);
+				Utils.hideKeyBoard(SearchResultBirdDetailTabletActivity.this,
+						etSearchAllBirds);
+				la.notifyDataSetChanged();
+				mViewPager.getAdapter().notifyDataSetChanged();
+				findViewById(R.id.linear_bird_detail).setVisibility(
+						View.INVISIBLE);
+				containerListView.setVisibility(View.VISIBLE);
+			}
+		});
+
+		btnSearch.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				int chance = spinnerChance.getSelectedItemPosition();
+				int appears = spinnerAppears.getSelectedItemPosition();
+				String searchText = etSearch.getText().toString().trim();
+				birds = Controller.getSelectedBirds(
+						SearchResultBirdDetailTabletActivity.this, ++chance,
+						++appears, searchText);
+				la.setFiller(birds);
+				Utils.hideKeyBoard(SearchResultBirdDetailTabletActivity.this,
+						etSearch);
+				la.notifyDataSetChanged();
+				mViewPager.getAdapter().notifyDataSetChanged();
+				findViewById(R.id.linear_bird_detail).setVisibility(
+						View.INVISIBLE);
+				containerListView.setVisibility(View.VISIBLE);
+			}
+		});
+		scroll.setOnTouchListener(new View.OnTouchListener() {
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+
+				v.getParent().requestDisallowInterceptTouchEvent(false);
+
+				return false;
+			}
+		});
+
+		findViewById(R.id.in_shadow).setOnTouchListener(
+				new View.OnTouchListener() {
+
+					@Override
+					public boolean onTouch(View v, MotionEvent event) {
+
+						v.getParent().requestDisallowInterceptTouchEvent(false);
+
+						return false;
+					}
+				});
+
+		((TextView) findViewById(R.id.meer_informative_content))
+				.setOnTouchListener(new View.OnTouchListener() {
+
+					@Override
+					public boolean onTouch(View v, MotionEvent event) {
+
+						v.getParent().requestDisallowInterceptTouchEvent(true);
+
+						return false;
+					}
+				});
 	}
 
 	private ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener() {
@@ -368,6 +538,7 @@ public class SearchResultBirdDetailTabletActivity extends ContentBaseActivity
 
 		@Override
 		public void onPageScrollStateChanged(int i) {
+
 		}
 	};
 
@@ -379,43 +550,17 @@ public class SearchResultBirdDetailTabletActivity extends ContentBaseActivity
 		pos = position;
 		// ViewPager vPager = new ViewPager(this);
 		// mViewPager.setAdapter(new ProfilePagerAdapter());
+
+		/*
+		 * mViewPager.setOffscreenPageLimit(1); ProfilePagerAdapter
+		 * viewPagerAdapter = new ProfilePagerAdapter();
+		 * mViewPager.setAdapter(viewPagerAdapter);
+		 * mViewPager.setOnPageChangeListener(pageChangeListener);
+		 * calcLayoutWH(mViewPager, 0); mViewPager.setSaveEnabled(false);
+		 * scroll.setViewPager(mViewPager); mViewPager.invalidate();
+		 */
 		bird = birds.get(position);
 		updateBirdData(position);
-		// *************************************************
-		LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-		View view = inflater.inflate(R.layout.viewpager_container, null);
-
-		final ImageView fullScreenIV = (ImageView) view
-				.findViewById(R.id.full_screen);
-		final ImageView image = (ImageView) view.findViewById(R.id.image_small);
-		final ImageView image_large = (ImageView) view
-				.findViewById(R.id.image_large);
-
-		fullScreenIV.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (fullScreenIV.getTag().toString().equals("small")) {
-					click(image, image_large);
-					v.setTag("large");
-				} else {
-					click(image_large, image);
-					v.setTag("small");
-				}
-			}
-		});
-
-		bird = birds.get(position);
-		Uri uri = Uri.parse("android.resource://" + getPackageName()
-				+ "/drawable/if" + bird.getImageName());
-		image.setImageURI(uri);
-		// uri = Uri.parse("android.resource://"+ getPackageName() +
-		// "/drawable/if" + bird.getImageName());
-		image_large.setImageURI(uri);
-		new ProfilePagerAdapter().notifyDataSetChanged();
-		findViewById(R.id.relative_container_images).invalidate();
-
-		// *************************************************
-
 	}
 
 	// */
@@ -445,7 +590,7 @@ public class SearchResultBirdDetailTabletActivity extends ContentBaseActivity
 
 	public void updateBirdData(int index) {
 
-		Log.i("Count", mViewPager.getChildCount() + "");
+		// Log.i("Count", mViewPager.getChildCount() + "");
 		bird = birds.get(index);
 		clickBird = bird;
 		if (mPlayer != null) {
@@ -457,6 +602,7 @@ public class SearchResultBirdDetailTabletActivity extends ContentBaseActivity
 			mPlayer = null;
 			mStartPlaying = true;
 		}
+		mViewPager.setCurrentItem(index);
 		createContent();
 	}
 
@@ -571,20 +717,62 @@ public class SearchResultBirdDetailTabletActivity extends ContentBaseActivity
 		setTypeFace(meer_title, true);
 
 		TextView meer_con = (TextView) findViewById(R.id.meer_informative_content);
-		// meer_con.setMovementMethod(LinkMovementMethod.getInstance());
 		meer_con.setText(Html.fromHtml(bird.getMeerInfo()));
-		// meer_con.setText(bird.getMeerInfo());
-
 		setTypeFace(meer_con, false);
-
-		final View inShadow = findViewById(R.id.in_shadow);
 		showMore = true;
+
+		/*
+		 * meer_con.setMovementMethod(LinkMovementMethod.getInstance());
+		 * meer_con.setOnTouchListener(textViewTouchListener);
+		 * meer_con.setClickable(true);
+		 */
+		/*	meer_con.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Log.d("MEER_TAG", "meer_informative_content_text_Displayed");
+				System.out.println("meer_informative_content_text_Displayed");
+				Toast.makeText(SearchResultBirdDetailTabletActivity.this,
+						"CLiked", Toast.LENGTH_SHORT).show();
+			}
+		});
+*/
+		// meer_con.setText(Html.fromHtml(bird.getMeerInfo()));
+		/*
+		 * meer_con.setOnTouchListener(new View.OnTouchListener() {
+		 * 
+		 * @Override public boolean onTouch(View view, MotionEvent motionEvent)
+		 * { meer_con.getParent().requestDisallowInterceptTouchEvent(true);
+		 * return false; } });
+		 */
+		/*
+		 * scroll.setOnTouchListener(new View.OnTouchListener() {
+		 * 
+		 * @Override public boolean onTouch(View view, MotionEvent motionEvent)
+		 * { scroll.getParent().requestDisallowInterceptTouchEvent(false);
+		 * return false; } });
+		 *//*
+			 * final View inShadow = findViewById(R.id.in_shadow);
+			 * inShadow.setOnTouchListener(new View.OnTouchListener() {
+			 * 
+			 * @Override public boolean onTouch(View view, MotionEvent
+			 * motionEvent) {
+			 * inShadow.getParent().requestDisallowInterceptTouchEvent(false);
+			 * return false; } });
+			 */
+
 		// if(showMore){
 		// inShadow.setVisibility(View.VISIBLE);
 		// less.setVisibility(View.GONE);
 		// }
 	}
 
+	private void textClick(){
+		Log.d("MEER_TAG", "meer_informative_content_text_Displayed");
+		System.out.println("meer_informative_content_text_Displayed");
+		Toast.makeText(SearchResultBirdDetailTabletActivity.this,
+				"CLiked", Toast.LENGTH_SHORT).show();
+	}
 	@Override
 	protected void onPause() {
 		if (mPlayer != null) {
@@ -601,11 +789,25 @@ public class SearchResultBirdDetailTabletActivity extends ContentBaseActivity
 		super.onPause();
 	}
 
-	private LayoutParams calcLayoutWH(View view, int flag) {
+	/*
+	 * private OnTouchListener textViewTouchListener= new OnTouchListener() {
+	 * 
+	 * @Override public boolean onTouch(View v, MotionEvent event) { int action
+	 * = event.getAction(); switch (action) { case MotionEvent.ACTION_DOWN:
+	 * v.getParent().requestDisallowInterceptTouchEvent(true); break;
+	 * 
+	 * case MotionEvent.ACTION_MOVE:
+	 * v.getParent().requestDisallowInterceptTouchEvent(false); break;
+	 * 
+	 * case MotionEvent.ACTION_UP:
+	 * v.getParent().requestDisallowInterceptTouchEvent(false); break; }
+	 * 
+	 * v.onTouchEvent(event); return true; } };
+	 */private LayoutParams calcLayoutWH(View view, int flag) {
 		DisplayMetrics metrics = getResources().getDisplayMetrics();
 		LayoutParams rlp = (LayoutParams) view.getLayoutParams();
 		if (flag == 1)
-			rlp.height = (int) (metrics.heightPixels - (155 * metrics.density));
+			rlp.height = (int) (metrics.heightPixels - (210 * metrics.density));
 		// rlp.height = LayoutParams.MATCH_PARENT;
 		if (flag == 0)
 			rlp.height = metrics.heightPixels / 3;
@@ -627,6 +829,9 @@ public class SearchResultBirdDetailTabletActivity extends ContentBaseActivity
 		if (ShowFullInfo) {
 			info.setVisibility(View.GONE);
 			scroll.setScrollingEnabled(false);
+
+			RelativeLayout imagesContainer = (RelativeLayout) findViewById(R.id.relative_container_images);
+			imagesContainer.getLayoutParams().height = 200;
 			// showBaseHeader(false);
 			// hideFooterMenu();
 			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
@@ -637,7 +842,7 @@ public class SearchResultBirdDetailTabletActivity extends ContentBaseActivity
 			// showFooterMenu();
 			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		}
-		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
 			calcLayoutWH(mViewPager, 2);
 		} else {
 			calcLayoutWH(mViewPager, ShowFullInfo ? 1 : 0);
@@ -664,8 +869,9 @@ public class SearchResultBirdDetailTabletActivity extends ContentBaseActivity
 			fullScreenIV.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					if (fullScreenIV.getTag().toString().equals("small")) {
+					if (v.getTag().toString().equals("small")) {
 						click(image, image_large);
+						// fullScreenIV.setVisibility(View.VISIBLE);
 						v.setTag("large");
 					} else {
 						click(image_large, image);
@@ -683,6 +889,7 @@ public class SearchResultBirdDetailTabletActivity extends ContentBaseActivity
 			image_large.setImageURI(uri);
 
 			container.addView(view);
+			// notifyDataSetChanged();
 			return view;
 		}
 
