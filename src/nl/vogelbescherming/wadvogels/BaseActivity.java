@@ -56,6 +56,7 @@ public class BaseActivity extends FragmentActivity {
 	private View vogelvinder;
 	private View zoekOpNaam;
 	private View vogelplekken;
+	private View getijden;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +99,18 @@ public class BaseActivity extends FragmentActivity {
 				startActivity(i);
 			}
 		});
+		getijden=findViewById(R.id.relative_footer_right_getijden);
+		getijden.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				getijden.setBackgroundColor(Color.parseColor("#226991"));
+				Intent i = new Intent(BaseActivity.this,
+						MapActivity2.class);
+				startActivity(i);
+			}
+		});
+
 		vogelplekken = findViewById(R.id.relative_footer_right);
 		vogelplekken.setOnClickListener(new OnClickListener() {
 
@@ -160,24 +173,24 @@ public class BaseActivity extends FragmentActivity {
 				}
 			});
 		}
-		Typeface typeFaceFooterButtons = Typeface.createFromAsset(getAssets(),
+/*		Typeface typeFaceFooterButtons = Typeface.createFromAsset(getAssets(),
 				"fonts/Museo500-Regular.otf");
-		Button btn_vorige = (Button) findViewById(R.id.button_vorige);
+*/		Button btn_vorige = (Button) findViewById(R.id.button_vorige);
 		Button btn_verder = (Button) findViewById(R.id.button_verder);
 		TextView textBwBtns = (TextView) findViewById(R.id.textBwBtns);
-		btn_vorige.setTypeface(typeFaceFooterButtons);
-		btn_verder.setTypeface(typeFaceFooterButtons);
-		textBwBtns.setTypeface(typeFaceFooterButtons);
+		btn_vorige.setTypeface(Fonts.getTfFont_interstate_regular());
+		btn_verder.setTypeface(Fonts.getTfFont_interstate_regular());
+		textBwBtns.setTypeface(Fonts.getTfFont_interstate_regular());
 
 		if (Controller.getFilteredBirds(BaseActivity.this) != null) {
 			int size = ((ArrayList<Bird>) Controller.getFilteredBirds(this)).size();
 			textBwBtns.setText(size + " Resultaten");
 		}
 		
-		Typeface typeFace = Typeface.createFromAsset(getAssets(),
-				"fonts/ufonts.com_museo-700-opentype.otf");
+/*		Typeface typeFace = Typeface.createFromAsset(getAssets(),
+				"fonts/ufonts.com_museo-700-opentype.otf");*/
 		title = (TextView) findViewById(R.id.title_tv);
-		title.setTypeface(typeFace);
+		title.setTypeface(Fonts.getTfFont_interstate_regular());
 
 		homeIV = (ImageView) findViewById(R.id.home_iv);
 		allBirdsIV = (ImageView) findViewById(R.id.all_birds);
@@ -357,9 +370,9 @@ public class BaseActivity extends FragmentActivity {
 			view_text = (TextView) findViewById(id);
 		}
 		if (typeface == Typeface.BOLD)
-			view_text.setTypeface(Fonts.getTfFont_bold());
+			view_text.setTypeface(Fonts.getTfFont_interstate_bold());
 		else
-			view_text.setTypeface(Fonts.getTfFont_regular());
+			view_text.setTypeface(Fonts.getTfFont_interstate_regular());
 		view_text.setText(Html.fromHtml(text));
 	}
 
@@ -374,9 +387,9 @@ public class BaseActivity extends FragmentActivity {
 			view_text = (TextView) findViewById(id);
 		}
 		if (typeface == Typeface.BOLD)
-			view_text.setTypeface(Fonts.getTfFont_bold());
+			view_text.setTypeface(Fonts.getTfFont_interstate_bold());
 		else
-			view_text.setTypeface(Fonts.getTfFont_regular());
+			view_text.setTypeface(Fonts.getTfFont_interstate_regular());
 		view_text.setText(Html.fromHtml(getString(headerGrootte)));
 	}
 
@@ -391,9 +404,9 @@ public class BaseActivity extends FragmentActivity {
 			view_text = (TextView) findViewById(id);
 		}
 		if (typeface == Typeface.BOLD)
-			view_text.setTypeface(Fonts.getTfFont_bold());
+			view_text.setTypeface(Fonts.getTfFont_interstate_bold());
 		else
-			view_text.setTypeface(Fonts.getTfFont());
+			view_text.setTypeface(Fonts.getTfFont_interstate_regular());
 		view_text.setText(text);
 	}
 
@@ -650,6 +663,12 @@ public class BaseActivity extends FragmentActivity {
 		zoekOpNaam.setBackgroundColor(Color.parseColor("#226991"));
 	}
 
+	public void showVogelPlekkenMenuAsActive() {
+		vogelplekken.setBackgroundColor(Color.parseColor("#226991"));
+	}
+	public void showGetijdenMenuAsActive() {
+		getijden.setBackgroundColor(Color.parseColor("#226991"));
+	}
 	public static boolean isTablet(Context context) {
 		
         boolean xlarge = ((context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == 4);
@@ -657,8 +676,6 @@ public class BaseActivity extends FragmentActivity {
         return (xlarge || large);
     }
 
-	public void showVogelPlekkenMenuAsActive() {
-		vogelplekken.setBackgroundColor(Color.parseColor("#226991"));
-	}
+	
 
 }

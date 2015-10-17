@@ -81,7 +81,7 @@ public class InfoActivity extends BaseActivity implements OnClickListener {
 		// }
 		tv.setText(title);
 		tv.setTextColor(getResources().getColor(R.color.text_color));
-		tv.setTypeface(Fonts.getTfFont_regular());
+		tv.setTypeface(Fonts.getTfFont_interstate_regular());
 		parent.setTag(tv);
 		LinearLayout toolbar = (LinearLayout) parent.findViewById(R.id.toolbar);
 		// ((LinearLayout.LayoutParams) toolbar.getLayoutParams()).bottomMargin

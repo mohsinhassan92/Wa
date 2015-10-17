@@ -27,6 +27,7 @@ import java.util.List;
 import nl.vogelbescherming.wadvogels.R;
 import nl.vogelbescherming.wadvogels.adapters.ListAdapter;
 import nl.vogelbescherming.wadvogels.control.Controller;
+import nl.vogelbescherming.wadvogels.fonts.Fonts;
 import nl.vogelbescherming.wadvogels.model.Bird;
 import nl.vogelbescherming.wadvogels.model.Location;
 import nl.vogelbescherming.wadvogels.util.Utils;
@@ -54,12 +55,14 @@ public class SearchResultActivity extends ContentBaseActivity {
 		showAllBirds = getIntent().getExtras().getBoolean("ShowAllBirds");
 		Location locationFromMap = (Location) getIntent().getExtras().get("locationFromMap");
 
-		showZoekOpNaamMenuAsActive();
+	//	showZoekOpNaamMenuAsActive();
 		hideButtons();
 
 		backView = (View) findViewById(R.id.backView);
 		etSearch = (EditText) findViewById(R.id.filter);
+		etSearch.setTypeface(Fonts.getTfFont_interstate_regular());
 		btnSearch = (Button) findViewById(R.id.buttonSearch);
+		btnSearch.setTypeface(Fonts.getTfFont_interstate_regular());
 		spinnerChance = (CustomSpinner) findViewById(R.id.spinnerTrefkans);
 
 		CustomAdapter adapter1 = new CustomAdapter(this, R.layout.simple_spinner_item, getResources().getStringArray(R.array.chance_items));
@@ -98,7 +101,7 @@ public class SearchResultActivity extends ContentBaseActivity {
 				birds = (ArrayList<Bird>) Controller.getFilteredBirds(this);
 			}
 		}
-
+		hideSpinners();
 		//if (getIntent().getStringExtra("Caller") == null || !getIntent().getStringExtra("Caller").equals("MainActivity")) {
 		if(birds.size() == 0) {
 			new AlertDialog.Builder(this)
@@ -124,7 +127,7 @@ public class SearchResultActivity extends ContentBaseActivity {
 			showVogelVinderMenuAsActive();
 			listview.setVisibility(View.VISIBLE);
 		} else {
-			listview.setVisibility(View.GONE);
+			showZoekOpNaamMenuAsActive();
 		}
 
 		btnSearch.setOnClickListener(new View.OnClickListener() {
@@ -162,7 +165,7 @@ public class SearchResultActivity extends ContentBaseActivity {
 
             }
         });*/
-		etSearch.addTextChangedListener(filterTextWatcher);
+	//	etSearch.addTextChangedListener(filterTextWatcher);
 	}
 	
 	@Override
@@ -201,6 +204,7 @@ public class SearchResultActivity extends ContentBaseActivity {
 			} else {
 				text.setText(item.toString());
 			}
+			text.setTypeface(Fonts.getTfFont_interstate_regular());
 
 			return view;
 		}
@@ -213,6 +217,10 @@ public class SearchResultActivity extends ContentBaseActivity {
 		btnSearch.setVisibility(View.GONE);
 	}
 
+	private void hideSpinners(){
+		spinnerAppears.setVisibility(View.GONE);
+		spinnerChance.setVisibility(View.GONE);
+	}
 	private void showBackButton(boolean isShow) {
 		if (isShow)	backView.setVisibility(View.VISIBLE);
 		else	backView.setVisibility(View.GONE);

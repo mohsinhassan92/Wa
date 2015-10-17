@@ -5,6 +5,7 @@ import java.util.Collections;
 
 import nl.vogelbescherming.wadvogels.adapters.ListAdapter;
 import nl.vogelbescherming.wadvogels.control.Controller;
+import nl.vogelbescherming.wadvogels.fonts.Fonts;
 import nl.vogelbescherming.wadvogels.model.Bird;
 import nl.vogelbescherming.wadvogels.model.Location;
 import nl.vogelbescherming.wadvogels.view.QuickScroll;
@@ -85,6 +86,7 @@ public class AllBirdsActivity extends ContentBaseActivity {
         hideButtons();
 
         etSearch = (EditText) root.findViewById(R.id.filter);
+        etSearch.setTypeface(Fonts.getTfFont_interstate_regular());
         etSearch.addTextChangedListener(filterTextWatcher);
 	}
     

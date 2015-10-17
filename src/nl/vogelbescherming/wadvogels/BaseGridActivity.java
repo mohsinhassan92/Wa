@@ -251,10 +251,7 @@ public class BaseGridActivity extends ContentBaseActivity implements
 					img_color = (CircleImageView) view.findViewById(R.id.image);
 					img_color.setBackgroundColor(colorsList.get(positionKleur
 							.get(0)));
-					/*
-					 * img_color.setImageDrawable(listDrawables.get(positionKleur
-					 * .get(0)));
-					 */
+					
 					if (positionKleur.get(0) == 1) {
 						img_color.setBorderWidth(0);
 						img_color.setBorderColor(this.getResources().getColor(
@@ -349,8 +346,7 @@ public class BaseGridActivity extends ContentBaseActivity implements
 
 		image_color.setBackgroundColor(colorsList.get(positionKleur
 				.get(position)));
-		// image_color.setImageDrawable(listDrawables_active.get(positionKleur.get(position)));
-
+	
 		Display display = getWindowManager().getDefaultDisplay();
 		int width = display.getWidth();
 		int height = display.getHeight();
@@ -378,7 +374,9 @@ public class BaseGridActivity extends ContentBaseActivity implements
 		image_color.setBorderColor(this.getResources().getColor(
 				R.color.active_button_color));
 		TextView text = (TextView) iv_temp2.findViewById(R.id.text);
-		text.setTextColor(Color.WHITE);
+		text.setTextColor(this.getResources().getColor(
+				R.color.inactive_button_color));
+//		text.setVisibility(View.VISIBLE);
 		image_color.setTag("selected");
 
 	}
@@ -400,6 +398,7 @@ public class BaseGridActivity extends ContentBaseActivity implements
 		TextView text = (TextView) iv.findViewById(R.id.text);
 		text.setTextColor(this.getResources().getColor(
 				R.color.inactive_button_color));
+	//	text.setVisibility(View.VISIBLE);
 		iv.findViewById(R.id.image).setTag("unselected");
 
 		for (int counter = 0; counter < positionKleur.size(); counter++) {
@@ -427,6 +426,7 @@ public class BaseGridActivity extends ContentBaseActivity implements
 		TextView text = (TextView) iv_temp.findViewById(R.id.text);
 		text.setTextColor(this.getResources().getColor(
 				R.color.inactive_button_color));
+//		text.setVisibility(View.VISIBLE);
 		iv_temp.findViewById(R.id.image).setTag("unselected");
 	}
 

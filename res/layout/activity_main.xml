@@ -18,7 +18,8 @@
             android:gravity="center"
             android:text="Vogels van het waddengebied"
             android:textColor="@color/active_button_color"
-            android:textSize="17sp" />
+            android:textSize="17sp" 
+            android:fontFamily="fonts/Interstate Regular.ttf"/>
     </LinearLayout>
 
     <LinearLayout

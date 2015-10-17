@@ -25,6 +25,7 @@ public class MainActivity extends BaseActivity {
 	private View button3;
 	private View button4;
 	private View buttonInfo;
+	private TextView text_tv;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -111,6 +112,8 @@ public class MainActivity extends BaseActivity {
 		
 		if (!BaseGridActivity.isTablet(this)) {
 			clearData();
+			text_tv=(TextView)findViewById(R.id.title_tv);
+			text_tv.setTypeface(Fonts.getTfFont_interstate_regular());
 			button1 = findViewById(R.id.relativeLayout1);
 			button1.setOnClickListener(new OnClickListener() {
 

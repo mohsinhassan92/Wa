@@ -67,7 +67,7 @@ public class MapActivity2 extends ContentBaseActivity {
 		showButton(false);
 		showAllBirdsButton(false);
 		hideButtons();
-		showVogelPlekkenMenuAsActive();
+		showGetijdenMenuAsActive();
 		hideTitleContainer();
 
 		mAreaMap = new HashMap<LatLng, String>();

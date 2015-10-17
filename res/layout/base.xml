@@ -26,12 +26,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:gravity="center"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="Vogels van het waddengebied"
             android:textColor="@android:color/white"
             android:textSize="17sp" />
-       
+
         <ImageView
             android:id="@+id/all_birds"
             android:layout_width="45dp"
@@ -39,7 +39,6 @@
             android:layout_gravity="center_vertical"
             android:padding="8dp"
             android:src="@drawable/header_icon2" />
-        
     </LinearLayout>
 
     <LinearLayout
@@ -188,19 +187,20 @@
             android:layout_height="40dp"
             android:layout_alignParentLeft="true"
             android:layout_weight="1"
-            android:paddingLeft="5dp" >
+            android:paddingLeft="5dp" 
+            android:paddingRight="3dp">
 
             <ImageView
                 android:id="@+id/search"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="5dp"
                 android:src="@drawable/search_symbol_footer" />
 
             <ImageView
                 android:layout_width="70dp"
-                android:layout_height="21dp"
+                android:layout_height="30dp"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/search"
                 android:src="@drawable/text_vogelvinder_footer" />
@@ -212,18 +212,19 @@
             android:layout_height="40dp"
             android:layout_toRightOf="@id/relative_footer_left"
             android:layout_weight="1"
-            android:paddingLeft="5dp" >
+            android:paddingLeft="5dp"
+            android:paddingRight="3dp" >
 
             <ImageView
                 android:id="@+id/edit"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
                 android:layout_centerVertical="true"
                 android:src="@drawable/edit_symbol_footer" />
 
             <ImageView
                 android:layout_width="80dp"
-                android:layout_height="23dp"
+                android:layout_height="32dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@id/edit"
@@ -236,22 +237,48 @@
             android:layout_height="40dp"
             android:layout_toRightOf="@id/relative_footer_center"
             android:layout_weight="1"
-            android:paddingLeft="5dp" >
+            android:paddingLeft="5dp" 
+            android:paddingRight="3dp">
 
             <ImageView
                 android:id="@+id/gear"
-                android:layout_width="17dp"
-                android:layout_height="17dp"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
                 android:layout_centerVertical="true"
                 android:src="@drawable/gear_symbol_footer" />
 
             <ImageView
                 android:layout_width="80dp"
-                android:layout_height="23dp"
+                android:layout_height="32dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="8dp"
                 android:layout_toRightOf="@id/gear"
                 android:src="@drawable/text_vogelplekken_footer" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relative_footer_right_getijden"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_toRightOf="@id/relative_footer_right"
+            android:layout_weight="1"
+            android:paddingLeft="5dp" 
+            android:paddingRight="3dp">
+
+            <ImageView
+                android:id="@+id/gear_getijden"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/gear_symbol_footer" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="10dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="3dp"
+                android:layout_toRightOf="@id/gear_getijden"
+                android:src="@drawable/text_getijden_footer" />
         </RelativeLayout>
     </LinearLayout>
 

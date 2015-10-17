@@ -157,7 +157,7 @@ public class ListAdapter extends BaseAdapter implements Filterable, Scrollable {
 		viewHolder.iv.setImageURI(uri);
 		viewHolder.iv.invalidate();
 		viewHolder.text.setText(bird.getName());
-		viewHolder.text.setTypeface(Fonts.getTfFont());
+		viewHolder.text.setTypeface(Fonts.getTfFont_interstate_regular());
 
 		String[] chances = mContext.getResources().getStringArray(
 				R.array.chance);
@@ -169,7 +169,7 @@ public class ListAdapter extends BaseAdapter implements Filterable, Scrollable {
 
 		// viewHolder.subtext.setSelected(true);
 		viewHolder.subtext.setText(text);
-		viewHolder.subtext.setTypeface(Fonts.getTfFont_italic());
+		viewHolder.subtext.setTypeface(Fonts.getTfFont_interstate_light());
 		if (!BaseActivity.isTablet(mContext)) {
 
 			rootView.setOnClickListener(new View.OnClickListener() {

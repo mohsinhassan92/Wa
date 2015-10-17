@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import nl.vogelbescherming.wadvogels.R;
 import nl.vogelbescherming.wadvogels.fonts.Fonts;
 import nl.vogelbescherming.wadvogels.model.Bird;
+import nl.vogelbescherming.wadvogels.photoview.PhotoView;
 import nl.vogelbescherming.wadvogels.util.HackyScrollView;
 import nl.vogelbescherming.wadvogels.util.HackyViewPager;
 
@@ -51,18 +52,19 @@ public class BirdDetailActivity extends ContentBaseActivity {
 	private HackyViewPager mViewPager;
 	private ImageView soundButton;
 	private Bird clickBird;
-
 	private boolean showMore = false;
 	private int pos;
 	private ArrayList<Bird> birds;
 	private HackyScrollView scroll;
 	private View info;
 	private View titleBar1, titleBar2, soundView, backView;
+	private View containerViewPager;
+	//	private ImageView fullScreenIV1;
 
 	private void showHeader(boolean show) {
 		if (show) {
 			titleBar1.setVisibility(View.VISIBLE);
-			titleBar2.setVisibility(View.VISIBLE);
+			titleBar2.setVisibility(View.GONE);
 			showBaseHeader(true);
 		} else {
 			titleBar1.setVisibility(View.GONE);
@@ -105,11 +107,12 @@ public class BirdDetailActivity extends ContentBaseActivity {
 		pos = getIntent().getExtras().getInt("Pos");
 
 		((TextView) findViewById(R.id.backTV)).setTypeface(Fonts
-				.getTfFont_regular());
+				.getTfFont_interstate_regular());
 		((TextView) findViewById(R.id.soundTV)).setTypeface(Fonts
-				.getTfFont_regular());
+				.getTfFont_interstate_regular());
 
 		info = findViewById(R.id.info);
+
 		titleBar1 = findViewById(R.id.titleBar1);
 		titleBar2 = findViewById(R.id.titleBar2);
 		soundView = findViewById(R.id.soundView);
@@ -120,7 +123,7 @@ public class BirdDetailActivity extends ContentBaseActivity {
 		infoBar = ((TableLayout) findViewById(R.id.infoBar));
 		soundButton = (ImageView) findViewById(R.id.soundButton);
 		clickBird = bird;
-
+		containerViewPager=findViewById(R.id.relative_container_images);
 		backView.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -174,33 +177,41 @@ public class BirdDetailActivity extends ContentBaseActivity {
 		mViewPager.setAdapter(new ProfilePagerAdapter());
 
 		mViewPager
-				.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-					@Override
-					public void onPageScrolled(int i, float v, int i2) {
-					}
+		.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+			@Override
+			public void onPageScrolled(int i, float v, int i2) {
+			}
 
-					@Override
-					public void onPageSelected(int index) {
+			@Override
+			public void onPageSelected(int index) {
 
-						Log.i("Count", mViewPager.getChildCount() + "");
-						bird = birds.get(index);
-						clickBird = bird;
-						if (mPlayer != null) {
-							try {
-								mPlayer.pause();
-								mPlayer.release();
-							} catch (Exception e) {
-							}
-							mPlayer = null;
-							mStartPlaying = true;
+				Log.i("Count", mViewPager.getChildCount() + "");
+				bird = birds.get(index);
+				clickBird = bird;
+				/*		if(containerViewPager.findViewById(R.id.image_large).getVisibility()==View.VISIBLE)
+						{
+							containerViewPager.findViewById(R.id.full_screen_close).setVisibility(View.VISIBLE);
+							containerViewPager.findViewById(R.id.full_screen).setVisibility(View.GONE);
+						}else{
+							containerViewPager.findViewById(R.id.full_screen_close).setVisibility(View.GONE);
+							containerViewPager.findViewById(R.id.full_screen).setVisibility(View.VISIBLE);
 						}
-						createContent();
-					}
+				 */		if (mPlayer != null) {
+					 try {
+						 mPlayer.pause();
+						 mPlayer.release();
+					 } catch (Exception e) {
+					 }
+					 mPlayer = null;
+					 mStartPlaying = true;
+				 }
+				 createContent();
+			}
 
-					@Override
-					public void onPageScrollStateChanged(int i) {
-					}
-				});
+			@Override
+			public void onPageScrollStateChanged(int i) {
+			}
+		});
 		calcLayoutWH(mViewPager, 0);
 		createContent();
 		mViewPager.setSaveEnabled(false);
@@ -240,8 +251,8 @@ public class BirdDetailActivity extends ContentBaseActivity {
 		category.setText(chances[Integer.valueOf(bird.getChance()) - 1] + " | "
 				+ appears[bird.getAppears().get(0) - 1]);
 
-		name.setTypeface(Fonts.getTfFont_regular());
-		category.setTypeface(Fonts.getTfFont_regular());
+		name.setTypeface(Fonts.getTfFont_interstate_regular());
+		category.setTypeface(Fonts.getTfFont_interstate_regular());
 
 		TextView voorkomen_title = (TextView) findViewById(R.id.voorkomen_title);
 		voorkomen_title.setText("Voorkomen");
@@ -347,15 +358,15 @@ public class BirdDetailActivity extends ContentBaseActivity {
 		 * 
 		 * return false; } });
 		 *//*
-			 * findViewById(R.id.in_shadow).setOnTouchListener( new
-			 * View.OnTouchListener() {
-			 * 
-			 * @Override public boolean onTouch(View v, MotionEvent event) {
-			 * 
-			 * v.getParent().requestDisallowInterceptTouchEvent(false);
-			 * 
-			 * return false; } });
-			 */
+		 * findViewById(R.id.in_shadow).setOnTouchListener( new
+		 * View.OnTouchListener() {
+		 * 
+		 * @Override public boolean onTouch(View v, MotionEvent event) {
+		 * 
+		 * v.getParent().requestDisallowInterceptTouchEvent(false);
+		 * 
+		 * return false; } });
+		 */
 		/*
 		 * findViewById(R.id.container_viewPager_info) .setOnTouchListener(new
 		 * View.OnTouchListener() {
@@ -370,26 +381,26 @@ public class BirdDetailActivity extends ContentBaseActivity {
 		// meer_con.setMovementMethod(LinkMovementMethod.getInstance());
 		meer_con.setText(Html.fromHtml(bird.getMeerInfo()));
 		scroll.setOnTouchListener(new OnTouchListener() {
-	        @Override
-	        public boolean onTouch(View v, MotionEvent event) {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
 
-	            int action = event.getAction();
+				int action = event.getAction();
 
-	            switch (action) {
-	            case MotionEvent.ACTION_DOWN:
-	                // Disallow ScrollView to intercept touch events.
-	                scroll.requestDisallowInterceptTouchEvent(true);
-	                break;
-	            case MotionEvent.ACTION_UP:
-	                // Allow ScrollView to intercept touch events.
+				switch (action) {
+				case MotionEvent.ACTION_DOWN:
+					// Disallow ScrollView to intercept touch events.
+					scroll.requestDisallowInterceptTouchEvent(true);
+					break;
+				case MotionEvent.ACTION_UP:
+					// Allow ScrollView to intercept touch events.
 
-	                        scroll.requestDisallowInterceptTouchEvent(false);
+					scroll.requestDisallowInterceptTouchEvent(false);
 
-	                    break;
-	            }
-	            return false;
-	        }
-	    });		
+					break;
+				}
+				return false;
+			}
+		});		
 		meer_con.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -476,7 +487,7 @@ public class BirdDetailActivity extends ContentBaseActivity {
 		DisplayMetrics metrics = getResources().getDisplayMetrics();
 		LayoutParams rlp = (LayoutParams) view.getLayoutParams();
 		if (flag == 1)
-			rlp.height = (int) (metrics.heightPixels - (155 * metrics.density));
+			rlp.height = (int) (metrics.heightPixels - (140 * metrics.density));
 		// rlp.height = LayoutParams.MATCH_PARENT;
 		if (flag == 0)
 			rlp.height = metrics.heightPixels / 3;
@@ -487,25 +498,30 @@ public class BirdDetailActivity extends ContentBaseActivity {
 
 	private void setTypeFace(TextView textView, boolean isTitle) {
 		if (isTitle)
-			textView.setTypeface(Fonts.getTfFont_condensed_bold());
+			textView.setTypeface(Fonts.getTfFont_interstate_bold());
 		else
-			textView.setTypeface(Fonts.getTfFont());
+			textView.setTypeface(Fonts.getTfFont_interstate_light());
 	}
 
-	private void click(View hidev, View visiblev) {
+	private void click(View hidev, View visiblev,ImageView fullScreenIV,ImageView fullScreenIVClose) {
 		hidev.setVisibility(View.GONE);
 		visiblev.setVisibility(View.VISIBLE);
 		if (ShowFullInfo) {
 			info.setVisibility(View.GONE);
+			titleBar2.setVisibility(View.GONE);
 			scroll.setScrollingEnabled(false);
-			// showBaseHeader(false);
-			hideFooterMenu();
+			//	hideFooterMenu();
+			fullScreenIVClose.setVisibility(View.VISIBLE);
+			fullScreenIV.setVisibility(View.GONE);
+
 			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 		} else {
 			info.setVisibility(View.VISIBLE);
+			titleBar2.setVisibility(View.VISIBLE);
 			scroll.setScrollingEnabled(true);
-			// showBaseHeader(true);
-			showFooterMenu();
+			//	showFooterMenu();
+			fullScreenIVClose.setVisibility(View.GONE);
+			fullScreenIV.setVisibility(View.VISIBLE);
 			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		}
 		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -514,6 +530,17 @@ public class BirdDetailActivity extends ContentBaseActivity {
 			calcLayoutWH(mViewPager, ShowFullInfo ? 1 : 0);
 		}
 		ShowFullInfo = !ShowFullInfo;
+		/*		(new ProfilePagerAdapter()).notifyDataSetChanged();*/
+
+	}
+	private void fullScreenToggle(ImageView fullScreenIV,ImageView fullScreenIVClose,Boolean showFullInfoToggle){
+		if (showFullInfoToggle) {
+			fullScreenIVClose.setVisibility(View.VISIBLE);
+			fullScreenIV.setVisibility(View.GONE);
+		} else {
+			fullScreenIVClose.setVisibility(View.GONE);
+			fullScreenIV.setVisibility(View.VISIBLE);
+		}
 	}
 
 	// ************************************************************************************************************************************
@@ -524,37 +551,50 @@ public class BirdDetailActivity extends ContentBaseActivity {
 			LayoutInflater inflater = LayoutInflater.from(container
 					.getContext());
 			View view = inflater.inflate(R.layout.viewpager_container, null);
+			/*			 final View view_images=view.findViewById(R.id.relative_container_images);
+			 */			 final ImageView fullScreenIVClose = (ImageView) view
+					 .findViewById(R.id.full_screen_close);
+			 final ImageView fullScreenIV = (ImageView) view
+					 .findViewById(R.id.full_screen);
+			 //	final PhotoView photoView =(PhotoView) view.findViewById(R.id.image_large);
+			 final ImageView image = (ImageView) view
+					 .findViewById(R.id.image_small);
+			 final ImageView image_large = (ImageView) view
+					 .findViewById(R.id.image_large);
 
-			final ImageView fullScreenIV = (ImageView) view
-					.findViewById(R.id.full_screen);
-			final ImageView image = (ImageView) view
-					.findViewById(R.id.image_small);
-			final ImageView image_large = (ImageView) view
-					.findViewById(R.id.image_large);
+			 if(!ShowFullInfo)
+			 {
+				 fullScreenToggle(fullScreenIV,fullScreenIVClose,true);
+			 }
+			 else /*if(info.getVisibility()==View.VISIBLE)*/
+			 {
+				 fullScreenToggle(fullScreenIV,fullScreenIVClose,false);	
+			 }
 
-			fullScreenIV.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (fullScreenIV.getTag().toString().equals("small")) {
-						click(image, image_large);
-						v.setTag("large");
-					} else {
-						click(image_large, image);
+			 image_large.setOnClickListener(new OnClickListener() {
+				 @Override
+				 public void onClick(View v) {
+					 //					if (fullScreenIV.getTag().toString().equals("small")) {
+					 click(image, image_large,fullScreenIV,fullScreenIVClose);
+					 //						v.setTag("large");
+					 /*
+						} else {
+						click(image_large, image,fullScreenIV,fullScreenIVClose);
 						v.setTag("small");
-					}
-				}
-			});
+					}//*/
+				 }
+			 });
 
-			bird = birds.get(position);
-			Uri uri = Uri.parse("android.resource://" + getPackageName()
-					+ "/drawable/if" + bird.getImageName());
-			image.setImageURI(uri);
-			// uri = Uri.parse("android.resource://"+ getPackageName() +
-			// "/drawable/if" + bird.getImageName());
-			image_large.setImageURI(uri);
+			 bird = birds.get(position);
+			 Uri uri = Uri.parse("android.resource://" + getPackageName()
+					 + "/drawable/if" + bird.getImageName());
+			 image.setImageURI(uri);
+			 // uri = Uri.parse("android.resource://"+ getPackageName() +
+			 // "/drawable/if" + bird.getImageName());
+			 image_large.setImageURI(uri);
 
-			container.addView(view);
-			return view;
+			 container.addView(view);
+			 return view;
 		}
 
 		@Override

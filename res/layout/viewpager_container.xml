@@ -37,5 +37,17 @@
         android:layout_marginBottom="8dp"
         android:layout_marginRight="8dp"
         android:src="@drawable/icon_full_screen" />
+    <ImageView
+        android:id="@+id/full_screen_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:padding="8dp"
+        android:tag="small"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="8dp"
+        android:src="@drawable/icon_full_screen_close"
+        android:visibility="gone" />
 
 </RelativeLayout>

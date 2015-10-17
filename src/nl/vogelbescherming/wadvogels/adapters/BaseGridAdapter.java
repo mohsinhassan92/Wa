@@ -1,41 +1,7 @@
 package nl.vogelbescherming.wadvogels.adapters;
 
-import android.R.color;
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Context;
-import android.content.res.Configuration;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.location.Criteria;
-import android.os.Handler;
-import android.os.Message;
-import android.support.annotation.ColorRes;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.util.TypedValue;
-import android.view.Display;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
-import android.view.ViewGroup.MarginLayoutParams;
-import android.webkit.WebView.FindListener;
-import android.widget.AbsListView;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle.Control;
-
-import com.google.android.gms.appdatasearch.GetRecentContextCall;
 
 import nl.vogelbescherming.wadvogels.BaseGridActivity;
 import nl.vogelbescherming.wadvogels.GrootteActivity;
@@ -43,10 +9,28 @@ import nl.vogelbescherming.wadvogels.KleurActivity;
 import nl.vogelbescherming.wadvogels.R;
 import nl.vogelbescherming.wadvogels.SilhuetteActivity;
 import nl.vogelbescherming.wadvogels.SnavelActivity;
-import nl.vogelbescherming.wadvogels.ViewHelperTab;
 import nl.vogelbescherming.wadvogels.control.Controller;
 import nl.vogelbescherming.wadvogels.fonts.Fonts;
 import nl.vogelbescherming.wadvogels.view.CircleImageView;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.os.Handler;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.util.TypedValue;
+import android.view.Display;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 @SuppressLint("NewApi")
 public class BaseGridAdapter extends ArrayAdapter<Drawable> {
@@ -197,7 +181,6 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			v = inflater.inflate(mGridItemLayout, null);
 		}
-
 		Drawable drawable = mObjects.get(position);
 
 		if (drawable != null) {
@@ -214,6 +197,7 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 			if (txt != null) {
 				// txt.setTypeface(Fonts.getTfFont());
 				txt.setText(text.get(position));
+				txt.setTypeface(Fonts.getTfFont_interstate_light());
 			}
 
 			Display display = ((Activity) mContext).getWindowManager()
@@ -568,11 +552,14 @@ public class BaseGridAdapter extends ArrayAdapter<Drawable> {
 		} else {
 			Log.d("SCREEN_SIZE", "::UnIdentified::");
 		}
-		// image_color.setBackgroundColor(mColors.get(position));
+	
 		image_color.setBorderColor(mContext.getResources().getColor(
 				R.color.active_button_color));
+		
 		TextView text = (TextView) iv_temp2.findViewById(R.id.text);
-		text.setTextColor(Color.WHITE);
+		text.setVisibility(View.VISIBLE);
+		text.setTextColor(mContext.getResources().getColor(
+				R.color.inactive_button_color));
 		image_color.setTag("selected");
 	}
 

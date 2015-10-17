@@ -48,15 +48,15 @@ public class KleurActivity extends BaseGridActivity {
 
 	private List<String> createText() {
 		List<String> temp = new ArrayList<String>(TABLE_ITEM_NUMBER);
-		temp.add("Zwart");
-		temp.add("Wit");
-		temp.add("Grijs");
-		temp.add("Geel");
-		temp.add("Oranje");
-		temp.add("Rood");
-		temp.add("Blauw");
-		temp.add("Groen");
-		temp.add("Bruin");
+		temp.add("ZWART");
+		temp.add("WIT");
+		temp.add("GRIJS");
+		temp.add("GEEL");
+		temp.add("ORANJE");
+		temp.add("ROOD");
+		temp.add("BLAUW");
+		temp.add("GROEN");
+		temp.add("BRUIN");
 		return temp;
 	}
 

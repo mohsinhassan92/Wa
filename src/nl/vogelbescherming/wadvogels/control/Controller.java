@@ -96,19 +96,19 @@ public class Controller {
 
 		for (Bird bird : birds) {
 			if (chance >= 1 && chance <= 4 && appears >= 1 && appears <= 4) {
-				if (bird.getChance() == chance && bird.getAppears().get(0) == appears && bird.getName().contains(text)) {
+				if (bird.getChance() == chance && bird.getAppears().get(0) == appears && bird.getName().toLowerCase().contains(text.toLowerCase())) {
 					birdsList.add(bird);
 				}
 			} else if (chance >= 1 && chance <= 4) {
-				if (bird.getChance() == chance && bird.getName().contains(text)) {
+				if (bird.getChance() == chance && bird.getName().toLowerCase().contains(text.toLowerCase())) {
 					birdsList.add(bird);
 				}
 			} else if (appears >= 1 && appears <= 4) {
-				if (bird.getAppears().get(0) == appears && bird.getName().contains(text)) {
+				if (bird.getAppears().get(0) == appears && bird.getName().toLowerCase().contains(text.toLowerCase())) {
 					birdsList.add(bird);
 				}
 			} else {
-				if (bird.getName().contains(text)) {
+				if (bird.getName().toLowerCase().contains(text.toLowerCase())) {
 					birdsList.add(bird);
 				}
 			}
